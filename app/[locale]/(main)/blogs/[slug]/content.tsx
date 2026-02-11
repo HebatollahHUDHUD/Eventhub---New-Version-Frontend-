@@ -19,8 +19,8 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
   const t = await getTranslations("blogs");
 
   return (
-    <div className="space-y-10 py-10">
-      <section className="container px-6 md:px-20">
+    <div className="flex flex-col space-y-10 py-10">
+      <section className="container px-6 xl:px-20">
         <div className="relative">
           <Image
             src={blog?.image}
@@ -32,15 +32,15 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               w-full 
               md:max-w-[600px] 
               aspect-[16/9] 
-              rounded-t-xl 
+              rounded-t-4xl 
               object-cover 
               mb-6 
               md:float-right md:ml-6 md:mb-1
             "
           />
 
-          <div className="space-y-4 leading-7 text-gray-800">
-            <Link href="/blogs" className="text-secondary underline title-5 block">
+          <div className="space-y-4 leading-7">
+            <Link href="/blogs" className="text-accentBlue underline title-5 block">
               {t("back_to_blog_list")}
             </Link>
 
