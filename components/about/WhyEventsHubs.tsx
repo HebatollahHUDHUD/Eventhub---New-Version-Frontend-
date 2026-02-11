@@ -56,15 +56,15 @@ export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
   const features =
     data?.about_page_goals_items && data.about_page_goals_items.length > 0
       ? data.about_page_goals_items.map((item, index) => ({
-          number: String(index + 1).padStart(2, "0"),
-          title: item.title,
-          description: item.desc,
-          highlightColor: "bg-amber-200/60",
-        }))
+        number: String(index + 1).padStart(2, "0"),
+        title: item.title,
+        description: item.desc,
+        highlightColor: "bg-amber-200/60",
+      }))
       : staticFeatures;
 
-    return (
-      <section className="relative overflow-hidden bg-[#F4F6F8] container">
+  return (
+    <section className="relative overflow-hidden bg-[#F4F6F8]">
       {/* Decorative SVG circles - top end */}
       <div className="absolute top-[-100px] end-[-180px] z-0">
         {circlesToDownLeftSVG}

@@ -11,7 +11,6 @@ const page = async () => {
     config: {
       next: {
         tags: ["about"],
-        cache: "force-cache",
       },
     },
   });

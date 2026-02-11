@@ -22,7 +22,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
   const downloadUrl = data?.about_page_footer_btn_url || "#";
 
   return (
-    <section className="bg-[#010462] p-4 md:p-8 lg:p-12 container">
+    <section className="bg-[#010462] p-4 md:p-8 lg:p-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 items-center">
         {/* Left column - Text content */}
         <div className="space-y-6">
@@ -74,8 +74,8 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
             url={downloadUrl}
             label={buttonText}
             icon={<div className="relative ">
-            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px]" />
-            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px]" />
+              <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px]" />
+              <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px]" />
             </div>}
             variant="pink"
             size="lg"
