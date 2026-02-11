@@ -62,6 +62,20 @@
     "ready_to_use_event_contract": "Ready-to-Use Event Contract",
     "event_contract_title": "Download our standard event contract that is designed to protect both talents and companies and ensure a clear, professional agreement.",
     "event_contract_description": "At Events Hubs, we believe that great partnerships start with clarity and trust. To support both talents and companies, we provide ready-to-use contract templates that outline expectations, responsibilities, and payment terms — all in a simple, transparent format.",
-    "download_now": "DOWNLOAD NOW"
+    "download_now": "DOWNLOAD NOW",
+    "questions_and_answers": "Questions & Answers",
+    "questions_and_answers_description": "Here are some of our most asked questions, but feel free to visit our Help Center or contact our support team for further assistance.",
+    "faq_1_question": "How do I register as a job seeker?",
+    "faq_1_answer": "Simply click on the \"Register\" button and fill out the required information to create your profile.",
+    "faq_2_question": "How do I post a job listing as a company?",
+    "faq_2_answer": "Sign up as a company, choose a plan, and follow the prompts to post your job listings.",
+    "faq_3_question": "What plans are available?",
+    "faq_3_answer": "We offer three plans for job seekers, and three for companies.",
+    "faq_4_question": "How can I contact support?",
+    "faq_4_answer": "You can reach us via email at support@eventhubs.com or call us at +962790000000.",
+    "faq_5_question": "Is there a free plan available?",
+    "faq_5_answer": "Yes, our Basic Plan for job seekers is free and provides access to job listings and company profiles.",
+    "faq_6_question": "Can I upgrade my plan later?",
+    "faq_6_answer": "Yes, you can upgrade your plan at any time through your account settings."
   }
 }
