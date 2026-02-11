@@ -45,4 +45,8 @@ export type BlogPostDetailsResponse = {
   };
 };
 
+export type TalentCategory = 
+  | "talents" 
+  | "recruitment";
+
 

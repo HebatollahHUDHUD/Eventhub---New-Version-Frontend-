@@ -79,5 +79,27 @@
     "faq_5_answer": "Yes, our Basic Plan for job seekers is free and provides access to job listings and company profiles.",
     "faq_6_question": "Can I upgrade my plan later?",
     "faq_6_answer": "Yes, you can upgrade your plan at any time through your account settings."
+  },
+  "talent":{
+    "title":"Our Amazing & Experienced Events Talents",
+    "description":"Explore the latest gigs, projects, and event roles. And take the next step in your events career",
+    "filters": {
+      "talents": "Talents",
+      "recruitment": "Recruitment"
+    },
+    "search": {
+      "job_title_skill": "Job Title / Skill",
+      "location": "Location",
+      "gender": "Gender",
+      "rate": "Rate",
+      "search": "Search",
+      "reset": "Reset"
+    },
+    "card": {
+      "projects": "Projects",
+      "years": "Years",
+      "skills": "Skills",
+      "details": "Details"
+    }
   }
 }
