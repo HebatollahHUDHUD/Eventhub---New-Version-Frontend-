@@ -34,6 +34,11 @@
   --color-primary: var(--primary);
   --color-accentPink: var(--accentPink);
   --color-accentBlue: var(--accentBlue);
+  --color-accentPurple: var(--accentPurple);
+  --color-accentSky: var(--accentSky);
+  --color-lightGray: var(--lightGray);
+  --color-subtleText: var(--subtleText);
+  --color-lightBackground: var(--lightBackground);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -63,6 +68,11 @@
   --accent: oklch(0.9700 0 0);
   --accentPink: oklch(67.515% 0.2295 345.972);
   --accentBlue: oklch(62.057% 0.1884 258.697);
+  --accentPurple: #797DE5;
+  --accentSky: #38BDF8;
+  --lightGray: #E2E2E2;
+  --subtleText: #727272;
+  --lightBackground: #F8FAFC;
   --accent-foreground: oklch(0.2050 0 0);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);
