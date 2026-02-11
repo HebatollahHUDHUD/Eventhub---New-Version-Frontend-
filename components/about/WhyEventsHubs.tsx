@@ -1,12 +1,20 @@
 import { useTranslations } from "next-intl";
-import { circlesToDownLeftSVG, circlesToLeftSVG, cyrclesToDownSVG } from "@/public/SVGs";
+import { circlesToDownLeftSVG, circlesToLeftSVG } from "@/public/SVGs";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import FeatureCard from "@/components/common/FeatureCard";
+import type { AboutPage } from "@/schemas/shared";
 
-export default function WhyEventsHubs() {
+interface WhyEventsHubsProps {
+  data?: AboutPage | null;
+}
+
+export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
   const t = useTranslations("about");
 
-  const features = [
+  const sectionTitle = data?.about_page_goals_title || t("why_events_hubs");
+  const sectionDescription = t("why_events_hubs_description");
+
+  const staticFeatures = [
     {
       number: "01",
       title: t("keen"),
@@ -45,6 +53,16 @@ export default function WhyEventsHubs() {
     },
   ];
 
+  const features =
+    data?.about_page_goals_items && data.about_page_goals_items.length > 0
+      ? data.about_page_goals_items.map((item, index) => ({
+          number: String(index + 1).padStart(2, "0"),
+          title: item.title,
+          description: item.desc,
+          highlightColor: "bg-amber-200/60",
+        }))
+      : staticFeatures;
+
   return (
     <section className="relative overflow-hidden bg-[#F4F6F8]">
       {/* Decorative SVG circles - top end */}
@@ -72,8 +90,8 @@ export default function WhyEventsHubs() {
       <div className="relative z-10 py-12 md:py-16 lg:py-20 space-y-12 md:space-y-16 px-4 md:px-8 lg:px-12">
         {/* Section header */}
         <TitleAndDescription
-          title={t("why_events_hubs")}
-          description={t("why_events_hubs_description")}
+          title={sectionTitle}
+          description={sectionDescription}
         />
 
         {/* Feature cards grid */}

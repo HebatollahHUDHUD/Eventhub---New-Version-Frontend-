@@ -2,11 +2,21 @@ import { useTranslations } from "next-intl";
 import { cyrclesToDownSVG } from "@/public/SVGs";
 import VideoPlayer from "@/components/common/VideoPlayer";
 import StatCard from "../common/StatCard";
+import type { AboutPage } from "@/schemas/shared";
 
 const PLACEHOLDER_VIDEO_URL = "https://www.example.com/placeholder-video.mp4";
 
-export default function AboutIntro() {
+interface AboutIntroProps {
+  data?: AboutPage | null;
+}
+
+export default function AboutIntro({ data }: AboutIntroProps) {
   const t = useTranslations("about");
+
+  const title = data?.about_page_title || t("hero_tagline");
+  const subtitle = data?.about_page_subtitle || t("who_is_events_hubs");
+  const description = t("who_is_events_hubs_description");
+  const videoUrl = data?.about_page_video || PLACEHOLDER_VIDEO_URL;
 
   const stats = [
     { value: "+200", label: t("companies"), highlightColor: "bg-teal-300/50" },
@@ -27,17 +37,17 @@ export default function AboutIntro() {
           {/* Left column - Tagline */}
           <div className="flex lg:col-span-4">
             <h1 className="title-1 text-primary leading-snug font-normal! lg:text-[55px]!">
-              {t("hero_tagline")}
+              {title}
             </h1>
           </div>
 
           {/* Right column - Who is Events Hubs */}
           <div className="space-y-4 lg:col-span-6">
             <h2 className="title-3 font-bold! text-primary">
-              {t("who_is_events_hubs")}
+              {subtitle}
             </h2>
             <p className="description leading-relaxed">
-              {t("who_is_events_hubs_description")}
+              {description}
             </p>
           </div>
         </div>
@@ -45,7 +55,7 @@ export default function AboutIntro() {
         {/* Video section */}
         <div className="relative z-10 px-4 md:px-8 lg:px-12">
           <VideoPlayer
-            url={PLACEHOLDER_VIDEO_URL}
+            url={videoUrl}
             className="w-full aspect-video max-h-[623px] rounded-2xl"
           />
         </div>
