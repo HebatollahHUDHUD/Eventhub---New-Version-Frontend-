@@ -1,8 +1,10 @@
-import React from 'react'
+import AboutIntro from '@/components/about/AboutIntro'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div className='p-4 md:p-8 lg:p-12'>
+      <AboutIntro />
+    </div>
   )
 }
 
