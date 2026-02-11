@@ -1,10 +1,12 @@
 import AboutIntro from '@/components/about/AboutIntro'
+import WhyEventsHubs from '@/components/about/WhyEventsHubs'
 
 const page = () => {
   return (
-    <div className='p-4 md:p-8 lg:p-12'>
+    <main className='p-4 md:p-8 lg:p-12 space-y-12 md:space-y-16'>
       <AboutIntro />
-    </div>
+      <WhyEventsHubs />
+    </main>
   )
 }
 
