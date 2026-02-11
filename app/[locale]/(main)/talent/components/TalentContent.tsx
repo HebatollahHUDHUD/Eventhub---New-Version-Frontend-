@@ -45,7 +45,7 @@ const TalentList = async ({ searchParams }: TalentContentProps) => {
 
   // Static card data
   const staticCard = {
-    id: 'static-1',
+    id: '1',
     name: 'Static Talent',
     role: 'Example Position',
     projects: 25,
@@ -66,6 +66,7 @@ const TalentList = async ({ searchParams }: TalentContentProps) => {
         {allCards?.map((item: any) => (
           <TalentCard 
             key={item.id}
+            id={item.id}
             name={item.name}
             role={item.role}
             projects={item.projects}

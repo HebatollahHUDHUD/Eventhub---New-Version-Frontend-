@@ -1,7 +1,10 @@
+ "use client";
+
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
-const TalentCard = ({ name, role, projects, years, skills, image }) => {
+const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
   const t = useTranslations("talent.card");
   
   return (
@@ -42,8 +45,14 @@ const TalentCard = ({ name, role, projects, years, skills, image }) => {
       </div>
 
       {/* Button */}
-      <Button variant={"secondary"} className="rounded-full capitalize w-3/4 mt-3">
-        {t("details")}
+      <Button
+        asChild
+        variant={"secondary"}
+        className="rounded-full capitalize w-3/4 mt-3"
+      >
+        <Link href={`/talent/${id}`} aria-label={`${t("details")} - ${name}`}>
+          {t("details")}
+        </Link>
       </Button>
     </div>
   );

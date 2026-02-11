@@ -83,6 +83,29 @@
   "talent":{
     "title":"Our Amazing & Experienced Events Talents",
     "description":"Explore the latest gigs, projects, and event roles. And take the next step in your events career",
+    "details": {
+      "about_me": "About Me",
+      "portfolio": "Portfolio",
+      "reviews": "Reviews",
+      "personal_details": "Personal Details",
+      "gender": "Gender",
+      "email": "Email",
+      "phone_number": "Phone Number",
+      "location": "Location",
+      "nationality": "Nationality",
+      "projects": "Projects",
+      "download_cv": "Download CV",
+      "rate_candidate": "Rate Candidate",
+      "badges": "Badges",
+      "pricing_per_day": "Pricing/Day",
+      "similar_profiles": "Similar Profiles",
+      "view": "View"
+    },
+    "rate_dialog": {
+      "title": "Rate Candidate",
+      "description": "Your feedback matters, rate this candidate",
+      "submit": "Submit"
+    },
     "filters": {
       "talents": "Talents",
       "recruitment": "Recruitment"
