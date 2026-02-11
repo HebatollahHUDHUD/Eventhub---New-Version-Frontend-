@@ -47,7 +47,6 @@ const BlogsList = async ({ searchParams }: BlogsContentProps) => {
     config: {
       next: {
         tags: ["blog-posts"],
-        cache: "force-cache",
       },
       queryParams
     }
@@ -67,9 +66,7 @@ const BlogsList = async ({ searchParams }: BlogsContentProps) => {
         aria-label="Blog posts list"
       >
         {blogPosts.map((blog) => (
-          <Link key={blog.id} href={`/blogs/${blog.slug}`} className="block" role="listitem">
           <BlogsCard key={blog.id} blog={blog} />
-          </Link>
         ))}
       </div>
 

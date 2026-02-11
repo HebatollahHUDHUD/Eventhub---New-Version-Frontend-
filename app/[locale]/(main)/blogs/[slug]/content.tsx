@@ -2,7 +2,6 @@ import { getData } from "@/lib/request-server";
 import type { BlogPostDetailsResponse } from "@/schemas/types";
 import Image from "@/components/common/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { CalendarIcon } from "lucide-react";
 import moment from "moment";
 import { getTranslations } from "next-intl/server";
@@ -10,21 +9,18 @@ import BlogsContent from "../components/BlogsContent";
 
 type BlogContentProps = {
   slug: string;
-  params?: Record<string, string | undefined>;
 };
 
-const BlogContent = async ({ slug ,params }: BlogContentProps) => {
-  const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${params?.id}` });
+const BlogContent = async ({ slug }: BlogContentProps) => {
+  const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${slug}` });
   const blog = data?.result?.blog_post;
 
   const formattedDate = moment(blog?.created_at).format("DD MMM, YYYY");
   const t = await getTranslations("blogs");
 
-  console.log("Blog data:", data);
-
   return (
-    <div className="flex flex-col"> 
-      <section className="container px-6 md:px-20 py-10">
+    <div className="space-y-10 py-10">
+      <section className="container px-6 md:px-20">
         <div className="relative">
           <Image
             src={blog?.image}
@@ -61,7 +57,7 @@ const BlogContent = async ({ slug ,params }: BlogContentProps) => {
             </div>
 
             <div className="description">
-             <p>{blog?.content}</p>
+              <p>{blog?.content}</p>
             </div>
           </div>
         </div>
@@ -73,7 +69,7 @@ const BlogContent = async ({ slug ,params }: BlogContentProps) => {
           <p className="description">{t("description")}</p>
         </div>
 
-        <BlogsContent  />
+        <BlogsContent />
       </section>
     </div>
   );
