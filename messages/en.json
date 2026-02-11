@@ -1,0 +1,41 @@
+{
+  "main": {
+    "title": "Events Hub",
+    "description": "Events Hub - Your premier destination for events"
+  },
+  "common": {
+  "events": "Events"
+  },
+  "home": {
+    "title": "Welcome to Events Hub!",
+    "carousel": {
+      "1": {
+        "title": "Welcome to Events Hub",
+        "content": "Your one-stop destination for all your salon needs. Discover quality products, manage your business, and stay informed with our latest insights."
+      }
+    },
+    "buttons": {
+      "enter-events": "Enter Events",
+      "create-event": "Create Event"
+    }
+  },
+  "blogs": {
+    "title": "Insights From Business Experts",
+    "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired."
+  },
+  "footer": {
+    "copyright": "Events Hub"
+  },
+  "navigation": {
+    "brand-name": "Events Hub",
+    "home": "Home",
+    "about": "About",
+    "talent": "Talent",
+    "opportunities": "Opportunities",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "login": "Login",
+    "category": "Category"
+  }
+}

@@ -1,0 +1,47 @@
+import Image from "@/components/common/image";
+import { CalendarIcon } from "lucide-react";
+import moment from "moment";
+import type { BlogPost } from "../../../../../schemas/types";
+
+type BlogsCardProps = {
+  blog: BlogPost;
+};
+
+const BlogsCard = ({ blog }: BlogsCardProps) => {
+  const formattedDate = moment(blog.created_at).format("DD MM, YYYY");
+
+  return (
+    <article
+      className="relative bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
+      role="listitem"
+    >
+      <div className="relative w-full aspect-[3/2] overflow-hidden">
+        <Image
+          src={blog.image}
+          alt={blog.title || "Blog post image"}
+          width={400}
+          height={267}
+          hasPreview
+          className="w-full h-full object-cover rounded-t-2xl"
+        />
+      </div>
+      <div className="space-y-2 px-4 pt-6 pb-4">
+        <h2 className="title-4 line-clamp-2">
+          {blog.title}
+        </h2>
+
+        <div className="flex items-center gap-1" aria-label={`Published on ${formattedDate}`}>
+          <CalendarIcon className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+          <time
+            dateTime={blog.created_at}
+            className="text-sm text-muted-foreground"
+          >
+            {formattedDate}
+          </time>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default BlogsCard;
