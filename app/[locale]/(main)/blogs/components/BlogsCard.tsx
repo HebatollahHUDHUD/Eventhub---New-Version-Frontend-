@@ -24,14 +24,22 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
           hasPreview
           className="w-full h-full object-cover rounded-t-2xl"
         />
+        <span className="absolute bottom-3 left-3 bg-accentPink text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md capitalize z-10">
+        {blog?.category?.name}
+      </span>
+        
       </div>
       <div className="space-y-2 px-4 pt-6 pb-4">
-        <h2 className="title-4 line-clamp-2">
-          {blog.title}
-        </h2>
+        <h2 className="title-4 line-clamp-2">{blog.title}</h2>
 
-        <div className="flex items-center gap-1" aria-label={`Published on ${formattedDate}`}>
-          <CalendarIcon className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+        <div
+          className="flex items-center gap-1"
+          aria-label={`Published on ${formattedDate}`}
+        >
+          <CalendarIcon
+            className="w-4 h-4 text-muted-foreground"
+            aria-hidden="true"
+          />
           <time
             dateTime={blog.created_at}
             className="text-sm text-muted-foreground"

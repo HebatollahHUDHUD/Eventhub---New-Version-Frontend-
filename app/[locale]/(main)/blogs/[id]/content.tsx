@@ -1,0 +1,83 @@
+import { getData } from "@/lib/request-server";
+import type { BlogPostDetailsResponse } from "@/schemas/types";
+import Image from "@/components/common/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { CalendarIcon } from "lucide-react";
+import moment from "moment";
+import { getTranslations } from "next-intl/server";
+import BlogsContent from "../components/BlogsContent";
+
+type BlogContentProps = {
+  slug: string;
+  params?: Record<string, string | undefined>;
+};
+
+const BlogContent = async ({ slug ,params }: BlogContentProps) => {
+  const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${params?.id}` });
+  const blog = data?.result?.blog_post;
+
+  const formattedDate = moment(blog?.created_at).format("DD MMM, YYYY");
+  const t = await getTranslations("blogs");
+
+  console.log("Blog data:", data);
+
+  return (
+    <div className="flex flex-col"> 
+      <section className="container px-6 md:px-20 py-10">
+        <div className="relative">
+          <Image
+            src={blog?.image}
+            alt={blog?.title}
+            hasPreview
+            width={800}
+            height={450}
+            className="
+              w-full 
+              md:max-w-[600px] 
+              aspect-[16/9] 
+              rounded-t-xl 
+              object-cover 
+              mb-6 
+              md:float-right md:ml-6 md:mb-1
+            "
+          />
+
+          <div className="space-y-4 leading-7 text-gray-800">
+            <Link href="/blogs" className="text-secondary underline title-5 block">
+              {t("back_to_blog_list")}
+            </Link>
+
+            <h2 className="title-2 max-w-full md:max-w-[450px]">{blog?.title}</h2>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="bg-accentPink text-white title-5 px-3 py-0.5 rounded-lg capitalize">
+                {blog?.category?.name}
+              </span>
+              <div className="flex items-center gap-1">
+                <CalendarIcon className="w-4 h-4" aria-hidden="true" />
+                <time dateTime={blog?.created_at}>{formattedDate}</time>
+              </div>
+            </div>
+
+            <div className="description">
+             <p>{blog?.content}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-sm space-y-6">
+        <div className="space-y-4 max-w-2xl mx-auto text-center">
+          <h2 className="title-1">{t("title-details")}</h2>
+          <p className="description">{t("description")}</p>
+        </div>
+
+        <BlogsContent  />
+      </section>
+    </div>
+  );
+};
+
+
+export default BlogContent; 

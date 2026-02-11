@@ -4,9 +4,10 @@ import BlogsCardSkeleton from './BlogsCardSkeleton';
 import { Suspense } from 'react';
 import type { BlogPostsResponse } from '../../../../../schemas/types';
 import Pagination from '@/components/common/Pagination';
+import Link from 'next/link';
 
 type BlogsContentProps = {
-  searchParams: Record<string, string | undefined>;
+  searchParams?: Record<string, string | undefined>;
 };
 
 const BlogsContentSkeleton = () => {
@@ -36,8 +37,8 @@ export default BlogsContent;
 
 const BlogsList = async ({ searchParams }: BlogsContentProps) => {
   const queryParams = {
-    page: searchParams.page || "1",
-    category: searchParams.category || "all",
+    page: searchParams?.page || "1",
+    category: searchParams?.category || "all",
     ...searchParams,
   };
 
@@ -66,7 +67,9 @@ const BlogsList = async ({ searchParams }: BlogsContentProps) => {
         aria-label="Blog posts list"
       >
         {blogPosts.map((blog) => (
+          <Link key={blog.id} href={`/blogs/${blog.slug}`} className="block" role="listitem">
           <BlogsCard key={blog.id} blog={blog} />
+          </Link>
         ))}
       </div>
 
