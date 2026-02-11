@@ -17,7 +17,7 @@ export default function WhyEventsHubs() {
       number: "02",
       title: t("smart"),
       description: t("smart_description"),
-      highlightColor: "bg-sky-200/60",
+      highlightColor: "bg-amber-200/60",
     },
     {
       number: "03",
@@ -35,7 +35,7 @@ export default function WhyEventsHubs() {
       number: "05",
       title: t("passionate"),
       description: t("passionate_description"),
-      highlightColor: "bg-sky-200/60",
+      highlightColor: "bg-amber-200/60",
     },
     {
       number: "06",
@@ -46,7 +46,7 @@ export default function WhyEventsHubs() {
   ];
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[#F4F6F8]">
       {/* Decorative SVG circles - top end */}
       <div className="absolute  top-[-100px] end-[-180px]  z-0">
         {circlesToDownLeftSVG}

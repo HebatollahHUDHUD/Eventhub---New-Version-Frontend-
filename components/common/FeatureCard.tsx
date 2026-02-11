@@ -18,11 +18,11 @@ export default function FeatureCard({
   return (
     <article className={cn("flex flex-col items-center text-center space-y-3", className)}>
       {/* Number with highlight */}
-      <span className="relative inline-block title-1 font-semibold text-primary leading-none">
+      <span className="relative inline-block title-1 font-semibold! text-primary leading-none">
         {number}
         <span
           className={cn(
-            "absolute bottom-0 start-[-20%] end-[40%] h-[85%] -z-10 rounded-sm",
+            "absolute bottom-[-10%] start-[-30%] end-[30%] h-[92%] -z-10 rounded-sm",
             highlightColor
           )}
           aria-hidden="true"
