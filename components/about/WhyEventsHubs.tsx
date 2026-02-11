@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { cyrclesToDownSVG } from "@/public/SVGs";
+import { circlesToDownLeftSVG, circlesToLeftSVG, cyrclesToDownSVG } from "@/public/SVGs";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import FeatureCard from "@/components/common/FeatureCard";
 
@@ -48,13 +48,15 @@ export default function WhyEventsHubs() {
   return (
     <section className="relative overflow-hidden">
       {/* Decorative SVG circles - top end */}
-      <div className="absolute scale-[0.8] top-[-200px] end-[-250px] w-full z-0">
-        {cyrclesToDownSVG}
+      <div className="absolute  top-[-100px] end-[-180px]  z-0">
+        {circlesToDownLeftSVG}
       </div>
 
       {/* Decorative SVG circles - bottom start */}
-      <div className="absolute scale-[0.8] bottom-[-200px] start-[-250px] w-full z-0">
-        {cyrclesToDownSVG}
+      <div className="absolute  bottom-[20%] start-[-5%] scale-[0.8]  z-0">
+        {circlesToLeftSVG}
+        {/* {circlesToDownLeftSVG} */}
+
       </div>
 
       <div className="relative z-10 py-12 md:py-16 lg:py-20 space-y-12 md:space-y-16 px-4 md:px-8 lg:px-12">
