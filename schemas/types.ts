@@ -27,3 +27,22 @@ export type BlogCategory =
   | "marketing" 
   | "sales" 
   | "organizing";
+
+
+export type BlogPostDetailsResponse = {
+  error_flag: number;
+  message: string;
+  result: {
+    blog_post: {
+      id: number;
+      slug: string;
+      title: string;
+      content: string;
+      category: string;
+      created_at: string;
+      image?: string | null;
+    };
+  };
+};
+
+

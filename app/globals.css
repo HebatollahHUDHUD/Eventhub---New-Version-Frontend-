@@ -32,6 +32,8 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-accentPink: var(--accentPink);
+  --color-accentBlue: var(--accentBlue);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -59,6 +61,8 @@
   --muted: oklch(0.9700 0 0);
   --muted-foreground: oklch(0.5560 0 0);
   --accent: oklch(0.9700 0 0);
+  --accentPink: oklch(67.515% 0.2295 345.972);
+  --accentBlue: oklch(62.057% 0.1884 258.697);
   --accent-foreground: oklch(0.2050 0 0);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);

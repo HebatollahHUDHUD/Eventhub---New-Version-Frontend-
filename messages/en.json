@@ -21,7 +21,9 @@
   },
   "blogs": {
     "title": "Insights From Business Experts",
-    "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired."
+    "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired.",
+    "title-details" : "Browse More Articles",
+    "back_to_blog_list" : "Back to Blog List"
   },
   "footer": {
     "copyright": "Events Hub"

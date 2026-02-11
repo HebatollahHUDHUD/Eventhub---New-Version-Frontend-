@@ -13,8 +13,9 @@ const page = async ({ searchParams }: PageProps) => {
 
   return (
     <main>
-      <div className="space-y-10">
-        <PageHeader title="Blogs" />
+      <PageHeader title="Blogs" />
+
+      <div className="space-y-10 py-10">
 
         <div className="space-y-4 max-w-md mx-auto text-center">
           <h2 className="title-1">
