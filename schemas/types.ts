@@ -29,6 +29,23 @@ export type BlogCategory =
   | "organizing";
 
 
+export interface Opportunity {
+  id: number;
+  title: string;
+  image: string;
+  company_name: string;
+  slug?: string;
+  category?: string;
+}
+
+export type OpportunityCategory =
+  | "all"
+  | "asher"
+  | "software engineer"
+  | "marketing"
+  | "photographer"
+  | "organizing";
+
 export type BlogPostDetailsResponse = {
   error_flag: number;
   message: string;
