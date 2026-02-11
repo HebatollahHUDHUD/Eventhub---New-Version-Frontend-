@@ -25,7 +25,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
   ];
 
   return (
-    <section className="relative">
+    <section className="relative container">
       {/* Decorative SVG circles */}
       <div className="absolute scale-[0.8] top-[-200px] start-[-250px] w-full -z-10">
         {cyrclesToDownSVG}

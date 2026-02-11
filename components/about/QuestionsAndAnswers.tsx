@@ -34,7 +34,7 @@ export default function QuestionsAndAnswers({ data }: QuestionsAndAnswersProps) 
       : staticFaqs;
 
   return (
-    <section className="px-4 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+    <section className="px-4 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 container">
       {/* Header */}
       <TitleAndDescription
         title={sectionTitle}

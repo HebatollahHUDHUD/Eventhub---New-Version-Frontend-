@@ -22,7 +22,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
   const downloadUrl = data?.about_page_footer_btn_url || "#";
 
   return (
-    <section className="bg-[#010462] p-4 md:p-8 lg:p-12">
+    <section className="bg-[#010462] p-4 md:p-8 lg:p-12 container">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 items-center">
         {/* Left column - Text content */}
         <div className="space-y-6">

@@ -63,8 +63,8 @@ export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
         }))
       : staticFeatures;
 
-  return (
-    <section className="relative overflow-hidden bg-[#F4F6F8]">
+    return (
+      <section className="relative overflow-hidden bg-[#F4F6F8] container">
       {/* Decorative SVG circles - top end */}
       <div className="absolute top-[-100px] end-[-180px] z-0">
         {circlesToDownLeftSVG}

@@ -24,7 +24,7 @@ export default function QACard({
       </div>
 
       {/* Content */}
-      <div className="space-y-1.5">
+      <div className="space-y-3">
         <h3 className="text-base font-bold text-primary">
           {question}
         </h3>
