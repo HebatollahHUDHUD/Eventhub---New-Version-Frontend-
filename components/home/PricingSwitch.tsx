@@ -26,7 +26,7 @@ const PricingSwitch = React.forwardRef<
       className={cn(
         // Knob
         "pointer-events-none block h-7 w-7 rounded-full",
-        "bg-indigo-500 shadow-md",
+        "bg-[#797DE5] shadow-md",
         "transition-transform duration-200 will-change-transform",
         // Inset = 6px on both sides
         "data-[state=unchecked]:translate-x-[6px]",

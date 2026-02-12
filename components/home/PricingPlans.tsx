@@ -26,6 +26,8 @@ interface Plan {
 }
 
 interface PricingPageResponse {
+  pricing_page_title: string;
+  pricing_page_subtitle: string;
   plans: Plan[];
 }
 
@@ -54,7 +56,7 @@ const MOCK_PLANS: Record<PlanType, Plan[]> = {
   ],
 };
 
-const USE_MOCK = true; // Set to false when API is ready
+const USE_MOCK = false;
 
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
@@ -93,8 +95,8 @@ const PricingPlans = () => {
         <div className="space-y-10 md:space-y-14">
           {/* Title and Description */}
           <TitleAndDescription
-            title={t("title")}
-            description={t("description")}
+            title={(data?.status === "success" ? data.result?.pricing_page_title : undefined) ?? t("title")}
+            description={(data?.status === "success" ? data.result?.pricing_page_subtitle : undefined) ?? t("description")}
           />
 
           {/* Plan Type Toggle */}
