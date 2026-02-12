@@ -50,6 +50,24 @@
     "buttons": {
       "enter-events": "الدخول إلى الفعاليات",
       "create-event": "إنشاء فعالية"
+    },
+    "pricingPlans": {
+      "title": "استكشف خطط الأسعار المرنة",
+      "description": "اختر الخطة التي تساعدك على عرض موهبتك وتوسيع شبكتك والتميز أمام أفضل شركات الفعاليات",
+      "companiesPlans": "خطط الشركات",
+      "talentsPlans": "خطط المواهب",
+      "toggleLabel": "التبديل بين خطط الشركات والمواهب",
+      "perMonth": "/شهرياً",
+      "recommended": "موصى به",
+      "purchaseNow": "اشتر الآن",
+      "registerNow": "سجّل الآن",
+      "noPlans": "لا توجد خطط متاحة حالياً.",
+      "purchaseDialog": {
+        "title": "شراء الخطة",
+        "description": "أنت على وشك شراء خطة {planName} بسعر {price}/شهرياً",
+        "cancel": "إلغاء",
+        "confirm": "تأكيد الشراء"
+      }
     }
   },
   "blogs": {
