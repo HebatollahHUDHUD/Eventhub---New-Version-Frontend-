@@ -5,7 +5,7 @@ import NavLink from "./NavLink";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -120,7 +120,9 @@ const Navbar = () => {
               ))}
 
               <li>
-                <LocalChanger />
+                <Suspense fallback={<span className="text-sm">عربي</span>}>
+                  <LocalChanger />
+                </Suspense>
               </li>
 
               {!isLoggedIn && (

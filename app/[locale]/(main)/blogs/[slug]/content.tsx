@@ -13,7 +13,8 @@ type BlogContentProps = {
 
 const BlogContent = async ({ slug }: BlogContentProps) => {
   const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${slug}` });
-  const blog = data?.result?.blog_post;
+
+  const blog = data?.status === "success" ? data.result.blog_post : null;
 
   const formattedDate = moment(blog?.created_at).format("DD MMM, YYYY");
   const t = await getTranslations("blogs");
@@ -23,7 +24,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
       <section className="container px-6 xl:px-20">
         <div className="relative">
           <Image
-            src={blog?.image}
+            src={blog?.image || ""}
             alt={blog?.title}
             hasPreview
             width={800}

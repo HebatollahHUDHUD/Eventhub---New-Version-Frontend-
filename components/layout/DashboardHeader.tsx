@@ -3,7 +3,6 @@ import { BellIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { getUserSession } from "@/lib/userSession";
-import SearchInput from "../common/SearchInput";
 import { UserType } from "@/constant";
 
 const DashboardHeader = () => {
@@ -19,13 +18,13 @@ const DashboardHeader = () => {
             <li>
               <Link href="/">{t("home")}</Link>
             </li>
-            <li>
+            {/* <li>
               {type === UserType.COMPANY ? (
                 <Link href="/speakers">{t("speakers")}</Link>
               ) : (
                 <Link href="/events">{t("events")}</Link>
               )}
-            </li>
+            </li> */}
             <li>
               <Link href="/about-us">{t("about-us")}</Link>
             </li>
@@ -45,7 +44,7 @@ const DashboardHeader = () => {
         </div>
 
         <div className="flex items-center justify-between gap-4 xl:justify-normal">
-          <SearchInput className="bg-background rounded-full px-6 h-10 xl:h-11" />
+          {/* <SearchInput className="bg-background rounded-full px-6 h-10 xl:h-11" /> */}
 
           <Link
             href="/notifications"

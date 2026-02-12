@@ -31,11 +31,12 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
           </span>
 
         </div>
-        <div className="space-y-2 px-4 pt-6 pb-4">
+
+        <div className="flex flex-col gap-2 px-4 pt-6 pb-4">
           <h2 className="title-4 line-clamp-2">{blog.title}</h2>
 
           <div
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 mt-auto"
             aria-label={`Published on ${formattedDate}`}
           >
             <CalendarIcon

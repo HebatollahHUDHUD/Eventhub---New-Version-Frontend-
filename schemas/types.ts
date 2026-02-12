@@ -1,25 +1,13 @@
 import { ReactNode } from "react";
-export interface BlogPost {
-  id: number;
-  title: string;
-  image: string;
-  created_at: string;
-  updated_at?: string;
-  slug?: string;
-  excerpt?: string;
-  content?: string;
-  category?: string;
-}
 
-export interface BlogPostsResponse {
-  blog_posts: {
-    data: BlogPost[];
-    current_page?: number;
-    last_page?: number;
-    per_page?: number;
-    total?: number;
-  };
-}
+
+export type Pagination = {
+  total: number;
+  count: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+};
 
 export type BlogCategory = 
   | "all" 
@@ -29,6 +17,11 @@ export type BlogCategory =
   | "sales" 
   | "organizing";
 
+export interface BlogPostCategory {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 export interface Opportunity {
   id: number;
@@ -47,20 +40,50 @@ export type OpportunityCategory =
   | "photographer"
   | "organizing";
 
-export type BlogPostDetailsResponse = {
-  error_flag: number;
-  message: string;
-  result: {
-    blog_post: {
-      id: number;
-      slug: string;
-      title: string;
-      content: string;
-      category: string;
-      created_at: string;
-      image?: string | null;
-    };
+export interface User {
+  id: number;
+  name: string;
+  photo: string | null;
+  email: string;
+  user_type: string;
+  mobile: string | null;
+  gender: string | null;
+  address: string | null;
+  bio: string | null;
+  role: string | null;
+  other_position: string | null;
+  experience_years: number | null;
+  available_for_work: boolean;
+  price_per_project: boolean;
+  facebook_url: string | null;
+  instagram_url: string | null;
+  youtube_url: string | null;
+  linkedin_url: string | null;
+  last_login_at: string | null;
+}
+
+
+export interface BlogPost {
+  id: number;
+  slug: string;
+  image: string;
+  title: string;
+  content: string;
+  category: BlogPostCategory;
+  writer: User;
+  created_at: string;
+}
+
+
+export interface BlogPostsResponse {
+  blog_posts: {
+    data: BlogPost[];
+    pagination: Pagination;
   };
+}
+
+export type BlogPostDetailsResponse = {
+  blog_post: BlogPost;
 };
 
 export interface ContactItem {
