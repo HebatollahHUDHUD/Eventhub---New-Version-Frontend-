@@ -63,6 +63,7 @@ const PricingPlans = () => {
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
     price: number;
+    id?: string | number;
   } | null>(null);
 
   const { data, isLoading } = useGetData<PricingPageResponse>({
@@ -81,7 +82,7 @@ const PricingPlans = () => {
       ? data.result?.plans ?? []
       : [];
 
-  const handlePurchase = (plan: { name: string; price: number }) => {
+  const handlePurchase = (plan: { name: string; price: number; id?: string | number }) => {
     setSelectedPlan(plan);
     setDialogOpen(true);
   };
@@ -144,6 +145,7 @@ const PricingPlans = () => {
                     handlePurchase({
                       name: plan.name,
                       price: plan.price,
+                      id: plan.id,
                     })
                   }
                 />

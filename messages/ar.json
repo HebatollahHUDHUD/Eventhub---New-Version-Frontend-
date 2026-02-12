@@ -63,10 +63,18 @@
       "registerNow": "سجّل الآن",
       "noPlans": "لا توجد خطط متاحة حالياً.",
       "purchaseDialog": {
-        "title": "شراء الخطة",
-        "description": "أنت على وشك شراء خطة {planName} بسعر {price}/شهرياً",
-        "cancel": "إلغاء",
-        "confirm": "تأكيد الشراء"
+        "title": "هل لديك رمز ترويجي؟",
+        "description": "أدخل الرمز للحصول على خصم",
+        "promocode": "الرمز الترويجي",
+        "promocodePlaceholder": "الرمز الترويجي",
+        "applyCode": "تطبيق الرمز",
+        "planAmount": "مبلغ الخطة",
+        "discount": "الخصم",
+        "total": "الإجمالي",
+        "continueWithoutCode": "المتابعة بدون رمز",
+        "proceedToPayment": "المتابعة للدفع",
+        "invalidPromoCode": "رمز ترويجي غير صالح",
+        "promoCodeApplied": "تم تطبيق الرمز الترويجي بنجاح"
       }
     }
   },

@@ -161,3 +161,40 @@
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
 }
+
+/* Ticket Card Design */
+.ticket-card {
+  --ticket-bg: #ffffff;
+  --notch-radius: 10px;
+  --notch-step: 30px;
+
+  position: relative;
+  background: var(--ticket-bg);
+  border-radius: 24px;
+
+  -webkit-mask:
+    radial-gradient(
+      circle var(--notch-radius) at 0%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y,
+    radial-gradient(
+      circle var(--notch-radius) at 100%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y;
+  -webkit-mask-composite: destination-in;
+
+  mask:
+    radial-gradient(
+      circle var(--notch-radius) at 0%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y,
+    radial-gradient(
+      circle var(--notch-radius) at 100%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y;
+  mask-composite: intersect;
+}

@@ -63,10 +63,18 @@
       "registerNow": "REGISTER NOW",
       "noPlans": "No plans available at the moment.",
       "purchaseDialog": {
-        "title": "Purchase Plan",
-        "description": "You are about to purchase the {planName} plan for {price}/month",
-        "cancel": "Cancel",
-        "confirm": "Confirm Purchase"
+        "title": "Have a Promocode?",
+        "description": "Apply code to get a discount",
+        "promocode": "Promocode",
+        "promocodePlaceholder": "Promocode",
+        "applyCode": "Apply Code",
+        "planAmount": "Plan Amount",
+        "discount": "Discount",
+        "total": "Total",
+        "continueWithoutCode": "Continue without Code",
+        "proceedToPayment": "Proceed to Payment",
+        "invalidPromoCode": "Invalid promo code",
+        "promoCodeApplied": "Promo code applied successfully"
       }
     }
   },
