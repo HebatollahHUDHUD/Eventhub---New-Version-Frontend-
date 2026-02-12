@@ -8,6 +8,39 @@
   },
   "home": {
     "title": "Welcome to Events Hub!",
+    "hero": {
+      "headline": "Find Your Perfect Match for Event Excellence!",
+      "description": "Welcome to Event Hub, your go-to platform for connecting event professionals with top companies in the industry.",
+      "search": {
+        "skills": "Skills/Exp",
+        "location": "Location",
+        "button": "Search"
+      },
+      "social": {
+        "follow": "Follow us on"
+      },
+      "profiles": {
+        "question1": "Do you have any questions?",
+        "question2": "Need help with your event?",
+        "viewProfile": "View Profile"
+      }
+    },
+    "aboutEventsHubs": {
+      "headline": "Welcome to Events Hubs! a community built for sharing knowledge, showcasing talent, and connecting with leading companies in the events industry",
+      "video": {
+        "url": "",
+        "poster": ""
+      },
+      "card1": {
+        "text": "6,000+ Talents In Events experience"
+      },
+      "card2": {
+        "text": "Connect with Industry Leaders"
+      },
+      "card3": {
+        "text": "Blogs for Knowledge Sharing"
+      }
+    },
     "carousel": {
       "1": {
         "title": "Welcome to Events Hub",
@@ -26,7 +59,23 @@
     "back_to_blog_list" : "Back to Blog List"
   },
   "footer": {
-    "copyright": "Events Hub"
+    "copyright": "Events Hub",
+    "newsletter-title": "Sign up to <br /> our newsletter",
+    "newsletter-desc": "Stay up to date with the latest news and talents in our website.",
+    "enter-email": "Enter Email Address",
+    "send": "Submit",
+    "subscribed-msg": "Successfully subscribed!",
+    "tagline": "Your go-to platform for connecting event professionals with top companies in the industry.",
+    "about": "About",
+    "recruitment": "Recruitment",
+    "talent": "Talent",
+    "opportunities": "Opportunities",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "billing-cancellation": "Billing and Cancellation",
+    "privacy-policy": "Privacy Policy",
+    "terms-companies": "Terms & Conditions For Companies",
+    "terms-users": "Terms & Conditions For Users"
   },
   "navigation": {
     "brand-name": "Events Hub",
@@ -38,7 +87,13 @@
     "pricing": "Pricing",
     "contact": "Contact",
     "login": "Login",
-    "category": "Category"
+    "category": "Category",
+    "recruitment": "Recruitment",
+    "tagline": "Your go-to platform for connecting event professionals with top companies in the industry.",
+    "billing-cancellation": "Billing and Cancellation",
+    "terms-companies": "Terms & Conditions For Companies",
+    "terms-users": "Terms & Conditions For Users",
+    "certified-by": "This website certified by"
   },
   "about": {
     "hero_tagline": "Connecting Talent with Opportunity in the Event Industry",

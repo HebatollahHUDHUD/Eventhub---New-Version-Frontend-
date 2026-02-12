@@ -1,4 +1,6 @@
 import { getData } from "@/lib/request-server";
+import HeroSection from "@/components/home/HeroSection";
+import AboutEventsHubs from "@/components/home/AboutEventsHubs";
 
 const page = async () => {
 
@@ -16,8 +18,9 @@ const page = async () => {
 
   return (
     <div>
-      <h1>Page</h1>
-      <p>{data.message}</p>
+      <HeroSection />
+      <AboutEventsHubs />
+      {/* Add other sections here */}
     </div>
   )
 }
