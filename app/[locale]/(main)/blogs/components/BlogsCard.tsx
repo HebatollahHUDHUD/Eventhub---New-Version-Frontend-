@@ -14,7 +14,7 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
   return (
     <Link key={blog.id} href={`/blogs/${blog.slug}`} className="h-full" role="listitem">
       <article
-        className="relative bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
+        className="relative h-full bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
         role="listitem"
       >
         <div className="relative w-full aspect-[3/2] overflow-hidden">

@@ -64,8 +64,8 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
       </section>
 
       <section className="container-sm space-y-6">
-        <div className="space-y-4 max-w-3xl mx-auto text-center">
-          <h2 className="title-1">{t("title-details")}</h2>
+        <div className="space-y-4 max-w-2xl mx-auto text-center">
+          <h2 className="title-2">{t("title-details")}</h2>
           <p className="description">{t("description")}</p>
         </div>
 
