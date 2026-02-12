@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { CircleCheck, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface PlanFeature {
   name: string;
@@ -29,6 +30,13 @@ const PlanCard = ({
 
   const isFree = price === 0;
 
+  const lowerName = name.toLowerCase();
+  const planIcon = lowerName.includes("platinum")
+    ? "/icons/plan-icons/platinum.png"
+    : lowerName.includes("gold")
+      ? "/icons/plan-icons/gold.png"
+      : "/icons/plan-icons/muted.png";
+
   return (
     <article
       className={cn(
@@ -45,16 +53,17 @@ const PlanCard = ({
 
       {/* Curved Gradient Header */}
       <div
-        className="relative flex flex-col items-center justify-center gap-3 pt-8 pb-12"
+        className="relative flex flex-col items-center justify-center  pt-4 pb-6"
         style={{
           background:
             "linear-gradient(180deg, #797DE5 0%, #333441 100%)",
-          borderRadius: "0 0 50% 50% / 0 0 30px 30px",
+          // borderRadius: "0 0 50% 50% / 0 0 30px 30px",
+          borderRadius: "0 0 70% 70% / 0 0 30px 30px",
         }}
       >
         {/* Icon Circle */}
-        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
-          <span className="text-white text-lg font-bold">X</span>
+        <div className="">
+          <Image src={planIcon} alt="Plan Icon" width={48} height={48} />
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
