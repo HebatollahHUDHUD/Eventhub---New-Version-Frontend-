@@ -10,7 +10,7 @@ type PageTitleProps = {
 const PageTitle = ({ title, description, className }: PageTitleProps) => {
   return (
     <div className={cn("space-y-4 mx-auto text-center", className)}>
-      <h2 className="title-1">{title}</h2>
+      <h2 className="title-2">{title}</h2>
       {description && <div className="description">{description}</div>}
     </div>
   );
