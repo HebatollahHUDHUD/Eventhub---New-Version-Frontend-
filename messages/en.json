@@ -198,5 +198,128 @@
       "skills": "Skills",
       "details": "Details"
     }
+  },
+  "auth":{
+    "auth-title": "Welcome to Events Hubs",
+    "login":{
+      "title": "Login",
+      "subtitle": "Welcome back! Please login to your account",
+      "email-or-username": "Email or Username",
+      "enter-email-or-username": "Enter email or username",
+      "keep-me-logged-in": "Keep me logged in",
+      "forgot-password": "Forgot password?",
+      "button": "Login",
+      "success-msg": "Login successful!",
+      "dont-have-account": "Don't have an account?",
+      "register-link": "Register",
+      "errors": {
+        "invalid-credentials": "Invalid email or password. Please try again.",
+        "account-locked": "Your account has been locked. Please contact support.",
+        "account-not-verified": "Please verify your email before logging in.",
+        "network-error": "Network error. Please check your connection and try again.",
+        "server-error": "Server error. Please try again later.",
+        "required": "Email and password are required."
+      }
+    },
+    "register":{
+      "title": "Welcome to Events Hubs",
+      "talent-title":"Looking for a Job",
+      "talent-description":"Set your profile and get noticed.",
+      "company-title":"Register as a Company",
+      "company-description":"Perfect employees for your company.",
+      "already-have-account":"Already have an account? <Link>Login</Link>",
+      "button": "Create Account",
+      "success-msg": "Account created successfully! Please check your email to verify your account.",
+      "errors": {
+        "email-exists": "This email is already registered. Please login instead.",
+        "weak-password": "Password is too weak. Please use a stronger password.",
+        "password-mismatch": "Passwords do not match.",
+        "invalid-email": "Please enter a valid email address.",
+        "required-fields": "Please fill in all required fields.",
+        "network-error": "Network error. Please check your connection and try again.",
+        "server-error": "Server error. Please try again later."
+      }
+    },
+    "forgot-password":{
+      "title": "Forgot Password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password",
+      "email-label": "Email Address",
+      "enter-email": "Enter your email address",
+      "button": "Send Reset Link",
+      "back-to-login": "Back to Login",
+      "success-msg": "Password reset link has been sent to your email.",
+      "errors": {
+        "email-not-found": "No account found with this email address.",
+        "invalid-email": "Please enter a valid email address.",
+        "too-many-requests": "Too many requests. Please try again later.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "verify-email":{
+      "title": "Verify Your Email",
+      "subtitle": "We've sent a verification code to your email address",
+      "code-label": "Verification Code",
+      "enter-code": "Enter verification code",
+      "button": "Verify Email",
+      "resend-code": "Resend Code",
+      "resend-success": "Verification code has been resent to your email.",
+      "success-msg": "Email verified successfully!",
+      "errors": {
+        "invalid-code": "Invalid verification code. Please try again.",
+        "expired-code": "Verification code has expired. Please request a new one.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "reset-password":{
+      "title": "Reset Password",
+      "subtitle": "Enter your new password",
+      "new-password-label": "New Password",
+      "confirm-password-label": "Confirm New Password",
+      "button": "Reset Password",
+      "success-msg": "Password has been reset successfully. You can now login with your new password.",
+      "errors": {
+        "weak-password": "Password is too weak. Please use a stronger password.",
+        "password-mismatch": "Passwords do not match.",
+        "invalid-token": "Invalid or expired reset token. Please request a new password reset.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "fields":{
+      "company-name": "Company Name",
+      "email-address": "Email Address",
+      "enter-email": "Enter email address",
+      "phone-number": "Phone Number",
+      "country": "Country",
+      "select-country": "Select country",
+      "incharge-person-name": "Incharge Person Name",
+      "password": "Password",
+      "enter-password": "Enter password",
+      "password-confirmation": "Confirm Password",
+      "confirm-password": "Confirm your password",
+      "image": "Company Image",
+      "upload-image": "Upload Image"
+    },
+    "common":{
+      "loading": "Loading...",
+      "submitting": "Submitting...",
+      "success": "Success!",
+      "error": "Error",
+      "try-again": "Please try again.",
+      "required": "This field is required.",
+      "optional": "Optional"
+    },
+    "company-name": "Company Name",
+    "email-address": "Email Address",
+    "enter-email": "Enter email address",
+    "phone-number": "Phone Number",
+    "country": "Country",
+    "incharge-person-name": "Incharge Person Name",
+    "password": "Password",
+    "enter-password": "Enter password",
+    "password-confirmation": "Confirm Password",
+    "confirm-password": "Confirm your password",
+    "create-account": "Create Account",
+    "account-created-msg": "Account created successfully! Please check your email to verify your account.",
+    "dont-have-account": "Don't have an account?"
   }
 }

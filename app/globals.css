@@ -34,6 +34,7 @@
   --color-primary: var(--primary);
   --color-accentPink: var(--accentPink);
   --color-accentBlue: var(--accentBlue);
+  --color-clr-orange: var(--orange);
   --color-accentPurple: var(--accentPurple);
   --color-accentSky: var(--accentSky);
   --color-lightGray: var(--lightGray);
@@ -80,6 +81,9 @@
   --border: oklch(0.9220 0 0);
   --input: oklch(0.9220 0 0);
   --ring: oklch(0.7080 0 0);
+  --orange: oklch(0.8062 0.1493 73.3220);
+
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

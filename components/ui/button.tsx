@@ -22,6 +22,7 @@ const buttonVariants = cva(
         muted: "bg-muted text-muted-foreground hover:bg-muted/90",
         pink: "bg-[#E91E8C] text-white hover:bg-[#E91E8C]/90",
         accentPurple: "bg-accentPurple hover:bg-accentPurple/90 text-white",
+        accentSecondary: "bg-secondary/60 hover:bg-secondary/80 text-white",
 
       },
       size: {

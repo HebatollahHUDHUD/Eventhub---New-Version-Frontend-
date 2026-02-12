@@ -193,9 +193,13 @@ export const HomeSchema = z
   .strict();
 
 export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-  kep_login: z.boolean().optional(),
+  identifier: z.string().min(1, {
+    message: "Email or username is required.",
+  }),
+  password: z.string().min(8, {
+    message: "Password must be at least 8 characters.",
+  }),
+  keep_login: z.boolean().optional(),
 });
 
 export const registerSchema = z
@@ -303,6 +307,38 @@ export const registerSchema = z
         }
       }
     }
+  });
+
+export const companyRegisterSchema = z
+  .object({
+    user_type: z.literal("company"),
+    name: z.string().min(2, {
+      message: "Company name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    mobile: z.string().min(10, {
+      message: "Mobile number must be at least 10 characters.",
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    incharge_person_name: z.string().min(2, {
+      message: "Incharge person name must be at least 2 characters.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+    image: z.instanceof(File).optional(),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
   });
 
 const infoSchema = z.object({
@@ -446,3 +482,4 @@ export type AboutPage = z.infer<typeof AboutPageSchema>;
 export type TrackPage = z.infer<typeof trackPageSchema>;
 export type JoinPage = z.infer<typeof JoinPageSchema>;
 export type ContactFormType = z.infer<typeof ContactFormSchema>;
+export type CompanyRegisterSchema = z.infer<typeof companyRegisterSchema>;
