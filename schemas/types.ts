@@ -70,5 +70,8 @@ export interface ContactItem {
   href: string;
   isExternal?: boolean;
 }
+export type TalentCategory = 
+  | "talents" 
+  | "recruitment";
 
 
