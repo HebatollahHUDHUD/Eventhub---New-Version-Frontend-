@@ -365,37 +365,36 @@ export const JoinPageSchema = z.object({
   join_page_image: z.string().url(),
 });
 
+const AboutFaqItemSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+});
+
 const AboutPageSchema = z.object({
-  about_page_title: z.string(),
-  about_page_subtitle: z.string(),
-  about_page_video: z.string(),
+  about_page_title: z.string().nullable().optional(),
+  about_page_subtitle: z.string().nullable().optional(),
+  about_page_desc: z.string().nullable().optional(),
+  about_page_video: z.string().nullable().optional(),
 
-  about_page_goals_title: z.string(),
-  about_page_goals_items: z
-    .array(AboutItemSchema)
+  about_page_why_us_items: z
+    .array(WhyUsItemSchema)
     .nullable()
     .optional()
     .default([]),
 
-  about_page_tools_title: z.string(),
-  about_page_tools_items: z
-    .array(AboutItemSchema)
+  about_page_contract_title: z.string().nullable().optional(),
+  about_page_contract_subtitle: z.string().nullable().optional(),
+  about_page_contract_desc: z.string().nullable().optional(),
+  about_page_contract_image: z.string().nullable().optional(),
+  about_page_contract_file: z.string().nullable().optional(),
+
+  about_page_faq_title: z.string().nullable().optional(),
+  about_page_faq_subtitle: z.string().nullable().optional(),
+  about_page_faq_items: z
+    .array(AboutFaqItemSchema)
     .nullable()
     .optional()
     .default([]),
-
-  about_page_what_offer_title: z.string(),
-  about_page_what_offer_desc: z.string(),
-  about_page_what_offer_items: z
-    .array(AboutItemSchema)
-    .nullable()
-    .optional()
-    .default([]),
-
-  about_page_footer_title: z.string(),
-  about_page_footer_desc: z.string(),
-  about_page_footer_btn_text: z.string(),
-  about_page_footer_btn_url: z.string(),
 });
 
 export const faqContactSchema = z.object({

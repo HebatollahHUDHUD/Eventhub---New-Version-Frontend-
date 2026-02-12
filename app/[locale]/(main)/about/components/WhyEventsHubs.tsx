@@ -11,7 +11,7 @@ interface WhyEventsHubsProps {
 export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
   const t = useTranslations("about");
 
-  const sectionTitle = data?.about_page_goals_title || t("why_events_hubs");
+  const sectionTitle = t("why_events_hubs");
   const sectionDescription = t("why_events_hubs_description");
 
   const staticFeatures = [
@@ -54,8 +54,8 @@ export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
   ];
 
   const features =
-    data?.about_page_goals_items && data.about_page_goals_items.length > 0
-      ? data.about_page_goals_items.map((item, index) => ({
+    data?.about_page_why_us_items && data.about_page_why_us_items.length > 0
+      ? data.about_page_why_us_items.map((item, index) => ({
         number: String(index + 1).padStart(2, "0"),
         title: item.title,
         description: item.desc,

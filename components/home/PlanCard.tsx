@@ -33,19 +33,19 @@ const PlanCard = ({
     <article
       className={cn(
         "relative flex flex-col rounded-3xl bg-background shadow-lg overflow-hidden border border-border/50 transition-transform duration-300 hover:-translate-y-1",
-        is_recommended && "ring-2 ring-primary"
+       
       )}
     >
       {/* Recommended Badge */}
       {is_recommended && (
-        <div className="absolute top-4 end-0 z-10 bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-s-full">
+        <div className="absolute top-0 end-5 z-10 bg-amber-500 text-[9px]  text-white  uppercase tracking-[.25em] px-2 py-1 leading-tight">
           {t("recommended")}
         </div>
       )}
 
       {/* Curved Gradient Header */}
       <div
-        className="relative flex items-center justify-center pt-8 pb-12"
+        className="relative flex flex-col items-center justify-center gap-3 pt-8 pb-12"
         style={{
           background:
             "linear-gradient(180deg, #797DE5 0%, #333441 100%)",
@@ -56,14 +56,14 @@ const PlanCard = ({
         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
           <span className="text-white text-lg font-bold">X</span>
         </div>
+        {/* Plan Name */}
+        <h3 className="text-lg font-bold text-white text-center">
+          {name}
+        </h3>
       </div>
 
       {/* Card Body */}
       <div className="flex flex-col flex-1 p-6 pt-4 space-y-6">
-        {/* Plan Name */}
-        <h3 className="text-lg font-bold text-foreground text-center">
-          {name}
-        </h3>
 
         {/* Price */}
         <div className="flex items-baseline justify-center gap-1">
