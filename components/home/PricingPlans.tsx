@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import PlanCard from "@/components/home/PlanCard";
 import PurchaseDialog from "@/components/home/PurchaseDialog";
+import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
@@ -99,48 +100,27 @@ const PricingPlans = () => {
           <div className="flex items-center justify-center gap-4">
             <span
               className={cn(
-                "text-sm md:text-base font-semibold transition-colors duration-200",
-                planType === "companies"
-                  ? "text-foreground"
-                  : "text-muted-foreground"
+                "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
+                
               )}
             >
               {t("companiesPlans")}
             </span>
 
             {/* Custom Toggle */}
-            <button
-              type="button"
-              role="switch"
-              aria-checked={planType === "talents"}
-              aria-label={t("toggleLabel")}
-              className={cn(
-                "relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                planType === "talents" ? "bg-primary" : "bg-primary"
-              )}
-              onClick={() =>
-                setPlanType((prev) =>
-                  prev === "companies" ? "talents" : "companies"
-                )
+            <PricingSwitch
+              checked={planType === "talents"}
+              onCheckedChange={(checked) =>
+                setPlanType(checked ? "talents" : "companies")
               }
-            >
-              <span
-                className={cn(
-                  "pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform duration-200",
-                  planType === "talents"
-                    ? "translate-x-7"
-                    : "translate-x-1"
-                )}
-              />
-            </button>
+              aria-label={t("toggleLabel")}
+            />
 
             <span
-              className={cn(
-                "text-sm md:text-base font-semibold transition-colors duration-200",
-                planType === "talents"
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              )}
+                className={cn(
+                  "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
+                  
+                )}
             >
               {t("talentsPlans")}
             </span>
