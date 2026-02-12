@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { cyrclesToDownSVG } from "@/public/SVGs";
 import VideoPlayer from "@/components/common/VideoPlayer";
-import StatCard from "../common/StatCard";
 import type { AboutPage } from "@/schemas/shared";
+import StatCard from "@/components/common/StatCard";
 
 const PLACEHOLDER_VIDEO_URL = "https://www.example.com/placeholder-video.mp4";
 
@@ -36,7 +36,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-10 gap-8 lg:gap-12 px-4 md:px-8 lg:px-12">
           {/* Left column - Tagline */}
           <div className="flex lg:col-span-4">
-            <h1 className="title-1 text-primary leading-snug font-normal! lg:text-6xl!">
+            <h1 className="title-1 text-primary leading-snug font-normal! ">
               {title}
             </h1>
           </div>
