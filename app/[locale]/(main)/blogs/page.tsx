@@ -17,7 +17,7 @@ const page = async ({ searchParams }: PageProps) => {
 
       <div className="space-y-10 py-10">
 
-        <div className="space-y-4 max-w-md mx-auto text-center">
+        <div className="space-y-4 max-w-xl mx-auto text-center">
           <h2 className="title-1">
             {t("title")}
           </h2>

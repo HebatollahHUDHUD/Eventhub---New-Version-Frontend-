@@ -4,7 +4,7 @@
     "description": "Events Hub - Your premier destination for events"
   },
   "common": {
-  "events": "Events"
+    "events": "Events"
   },
   "home": {
     "title": "Welcome to Events Hub!",
@@ -55,8 +55,8 @@
   "blogs": {
     "title": "Insights From Business Experts",
     "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired.",
-    "title-details" : "Browse More Articles",
-    "back_to_blog_list" : "Back to Blog List"
+    "title-details": "Browse More Articles",
+    "back_to_blog_list": "Back to Blog List"
   },
   "footer": {
     "copyright": "Events Hub",
@@ -134,5 +134,24 @@
     "faq_5_answer": "Yes, our Basic Plan for job seekers is free and provides access to job listings and company profiles.",
     "faq_6_question": "Can I upgrade my plan later?",
     "faq_6_answer": "Yes, you can upgrade your plan at any time through your account settings."
+  },
+  "contact": {
+    "title": "Get in Touch!",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter subject",
+    "message": "Message",
+    "messagePlaceholder": "Write your message",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "sendSuccess": "Message sent successfully!",
+    "error": "Something went wrong",
+    "call": "Call us at",
+    "emailcon": "Drop a mail",
+    "visit": "Drop by",
+    "map": "View on Google Map"
   }
 }
