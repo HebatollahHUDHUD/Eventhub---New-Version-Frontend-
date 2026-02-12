@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 export interface BlogPost {
   id: number;
   title: string;
@@ -61,5 +62,13 @@ export type BlogPostDetailsResponse = {
     };
   };
 };
+
+export interface ContactItem {
+  icon: ReactNode;
+  title: string;
+  value: string;
+  href: string;
+  isExternal?: boolean;
+}
 
 

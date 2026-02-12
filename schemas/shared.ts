@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { email, z } from "zod";
 
 export const timestamp = z.string().datetime(); // ISO 8601 timestamp
 
@@ -422,6 +422,13 @@ const calendarSchema = z.object({
   announcements: AnnouncementsSchema,
 });
 
+export const ContactFormSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  subject: z.string(),
+  message: z.string()
+})
+
 export type Calendar = z.infer<typeof calendarSchema>;
 export type AnnouncementSchema = z.infer<typeof AnnouncementSchema>;
 export type AnnouncementsSchema = z.infer<typeof AnnouncementsSchema>;
@@ -438,3 +445,4 @@ export type CollegePage = z.infer<typeof CollegePageSchema>;
 export type AboutPage = z.infer<typeof AboutPageSchema>;
 export type TrackPage = z.infer<typeof trackPageSchema>;
 export type JoinPage = z.infer<typeof JoinPageSchema>;
+export type ContactFormType = z.infer<typeof ContactFormSchema>;

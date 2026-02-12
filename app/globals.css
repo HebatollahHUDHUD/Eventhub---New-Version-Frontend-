@@ -73,6 +73,7 @@
   --lightGray: #E2E2E2;
   --subtleText: #727272;
   --lightBackground: #F8FAFC;
+  --accentPurple: hsl(238, 68%, 69%);
   --accent-foreground: oklch(0.2050 0 0);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);

@@ -44,7 +44,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               {t("back_to_blog_list")}
             </Link>
 
-            <h2 className="title-2 max-w-full md:max-w-[450px]">{blog?.title}</h2>
+            <h2 className="title-2 max-w-full md:max-w-[550px]">{blog?.title}</h2>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="bg-accentPink text-white title-5 px-3 py-0.5 rounded-lg capitalize">
@@ -64,7 +64,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
       </section>
 
       <section className="container-sm space-y-6">
-        <div className="space-y-4 max-w-2xl mx-auto text-center">
+        <div className="space-y-4 max-w-3xl mx-auto text-center">
           <h2 className="title-1">{t("title-details")}</h2>
           <p className="description">{t("description")}</p>
         </div>
