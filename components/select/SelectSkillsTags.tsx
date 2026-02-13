@@ -1,45 +1,37 @@
 "use client";
 
 import { useGetData } from "@/hooks/useFetch";
-import { Badge } from "../ui/badge";
+import SelectItem, { ValueType } from "./SelectItem";
 
-const SelectSkillsTags = ({
+const SelectSkills = ({
   onChange,
   value,
+  className,
+  isMultiple,
 }: {
-  onChange: (value: number[]) => void;
-  value: number[];
+  onChange: (value: ValueType) => void;
+  value: ValueType;
+  className?: string;
+  isMultiple?: boolean;
 }) => {
   const endpoint = "/skills";
-  const { data } = useGetData<any>({
+  const { data, isLoading } = useGetData<any>({
     endpoint,
     queryKey: ["Skills", endpoint],
   });
 
   const skillsData = data?.status === "success" ? data?.result : [];
 
-  if (!skillsData?.length) {
-    return null;
-  }
-
   return (
-    <div className="flex flex-wrap gap-2">
-      {skillsData?.map((skill: { id: number; name: string }) => (
-        <Badge
-          key={skill?.id}
-          variant={value?.includes(skill?.id) ? "secondary" : "outline"}
-          className="text-sm font-medium rounded-full py-2 px-4 cursor-pointer"
-          onClick={() => {
-            value.includes(skill?.id)
-              ? onChange(value?.filter((id) => id !== skill?.id))
-              : onChange([...value, skill?.id]);
-          }}
-        >
-          {skill?.name}
-        </Badge>
-      ))}
-    </div>
+    <SelectItem
+      items={skillsData}
+      value={value}
+      setValue={onChange}
+      isLoading={isLoading}
+      className={className}
+      isMultiple={isMultiple}
+    />
   );
 };
 
-export default SelectSkillsTags;
+export default SelectSkills;

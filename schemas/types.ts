@@ -98,3 +98,47 @@ export type TalentCategory =
   | "recruitment";
 
 
+
+
+
+// Job Ad related interfaces
+export interface JobAdCountry {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface JobAdSkill {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface JobAdUser extends User {
+  incharge_person_name: string | null;
+}
+
+export interface JobAd {
+  id: number;
+  user: JobAdUser;
+  country: JobAdCountry;
+  title: Record<string, string>;
+  about: Record<string, string>;
+  experience_years: number;
+  gender: string | null;
+  status: string | null;
+  skills: JobAdSkill[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface JobAdsResponse {
+  job_ads: {
+    data: JobAd[];
+    pagination: Pagination;
+  };
+}
+
+export type JobAdDetailsResponse = {
+  job_ad: JobAd;
+};

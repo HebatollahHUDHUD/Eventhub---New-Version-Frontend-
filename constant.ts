@@ -36,8 +36,9 @@ const PUSHER_APP_KEY = "3bb1f97034c7d028906d";
 const PUSHER_APP_CLUSTER = "mt1";
 
 enum UserType {
-  "STUDENT" = "student",
-  "TEACHER" = "teacher",
+  "COMPANY" = "company",
+  "TALENT" = "talent",
+  "RECRUITER" = "recruiter",
 }
 
 export {

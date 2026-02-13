@@ -23,7 +23,11 @@ const buttonVariants = cva(
         pink: "bg-[#E91E8C] text-white hover:bg-[#E91E8C]/90",
         accentPurple: "bg-accentPurple hover:bg-accentPurple/90 text-white",
         accentSecondary: "bg-secondary/60 hover:bg-secondary/80 text-white",
-
+        outlinePrimary: "border bg-primary/10 hover:bg-primary/20 text-primary",
+        outlineDestructive:
+          "border bg-destructive/10 hover:bg-destructive/20 text-destructive",
+        outlineSecondary:
+          "border border-secondary bg-transparent hover:bg-secondary/20 text-secondary",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

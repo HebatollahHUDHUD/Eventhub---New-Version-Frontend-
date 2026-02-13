@@ -59,40 +59,40 @@ const SelectItem = ({
           variant="outline"
           role="combobox"
           className={cn(
-            "justify-between w-full h-14 rounded-lg",
+            "justify-between w-full h-12 rounded-lg",
             !value && "text-muted-foreground",
             isMultiple &&
-              "hover:bg-muted/35 h-auto min-h-14 px-2 flex-wrap justify-start gap-1",
+            "hover:bg-muted/35 h-auto min-h-12 px-2 flex-wrap justify-start gap-1",
             className
           )}
           disabled={!items.length}
         >
           {isMultiple && (value as any[])?.length
             ? (value as any[])?.map((item) => {
-                const selectedItem = items.find((i) => i.id == item);
-                if (selectedItem)
-                  return (
-                    <div
-                      key={selectedItem?.id}
-                      className="text-xs text-foreground bg-muted px-1.5 py-1 rounded-md flex items-center gap-1.5"
-                    >
-                      <span>{selectedItem?.name}</span>
+              const selectedItem = items.find((i) => i.id == item);
+              if (selectedItem)
+                return (
+                  <div
+                    key={selectedItem?.id}
+                    className="text-xs text-foreground bg-muted px-1.5 py-1 rounded-md flex items-center gap-1.5"
+                  >
+                    <span>{selectedItem?.name}</span>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleSelect(selectedItem?.id);
-                        }}
-                        className="text-muted-foreground hover:text-destructive"
-                      >
-                        <XIcon className="!size-4" />
-                      </button>
-                    </div>
-                  );
-              })
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelect(selectedItem?.id);
+                      }}
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <XIcon className="!size-4" />
+                    </button>
+                  </div>
+                );
+            })
             : value && !isMultiple
-            ? items.find((item) => item.id == value)?.name
-            : t("select-item")}
+              ? items.find((item) => item.id == value)?.name
+              : t("select-item")}
 
           <div className="flex items-center gap-2 ms-auto">
             {isLoading ? (

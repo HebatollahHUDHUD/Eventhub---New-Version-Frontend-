@@ -1,5 +1,5 @@
 import { email, z } from "zod";
-
+import { User } from "./types";
 export const timestamp = z.string().datetime(); // ISO 8601 timestamp
 
 export const linkSchema = z
@@ -341,6 +341,47 @@ export const companyRegisterSchema = z
     path: ["password_confirmation"],
   });
 
+export const companyProfileSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  mobile: z.string().min(10, {
+    message: "Mobile number must be at least 10 characters.",
+  }),
+  country_id: z.number().int().positive({
+    message: "Please select a valid country.",
+  }),
+  incharge_person_name: z.string().min(2, {
+    message: "Incharge person name must be at least 2 characters.",
+  }),
+  image: z.instanceof(File).optional(),
+});
+
+export type CompanyProfileType = z.infer<typeof companyProfileSchema>;
+
+export const changePasswordSchema = z
+  .object({
+    current_password: z.string().min(1, {
+      message: "Current password is required.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
+  });
+
+export type ChangePasswordType = z.infer<typeof changePasswordSchema>;
+
 const infoSchema = z.object({
   footer_title: z.string().min(1),
   footer_desc: z.string().min(1),
@@ -483,3 +524,25 @@ export type TrackPage = z.infer<typeof trackPageSchema>;
 export type JoinPage = z.infer<typeof JoinPageSchema>;
 export type ContactFormType = z.infer<typeof ContactFormSchema>;
 export type CompanyRegisterSchema = z.infer<typeof companyRegisterSchema>;
+
+export const jobAdSchema = z
+  .object({
+    title: z.object({
+      en: z.string().min(1),
+    }),
+    about: z.object({
+      en: z.string().min(1),
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    gender: z.enum(["male", "female", "both"]),
+    experience_years: z.string().regex(/^\d+$/, {
+      message: "Experience years must be a number.",
+    }),
+    skill_ids: z.array(z.number().int().positive()).min(1),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type JobAdSchema = z.infer<typeof jobAdSchema>;

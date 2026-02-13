@@ -12,7 +12,7 @@ const SelectCountry = ({
   value: ValueType;
   className?: string;
 }) => {
-  const endpoint = "/all-countries";
+  const endpoint = "/countries";
   const { data, isLoading } = useGetData<any>({
     endpoint,
     queryKey: ["Countries", endpoint],

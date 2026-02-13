@@ -4,7 +4,14 @@
     "description": "Events Hub - Your premier destination for events"
   },
   "common": {
-    "events": "Events"
+    "events": "Events",
+    "file-upload": {
+      "drag-drop-text": "Drag & Drop your",
+      "images": "Images",
+      "or": "Or",
+      "browse": "browse",
+      "on-computer": "on your computer"
+    }
   },
   "home": {
     "title": "Welcome to Events Hub!",
@@ -93,7 +100,16 @@
     "billing-cancellation": "Billing and Cancellation",
     "terms-companies": "Terms & Conditions For Companies",
     "terms-users": "Terms & Conditions For Users",
-    "certified-by": "This website certified by"
+    "certified-by": "This website certified by",
+    "dashboard": "Dashboard",
+    "privet-information": "Private Information",
+    "change-password": "Change Password",
+    "job-ads": "Job Ads",
+    "company-plans": "Company Plans",
+    "events": "Events",
+    "my-messages": "My Messages",
+    "employees": "Employees",
+    "logout": "Logout"
   },
   "about": {
     "hero_tagline": "Connecting Talent with Opportunity in the Event Industry",
@@ -321,5 +337,56 @@
     "create-account": "Create Account",
     "account-created-msg": "Account created successfully! Please check your email to verify your account.",
     "dont-have-account": "Don't have an account?"
+  },
+  "dashboard": {
+    "privet-information": "Private Information",
+    "company-name": "Company Name",
+    "email-address": "Email Address",
+    "enter-email": "Enter email address",
+    "phone-number": "Phone Number",
+    "country": "Country",
+    "incharge-person-name": "Incharge Person Name",
+    "save-changes": "Save Changes",
+    "change-password": "Change Password",
+    "current-password": "Current Password",
+    "enter-current-password": "Enter current password",
+    "new-password": "New Password",
+    "enter-new-password": "Enter new password",
+    "confirm-password": "Confirm Password",
+    "enter-confirm-password": "Enter confirm password",
+    "job-ads": {
+      "title": "Job Ads",
+      "job-title": "Job Title",
+      "enter-job-title": "Enter job title",
+      "country": "Country",
+      "job-skills-tags": "Job Skills/Tags",
+      "years-of-experience": "Years of Experience",
+      "select-experience": "Select years of experience",
+      "year": "year",
+      "years": "years",
+      "gender": "Gender",
+      "select-gender": "Select gender",
+      "male": "Male",
+      "female": "Female",
+      "both": "Both",
+      "about-the-job": "About The Job",
+      "enter-about-job": "Enter job description",
+      "max-letters": "Max 250 Letters",
+      "job-image": "Job Image",
+      "drag-drop-image": "Drag & Drop your Job Image",
+      "or-browse": "Or",
+      "browse": "browse",
+      "on-computer": "on your computer",
+      "add-job-ad": "Add Job Ad",
+      "success-msg": "Job ad created successfully!",
+      "error-msg": "Failed to create job ad. Please try again.",
+      "view": "View",
+      "no-job-ads": "No job ads found.",
+      "status": {
+        "active": "Active",
+        "closed": "Closed",
+        "cancelled": "Cancelled"
+      }
+    }
   }
 }
