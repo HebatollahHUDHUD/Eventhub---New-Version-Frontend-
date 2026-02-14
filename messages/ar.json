@@ -11,7 +11,16 @@
       "or": "أو",
       "browse": "تصفح",
       "on-computer": "على جهازك"
-    }
+    },
+    "delete": "حذف",
+    "are-you-sure": "هل أنت متأكد؟",
+    "delete-desc": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف العنصر نهائياً.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "failed-to-submit": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
+    "select-item": "اختر عنصر",
+    "search-for-items": "ابحث عن العناصر...",
+    "no-item-found": "لم يتم العثور على عنصر."
   },
   "home": {
     "title": "مرحباً بك في مركز الفعاليات!",
@@ -395,6 +404,7 @@
       "job-skills-tags": "مهارات/علامات الوظيفة",
       "years-of-experience": "سنوات الخبرة",
       "select-experience": "اختر سنوات الخبرة",
+      "enter-experience-years": "أدخل سنوات الخبرة",
       "year": "سنة",
       "years": "سنوات",
       "gender": "الجنس",
@@ -411,6 +421,8 @@
       "browse": "تصفح",
       "on-computer": "على جهازك",
       "add-job-ad": "إضافة إعلان وظيفة",
+      "update-job-ad": "تحديث إعلان الوظيفة",
+      "job-ad-details": "تفاصيل إعلان الوظيفة",
       "success-msg": "تم إنشاء إعلان الوظيفة بنجاح!",
       "error-msg": "فشل إنشاء إعلان الوظيفة. يرجى المحاولة مرة أخرى.",
       "view": "عرض",
@@ -420,6 +432,30 @@
         "closed": "مغلق",
         "cancelled": "ملغي"
       }
+    },
+    "events": {
+      "title": "الفعاليات",
+      "add-event": "إضافة فعالية",
+      "event-title": "عنوان الفعالية",
+      "enter-event-title": "أدخل عنوان الفعالية",
+      "event-type": "نوع الفعالية",
+      "from-date": "من تاريخ",
+      "enter-from-date": "أدخل تاريخ البداية",
+      "to-date": "إلى تاريخ",
+      "enter-to-date": "أدخل تاريخ النهاية",
+      "check-in-time": "وقت الحضور",
+      "enter-check-in-time": "أدخل وقت الحضور",
+      "check-out-time": "وقت المغادرة",
+      "enter-check-out-time": "أدخل وقت المغادرة",
+      "employees": "الموظفون",
+      "attachments": "المرفقات",
+      "location": "الموقع",
+      "month": "شهر",
+      "week": "أسبوع",
+      "previous": "السابق",
+      "next": "التالي",
+      "error-msg": "فشل إنشاء الفعالية. يرجى المحاولة مرة أخرى.",
+      "success-msg": "تم إنشاء الفعالية بنجاح!"
     }
   }
 }

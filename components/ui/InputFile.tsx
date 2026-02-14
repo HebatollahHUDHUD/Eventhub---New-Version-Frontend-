@@ -1,6 +1,6 @@
 "use client";
 
-import { CloudUpload, Paperclip } from "lucide-react";
+import { Paperclip, Trash2 } from "lucide-react";
 import {
   FileInput,
   FileUploader,
@@ -9,14 +9,19 @@ import {
 } from "./file-upload";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { AttachmentType } from "@/schemas/types";
+import { buttonVariants } from "./button";
+import { cn } from "@/lib/utils";
 
 const InputFile = ({
   files,
   onChange,
   id = `fileInput-${Math.random()}`,
   options = {},
+  defaultValue = [],
 }: {
   files: File[] | string[];
+  defaultValue?: AttachmentType[];
   onChange: (value: File[] | null) => void;
   id?: string;
   options?: {
@@ -27,7 +32,7 @@ const InputFile = ({
   };
 }) => {
   const t = useTranslations("common.file-upload");
-  
+
   const dropZoneConfig = {
     maxFiles: 5,
     maxSize: 1024 * 1024 * 4,
@@ -58,10 +63,10 @@ const InputFile = ({
           />
           <div className="space-y-1">
             <p className="text-sm font-semibold text-primary dark:text-primary">
-              {t("drag-drop-text") || "Drag & Drop your"} <span className="font-bold text-secondary">{t("images") || "Images"}</span>
+              {t("drag-drop-text")} <span className="font-bold text-secondary">{t("images")}</span>
             </p>
             <p className="text-xs text-primary dark:text-primary">
-              {t("or") || "Or"} <span className="font-bold text-secondary">{t("browse") || "browse"}</span> {t("on-computer") || "on your computer"}
+              {t("or")} <span className="font-bold text-secondary">{t("browse")}</span> {t("on-computer")}
             </p>
           </div>
 
@@ -69,6 +74,29 @@ const InputFile = ({
       </FileInput>
 
       <FileUploaderContent>
+        {defaultValue?.map((attachment, i) => (
+          <div
+            key={i}
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "h-6 p-1 flex justify-between gap-1 relative"
+            )}
+          >
+            <a href={attachment.file_path} target="_blank" rel="noopener noreferrer" className="font-medium leading-none tracking-tight flex items-center gap-1.5 h-full w-full">
+              <Paperclip className="h-4 w-4 stroke-current" />
+              <span>{attachment.file_name}</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => { }}
+            >
+              <span className="sr-only">remove item {i}</span>
+              <Trash2 className="w-4 h-4 hover:stroke-destructive duration-200 ease-in-out" />
+            </button>
+          </div>
+        ))}
+
         {files &&
           files.length > 0 &&
           files.map((file, i) => (

@@ -17,7 +17,13 @@ export type BlogCategory =
   | "sales" 
   | "organizing";
 
-export interface BlogPostCategory {
+export interface AttachmentType {
+  id: number;
+  file_name: string;
+  file_path: string;
+}
+
+  export interface BlogPostCategory {
   id: number;
   name: string;
   slug: string;
@@ -128,6 +134,7 @@ export interface JobAd {
   gender: string | null;
   status: string | null;
   skills: JobAdSkill[];
+  attachments: AttachmentType[];
   created_at: string;
   updated_at: string;
 }
@@ -142,3 +149,35 @@ export interface JobAdsResponse {
 export type JobAdDetailsResponse = {
   job_ad: JobAd;
 };
+
+// Event related interfaces
+export interface EventType {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Event {
+  id: number;
+  event_type: EventType;
+  title: string;
+  from_date: string;
+  to_date: string;
+  check_in_time: string;
+  check_out_time: string;
+  lat: string;
+  lng: string;
+  status: string;
+  attendees: any[];
+  users: User[];
+  attachments: AttachmentType[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EventsResponse {
+  events?: Event[];
+  result?: {
+    events?: Event[];
+  };
+}

@@ -76,10 +76,10 @@ export const useDeleteData = <T, K = unknown>({
   endpoint,
   config,
 }: FetchData) => {
-  const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
+  const { data, mutateAsync, mutate, status, isSuccess, isPending } = useMutation({
     mutationKey: [endpoint, config],
     mutationFn: (data: RequestData) =>
       deleteData<T, K>({ endpoint, config: { body: data, ...config } }),
   });
-  return { data, mutateAsync, mutate, status, isSuccess };
+  return { data, mutateAsync, mutate, status, isSuccess, isPending };
 };

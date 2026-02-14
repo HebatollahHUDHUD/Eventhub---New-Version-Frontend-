@@ -10,103 +10,167 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popoverDialog";
 import { CheckIcon, ChevronsUpDownIcon, LoaderIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
-export type ValueType = number | string | string[] | number[] | undefined;
+export type ValueType = any;
 
 type SelectItemProps = {
-  items: { id: number | string; name: string; alt_name?: string }[];
+  items: any[];
   value: ValueType;
-  setValue: (value: ValueType) => void;
+  setValue?: (value: ValueType) => void;
+  labelKey?: "name" | "ecri_no" | "tender_no" | "tender_name" | "no";
+  getItem?: (value: any | any[]) => void; // NEW PROP
   isLoading?: boolean;
   className?: string;
   clearable?: boolean;
   isMultiple?: boolean;
+  placeholder?: string;
+  disabled?: boolean;
+  size?: "sm" | "lg" | "default";
+  onSearchChange?: (value: string) => void;
 };
 
 const SelectItem = ({
   items,
   value,
-  setValue,
+  setValue = () => { },
+  getItem,
   isLoading,
   className,
   clearable = true,
   isMultiple,
+  placeholder,
+  disabled,
+  size = "default",
+  onSearchChange,
 }: SelectItemProps) => {
   const [open, setOpen] = useState(false);
-  const locale = useLocale();
+  const language = useLocale()
   const t = useTranslations("common");
 
-  const handleSelect = (val: number | string) => {
-    if (isMultiple && !(value as any[])?.includes(val)) {
-      setValue([...(value as any[]), val]);
-    } else if (isMultiple && (value as any[])?.includes(val)) {
-      setValue((value as any[]).filter((item) => item !== val));
+  const getLabel = (item: any) => {
+    if (!item) return "";
+
+    if (typeof item.name === "string") {
+      return item.name;
     } else {
-      setValue(val);
+      return item.name?.[language];
     }
+
+  };
+
+  const hasSingleValue = value !== undefined && value !== null && value !== "" && value !== 0;
+  const hasMultipleValue = Array.isArray(value) && (value as any[])?.length > 0;
+  const hasValue = isMultiple ? hasMultipleValue : hasSingleValue;
+
+  const handleSelect = (val: number | string) => {
+    const selectedItem = items.find((i) => i.id == val);
+
+    // Multi Select
+    if (isMultiple) {
+      let newValues: any[] = [];
+
+      if (!(value as any[])?.includes(val)) {
+        newValues = [...(value as any[]), val];
+      } else {
+        newValues = (value as any[]).filter((v) => v != val);
+      }
+
+      setValue(newValues);
+
+      // Return array of selected item objects
+      const selectedItemsData = items.filter((i) => newValues.includes(i.id));
+      getItem?.(selectedItemsData);
+
+      return;
+    }
+
+    // Single Select
+    setValue(val);
+
+    // Return selected item object
+    getItem?.(selectedItem || null);
   };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          size={size}
           variant="outline"
           role="combobox"
           className={cn(
-            "justify-between w-full h-12 rounded-lg",
-            !value && "text-muted-foreground",
+            "bg-background! justify-between w-full overflow-hidden rounded-lg border-primary/50 focus-visible:border-primary px-4 h-12",
+            !hasValue && "text-[#5F5F5F]",
             isMultiple &&
             "hover:bg-muted/35 h-auto min-h-12 px-2 flex-wrap justify-start gap-1",
             className
           )}
-          disabled={!items.length}
+          disabled={disabled !== undefined ? disabled : !items.length}
         >
-          {isMultiple && (value as any[])?.length
-            ? (value as any[])?.map((item) => {
-              const selectedItem = items.find((i) => i.id == item);
+          {/* MULTI SELECT */}
+          {isMultiple && value?.length
+            ? value?.map((id: any) => {
+              const selectedItem = items.find((i) => i.id == id);
+
               if (selectedItem)
                 return (
                   <div
-                    key={selectedItem?.id}
-                    className="text-xs text-foreground bg-muted px-1.5 py-1 rounded-md flex items-center gap-1.5"
+                    key={selectedItem.id}
+                    className="bg-muted text-xs text-foreground px-1.5 py-1 rounded-md flex items-center gap-1.5"
                   >
-                    <span>{selectedItem?.name}</span>
+                    <span>{getLabel(selectedItem)}</span>
 
-                    <button
+                    <span
+                      role="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleSelect(selectedItem?.id);
+                        handleSelect(selectedItem.id);
                       }}
                       className="text-muted-foreground hover:text-destructive"
                     >
                       <XIcon className="!size-4" />
-                    </button>
+                    </span>
                   </div>
                 );
             })
-            : value && !isMultiple
-              ? items.find((item) => item.id == value)?.name
-              : t("select-item")}
+            : isMultiple && !value?.length
+              ? placeholder || t("select-item")
+              : null}
+
+          {/* SINGLE SELECT */}
+          {!isMultiple &&
+            (hasSingleValue ? (
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                {(() => {
+                  const selectedItem = items.find((item) => item.id == value);
+                  return selectedItem?.label || getLabel(selectedItem);
+                })()}
+              </span>
+            ) : (
+              placeholder || t("select-item")
+            ))}
 
           <div className="flex items-center gap-2 ms-auto">
             {isLoading ? (
               <LoaderIcon className="h-4 w-4 shrink-0 animate-spin" />
-            ) : value && clearable && !isMultiple ? (
-              <button
+            ) : hasSingleValue && clearable && !isMultiple ? (
+              <span
+                role="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setValue("");
+                  getItem?.(null);
                 }}
                 className="text-muted-foreground hover:text-destructive"
               >
                 <XIcon className="h-4 w-4" />
-              </button>
+              </span>
             ) : (isMultiple && !(value as any[])?.length) || !value ? (
               <ChevronsUpDownIcon className="h-4 w-4 shrink-0 opacity-50" />
             ) : null}
@@ -114,27 +178,24 @@ const SelectItem = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+      <PopoverContent className="p-0">
         <Command>
-          <CommandInput placeholder={t("search-for-items")} />
+          <CommandInput
+            placeholder={t("search-for-items")}
+            onValueChange={onSearchChange}
+          />
 
           <CommandList>
-            <CommandEmpty>No item found.</CommandEmpty>
-
+            <CommandEmpty>{t("no-item-found")}</CommandEmpty>
             <CommandGroup>
-              {items?.map((item) => (
+              {items?.map((item: any) => (
                 <CommandItem
-                  value={
-                    locale === "en" && item?.name
-                      ? item.name
-                      : item?.alt_name || item?.name || ""
-                  }
+                  value={`${item.id}-${getLabel(item)}`}
                   key={item.id}
+                  disabled={item.disabled}
                   onSelect={() => {
                     handleSelect(item.id);
-                    if (!isMultiple) {
-                      setOpen(false);
-                    }
+                    if (!isMultiple) setOpen(false);
                   }}
                 >
                   <CheckIcon
@@ -147,9 +208,8 @@ const SelectItem = ({
                     )}
                   />
 
-                  {locale === "en"
-                    ? item.name || item.alt_name
-                    : item.alt_name || item.name}
+                  {
+                    item.label ? item.label : getLabel(item)}
                 </CommandItem>
               ))}
             </CommandGroup>

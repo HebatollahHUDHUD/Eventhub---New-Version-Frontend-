@@ -1,6 +1,5 @@
 "use client";
 
-import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -13,45 +12,36 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useTranslations, useLocale } from "next-intl";
-import { jobAdSchema } from "@/lib/schemas";
+import { useTranslations } from "next-intl";
+import { AddEventSchema, AddEventType } from "@/lib/schemas";
 import { usePostData } from "@/hooks/useFetch";
 import { toast } from "@/components/ui/toast";
 import { LoaderIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SelectCountry from "@/components/select/SelectCountry";
-import SelectSkills from "@/components/select/SelectSkillsTags";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { serialize } from "object-to-formdata";
 import InputFile from "@/components/ui/InputFile";
+import SelectUser from "@/components/select/SelectUser";
+import SelectEventType from "@/components/select/SelectEventType";
+import SelectLocation from "@/components/common/SelectLocation";
 
-const JobAdForm = ({ refetch }: { refetch: () => void }) => {
-  const t = useTranslations("dashboard.job-ads");
-  const form = useForm<z.infer<typeof jobAdSchema>>({
-    resolver: zodResolver(jobAdSchema),
+const AddEvent = ({ refetch }: { refetch: () => void }) => {
+  const t = useTranslations("dashboard.events");
+  const form = useForm<AddEventType>({
+    resolver: zodResolver(AddEventSchema),
     defaultValues: {
+      event_type_id: 1,
       title: { en: "" },
-      about: { en: "" },
-      country_id: undefined,
-      gender: undefined,
-      experience_years: undefined,
-      skill_ids: [],
+      user_ids: [],
       attachments: [],
     },
   });
 
-  const { mutateAsync } = usePostData<z.infer<typeof jobAdSchema>>({
-    endpoint: "/profile/job-ads",
+  const { mutateAsync } = usePostData<AddEventType>({
+    endpoint: "/profile/events",
   });
 
-  async function onSubmit(values: z.infer<typeof jobAdSchema>) {
+  async function onSubmit(values: AddEventType) {
     try {
       const formData = serialize(values, {
         indices: true,
@@ -69,7 +59,7 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
       }
     } catch (error) {
       console.log(error);
-      toast("Failed to submit the form. Please try again.", "destructive");
+      toast(t("error-msg"), "destructive");
     }
   }
 
@@ -78,8 +68,11 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("title")}</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          {t("add-event")}
+        </CardTitle>
       </CardHeader>
+
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -89,11 +82,11 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
                 name="title.en"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("job-title")}</FormLabel>
+                    <FormLabel>{t("event-title")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder={t("enter-job-title")}
+                        placeholder={t("enter-event-title")}
                       />
                     </FormControl>
                     <FormMessage />
@@ -103,11 +96,11 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
 
               <FormField
                 control={form.control}
-                name="country_id"
+                name="event_type_id"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("country")}</FormLabel>
-                    <SelectCountry onChange={field.onChange} value={field.value} />
+                    <FormLabel>{t("event-type")}</FormLabel>
+                    <SelectEventType onChange={field.onChange} value={field.value} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -115,15 +108,15 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
 
               <FormField
                 control={form.control}
-                name="skill_ids"
+                name="from_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("job-skills-tags")}</FormLabel>
+                    <FormLabel>{t("from-date")}</FormLabel>
                     <FormControl>
-                      <SelectSkills
-                        isMultiple
-                        value={field.value}
-                        onChange={field.onChange}
+                      <Input
+                        {...field}
+                        type="date"
+                        placeholder={t("enter-from-date")}
                       />
                     </FormControl>
                     <FormMessage />
@@ -133,16 +126,14 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
 
               <FormField
                 control={form.control}
-                name="experience_years"
+                name="to_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("years-of-experience")}</FormLabel>
+                    <FormLabel>{t("to-date")}</FormLabel>
                     <Input
                       {...field}
-                      type="number"
-                      min={0}
-                      max={50}
-                      placeholder={t("enter-experience-years")}
+                      type="date"
+                      placeholder={t("enter-to-date")}
                     />
                     <FormMessage />
                   </FormItem>
@@ -151,25 +142,17 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
 
               <FormField
                 control={form.control}
-                name="gender"
+                name="check_in_time"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("gender")}</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t("select-gender")} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="male">{t("male")}</SelectItem>
-                        <SelectItem value="female">{t("female")}</SelectItem>
-                        <SelectItem value="both">{t("both")}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>{t("check-in-time")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="time"
+                        placeholder={t("enter-check-in-time")}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -177,32 +160,46 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
 
               <FormField
                 control={form.control}
-                name="about.en"
+                name="check_out_time"
                 render={({ field }) => (
-                  <FormItem className="col-span-full">
-                    <FormLabel>{t("about-the-job")}</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder={t("enter-about-job")}
-                        {...field}
-                        className="min-h-[120px]"
-                        maxLength={250}
-                      />
-                    </FormControl>
-                    <div className="text-sm text-muted-foreground">
-                      {field.value?.toString().length || 0}/250 {t("max-letters")}
-                    </div>
+                  <FormItem>
+                    <FormLabel>{t("check-out-time")}</FormLabel>
+                    <Input
+                      {...field}
+                      type="time"
+                      placeholder={t("enter-check-out-time")}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+
+              <FormField
+                control={form.control}
+                name="user_ids"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("employees")}</FormLabel>
+                    <SelectUser
+                      isMultiple
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
 
               <FormField
                 control={form.control}
                 name="attachments"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("job-image")}</FormLabel>
+                    <FormLabel>{t("attachments")}</FormLabel>
                     <FormControl>
                       <InputFile
                         files={field.value || []}
@@ -213,6 +210,28 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
                   </FormItem>
                 )}
               />
+
+              <FormField
+                control={form.control}
+                name="lat"
+                render={() => (
+                  <FormItem>
+                    <FormLabel>{t("location")}</FormLabel>
+                    <FormControl>
+                      <SelectLocation
+                        value={{ lat: form.watch("lat"), lng: form.watch("lng") }}
+                        onChange={({ lat, lng }) => {
+                          form.setValue("lat", lat);
+                          form.setValue("lng", lng);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+
             </div>
 
 
@@ -223,11 +242,12 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
                 disabled={isLoading}
                 variant={"accentSecondary"}
               >
-                {isLoading ? (
+                {isLoading && (
                   <LoaderIcon className="animate-spin" />
-                ) : (
-                  t("add-job-ad")
                 )}
+
+                {t("add-event")}
+
               </Button>
             </div>
           </form>
@@ -237,4 +257,5 @@ const JobAdForm = ({ refetch }: { refetch: () => void }) => {
   );
 };
 
-export default JobAdForm;
+export default AddEvent;
+

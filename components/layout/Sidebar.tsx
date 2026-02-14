@@ -57,29 +57,29 @@ const Sidebar = () => {
     },
     {
       name: "job-ads",
-      href: "/job-ads",
+      href: "/profile/job-ads",
       icon: <SettingsIcon size={26} />,
       permission: UserType.COMPANY,
     },
     {
       name: "company-plans",
-      href: "/company-plans",
+      href: "/profile/company-plans",
       icon: <BookmarkIcon size={26} />,
     },
     {
       name: "events",
-      href: "/events",
+      href: "/profile/events",
       icon: <FileText size={26} />,
       permission: UserType.COMPANY,
     },
     {
       name: "my-messages",
-      href: "/messages",
+      href: "/profile/messages",
       icon: <MessageSquareText size={26} />,
     },
     {
       name: "employees",
-      href: "/employees",
+      href: "/profile/employees",
       icon: <Users2Icon size={26} />,
     },
   ];

@@ -176,3 +176,20 @@
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
 }
+
+.fc .fc-toolbar.fc-header-toolbar{
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:last-child{
+  margin-inline-start: auto;
+}
+
+/* Hide empty header toolbar chunks */
+.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:empty {
+  display: none;
+}

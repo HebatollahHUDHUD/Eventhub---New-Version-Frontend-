@@ -11,7 +11,16 @@
       "or": "Or",
       "browse": "browse",
       "on-computer": "on your computer"
-    }
+    },
+    "delete": "Delete",
+    "are-you-sure": "Are you sure?",
+    "delete-desc": "This action cannot be undone. This will permanently delete the item.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "failed-to-submit": "Failed to submit the form. Please try again.",
+    "select-item": "Select item",
+    "search-for-items": "Search for items...",
+    "no-item-found": "No item found."
   },
   "home": {
     "title": "Welcome to Events Hub!",
@@ -362,6 +371,7 @@
       "job-skills-tags": "Job Skills/Tags",
       "years-of-experience": "Years of Experience",
       "select-experience": "Select years of experience",
+      "enter-experience-years": "Enter years of experience",
       "year": "year",
       "years": "years",
       "gender": "Gender",
@@ -378,6 +388,8 @@
       "browse": "browse",
       "on-computer": "on your computer",
       "add-job-ad": "Add Job Ad",
+      "update-job-ad": "Update Job Ad",
+      "job-ad-details": "Job Ad Details",
       "success-msg": "Job ad created successfully!",
       "error-msg": "Failed to create job ad. Please try again.",
       "view": "View",
@@ -387,6 +399,30 @@
         "closed": "Closed",
         "cancelled": "Cancelled"
       }
+    },
+    "events": {
+      "title": "Events",
+      "add-event": "Add Event",
+      "event-title": "Event Title",
+      "enter-event-title": "Enter event title",
+      "event-type": "Event Type",
+      "from-date": "From Date",
+      "enter-from-date": "Enter from date",
+      "to-date": "To Date",
+      "enter-to-date": "Enter to date",
+      "check-in-time": "Check In Time",
+      "enter-check-in-time": "Enter check in time",
+      "check-out-time": "Check Out Time",
+      "enter-check-out-time": "Enter check out time",
+      "employees": "Employees",
+      "attachments": "Attachments",
+      "location": "Location",
+      "month": "Month",
+      "week": "Week",
+      "previous": "Previous",
+      "next": "Next",
+      "error-msg": "Failed to create event. Please try again.",
+      "success-msg": "Event created successfully!"
     }
   }
 }

@@ -83,7 +83,7 @@ export default function Status({
     not_available: "text-destructive",
     retired: "text-destructive",
     "In Progress": "text-orange-600",
-    active: "text-primary",
+    active: "text-green-600",
     inactive: "text-destructive",
     appointed: "text-blue-600",
     reappointed: "text-blue-600",
@@ -109,13 +109,13 @@ export default function Status({
               className
             )}
           >
-            {status ? t(`statuses.${status}`) : "-"}
+            {status ? t(status) : "-"}
           </p>
         </TooltipTrigger>
 
         {tooltip && (
           <TooltipContent>
-            <p>{tooltip || t(`statuses.${status}`)}</p>
+            <p>{tooltip || t(status)}</p>
           </TooltipContent>
         )}
       </Tooltip>

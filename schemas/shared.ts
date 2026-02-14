@@ -536,7 +536,7 @@ export const jobAdSchema = z
     country_id: z.number().int().positive({
       message: "Please select a valid country.",
     }),
-    gender: z.enum(["male", "female", "both"]),
+    gender: z.enum(["male", "female", "both"]).optional(),
     experience_years: z.string().regex(/^\d+$/, {
       message: "Experience years must be a number.",
     }),
@@ -546,3 +546,52 @@ export const jobAdSchema = z
   .strict();
 
 export type JobAdSchema = z.infer<typeof jobAdSchema>;
+
+export const AddEventSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    title: z.object({
+      en: z.string().min(1, {
+        message: "Event title is required.",
+      }),
+    }),
+    event_type_id: z.number().int().positive({
+      message: "Please select a valid event type.",
+    }),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{1,2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+    to_date: z.string().regex(/^\d{4}-\d{2}-\d{1,2}$/, {
+      message: "To date must be in YYYY-MM-DD format.",
+    }),
+    lat: z.number().min(1, {
+      message: "Latitude is required.",
+    }),
+    lng: z.number().min(1, {
+      message: "Longitude is required.",
+    }),
+    check_in_time: z.string().regex(/^\d{2}:\d{2}$/, {
+      message: "Check-in time must be in HH:MM format.",
+    }),
+    check_out_time: z.string().regex(/^\d{2}:\d{2}$/, {
+      message: "Check-out time must be in HH:MM format.",
+    }),
+    user_ids: z.array(z.number().int().positive()).min(1, {
+      message: "At least one user must be selected.",
+    }),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date);
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type AddEventType = z.infer<typeof AddEventSchema>;

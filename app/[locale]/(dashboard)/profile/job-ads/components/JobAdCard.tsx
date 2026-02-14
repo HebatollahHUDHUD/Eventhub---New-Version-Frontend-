@@ -6,6 +6,7 @@ import Image from "@/components/common/image";
 import { useTranslations } from "next-intl";
 import moment from "moment";
 import Status, { StatusType } from "@/components/common/Status";
+import Link from "next/link";
 
 type JobAdCardProps = {
   jobAd: JobAd;
@@ -43,8 +44,11 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
             size={"lg"}
             variant="outlineSecondary"
             className="w-full"
+            asChild
           >
-            {t("view")}
+            <Link href={`/job-ads/${jobAd.id}`}>
+              {t("view")}
+            </Link>
           </Button>
         </div>
       </div>
