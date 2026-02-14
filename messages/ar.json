@@ -66,6 +66,32 @@
     "buttons": {
       "enter-events": "الدخول إلى الفعاليات",
       "create-event": "إنشاء فعالية"
+    },
+    "pricingPlans": {
+      "title": "استكشف خطط الأسعار المرنة",
+      "description": "اختر الخطة التي تساعدك على عرض موهبتك وتوسيع شبكتك والتميز أمام أفضل شركات الفعاليات",
+      "companiesPlans": "خطط الشركات",
+      "talentsPlans": "خطط المواهب",
+      "toggleLabel": "التبديل بين خطط الشركات والمواهب",
+      "perMonth": "/شهرياً",
+      "recommended": "موصى به",
+      "purchaseNow": "اشتر الآن",
+      "registerNow": "سجّل الآن",
+      "noPlans": "لا توجد خطط متاحة حالياً.",
+      "purchaseDialog": {
+        "title": "هل لديك رمز ترويجي؟",
+        "description": "أدخل الرمز للحصول على خصم",
+        "promocode": "الرمز الترويجي",
+        "promocodePlaceholder": "الرمز الترويجي",
+        "applyCode": "تطبيق الرمز",
+        "planAmount": "مبلغ الخطة",
+        "discount": "الخصم",
+        "total": "الإجمالي",
+        "continueWithoutCode": "المتابعة بدون رمز",
+        "proceedToPayment": "المتابعة للدفع",
+        "invalidPromoCode": "رمز ترويجي غير صالح",
+        "promoCodeApplied": "تم تطبيق الرمز الترويجي بنجاح"
+      }
     }
   },
   "blogs": {

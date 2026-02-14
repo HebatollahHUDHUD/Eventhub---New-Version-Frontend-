@@ -28,6 +28,8 @@ const buttonVariants = cva(
           "border bg-destructive/10 hover:bg-destructive/20 text-destructive",
         outlineSecondary:
           "border border-secondary bg-transparent hover:bg-secondary/20 text-secondary",
+        orange: "bg-amber-400 text-white hover:bg-amber-400/90",
+
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

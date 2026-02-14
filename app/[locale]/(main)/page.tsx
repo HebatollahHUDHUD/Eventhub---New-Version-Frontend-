@@ -1,6 +1,7 @@
 import { getData } from "@/lib/request-server";
 import HeroSection from "@/components/home/HeroSection";
 import AboutEventsHubs from "@/components/home/AboutEventsHubs";
+import PricingPlans from "@/components/home/PricingPlans";
 
 const page = async () => {
 
@@ -20,7 +21,7 @@ const page = async () => {
     <div>
       <HeroSection />
       <AboutEventsHubs />
-      {/* Add other sections here */}
+      <PricingPlans />
     </div>
   )
 }

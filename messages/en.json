@@ -66,6 +66,32 @@
     "buttons": {
       "enter-events": "Enter Events",
       "create-event": "Create Event"
+    },
+    "pricingPlans": {
+      "title": "Explore Flexible Pricing Plans",
+      "description": "Choose the plan that helps you showcase your talent, grow your network, and get discovered by top event companies",
+      "companiesPlans": "Companies Plans",
+      "talentsPlans": "Talents Plans",
+      "toggleLabel": "Switch between companies and talents plans",
+      "perMonth": "/month",
+      "recommended": "RECOMMENDED",
+      "purchaseNow": "PURCHASE NOW",
+      "registerNow": "REGISTER NOW",
+      "noPlans": "No plans available at the moment.",
+      "purchaseDialog": {
+        "title": "Have a Promocode?",
+        "description": "Apply code to get a discount",
+        "promocode": "Promocode",
+        "promocodePlaceholder": "Promocode",
+        "applyCode": "Apply Code",
+        "planAmount": "Plan Amount",
+        "discount": "Discount",
+        "total": "Total",
+        "continueWithoutCode": "Continue without Code",
+        "proceedToPayment": "Proceed to Payment",
+        "invalidPromoCode": "Invalid promo code",
+        "promoCodeApplied": "Promo code applied successfully"
+      }
     }
   },
   "blogs": {
