@@ -102,17 +102,6 @@ const Navbar = () => {
             </div>
 
             <ul className="p-4 flex flex-col xl:items-center xl:justify-center gap-2 xl:flex-row xl:p-0">
-              {/* <li>
-                <Button
-                  size={"lg"}
-                  className="rounded-full"
-                  variant={"ghostSecondary"}
-                >
-                  <Grid2X2Icon />
-                  <span>{t("category")}</span>
-                </Button>
-              </li> */}
-
               {navigation.map((item) => (
                 <li key={item.name}>
                   <NavLink href={item.href}>{t(item.name)}</NavLink>

@@ -17,7 +17,13 @@ export type BlogCategory =
   | "sales" 
   | "organizing";
 
-export interface BlogPostCategory {
+export interface AttachmentType {
+  id: number;
+  file_name: string;
+  file_path: string;
+}
+
+  export interface BlogPostCategory {
   id: number;
   name: string;
   slug: string;
@@ -98,3 +104,80 @@ export type TalentCategory =
   | "recruitment";
 
 
+
+
+
+// Job Ad related interfaces
+export interface JobAdCountry {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface JobAdSkill {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface JobAdUser extends User {
+  incharge_person_name: string | null;
+}
+
+export interface JobAd {
+  id: number;
+  user: JobAdUser;
+  country: JobAdCountry;
+  title: Record<string, string>;
+  about: Record<string, string>;
+  experience_years: number;
+  gender: string | null;
+  status: string | null;
+  skills: JobAdSkill[];
+  attachments: AttachmentType[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface JobAdsResponse {
+  job_ads: {
+    data: JobAd[];
+    pagination: Pagination;
+  };
+}
+
+export type JobAdDetailsResponse = {
+  job_ad: JobAd;
+};
+
+// Event related interfaces
+export interface EventType {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Event {
+  id: number;
+  event_type: EventType;
+  title: string;
+  from_date: string;
+  to_date: string;
+  check_in_time: string;
+  check_out_time: string;
+  lat: string;
+  lng: string;
+  status: string;
+  attendees: any[];
+  users: User[];
+  attachments: AttachmentType[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EventsResponse {
+  events?: Event[];
+  result?: {
+    events?: Event[];
+  };
+}
