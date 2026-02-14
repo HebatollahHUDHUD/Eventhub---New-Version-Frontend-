@@ -88,7 +88,7 @@ const Sidebar = () => {
     <div
       className={cn(
         "flex-1 w-full bg-background z-10 fixed max-w-72 top-0 start-0 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar ltr:-translate-x-full translate-x-full duration-300",
-        "lg:p-4 lg:sticky lg:w-auto lg:ltr:translate-x-0 lg:translate-x-0"
+        "lg:top-20 lg:p-4 lg:sticky lg:w-auto lg:ltr:translate-x-0 lg:translate-x-0"
       )}
     >
       <div className="h-full pt-6 pb-2 px-2 flex flex-col items-center justify-start gap-6 lg:border lg:rounded-xl lg:shadow-sm">

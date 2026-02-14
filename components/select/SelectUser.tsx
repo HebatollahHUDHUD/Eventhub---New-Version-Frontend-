@@ -8,11 +8,13 @@ const SelectUser = ({
   value,
   className,
   isMultiple,
+  getItem,
 }: {
-  onChange: (value: ValueType) => void;
+  onChange?: (value: ValueType) => void;
   value: ValueType;
   className?: string;
   isMultiple?: boolean;
+  getItem?: (value: any) => void;
 }) => {
   const endpoint = "/users";
   const { data, isLoading } = useGetData<any>({
@@ -30,6 +32,7 @@ const SelectUser = ({
       isLoading={isLoading}
       className={className}
       isMultiple={isMultiple}
+      getItem={getItem}
     />
   );
 };

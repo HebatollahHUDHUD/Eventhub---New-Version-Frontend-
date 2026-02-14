@@ -579,6 +579,7 @@ export const AddEventSchema = z
     user_ids: z.array(z.number().int().positive()).min(1, {
       message: "At least one user must be selected.",
     }),
+    users:z.array(z.any()).optional(),
     attachments: z.array(z.instanceof(File)).optional(),
   })
   .strict()

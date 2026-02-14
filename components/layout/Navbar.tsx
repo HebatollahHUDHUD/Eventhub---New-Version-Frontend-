@@ -59,7 +59,7 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={"w-full bg-primary z-40"}>
+    <nav className={"sticky top-0 w-full bg-primary z-40"}>
       <div className="container">
         <div className="h-20 flex items-center justify-between">
           <Link href="/" className="flex justify-center items-center">

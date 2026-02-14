@@ -6,6 +6,7 @@ import EventsCalendar from "./components/EventsCalendar";
 import AddEvent from "./components/AddEvent";
 import { parseAsString, useQueryStates } from "nuqs";
 import moment from "moment";
+import EventsList from "./components/EventsList";
 
 const EventsPage = () => {
   const [queryParams] = useQueryStates({
@@ -30,6 +31,8 @@ const EventsPage = () => {
       <EventsCalendar eventsData={eventsData} />
 
       <AddEvent refetch={refetch} />
+
+      <EventsList eventsData={eventsData} />
     </div>
   );
 };

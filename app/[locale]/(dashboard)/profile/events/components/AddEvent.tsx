@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,11 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AddEventSchema, AddEventType } from "@/lib/schemas";
 import { usePostData } from "@/hooks/useFetch";
 import { toast } from "@/components/ui/toast";
-import { LoaderIcon } from "lucide-react";
+import { LoaderIcon, TrashIcon, XIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { serialize } from "object-to-formdata";
@@ -24,8 +24,18 @@ import InputFile from "@/components/ui/InputFile";
 import SelectUser from "@/components/select/SelectUser";
 import SelectEventType from "@/components/select/SelectEventType";
 import SelectLocation from "@/components/common/SelectLocation";
+import Image from "@/components/common/image";
+import { Event } from "@/schemas/types";
 
-const AddEvent = ({ refetch }: { refetch: () => void }) => {
+const AddEvent = ({
+  refetch,
+  event,
+  isUpdate
+}: {
+  refetch: () => void;
+  event?: Event | null;
+  isUpdate?: boolean;
+}) => {
   const t = useTranslations("dashboard.events");
   const form = useForm<AddEventType>({
     resolver: zodResolver(AddEventSchema),
@@ -33,8 +43,31 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
       event_type_id: 1,
       title: { en: "" },
       user_ids: [],
+      users: [],
       attachments: [],
+      ...(event ? {
+        id: event.id,
+        title: { en: event.title },
+        event_type_id: event.event_type.id,
+        from_date: event.from_date,
+        to_date: event.to_date,
+        check_in_time: event.check_in_time,
+        check_out_time: event.check_out_time,
+        lat: parseFloat(event.lat),
+        lng: parseFloat(event.lng),
+        user_ids: event.users?.map((user) => user.id) || [],
+        users: event.users || [],
+      } : {}),
     },
+  });
+
+  const {
+    fields: users,
+    append: appendUser,
+    remove: removeUser,
+  } = useFieldArray({
+    control: form.control,
+    name: "users",
   });
 
   const { mutateAsync } = usePostData<AddEventType>({
@@ -43,7 +76,13 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
 
   async function onSubmit(values: AddEventType) {
     try {
-      const formData = serialize(values, {
+      const userIds = users?.map((user: any) => user.id) || [];
+      const data = {
+        ...values,
+        user_ids: userIds,
+      };
+
+      const formData = serialize(data, {
         indices: true,
       });
 
@@ -51,7 +90,20 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
 
       if (res.status === "success") {
         toast(res.message, "success");
-        form.reset();
+        if (!isUpdate) {
+          form.reset({
+            event_type_id: undefined,
+            title: { en: undefined },
+            user_ids: [],
+            attachments: [],
+            check_in_time: undefined,
+            check_out_time: undefined,
+            from_date: undefined,
+            to_date: undefined,
+            lat: undefined,
+            lng: undefined,
+          });
+        }
         refetch();
         return;
       } else {
@@ -64,12 +116,11 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
   }
 
   const isLoading = form.formState.isSubmitting;
-
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          {t("add-event")}
+          {isUpdate ? t("event-details") || "Event Details" : t("add-event")}
         </CardTitle>
       </CardHeader>
 
@@ -178,20 +229,44 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
               <FormField
                 control={form.control}
                 name="user_ids"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>{t("employees")}</FormLabel>
                     <SelectUser
                       isMultiple
-                      value={field.value}
-                      onChange={field.onChange}
+                      value={form.watch("users")?.map((user: any) => user.id) || []}
+                      getItem={(value) => {
+                        form.setValue("users", value);
+                      }}
                     />
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+              <div className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {users?.map((user: any, index: number) => (
+                  <div key={user.id} className="flex items-center gap-4">
+                    <Button variant="outlineDestructive" size="icon-sm" className="rounded-full border-destructive bg-transparent" onClick={() => {
+                      removeUser(index);
+                    }}>
+                      <XIcon />
+                    </Button>
+
+                    <div className="flex-1 flex items-center gap-2">
+                      <Image
+                        src={user.profile_image}
+                        alt={user.full_name}
+                        width={70}
+                        height={70}
+                        className="w-18 h-18 rounded-full"
+                      />
+
+                      <p>{user.name}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
 
               <FormField
@@ -203,6 +278,7 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
                     <FormControl>
                       <InputFile
                         files={field.value || []}
+                        defaultValue={event?.attachments || []}
                         onChange={field.onChange}
                       />
                     </FormControl>
@@ -246,7 +322,7 @@ const AddEvent = ({ refetch }: { refetch: () => void }) => {
                   <LoaderIcon className="animate-spin" />
                 )}
 
-                {t("add-event")}
+                {isUpdate ? t("update-event") || "Update" : t("add-event")}
 
               </Button>
             </div>
