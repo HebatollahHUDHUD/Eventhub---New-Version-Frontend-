@@ -306,7 +306,7 @@
         "network-error": "Network error. Please check your connection and try again."
       }
     },
-    "verify-email":{
+    "verify-form":{
       "title": "Verify Your Email",
       "subtitle": "We've sent a verification code to your email address",
       "code-label": "Verification Code",
@@ -371,7 +371,29 @@
     "confirm-password": "Confirm your password",
     "create-account": "Create Account",
     "account-created-msg": "Account created successfully! Please check your email to verify your account.",
-    "dont-have-account": "Don't have an account?"
+    "dont-have-account": "Don't have an account?",
+    "full-name": "Full Name",
+    "current-position": "Current Position",
+    "other-position": "Other Position",
+    "languages": "Languages (Multi)",
+    "verification-code": "Verification Code",
+    "sign-up": "Sign Up",
+    "account-created-successfully": "Account Created Successfully",
+    "account-created-successfully-desc": "Your account has been created successfully. Please verify your email to continue.",
+    "verify-email": "Verify Email",
+    "go-to-login": "Go to Login",
+    "talent": "Talent",
+    "recruiter": "Recruiter",
+    "resume": {
+      "success-msg": "Resume uploaded successfully!",
+      "upload-resume": "Upload Resume",
+      "upload-failed": "Resume upload failed. Please try again."
+    },
+    "upload-resume": "Upload Resume",
+    "submit-failed": "Failed to submit the form. Please try again.",
+    "login-failed": "Login failed. Please try again.",
+    "login-error": "Failed to login. Please try again.",
+    "session-missing": "Login successful but session data is missing."
   },
   "dashboard": {
     "privet-information": "Private Information",

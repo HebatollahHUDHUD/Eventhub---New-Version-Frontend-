@@ -48,7 +48,7 @@ const SuccessAlert = ({
       }
     } catch (error) {
       console.log(error);
-      toast("Failed to submit the form. Please try again.", "destructive");
+      toast(t("submit-failed"), "destructive");
     }
   }
 

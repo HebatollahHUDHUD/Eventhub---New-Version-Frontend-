@@ -28,7 +28,7 @@ const buttonVariants = cva(
           "border bg-destructive/10 hover:bg-destructive/20 text-destructive",
         outlineSecondary:
           "border border-secondary bg-transparent hover:bg-secondary/20 text-secondary",
-        orange: "bg-amber-400 text-white hover:bg-amber-400/90",
+        orange: "bg-amber-500 text-white hover:bg-amber-500/90",
 
       },
       size: {

@@ -137,7 +137,6 @@
     "terms-users": "الشروط والأحكام للمستخدمين",
     "certified-by": "هذا الموقع معتمد من",
     "speakers": "المتحدثون",
-    "events": "الفعاليات",
     "about-us": "من نحن",
     "my-subscription": "اشتراكي",
     "contact-us": "اتصل بنا",
@@ -339,7 +338,7 @@
         "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى."
       }
     },
-    "verify-email": {
+    "verify-form": {
       "title": "تحقق من بريدك الإلكتروني",
       "subtitle": "لقد أرسلنا رمز التحقق إلى عنوان بريدك الإلكتروني",
       "code-label": "رمز التحقق",
@@ -404,7 +403,29 @@
     "confirm-password": "أكد كلمة المرور",
     "create-account": "إنشاء حساب",
     "account-created-msg": "تم إنشاء الحساب بنجاح! يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك.",
-    "dont-have-account": "ليس لديك حساب؟"
+    "dont-have-account": "ليس لديك حساب؟",
+    "full-name": "الاسم الكامل",
+    "current-position": "المنصب الحالي",
+    "other-position": "منصب آخر",
+    "languages": "اللغات (متعدد)",
+    "verification-code": "رمز التحقق",
+    "sign-up": "التسجيل",
+    "account-created-successfully": "تم إنشاء الحساب بنجاح",
+    "account-created-successfully-desc": "تم إنشاء حسابك بنجاح. يرجى التحقق من بريدك الإلكتروني للمتابعة.",
+    "verify-email": "التحقق من البريد الإلكتروني",
+    "go-to-login": "الذهاب إلى تسجيل الدخول",
+    "talent": "الموهبة",
+    "recruiter": "المسؤول عن التوظيف",
+    "resume": {
+      "success-msg": "تم رفع السيرة الذاتية بنجاح!",
+      "upload-resume": "رفع السيرة الذاتية",
+      "upload-failed": "فشل رفع السيرة الذاتية. يرجى المحاولة مرة أخرى."
+    },
+    "upload-resume": "رفع السيرة الذاتية",
+    "submit-failed": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
+    "login-failed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "login-error": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "session-missing": "تم تسجيل الدخول بنجاح ولكن بيانات الجلسة مفقودة."
   },
   "dashboard": {
     "privet-information": "المعلومات الخاصة",

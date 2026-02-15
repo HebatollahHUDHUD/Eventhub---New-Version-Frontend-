@@ -341,6 +341,49 @@ export const companyRegisterSchema = z
     path: ["password_confirmation"],
   });
 
+export const talentRegisterSchema = z
+  .object({
+    step:z.enum(["1", "2", "3"]),
+    user_type: z.enum(["talent", "recruiter"]),
+    name: z.string().min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    mobile: z.string().min(10, {
+      message: "Mobile number must be at least 10 characters.",
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    position_id: z.number().int().positive({
+      message: "Please select a valid position.",
+    }),
+    language_ids: z.array(z.number().int().positive()).min(1, {
+      message: "Please select at least one language.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+    verification_code: z.string().min(6, {
+      message: "Verification code must be at least 6 characters.",
+    }).optional(),
+    image: z.instanceof(File).optional(),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
+  })
+  .refine((data) => data.step === "2" ? data.verification_code : true, {
+    message: "Verification code is required.",
+    path: ["verification_code"],
+  })
+
 export const companyProfileSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -523,6 +566,7 @@ export type TrackPage = z.infer<typeof trackPageSchema>;
 export type JoinPage = z.infer<typeof JoinPageSchema>;
 export type ContactFormType = z.infer<typeof ContactFormSchema>;
 export type CompanyRegisterSchema = z.infer<typeof companyRegisterSchema>;
+export type TalentRegisterSchema = z.infer<typeof talentRegisterSchema>;
 
 export const jobAdSchema = z
   .object({

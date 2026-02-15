@@ -1,9 +1,11 @@
-import React from 'react'
+import TalentRegisterForm from "./Form";
 
-const page = () => {
+const TalentRegisterPage = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className="container">
+      <TalentRegisterForm />
+    </div>
+  );
+};
 
-export default page
+export default TalentRegisterPage;

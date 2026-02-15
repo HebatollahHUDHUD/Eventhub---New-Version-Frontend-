@@ -45,7 +45,7 @@ const LoginForm = () => {
       const res = (await mutateAsync(values)) as any;
 
       if (res.status === "success") {
-        toast(t("login.success-msg") || "Login successful!", "success");
+        toast(t("login.success-msg"), "success");
 
         const token = res.result?.token || res.result?.access_token;
         const userSession = res.result?.profile || res.result?.user;
@@ -58,17 +58,17 @@ const LoginForm = () => {
           );
           router.replace("/dashboard");
         } else {
-          toast("Login successful but session data is missing.", "destructive");
+          toast(t("session-missing"), "destructive");
         }
         return;
       } else {
-        toast(res.message || "Login failed. Please try again.", "destructive");
+        toast(res.message || t("login-failed"), "destructive");
       }
     } catch (error: any) {
       console.log(error);
       toast(
         error?.response?.data?.message ||
-        "Failed to login. Please try again.",
+        t("login-error"),
         "destructive"
       );
     }

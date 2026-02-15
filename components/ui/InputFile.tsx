@@ -14,12 +14,14 @@ import { buttonVariants } from "./button";
 import { cn } from "@/lib/utils";
 
 const InputFile = ({
+  isResume = false,
   files,
   onChange,
   id = `fileInput-${Math.random()}`,
   options = {},
   defaultValue = [],
 }: {
+  isResume?: boolean;
   files: File[] | string[];
   defaultValue?: AttachmentType[];
   onChange: (value: File[] | null) => void;
@@ -54,16 +56,16 @@ const InputFile = ({
       <FileInput id={id} className="border-dashed shadow-none">
         <div className="flex items-center justify-center flex-col gap-4 p-8 w-full ">
           <Image
-            src={"/images/upload.png"}
+            src={isResume ? "/images/upload-resume.png" : "/images/upload.png"}
             alt="upload"
             width={300}
             height={300}
             quality={100}
             className="w-40 h-36 object-contain"
           />
-          <div className="space-y-1">
+          <div className="space-y-1 text-center">
             <p className="text-sm font-semibold text-primary dark:text-primary">
-              {t("drag-drop-text")} <span className="font-bold text-secondary">{t("images")}</span>
+              {t("drag-drop-text")} <span className="font-bold text-secondary">{isResume ? t("resume") : t("images")}</span>
             </p>
             <p className="text-xs text-primary dark:text-primary">
               {t("or")} <span className="font-bold text-secondary">{t("browse")}</span> {t("on-computer")}
