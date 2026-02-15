@@ -4,8 +4,6 @@ import VideoPlayer from "@/components/common/VideoPlayer";
 import type { AboutPage } from "@/schemas/shared";
 import StatCard from "@/components/common/StatCard";
 
-const PLACEHOLDER_VIDEO_URL = "https://www.example.com/placeholder-video.mp4";
-
 interface AboutIntroProps {
   data?: AboutPage | null;
 }
@@ -16,7 +14,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
   const title = data?.about_page_title || t("hero_tagline");
   const subtitle = data?.about_page_subtitle || t("who_is_events_hubs");
   const description = data?.about_page_desc || t("who_is_events_hubs_description");
-  const videoUrl = data?.about_page_video || PLACEHOLDER_VIDEO_URL;
+  const videoUrl = data?.about_page_video;
 
   const stats = [
     { value: "+200", label: t("companies"), highlightColor: "bg-teal-300/50" },
@@ -53,12 +51,14 @@ export default function AboutIntro({ data }: AboutIntroProps) {
         </div>
 
         {/* Video section */}
-        <div className="relative z-10 px-4 md:px-8 lg:px-12">
-          <VideoPlayer
-            url={videoUrl}
-            className="w-full aspect-video max-h-[623px] rounded-2xl"
-          />
-        </div>
+        {videoUrl && (
+          <div className="relative z-10 px-4 md:px-8 lg:px-12">
+            <VideoPlayer
+              url={videoUrl}
+              className="w-full aspect-video max-h-[623px] rounded-2xl"
+            />
+          </div>
+        )}
 
         {/* Stats section */}
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 px-4 md:px-8 lg:px-12">
