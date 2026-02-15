@@ -85,11 +85,11 @@ const PricingPlans = () => {
   });
   // const activeSubscription = loggedUser?.current_subscription ?? null;
 
-  // Fetch current subscription only when user is logged in
+  // Fetch current subscription only when user is logged in and payment status check is done
   const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
     endpoint: "/profile",
     queryKey: ["profile"],
-    enabled: isLoggedIn,
+    enabled: isLoggedIn && !paymentStatusOpen,
   });
 
   const activeSubscription =
