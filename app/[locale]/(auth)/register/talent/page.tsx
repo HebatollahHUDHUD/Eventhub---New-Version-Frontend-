@@ -1,9 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import TalentRegisterForm from "./Form";
+import ResumeForm from "../resume/Form";
 
 const TalentRegisterPage = () => {
+  const [step, setStep] = useState("1");
+
   return (
     <div className="container">
-      <TalentRegisterForm />
+      {step === "1" && <ResumeForm />}
+      {step === "2" && <TalentRegisterForm />}
     </div>
   );
 };

@@ -14,6 +14,7 @@ import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { getUserSession } from "@/lib/userSession";
+import PageTitle from "../common/PageTitle";
 
 type PlanType = "company" | "personal";
 
@@ -111,19 +112,14 @@ const PricingPlans = () => {
       <div className="container relative z-10">
         <div className="space-y-10 md:space-y-14">
           {/* Title and Description */}
-          <TitleAndDescription
+          <PageTitle
             title={(data?.status === "success" ? data.result?.pricing_page_title : undefined) ?? t("title")}
             description={(data?.status === "success" ? data.result?.pricing_page_subtitle : undefined) ?? t("description")}
           />
 
           {/* Plan Type Toggle */}
           <div className="flex items-center justify-center gap-4">
-            <span
-              className={cn(
-                "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
-
-              )}
-            >
+            <span className="text-sm md:text-base font-semibold transition-colors duration-200 text-foreground">
               {t("companiesPlans")}
             </span>
 
@@ -136,12 +132,7 @@ const PricingPlans = () => {
               aria-label={t("toggleLabel")}
             />
 
-            <span
-              className={cn(
-                "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
-
-              )}
-            >
+            <span className="text-sm md:text-base font-semibold transition-colors duration-200 text-foreground">
               {t("talentsPlans")}
             </span>
           </div>
