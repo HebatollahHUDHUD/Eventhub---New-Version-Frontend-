@@ -24,7 +24,7 @@ const resumeSchema = z.object({
   resume: z.instanceof(File).optional(),
 });
 
-const ResumeForm = () => {
+const ResumeForm = ({ onSuccess }: { onSuccess: (data: any) => void }) => {
   const t = useTranslations("auth");
 
   const form = useForm<z.infer<typeof resumeSchema>>({
@@ -46,8 +46,7 @@ const ResumeForm = () => {
 
       if (res.status === "success") {
         toast(t("resume.success-msg"), "success");
-
-        console.log(res);
+        onSuccess(res.result);
       } else {
         toast(res.message || t("resume.upload-failed"), "destructive");
       }

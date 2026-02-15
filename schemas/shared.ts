@@ -373,6 +373,7 @@ export const talentRegisterSchema = z
       message: "Verification code must be at least 6 characters.",
     }).optional(),
     image: z.instanceof(File).optional(),
+    skills: z.array(z.string()).optional(),
   })
   .strict()
   .refine((data) => data.password === data.password_confirmation, {

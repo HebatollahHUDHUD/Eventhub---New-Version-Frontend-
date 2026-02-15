@@ -11,13 +11,12 @@ import { talentRegisterSchema } from "@/lib/schemas";
 import { usePostData } from "@/hooks/useFetch";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
 import { serialize } from "object-to-formdata";
 import { loginAction } from "@/actions/login";
 import RegisterInfoForm from "./RegisterInfoForm";
 import VerificationCodeForm from "./VerificationCodeForm";
 
-const TalentRegisterForm = () => {
+const TalentRegisterForm = ({ extractData }: { extractData: any }) => {
   const router = useRouter();
   const t = useTranslations("auth");
 
@@ -26,11 +25,12 @@ const TalentRegisterForm = () => {
     defaultValues: {
       step: "1",
       user_type: "talent",
-      name: "",
-      email: "",
-      mobile: "",
+      name: extractData?.name || "",
+      email: extractData?.email || "",
+      mobile: extractData?.mobile || "",
       country_id: undefined,
-      position_id: undefined,
+      position_id: extractData?.position || undefined,
+      skills: extractData?.skills || [],
       language_ids: [],
       password: "",
       password_confirmation: "",
@@ -59,7 +59,7 @@ const TalentRegisterForm = () => {
           form.setValue("step", "2");
           return;
         } else {
-          const token = res.result.token;
+          const token = res.result.access_token;
           const userSession = res.result.profile;
 
           await loginAction(token, JSON.stringify(userSession), true);

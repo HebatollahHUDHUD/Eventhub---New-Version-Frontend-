@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
