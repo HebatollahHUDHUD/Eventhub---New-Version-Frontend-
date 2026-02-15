@@ -90,7 +90,7 @@ const PricingPlans = () => {
   };
 
   return (
-    <section className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section className="relative py-6 md:py-8 lg:py-12 overflow-hidden">
       <div className="container relative z-10">
         <div className="space-y-10 md:space-y-14">
           {/* Title and Description */}
@@ -104,7 +104,7 @@ const PricingPlans = () => {
             <span
               className={cn(
                 "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
-                
+
               )}
             >
               {t("companiesPlans")}
@@ -120,10 +120,10 @@ const PricingPlans = () => {
             />
 
             <span
-                className={cn(
-                  "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
-                  
-                )}
+              className={cn(
+                "text-sm md:text-base font-semibold transition-colors duration-200 text-foreground"
+
+              )}
             >
               {t("talentsPlans")}
             </span>

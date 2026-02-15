@@ -24,15 +24,14 @@ const HeroSection = () => {
   const locationOptions = ["Riyadh", "Jeddah", "Dubai", "Abu Dhabi", "Dammam"];
 
   return (
-    <section className="relative min-h-[calc(100vh-80px)] flex items-center bg-primary">
-      <div className="container">
+    <section className="min-h-[calc(100vh-80px)] flex items-center bg-primary">
+      <div className="relative container">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div className="space-y-8">
             {/* Social Media Icons - Desktop */}
-            <div className="absolute -left-16 top-0 hidden lg:flex flex-col items-center gap-5">
-              <span className="text-white text-xs font-medium mb-6 [writing-mode:vertical-rl] [text-orientation:mixed] tracking-wider">
-                {t("social.follow")}
-              </span>
+            <div className="absolute -start-6 top-4 hidden lg:flex flex-col items-center gap-5">
+              <span className="h-28 w-[3px] bg-white" />
+
               <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="Instagram">
                 <Instagram className="size-5" />
               </a>
@@ -45,6 +44,10 @@ const HeroSection = () => {
               <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="Facebook">
                 <Facebook className="size-5" />
               </a>
+
+              <span className="text-white text-xs font-medium mb-6 [writing-mode:vertical-rl] [text-orientation:mixed] tracking-wider">
+                {t("social.follow")}
+              </span>
             </div>
 
             {/* Social Media Icons - Mobile */}
@@ -155,6 +158,8 @@ const HeroSection = () => {
           width={500}
           height={500}
           className="w-full h-auto object-cover"
+          unoptimized
+          quality={100}
         />
       </div>
     </section>

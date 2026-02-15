@@ -65,7 +65,7 @@ const SuccessAlert = ({
       />
 
       <div className="space-y-2 text-center">
-        <h2 className="title text-primary !font-medium">
+        <h2 className="title text-primary font-medium">
           {t("account-created-successfully")}
         </h2>
 
@@ -78,7 +78,7 @@ const SuccessAlert = ({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <Button
-              variant={"emerald"}
+              variant={"accentSecondary"}
               className="w-full"
               type="submit"
               size={"xl"}

@@ -103,6 +103,29 @@ export type TalentCategory =
   | "talents" 
   | "recruitment";
 
+// Talent related interfaces
+export interface Talent extends User {
+  // Talent-specific fields are already in User interface
+  // This extends User to make it clear this is a talent type
+}
+
+export interface TalentCardData {
+  id: string;
+  name: string;
+  role: string;
+  projects: number;
+  years: number;
+  skills: number;
+  image: string;
+}
+
+export interface TalentsResponse {
+  users: {
+    data: Talent[];
+    pagination: Pagination;
+  };
+}
+
 
 
 
@@ -128,7 +151,7 @@ export interface JobAd {
   id: number;
   user: JobAdUser;
   country: JobAdCountry;
-  title: Record<string, string>;
+  title: Record<string, string> | string;
   about: Record<string, string>;
   experience_years: number;
   gender: string | null;

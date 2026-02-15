@@ -1,15 +1,11 @@
 "use client";
 
-import Image from "next/image";
-
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
-  BellIcon,
   BookmarkIcon,
   FileText,
-  FileTextIcon,
   LayoutGridIcon,
   LogOutIcon,
   MessageSquareText,
@@ -17,7 +13,6 @@ import {
   UserIcon,
   Users2Icon,
 } from "lucide-react";
-import { getUserSession } from "@/lib/userSession";
 import { logoutAction } from "@/actions/logout";
 import { UserType } from "@/constant";
 import { useGetData } from "@/hooks/useFetch";
@@ -26,9 +21,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 const Sidebar = () => {
   const pathname = usePathname();
   const t = useTranslations("navigation");
-  const user = getUserSession();
-  const type = user?.user_type || UserType.COMPANY;
-  const endpoint = `/${type}/profile/info`;
+  const endpoint = "/profile";
   const locale = useLocale();
 
   const { data } = useGetData<any>({
@@ -36,7 +29,7 @@ const Sidebar = () => {
     queryKey: ["Profile", endpoint],
   });
 
-  const profileDate = data?.status === "success" ? data?.result : null;
+  const profileDate = data?.status === "success" ? data?.result?.profile : null;
 
   const links = [
     {
@@ -95,14 +88,14 @@ const Sidebar = () => {
         <div className="flex flex-col items-center gap-2">
           <Avatar className="w-[100px] h-[100px] rounded-full">
             <AvatarImage
-              src={profileDate?.avatar ? profileDate?.avatar : undefined}
+              src={profileDate?.photo}
               alt={
-                profileDate?.first_name || profileDate?.company_name || "User"
+                profileDate?.name || "User"
               }
               className="object-cover"
             />
             <AvatarFallback>
-              {(profileDate?.first_name || profileDate?.company_name)
+              {(profileDate?.name)
                 ?.slice(0, 2)
                 ?.toUpperCase()}
             </AvatarFallback>
@@ -110,9 +103,7 @@ const Sidebar = () => {
 
           <div className="text-center">
             <h2 className="title-sm text-primary">
-              {profileDate?.first_name
-                ? profileDate?.first_name + " " + profileDate?.last_name
-                : profileDate?.company_name || "Guest"}
+              {profileDate?.name}
             </h2>
 
             {profileDate?.employer_name && (
@@ -133,7 +124,7 @@ const Sidebar = () => {
 
         <ul className="w-full space-y-1">
           {links
-            .filter((item) => !item.permission || item.permission === type)
+            .filter((item) => !item.permission || item.permission === profileDate?.user_type)
             .map((link) => (
               <li key={link.name}>
                 <Link

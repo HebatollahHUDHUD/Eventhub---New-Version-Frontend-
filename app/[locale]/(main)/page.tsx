@@ -1,27 +1,21 @@
-import { getData } from "@/lib/request-server";
 import HeroSection from "@/components/home/HeroSection";
 import AboutEventsHubs from "@/components/home/AboutEventsHubs";
+import TalentsSection from "@/components/home/TalentsSection";
+import BlogsSection from "@/components/home/BlogsSection";
+import OpportunitiesSection from "@/components/home/OpportunitiesSection";
+import TrustedOrganisationsSection from "@/components/home/TrustedOrganisationsSection";
 import PricingPlans from "@/components/home/PricingPlans";
 
-const page = async () => {
-
-  const data = await getData<any>({
-    endpoint: "/home",
-    config: {
-      next: {
-        cache: "no-cache",
-        tags: ["home"],
-        revalidate: 0,
-      },
-    }
-  });
-
-
+const page = () => {
   return (
     <div>
       <HeroSection />
       <AboutEventsHubs />
+      <TalentsSection />
+      <TrustedOrganisationsSection />
       <PricingPlans />
+      <OpportunitiesSection />
+      <BlogsSection />
     </div>
   )
 }

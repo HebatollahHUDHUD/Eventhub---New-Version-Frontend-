@@ -67,6 +67,28 @@
       "enter-events": "Enter Events",
       "create-event": "Create Event"
     },
+    "talents": {
+      "hireButton": "Hire Best Talents",
+      "title": "Our Amazing & Experienced Events Talents",
+      "viewMore": "View More"
+    },
+    "blogs": {
+      "tag": "Blog Post",
+      "title": "Insights From Business Experts",
+      "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired.",
+      "viewMore": "View More"
+    },
+    "opportunities": {
+      "button": "Find Your Passion",
+      "title": "More Opportunities For Everyone",
+      "description": "Explore the latest gigs, projects, and event roles. And take the next step in your events career",
+      "viewMore": "View More"
+    },
+    "trustedOrganisations": {
+      "tag": "Our Trusted Organisations",
+      "title": "Trusted By Over 150 Organizations In More Than 20 Countries",
+      "button": "More About Us"
+    },
     "pricingPlans": {
       "title": "Explore Flexible Pricing Plans",
       "description": "Choose the plan that helps you showcase your talent, grow your network, and get discovered by top event companies",
