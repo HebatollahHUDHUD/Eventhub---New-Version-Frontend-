@@ -26,7 +26,6 @@ const PaymentStatusDialog = ({
   paymentId,
 }: PaymentStatusDialogProps) => {
   const t = useTranslations("home.pricingPlans.paymentStatus");
-
   const { data, isLoading } = useQuery({
     queryKey: ["payment-status", paymentId],
     queryFn: () =>
@@ -71,15 +70,15 @@ const PaymentStatusDialog = ({
               <DialogTitle className="text-2xl font-bold">
                 {t("successTitle")}
               </DialogTitle>
-              <DialogDescription className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
+              <DialogDescription className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line text-center">
                 {t("successDescription")}
               </DialogDescription>
             </DialogHeader>
 
             <Button
-              variant="default"
+              variant="purple"
               size="lg"
-              className="mt-2 min-w-[200px] bg-[#797DE5]!"
+              className="mt-2 min-w-[200px]"
               onClick={() => onOpenChange(false)}
             >
               {t("greatButton")}

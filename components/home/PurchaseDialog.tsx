@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TicketCard } from "@/components/ui/ticket-card";
-import { usePostData } from "@/hooks/useFetch";
 import { postData } from "@/lib/request";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "@/i18n/navigation";
@@ -40,17 +39,20 @@ const PurchaseDialog = ({
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<{
     code: string;
+    price: number;
     discount: number;
+    total: number;
   } | null>(null);
 
-  // Placeholder API: Validate Promo Code
-  // POST /validate-promo  { code: string, plan_id: string }
-  // Response: { status: "success", result: { discount: number, code: string } }
-  const { mutate: validatePromo, isPending: isValidating } = usePostData<{
-    discount: number;
-    code: string;
-  }>({
-    endpoint: "/validate-promo",
+  // Check coupon via the subscribe endpoint with check_coupon flag
+  const { mutate: checkCoupon, isPending: isValidating } = useMutation({
+    mutationFn: (coupon: string) =>
+      postData<{ price: number; discount: number; total: number }>({
+        endpoint: `/profile/plan/${planDetails?.id}/subscribe`,
+        config: {
+          body: { coupon, check_coupon: 1 },
+        },
+      }),
   });
 
   // Subscribe to plan API (dynamic endpoint per planId)
@@ -58,11 +60,11 @@ const PurchaseDialog = ({
   // Success: { error_flag: 0, message: "You can pay now", result: { payment_url: "..." } }
   // Unauthenticated: returns FailResponse with code 401
   const { mutate: subscribePlan, isPending: isProcessing } = useMutation({
-    mutationFn: (payload: { planId: string | number; promoCode?: string }) =>
+    mutationFn: (payload: { planId: string | number; coupon?: string }) =>
       postData<{ payment_url: string }>({
         endpoint: `/profile/plan/${payload.planId}/subscribe`,
         config: {
-          body: payload.promoCode ? { promo_code: payload.promoCode } : null,
+          body: payload.coupon ? { coupon: payload.coupon } : null,
         },
       }),
   });
@@ -70,25 +72,24 @@ const PurchaseDialog = ({
   const handleApplyPromo = () => {
     if (!promoCode.trim() || !planDetails) return;
 
-    validatePromo(
-      { code: promoCode.trim(), plan_id: String(planDetails.id ?? "") },
-      {
-        onSuccess: (res) => {
-          if (res?.status === "success" && res.result) {
-            setAppliedPromo({
-              code: promoCode.trim(),
-              discount: res.result.discount,
-            });
-            toast(t("promoCodeApplied"), "success");
-          } else {
-            toast(t("invalidPromoCode"), "destructive");
-          }
-        },
-        onError: () => {
+    checkCoupon(promoCode.trim(), {
+      onSuccess: (res) => {
+        if (res?.status === "success" && res.result) {
+          setAppliedPromo({
+            code: promoCode.trim(),
+            price: res.result.price,
+            discount: res.result.discount,
+            total: res.result.total,
+          });
+          toast(t("promoCodeApplied"), "success");
+        } else {
           toast(t("invalidPromoCode"), "destructive");
-        },
-      }
-    );
+        }
+      },
+      onError: () => {
+        toast(t("invalidPromoCode"), "destructive");
+      },
+    });
   };
 
   const handleRemovePromo = () => {
@@ -102,7 +103,7 @@ const PurchaseDialog = ({
     subscribePlan(
       {
         planId: planDetails.id,
-        promoCode: appliedPromo?.code,
+        coupon: appliedPromo?.code,
       },
       {
         onSuccess: (res) => {
@@ -145,9 +146,9 @@ const PurchaseDialog = ({
 
   if (!planDetails) return null;
 
-  const price = planDetails.price;
+  const price = appliedPromo?.price ?? planDetails.price;
   const discount = appliedPromo?.discount ?? 0;
-  const total = price - discount;
+  const total = appliedPromo?.total ?? planDetails.price;
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -252,9 +253,9 @@ const PurchaseDialog = ({
 
           {/* Footer Button */}
           <Button
-            // variant="default"
+            variant="purple"
             size="lg"
-            className="max-w-[300px]! mx-auto bg-[#797DE5]!"
+            className="max-w-[300px]! mx-auto"
             onClick={handleSubscribe}
             disabled={isProcessing}
           >

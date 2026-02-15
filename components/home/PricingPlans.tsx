@@ -13,6 +13,7 @@ import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { getUserSession } from "@/lib/userSession";
 
 type PlanType = "company" | "personal";
 
@@ -35,10 +36,25 @@ interface PricingPageResponse {
   plans: Plan[];
 }
 
+interface ProfilePlanResponse {
+  profile: {
+    current_subscription: {
+      id: number;
+      plan: Plan;
+      start_date: string;
+      end_date: string;
+      created_at: string;
+      updated_at: string;
+    } | null;
+  };
+}
+
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
   const searchParams = useSearchParams();
-  const [planType, setPlanType] = useState<PlanType>("company");
+  const loggedUser = getUserSession();
+  const initialPlanType: PlanType = loggedUser?.user_type === "company" ? "company" : "personal";
+  const [planType, setPlanType] = useState<PlanType>(loggedUser ? initialPlanType : "company");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
@@ -52,7 +68,6 @@ const PricingPlans = () => {
   const [paymentStatusOpen, setPaymentStatusOpen] = useState(
     !!paymentId && isLoggedIn
   );
-
   const handlePaymentStatusClose = (open: boolean) => {
     setPaymentStatusOpen(open);
     if (!open && paymentId) {
@@ -67,6 +82,21 @@ const PricingPlans = () => {
     endpoint: "/pricing-page",
     queryKey: ["pricing-plans"],
   });
+  // const activeSubscription = loggedUser?.current_subscription ?? null;
+
+  // Fetch current subscription only when user is logged in
+  const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
+    endpoint: "/profile",
+    queryKey: ["profile"],
+    enabled: isLoggedIn,
+  });
+
+  const activeSubscription =
+    isLoggedIn &&
+    profilePlanData?.status === "success" &&
+    profilePlanData.result?.profile?.current_subscription
+      ? profilePlanData.result.profile.current_subscription
+      : null;
 
   const allPlans = data?.status === "success" ? data.result?.plans ?? [] : [];
   const plans = allPlans.filter((plan) => plan.type === planType);
@@ -137,6 +167,7 @@ const PricingPlans = () => {
                       id: plan.id,
                     })
                   }
+                  disabled={activeSubscription?.plan?.id === plan.id}
                 />
               ))}
             </div>

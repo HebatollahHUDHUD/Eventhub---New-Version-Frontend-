@@ -17,6 +17,7 @@ interface PlanCardProps {
   price: number;
   features: PlanFeature[];
   onPurchase: () => void;
+  disabled?: boolean;
 }
 
 const PlanCard = ({
@@ -25,6 +26,7 @@ const PlanCard = ({
   price,
   features,
   onPurchase,
+  disabled,
 }: PlanCardProps) => {
   const t = useTranslations("home.pricingPlans");
 
@@ -56,8 +58,8 @@ const PlanCard = ({
         style={{
           background:
             "linear-gradient(180deg, #797DE5 0%, #333441 100%)",
-          // borderRadius: "0 0 50% 50% / 0 0 30px 30px",
-          borderRadius: "0 0 70% 70% / 0 0 30px 30px",
+          borderRadius: "0 0 50% 50% / 0 0 30px 30px",
+          // borderRadius: "0 0 70% 70% / 0 0 30px 30px",
         }}
       >
         {/* Icon Circle */}
@@ -110,10 +112,11 @@ const PlanCard = ({
 
         {/* Purchase / Register Button */}
         <Button
-          variant="default"
+          variant="purple"
           size="lg"
           className="w-full uppercase tracking-wider font-bold"
           onClick={onPurchase}
+          disabled={disabled}
         >
           {isFree ? t("registerNow") : t("purchaseNow")}
           <ArrowUpRight className="size-4" />
