@@ -151,8 +151,24 @@ export interface JobAd {
   id: number;
   user: JobAdUser;
   country: JobAdCountry;
-  title: Record<string, string> | string;
-  about: Record<string, string>;
+  title: { en: string };
+  about: { en: string };
+  experience_years: number;
+  gender: string | null;
+  status: string | null;
+  skills: JobAdSkill[];
+  attachments: AttachmentType[];
+  created_at: string;
+  updated_at: string;
+}
+
+// Main website JobAd - title and about as strings
+export interface JobAdMain {
+  id: number;
+  user: JobAdUser;
+  country: JobAdCountry;
+  title: string;
+  about: string;
   experience_years: number;
   gender: string | null;
   status: string | null;
@@ -165,6 +181,13 @@ export interface JobAd {
 export interface JobAdsResponse {
   job_ads: {
     data: JobAd[];
+    pagination: Pagination;
+  };
+}
+
+export interface JobAdsMainResponse {
+  job_ads: {
+    data: JobAdMain[];
     pagination: Pagination;
   };
 }

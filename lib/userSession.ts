@@ -19,7 +19,7 @@ export function getUserSession() {
 export function isStudentType() {
   const user = getUserSession();
 
-  return user.user_type === UserType.STUDENT;
+  return user.user_type === UserType.COMPANY;
 }
 
 export function getUserType() {

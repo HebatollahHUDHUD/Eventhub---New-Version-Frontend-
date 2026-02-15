@@ -26,7 +26,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { usePatchData } from "@/hooks/useFetch";
+import { usePostData } from "@/hooks/useFetch";
 import { toast } from "@/components/ui/toast";
 import { LoaderIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -90,7 +90,7 @@ const EditHoursDialog = ({
       const existingCheckOut = attendee.check_out
         ? moment(attendee.check_out).format("HH")
         : "00";
-      
+
       form.reset({
         check_in_hour: existingCheckIn,
         check_out_hour: existingCheckOut,
@@ -98,7 +98,7 @@ const EditHoursDialog = ({
     }
   }, [open, attendee, form]);
 
-  const { mutateAsync, isPending } = usePatchData({
+  const { mutateAsync, isPending } = usePostData({
     endpoint: `/profile/events/${eventId}/attendees/${attendee.id}`,
   });
 

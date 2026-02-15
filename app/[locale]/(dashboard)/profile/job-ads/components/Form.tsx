@@ -49,7 +49,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
 
       ...(jobAd ? {
         id: jobAd.id,
-        title: { en: jobAd.title.en },
+        title: { en: jobAd.title?.en },
         about: { en: jobAd.about.en },
         country_id: jobAd.country.id,
         gender: jobAd.gender as "male" | "female" | "both" | undefined,

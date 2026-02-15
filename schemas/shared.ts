@@ -568,13 +568,16 @@ export type ContactFormType = z.infer<typeof ContactFormSchema>;
 export type CompanyRegisterSchema = z.infer<typeof companyRegisterSchema>;
 export type TalentRegisterSchema = z.infer<typeof talentRegisterSchema>;
 
+// Dashboard schema - title and about as objects with en and ar
 export const jobAdSchema = z
   .object({
     title: z.object({
       en: z.string().min(1),
+      ar: z.string().min(1).optional(),
     }),
     about: z.object({
       en: z.string().min(1),
+      ar: z.string().min(1).optional(),
     }),
     country_id: z.number().int().positive({
       message: "Please select a valid country.",
@@ -589,6 +592,25 @@ export const jobAdSchema = z
   .strict();
 
 export type JobAdSchema = z.infer<typeof jobAdSchema>;
+
+// Main website schema - title and about as strings
+export const jobAdMainSchema = z
+  .object({
+    title: z.string().min(1),
+    about: z.string().min(1),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    gender: z.enum(["male", "female", "both"]).optional(),
+    experience_years: z.string().regex(/^\d+$/, {
+      message: "Experience years must be a number.",
+    }),
+    skill_ids: z.array(z.number().int().positive()).min(1),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type JobAdMainSchema = z.infer<typeof jobAdMainSchema>;
 
 export const AddEventSchema = z
   .object({
