@@ -5,6 +5,7 @@ import { CircleCheck, ArrowUpRight, CircleCheckBig } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { riyalSVG } from "@/public/SVGs";
 
 interface PlanFeature {
   name: string;
@@ -68,7 +69,7 @@ const PlanCard = ({
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
-          {name}
+          {name} 
         </h3>
       </div>
 
@@ -77,11 +78,12 @@ const PlanCard = ({
 
         {/* Price */}
         <div className="flex items-baseline justify-center gap-1">
-          <span className="text-4xl md:text-5xl font-bold text-foreground">
+          <span className="title-2 font-bold text-foreground flex items-center gap-1">
+            {riyalSVG("#000","40px","40px")}
             {isFree ? "00.00" : price.toFixed(2)}
           </span>
           <span className="text-sm text-muted-foreground font-medium">
-            {t("perMonth")}
+            {t("perMonth")} 
           </span>
         </div>
 

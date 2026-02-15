@@ -17,6 +17,7 @@ import { postData } from "@/lib/request";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "@/i18n/navigation";
 import { CircleX, Loader2 } from "lucide-react";
+import { riyalSVG } from "@/public/SVGs";
 
 interface PurchaseDialogProps {
   open: boolean;
@@ -220,8 +221,8 @@ const PurchaseDialog = ({
               <span className="text-sm text-muted-foreground">
                 {t("planAmount")}
               </span>
-              <span className="text-base font-semibold">
-                ₦{price.toFixed(2)}
+              <span className="text-base font-semibold flex items-center gap-1">
+                {riyalSVG("#000", "14", "14")}{price.toFixed(2)}
               </span>
             </div>
 
@@ -232,8 +233,8 @@ const PurchaseDialog = ({
                   <span className="text-sm text-muted-foreground">
                     {t("discount")}
                   </span>
-                  <span className="text-base font-semibold">
-                    ₦{discount.toFixed(2)}
+                  <span className="text-base font-semibold flex items-center gap-1">
+                    {riyalSVG("#000", "14", "14")}{discount.toFixed(2)}
                   </span>
                 </div>
 
@@ -243,8 +244,8 @@ const PurchaseDialog = ({
                   <span className="text-sm font-medium text-foreground">
                     {t("total")}
                   </span>
-                  <span className="text-lg font-bold text-amber-500">
-                    ₦{total.toFixed(2)}
+                  <span className="text-lg font-bold text-amber-500 flex items-center gap-1">
+                    {riyalSVG("#f59e0b", "16", "16")}{total.toFixed(2)}
                   </span>
                 </div>
               </>
