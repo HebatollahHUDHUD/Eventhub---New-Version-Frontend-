@@ -10,19 +10,19 @@ import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
-type PlanType = "companies" | "talents";
-
-interface PlanFeature {
-  name: string;
-  is_active: boolean;
-}
+type PlanType = "company" | "personal";
 
 interface Plan {
-  id: string | number;
+  id: number;
+  type: string;
+  image: string | null;
   name: string;
-  is_recommended: boolean;
-  price: number;
-  features: PlanFeature[];
+  slug: string;
+  features: string[];
+  currency: string;
+  price: string;
+  billing_interval: string;
+  is_featured: number;
 }
 
 interface PricingPageResponse {
@@ -31,36 +31,9 @@ interface PricingPageResponse {
   plans: Plan[];
 }
 
-// TODO: Remove mock data once the API is ready
-const MOCK_FEATURES: PlanFeature[] = [
-  { name: "Lorem ipsum dolor sit amet", is_active: true },
-  { name: "Lorem ipsum dolor sit amet", is_active: true },
-  { name: "Lorem ipsum dolor sit amet", is_active: true },
-  { name: "Lorem ipsum dolor sit amet", is_active: true },
-  { name: "Lorem ipsum dolor sit amet", is_active: false },
-  { name: "Lorem ipsum dolor sit amet", is_active: false },
-];
-
-const MOCK_PLANS: Record<PlanType, Plan[]> = {
-  companies: [
-    { id: 1, name: "Free Plan", is_recommended: false, price: 0, features: MOCK_FEATURES },
-    { id: 2, name: "Silver Plan", is_recommended: false, price: 50, features: MOCK_FEATURES },
-    { id: 3, name: "Golden Plan", is_recommended: true, price: 100, features: MOCK_FEATURES },
-    { id: 4, name: "Platinum Plan", is_recommended: false, price: 200, features: MOCK_FEATURES },
-  ],
-  talents: [
-    { id: 5, name: "Free Plan", is_recommended: false, price: 0, features: MOCK_FEATURES },
-    { id: 6, name: "Bronze Plan", is_recommended: false, price: 30, features: MOCK_FEATURES },
-    { id: 7, name: "Silver Plan", is_recommended: true, price: 75, features: MOCK_FEATURES },
-    { id: 8, name: "Gold Plan", is_recommended: false, price: 150, features: MOCK_FEATURES },
-  ],
-};
-
-const USE_MOCK = false;
-
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
-  const [planType, setPlanType] = useState<PlanType>("companies");
+  const [planType, setPlanType] = useState<PlanType>("company");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
@@ -70,19 +43,11 @@ const PricingPlans = () => {
 
   const { data, isLoading } = useGetData<PricingPageResponse>({
     endpoint: "/pricing-page",
-    config: {
-      queryParams: {
-        type: planType,
-      },
-    },
-    queryKey: ["pricing-plans", planType],
+    queryKey: ["pricing-plans"],
   });
 
-  const plans = USE_MOCK
-    ? MOCK_PLANS[planType]
-    : data?.status === "success"
-      ? data.result?.plans ?? []
-      : [];
+  const allPlans = data?.status === "success" ? data.result?.plans ?? [] : [];
+  const plans = allPlans.filter((plan) => plan.type === planType);
 
   const handlePurchase = (plan: { name: string; price: number; id?: string | number }) => {
     setSelectedPlan(plan);
@@ -112,9 +77,9 @@ const PricingPlans = () => {
 
             {/* Custom Toggle */}
             <PricingSwitch
-              checked={planType === "talents"}
+              checked={planType === "personal"}
               onCheckedChange={(checked) =>
-                setPlanType(checked ? "talents" : "companies")
+                setPlanType(checked ? "personal" : "company")
               }
               aria-label={t("toggleLabel")}
             />
@@ -140,13 +105,13 @@ const PricingPlans = () => {
                 <PlanCard
                   key={plan.id}
                   name={plan.name}
-                  is_recommended={plan.is_recommended}
-                  price={plan.price}
-                  features={plan.features}
+                  is_recommended={!!plan.is_featured}
+                  price={parseFloat(plan.price)}
+                  features={plan.features.map((f) => ({ name: f, is_active: true }))}
                   onPurchase={() =>
                     handlePurchase({
                       name: plan.name,
-                      price: plan.price,
+                      price: parseFloat(plan.price),
                       id: plan.id,
                     })
                   }

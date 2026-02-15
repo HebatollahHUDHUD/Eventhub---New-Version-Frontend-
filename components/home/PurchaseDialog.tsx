@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMutation } from "@tanstack/react-query";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TicketCard } from "@/components/ui/ticket-card";
 import { usePostData } from "@/hooks/useFetch";
+import { postData } from "@/lib/request";
 import { toast } from "@/components/ui/toast";
+import { useRouter } from "@/i18n/navigation";
 import { CircleX, Loader2 } from "lucide-react";
 
 interface PurchaseDialogProps {
@@ -32,6 +35,7 @@ const PurchaseDialog = ({
   planDetails,
 }: PurchaseDialogProps) => {
   const t = useTranslations("home.pricingPlans.purchaseDialog");
+  const router = useRouter();
 
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<{
@@ -49,13 +53,18 @@ const PurchaseDialog = ({
     endpoint: "/validate-promo",
   });
 
-  // Placeholder API: Process Payment
-  // POST /process-payment  { plan_id: string, promo_code?: string }
-  // Response: { status: "success", result: { payment_url: string } }
-  const { mutate: processPayment, isPending: isProcessing } = usePostData<{
-    payment_url: string;
-  }>({
-    endpoint: "/process-payment",
+  // Subscribe to plan API (dynamic endpoint per planId)
+  // POST /profile/plan/{planId}/subscribe
+  // Success: { error_flag: 0, message: "You can pay now", result: { payment_url: "..." } }
+  // Unauthenticated: returns FailResponse with code 401
+  const { mutate: subscribePlan, isPending: isProcessing } = useMutation({
+    mutationFn: (payload: { planId: string | number; promoCode?: string }) =>
+      postData<{ payment_url: string }>({
+        endpoint: `/profile/plan/${payload.planId}/subscribe`,
+        config: {
+          body: payload.promoCode ? { promo_code: payload.promoCode } : null,
+        },
+      }),
   });
 
   const handleApplyPromo = () => {
@@ -87,26 +96,42 @@ const PurchaseDialog = ({
     setPromoCode("");
   };
 
-  const handlePayment = () => {
-    if (!planDetails) return;
+  const handleSubscribe = () => {
+    if (!planDetails?.id) return;
 
-    const payload: Record<string, unknown> = {
-      plan_id: String(planDetails.id ?? ""),
-    };
-    if (appliedPromo) {
-      payload.promo_code = appliedPromo.code;
-    }
+    subscribePlan(
+      {
+        planId: planDetails.id,
+        promoCode: appliedPromo?.code,
+      },
+      {
+        onSuccess: (res) => {
+          // Case 1: Unauthenticated (401 returned as FailResponse)
+          if (res.status === "fail" && res.code === 401) {
+            toast(t("loginRequired"), "destructive");
+            onOpenChange(false);
+            router.push("/login");
+            return;
+          }
 
-    processPayment(payload, {
-      onSuccess: (res) => {
-        if (res?.status === "success" && res.result?.payment_url) {
-          window.location.href = res.result.payment_url;
-        }
-      },
-      onError: () => {
-        toast(t("invalidPromoCode"), "destructive");
-      },
-    });
+          // Case 2: Success with payment URL — redirect cross-browser safe
+          if (res.status === "success" && res.result?.payment_url) {
+            window.location.assign(res.result.payment_url);
+            return;
+          }
+
+          // Case 3: Success without payment URL (e.g., free plan subscribed directly)
+          if (res.status === "success" && !res.result?.payment_url) {
+            toast(res.message || t("subscriptionSuccess"), "success");
+            onOpenChange(false);
+            return;
+          }
+
+          // Case 4: Other failure
+          toast(t("subscriptionFailed"), "destructive");
+        },
+      }
+    );
   };
 
   const handleOpenChange = (value: boolean) => {
@@ -230,7 +255,7 @@ const PurchaseDialog = ({
             // variant="default"
             size="lg"
             className="max-w-[300px]! mx-auto bg-[#797DE5]!"
-            onClick={handlePayment}
+            onClick={handleSubscribe}
             disabled={isProcessing}
           >
             {isProcessing ? (

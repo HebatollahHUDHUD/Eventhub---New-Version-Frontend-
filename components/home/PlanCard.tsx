@@ -30,10 +30,9 @@ const PlanCard = ({
 
   const isFree = price === 0;
 
-  const lowerName = name.toLowerCase();
-  const planIcon = lowerName.includes("platinum")
+  const planIcon = (name.toLowerCase().includes("platinum") || name.includes("بلاتين"))
     ? "/icons/plan-icons/platinum.png"
-    : lowerName.includes("gold")
+    : (name.toLowerCase().includes("gold") || name.includes("ذهب"))
       ? "/icons/plan-icons/gold.png"
       : "/icons/plan-icons/muted.png";
 

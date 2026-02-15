@@ -112,7 +112,10 @@
         "continueWithoutCode": "Continue without Code",
         "proceedToPayment": "Proceed to Payment",
         "invalidPromoCode": "Invalid promo code",
-        "promoCodeApplied": "Promo code applied successfully"
+        "promoCodeApplied": "Promo code applied successfully",
+        "loginRequired": "Please login to subscribe to a plan",
+        "subscriptionSuccess": "Subscribed successfully",
+        "subscriptionFailed": "Subscription failed. Please try again."
       }
     }
   },
