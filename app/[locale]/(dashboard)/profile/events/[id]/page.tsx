@@ -2,17 +2,10 @@
 
 import LoadingPage from "@/components/common/LoadingPage";
 import { useGetData } from "@/hooks/useFetch";
-import { Event } from "@/schemas/types";
+import { Event, EventDetailsResponse } from "@/schemas/types";
 import AddEvent from "../components/AddEvent";
 import AttendanceCard from "../components/AttendanceCard";
 import { useParams } from "next/navigation";
-
-type EventDetailsResponse = {
-  status: string;
-  result: {
-    event: Event;
-  };
-};
 
 const EventDetailsPage = () => {
   const { id } = useParams();

@@ -204,3 +204,7 @@ export interface EventsResponse {
     events?: Event[];
   };
 }
+
+export type EventDetailsResponse = {
+  event: Event;
+};

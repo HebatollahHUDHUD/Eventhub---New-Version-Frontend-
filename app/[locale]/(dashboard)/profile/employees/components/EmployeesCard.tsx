@@ -1,13 +1,13 @@
 "use client";
 
-import { Employee } from "@/schemas/types";
+import { User } from "@/schemas/types";
 import { Button } from "@/components/ui/button";
 import Image from "@/components/common/image";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 type EmployeesCardProps = {
-  employee: Employee;
+  employee: User;
 };
 
 const EmployeesCard = ({ employee }: EmployeesCardProps) => {
@@ -18,7 +18,7 @@ const EmployeesCard = ({ employee }: EmployeesCardProps) => {
       <div>
         <Image
           src="/images/placeholder.png"
-          alt={employee.title}
+          alt={employee.name}
           width={400}
           height={267}
           className="w-32 h-32 rounded-full object-cover"
