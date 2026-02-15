@@ -7,18 +7,20 @@ const SelectLanguage = ({
   onChange,
   value,
   isMultiple,
+  className,
 }: {
   onChange: (value: ValueType) => void;
   value: ValueType;
   isMultiple?: boolean;
+  className?: string;
 }) => {
-  const endpoint = "/languages";
+  const endpoint = "/system-lookups?type=language";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
-    queryKey: ["Languages", endpoint],
+    queryKey: ["SystemLookups", "language"],
   });
 
-  const languagesData = data?.status === "success" ? data?.result : [];
+  const languagesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <SelectItem
@@ -27,6 +29,7 @@ const SelectLanguage = ({
       setValue={onChange}
       isLoading={isLoading || isFetching}
       isMultiple={isMultiple}
+      className={className}
     />
   );
 };

@@ -8,9 +8,9 @@ import { FormField, FormItem, FormControl, FormLabel, FormMessage } from '@/comp
 import InputImage from '@/components/common/InputImage';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
-import SelectCountrySystem from '@/components/select/SelectCountrySystem';
+import SelectCountry from '@/components/select/SelectCountry';
 import SelectPosition from '@/components/select/SelectPosition';
-import SelectLanguageSystem from '@/components/select/SelectLanguageSystem';
+import SelectLanguage from '@/components/select/SelectLanguage';
 import { PasswordInput } from '@/components/ui/password-input';
 import { LoaderIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -120,7 +120,7 @@ const RegisterInfoForm = ({ form, isLoading }: { form: UseFormReturn<z.infer<typ
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("country")}</FormLabel>
-                  <SelectCountrySystem onChange={field.onChange} value={field.value} />
+                  <SelectCountry onChange={field.onChange} value={field.value} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -144,7 +144,7 @@ const RegisterInfoForm = ({ form, isLoading }: { form: UseFormReturn<z.infer<typ
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("languages")}</FormLabel>
-                  <SelectLanguageSystem
+                  <SelectLanguage
                     isMultiple
                     value={field.value || []}
                     onChange={field.onChange}

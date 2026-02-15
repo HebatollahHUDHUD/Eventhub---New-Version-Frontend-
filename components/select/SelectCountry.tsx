@@ -12,13 +12,13 @@ const SelectCountry = ({
   value: ValueType;
   className?: string;
 }) => {
-  const endpoint = "/countries";
+  const endpoint = "/system-lookups?type=country";
   const { data, isLoading } = useGetData<any>({
     endpoint,
-    queryKey: ["Countries", endpoint],
+    queryKey: ["SystemLookups", "country"],
   });
 
-  const countriesData = data?.status === "success" ? data?.result : [];
+  const countriesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <SelectItem

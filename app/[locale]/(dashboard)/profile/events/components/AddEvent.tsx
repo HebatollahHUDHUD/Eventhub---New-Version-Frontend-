@@ -40,7 +40,7 @@ const AddEvent = ({
   const form = useForm<AddEventType>({
     resolver: zodResolver(AddEventSchema),
     defaultValues: {
-      event_type_id: 1,
+      event_type_id: undefined,
       title: { en: "" },
       user_ids: [],
       users: [],

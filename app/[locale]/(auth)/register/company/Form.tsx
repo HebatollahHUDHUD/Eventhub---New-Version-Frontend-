@@ -38,7 +38,7 @@ const RegisterForm = () => {
       name: "",
       email: "",
       mobile: "",
-      country_id: 1,
+      country_id: undefined,
       incharge_person_name: "",
       password: "",
       password_confirmation: "",
