@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CircleCheck, ArrowUpRight } from "lucide-react";
+import { CircleCheck, ArrowUpRight, CircleCheckBig } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -90,17 +90,17 @@ const PlanCard = ({
               key={index}
               className={cn(
                 "flex items-center gap-2 text-sm",
-                feature.is_active
-                  ? "text-foreground"
-                  : "text-muted-foreground/40"
+                // feature
+                //   ? "text-foreground"
+                //   : "text-muted-foreground/40"
               )}
             >
-              <CircleCheck
+              <CircleCheckBig
                 className={cn(
                   "size-4 shrink-0",
-                  feature.is_active
-                    ? "text-primary"
-                    : "text-muted-foreground/40"
+                  // feature.is_active
+                  //   ? "text-primary"
+                  //   : "text-muted-foreground/40"
                 )}
               />
               <span>{feature.name}</span>
