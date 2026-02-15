@@ -231,3 +231,23 @@ export interface EventsResponse {
 export type EventDetailsResponse = {
   event: Event;
 };
+
+// Pricing Plans related interfaces
+export interface Plan {
+  id: number;
+  type: string;
+  image: string | null;
+  name: string;
+  slug: string;
+  features: string[];
+  currency: string;
+  price: string;
+  billing_interval: string;
+  is_featured: number;
+}
+
+export interface PricingPageResponse {
+  pricing_page_title: string;
+  pricing_page_subtitle: string;
+  plans: Plan[];
+}
