@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import cookieClient from "js-cookie";
+import { SESSION_NAME } from "@/constant";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import PlanCard from "@/components/home/PlanCard";
 import PurchaseDialog from "@/components/home/PurchaseDialog";
+import PaymentStatusDialog from "@/components/home/PaymentStatusDialog";
 import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
@@ -33,6 +37,7 @@ interface PricingPageResponse {
 
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
+  const searchParams = useSearchParams();
   const [planType, setPlanType] = useState<PlanType>("company");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{
@@ -40,6 +45,23 @@ const PricingPlans = () => {
     price: number;
     id?: string | number;
   } | null>(null);
+
+  // Payment status check: only if logged in and payment_id param is present
+  const paymentId = searchParams.get("payment_id");
+  const isLoggedIn = !!cookieClient.get(SESSION_NAME);
+  const [paymentStatusOpen, setPaymentStatusOpen] = useState(
+    !!paymentId && isLoggedIn
+  );
+
+  const handlePaymentStatusClose = (open: boolean) => {
+    setPaymentStatusOpen(open);
+    if (!open && paymentId) {
+      // Remove payment_id from URL without a full reload
+      const url = new URL(window.location.href);
+      url.searchParams.delete("payment_id");
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const { data, isLoading } = useGetData<PricingPageResponse>({
     endpoint: "/pricing-page",
@@ -133,6 +155,13 @@ const PricingPlans = () => {
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         planDetails={selectedPlan}
+      />
+
+      {/* Payment Status Dialog */}
+      <PaymentStatusDialog
+        open={paymentStatusOpen}
+        onOpenChange={handlePaymentStatusClose}
+        paymentId={paymentId}
       />
     </section>
   );
