@@ -99,6 +99,13 @@ export interface ContactItem {
   href: string;
   isExternal?: boolean;
 }
+
+export interface InfoResponse {
+  mobile: string;
+  email: string;
+  address: string;
+  map_url: string;
+}
 export type TalentCategory = 
   | "talents" 
   | "recruitment";
