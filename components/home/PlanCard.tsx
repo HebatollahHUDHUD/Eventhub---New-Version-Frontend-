@@ -117,10 +117,13 @@ const PlanCard = ({
           className="w-full uppercase tracking-wider font-bold"
           onClick={onPurchase}
           disabled={disabled}
+          
         >
           {isFree ? t("registerNow") : t("purchaseNow")}
-          <ArrowUpRight className="size-4" />
-        </Button>
+          <div className="relative ">
+              <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+              <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+            </div>      </Button>
       </div>
     </article>
   );
