@@ -1,111 +1,13 @@
+import { getData } from "@/lib/request-server";
 import OpportunitiesCard from "./OpportunitiesCard";
 import OpportunitiesCardSkeleton from "./OpportunitiesCardSkeleton";
 import { Suspense } from "react";
-import type { Opportunity } from "../../../../../schemas/types";
+import type { JobAdsMainResponse } from "../../../../../schemas/types";
 import Pagination from "@/components/common/Pagination";
 
 type OpportunitiesContentProps = {
   searchParams?: Record<string, string | undefined>;
 };
-
-const staticOpportunities: Opportunity[] = [
-  {
-    id: 1,
-    title: "Asher",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "asher",
-    category: "asher",
-  },
-  {
-    id: 2,
-    title: "Software Engineer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "software-engineer",
-    category: "software engineer",
-  },
-  {
-    id: 3,
-    title: "Marketing",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "marketing",
-    category: "marketing",
-  },
-  {
-    id: 4,
-    title: "Photographer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "photographer",
-    category: "photographer",
-  },
-  {
-    id: 5,
-    title: "Asher",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "asher-2",
-    category: "asher",
-  },
-  {
-    id: 6,
-    title: "Software Engineer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "software-engineer-2",
-    category: "software engineer",
-  },
-  {
-    id: 7,
-    title: "Marketing",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "marketing-2",
-    category: "marketing",
-  },
-  {
-    id: 8,
-    title: "Photographer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "photographer-2",
-    category: "photographer",
-  },
-  {
-    id: 9,
-    title: "Asher",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "asher-2",
-    category: "asher",
-  },
-  {
-    id: 10,
-    title: "Software Engineer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "software-engineer-2",
-    category: "software engineer",
-  },
-  {
-    id: 11,
-    title: "Marketing",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "marketing-2",
-    category: "marketing",
-  },
-  {
-    id: 12,
-    title: "Photographer",
-    image: "/images/placeholder.png",
-    company_name: "Company Name",
-    slug: "photographer-2",
-    category: "photographer",
-  },
-];
 
 const OpportunitiesContentSkeleton = () => {
   return (
@@ -132,13 +34,28 @@ const OpportunitiesContent = ({ searchParams }: OpportunitiesContentProps) => {
 
 export default OpportunitiesContent;
 
-const OpportunitiesList = ({ searchParams }: OpportunitiesContentProps) => {
-  const category = searchParams?.category || "all";
+const OpportunitiesList = async ({
+  searchParams,
+}: OpportunitiesContentProps) => {
+  const queryParams = {
+    page: searchParams?.page || "1",
+    per_page: "20",
+    ...searchParams,
+  };
 
-  const filtered =
-    category === "all"
-      ? staticOpportunities
-      : staticOpportunities.filter((opp) => opp.category === category);
+  const data = await getData<JobAdsMainResponse>({
+    endpoint: "/job-ads",
+    config: {
+      next: {
+        tags: ["job-ads"],
+      },
+      queryParams,
+    },
+  });
+
+  const jobAds = data.status === "success" ? data.result.job_ads : null;
+  const jobAdsList = jobAds?.data || [];
+  const pagination = jobAds?.pagination || null;
 
   return (
     <div className="space-y-6">
@@ -147,12 +64,12 @@ const OpportunitiesList = ({ searchParams }: OpportunitiesContentProps) => {
         role="list"
         aria-label="Opportunities list"
       >
-        {filtered.map((opportunity) => (
-          <OpportunitiesCard key={opportunity.id} opportunity={opportunity} />
+        {jobAdsList.map((jobAd) => (
+          <OpportunitiesCard key={jobAd.id} jobAd={jobAd} />
         ))}
       </div>
 
-      <Pagination />
+      <Pagination pagination={pagination} />
     </div>
   );
 };

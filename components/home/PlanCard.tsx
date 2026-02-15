@@ -28,7 +28,7 @@ const PlanCard = ({
 }: PlanCardProps) => {
   const t = useTranslations("home.pricingPlans");
 
-  const isFree = price === 0;
+  const isFree = Number(price) === 0;
 
   const lowerName = name.toLowerCase();
   const planIcon = lowerName.includes("platinum")
@@ -77,7 +77,7 @@ const PlanCard = ({
         {/* Price */}
         <div className="flex items-baseline justify-center gap-1">
           <span className="text-4xl md:text-5xl font-bold text-foreground">
-            {isFree ? "00.00" : price.toFixed(2)}
+            {isFree ? "00.00" : Number(price).toFixed(2)}
           </span>
           <span className="text-sm text-muted-foreground font-medium">
             {t("perMonth")}

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 
-
 export type Pagination = {
   total: number;
   count: number;
@@ -9,12 +8,12 @@ export type Pagination = {
   total_pages: number;
 };
 
-export type BlogCategory = 
-  | "all" 
-  | "business" 
-  | "conference" 
-  | "marketing" 
-  | "sales" 
+export type BlogCategory =
+  | "all"
+  | "business"
+  | "conference"
+  | "marketing"
+  | "sales"
   | "organizing";
 
 export interface AttachmentType {
@@ -23,7 +22,7 @@ export interface AttachmentType {
   file_path: string;
 }
 
-  export interface BlogPostCategory {
+export interface BlogPostCategory {
   id: number;
   name: string;
   slug: string;
@@ -68,7 +67,6 @@ export interface User {
   last_login_at: string | null;
 }
 
-
 export interface BlogPost {
   id: number;
   slug: string;
@@ -79,7 +77,6 @@ export interface BlogPost {
   writer: User;
   created_at: string;
 }
-
 
 export interface BlogPostsResponse {
   blog_posts: {
@@ -99,9 +96,7 @@ export interface ContactItem {
   href: string;
   isExternal?: boolean;
 }
-export type TalentCategory = 
-  | "talents" 
-  | "recruitment";
+export type TalentCategory = "talents" | "recruitment";
 
 // Talent related interfaces
 export interface Talent extends User {
@@ -125,10 +120,6 @@ export interface TalentsResponse {
     pagination: Pagination;
   };
 }
-
-
-
-
 
 // Job Ad related interfaces
 export interface JobAdCountry {
