@@ -3,6 +3,7 @@ import TalentFilters from './TalentFilters';
 import TalentCard from './TalentCard';
 import TalentSearchFilters from './TalentSearchFilters';
 import { Suspense } from 'react';
+import { TalentsPageResponse } from '@/schemas/types';
 
 type TalentContentProps = {
   searchParams?: Record<string, string | undefined>;
@@ -29,19 +30,18 @@ export default TalentContent;
 
 const TalentList = async ({ searchParams }: TalentContentProps) => {
  
-  const data = await getData<any>({
-    endpoint: "/talent",
+  const data = await getData<TalentsPageResponse>({
+    endpoint: "/talents-page",
     config: {
       next: {
-        tags: ["talent"],
+        tags: ["talents-page"],
       },
     }
   });
 
-  const talnt = data.status === "success" ? data?.result : null;
-
-
-  const talentItems = talnt?.data;
+  const pageData = data.status === "success" ? data.result : null;
+  
+  const talentItems = null; 
 
   // Static card data
   const staticCard = {
