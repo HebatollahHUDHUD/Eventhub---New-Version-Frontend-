@@ -31,7 +31,7 @@ const PlanCard = ({
 }: PlanCardProps) => {
   const t = useTranslations("home.pricingPlans");
 
-  const isFree = price === 0;
+  const isFree = Number(price) === 0;
 
   const planIcon = (name.toLowerCase().includes("platinum") || name.includes("بلاتين"))
     ? "/icons/plan-icons/platinum.png"
@@ -43,7 +43,7 @@ const PlanCard = ({
     <article
       className={cn(
         "relative flex flex-col rounded-3xl bg-background shadow-lg overflow-hidden border border-border/50 transition-transform duration-300 hover:-translate-y-1",
-       
+
       )}
     >
       {/* Recommended Badge */}
@@ -69,7 +69,7 @@ const PlanCard = ({
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
-          {name} 
+          {name}
         </h3>
       </div>
 
@@ -79,11 +79,11 @@ const PlanCard = ({
         {/* Price */}
         <div className="flex items-baseline justify-center gap-1">
           <span className="title-2 font-bold text-foreground flex items-center gap-1">
-            {riyalSVG("#000","40px","40px")}
+            {riyalSVG("#000", "40px", "40px")}
             {isFree ? "00.00" : price.toFixed(2)}
           </span>
           <span className="text-sm text-muted-foreground font-medium">
-            {t("perMonth")} 
+            {t("perMonth")}
           </span>
         </div>
 
@@ -119,13 +119,13 @@ const PlanCard = ({
           className="w-full uppercase tracking-wider font-bold"
           onClick={onPurchase}
           disabled={disabled}
-          
+
         >
           {isFree ? t("registerNow") : t("purchaseNow")}
           <div className="relative ">
-              <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
-              <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
-            </div>      </Button>
+            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+          </div>      </Button>
       </div>
     </article>
   );
