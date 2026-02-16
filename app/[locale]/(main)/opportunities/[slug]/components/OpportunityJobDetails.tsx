@@ -27,8 +27,12 @@ const OpportunityJobDetails = ({
 
   const handleApply = () => {
     applyToJob(null, {
-      onSuccess: () => {
-        toast("Applied for the job ad successfully", "success");
+      onSuccess: (data: any) => {
+        if (data?.status === "fail") {
+          toast(data.message, "destructive");
+        } else {
+          toast(data?.message || "Applied successfully", "success");
+        }
       },
       onError: () => {
         toast("Failed to apply. Please try again.", "destructive");
