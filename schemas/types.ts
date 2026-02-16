@@ -89,6 +89,15 @@ export type BlogPostDetailsResponse = {
   blog_post: BlogPost;
 };
 
+export interface TalentsPageResponse {
+  error_flag: number;
+  message: string;
+  result: {
+    talents_page_name: string;
+    talents_page_title: string;
+    talents_page_subtitle: string;
+  };
+}
 export interface ContactItem {
   icon: ReactNode;
   title: string;
