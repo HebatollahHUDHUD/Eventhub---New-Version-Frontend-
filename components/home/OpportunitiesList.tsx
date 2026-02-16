@@ -38,7 +38,8 @@ const OpportunitiesList = async () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {opportunities.map((opportunity) => (
-        <OpportunitiesCard key={opportunity.id} opportunity={opportunity} />
+        <OpportunitiesCard key={opportunity.id}
+          jobAd={opportunity as any} />
       ))}
     </div>
   );

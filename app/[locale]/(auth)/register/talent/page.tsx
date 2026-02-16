@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import TalentRegisterForm from "./Form";
-import ResumeForm from "../resume/Form";
+import ResumeForm from "./ResumeForm";
 
 const TalentRegisterPage = () => {
   const [step, setStep] = useState("1");

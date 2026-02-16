@@ -7,22 +7,20 @@ import ContactCard from "./ContactCard";
 const ContactInfoSection = async () => {
   const t = await getTranslations("contact");
 
-  const data = await getData<{ result: InfoResponse }>({
+  const data = await getData<InfoResponse>({
     endpoint: "/info",
   });
 
-  const info = data?.result;
+  const info = data?.status === "success" ? data.result : null;
 
-  if (!info) {
-    return null;
-  }
+  if (!info) return null;
 
   const contactData: ContactItem[] = [
     {
       icon: <Phone size={26} />,
       title: t("call"),
-      value: info.mobile,
-      href: `tel:${info.phone}`,
+      value: info?.mobile,
+      href: `tel:${info.mobile}`,
     },
     {
       icon: <Mail size={26} />,
