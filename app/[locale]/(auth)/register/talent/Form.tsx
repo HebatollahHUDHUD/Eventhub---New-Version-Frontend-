@@ -63,7 +63,7 @@ const TalentRegisterForm = ({ extractData }: { extractData: any }) => {
           const userSession = res.result.profile;
 
           await loginAction(token, JSON.stringify(userSession), true);
-          router.replace("/dashboard");
+          router.replace("/profile");
         }
 
       } else {

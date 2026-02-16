@@ -56,7 +56,12 @@ const LoginForm = () => {
             JSON.stringify(userSession),
             values.keep_login || false
           );
-          router.replace("/dashboard");
+
+          if (userSession?.user_type === "company") {
+            router.replace("/dashboard");
+          } else {
+            router.replace("/profile");
+          }
         } else {
           toast(t("session-missing"), "destructive");
         }
