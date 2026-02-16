@@ -14,7 +14,8 @@ export default function AboutIntro({ data }: AboutIntroProps) {
   const title = data?.about_page_title || t("hero_tagline");
   const subtitle = data?.about_page_subtitle || t("who_is_events_hubs");
   const description = data?.about_page_desc || t("who_is_events_hubs_description");
-  const videoUrl = data?.about_page_video;
+  const videoUrl = data?.about_page_video 
+  
 
   const stats = [
     { value: "+200", label: t("companies"), highlightColor: "bg-teal-300/50" },

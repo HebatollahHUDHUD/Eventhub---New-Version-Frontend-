@@ -18,7 +18,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
   const description =
     data?.about_page_contract_desc || t("event_contract_description");
   const buttonText = t("download_now");
-  const downloadUrl = data?.about_page_contract_file || "#";
+  const downloadUrl = data?.about_page_contract_file || undefined;
 
   return (
     <section className="bg-[#010462] p-4 md:p-8 lg:p-12">
@@ -51,7 +51,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
             {/* Inner circle with image */}
             <div className="">
               <Image
-                src="/images/employment-contract-template-uk-feature-image@2x.png"
+                src={data?.about_page_contract_image || "/images/employment-contract-template-uk-feature-image@2x.png"}
                 alt="Event contract document"
                 // width={400}
                 // height={400}
@@ -69,6 +69,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
           </div>
 
           {/* Download button */}
+          {downloadUrl && (
           <DownloadButton
             url={downloadUrl}
             label={buttonText}
@@ -80,6 +81,7 @@ export default function EventContract({ data, downloadIcon }: EventContractProps
             size="lg"
             className="min-w-[250px] rounded-lg p-6"
           />
+          )}
         </div>
       </div>
     </section>

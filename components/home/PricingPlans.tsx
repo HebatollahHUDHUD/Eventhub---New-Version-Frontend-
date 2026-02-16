@@ -10,6 +10,8 @@ import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
 import { Loader2 } from "lucide-react";
 import { getUserSession } from "@/lib/userSession";
+import { toast } from "@/components/ui/toast";
+import { useRouter } from "@/i18n/navigation";
 import PageTitle from "../common/PageTitle";
 
 type PlanType = "company" | "personal";
@@ -49,6 +51,7 @@ interface ProfilePlanResponse {
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
   const searchParams = useSearchParams();
+  const router = useRouter();
   const loggedUser = getUserSession();
   const initialPlanType: PlanType = loggedUser?.user_type === "company" ? "company" : "personal";
   const [planType, setPlanType] = useState<PlanType>(loggedUser ? initialPlanType : "company");
@@ -70,7 +73,7 @@ const PricingPlans = () => {
   // const activeSubscription = loggedUser?.current_subscription ?? null;
 
   // Fetch current subscription only when user is logged in and payment status check is done
-  const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
+  const { data: profilePlanData, refetch: refetchProfile } = useGetData<ProfilePlanResponse>({
     endpoint: "/profile",
     queryKey: ["profile"],
     enabled: isLoggedIn && !paymentStatusOpen,
