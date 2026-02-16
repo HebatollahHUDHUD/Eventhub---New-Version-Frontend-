@@ -7,7 +7,7 @@ interface BlogsPageResponse {
   blog_page_subtitle: string;
 }
 
-export default function BlogsTitleClient() {
+export default function BlogsTitle() {
   const { data, isLoading } = useGetData<BlogsPageResponse>({
     endpoint: "/blog-page",
   });

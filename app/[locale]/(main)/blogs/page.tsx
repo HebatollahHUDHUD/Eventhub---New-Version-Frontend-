@@ -2,7 +2,7 @@ import BlogsContent from './components/BlogsContent';
 import PageHeader from '@/components/common/PageHeader';
 import BlogsFilters from './components/BlogsFilters';
 import { getTranslations } from 'next-intl/server';
-import BlogsTitleClient from './components/BlogsTitle';
+import BlogsTitle from './components/BlogsTitle';
 
 type PageProps = {
   searchParams: Promise<Record<string, string | undefined>>;
@@ -18,7 +18,7 @@ const page = async ({ searchParams }: PageProps) => {
 
       <div className="space-y-10 py-10">
 
-         <BlogsTitleClient />
+         <BlogsTitle />
 
         <BlogsFilters />
 
