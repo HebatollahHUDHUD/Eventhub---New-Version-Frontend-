@@ -46,7 +46,7 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
             className="w-full"
             asChild
           >
-            <Link href={`/job-ads/${jobAd.id}`}>
+            <Link href={`/profile/job-ads/${jobAd.id}`}>
               {t("view")}
             </Link>
           </Button>

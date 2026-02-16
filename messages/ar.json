@@ -642,6 +642,13 @@
     "employees": {
       "new-employees": "الموظفون الجدد",
       "confirmed-employees": "الموظفون المؤكدون"
+    },
+    "plans": {
+      "my-plan": "خطتي",
+      "upgrade-plan": "ترقية الخطة",
+      "month": "شهر",
+      "valid-till": "صالح حتى",
+      "no-current-plan": "لا توجد خطة حالية"
     }
   }
 }

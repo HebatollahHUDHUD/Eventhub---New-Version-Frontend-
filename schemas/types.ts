@@ -252,6 +252,15 @@ export interface PricingPageResponse {
   plans: Plan[];
 }
 
+export interface ProfilePlanResponse {
+  current_subscription: Plan | null;
+  other_plans: Plan[];
+}
+
+export interface CurrentSubscriptionWithDate extends Plan {
+  end_date?: string | null;
+}
+
 // Talent Profile related interfaces
 export interface Position {
   id: number;

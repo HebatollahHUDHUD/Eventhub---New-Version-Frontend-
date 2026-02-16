@@ -156,25 +156,33 @@ const Sidebar = () => {
         <ul className="w-full space-y-1">
           {links
             .filter((item) => !item.permission || item.permission === profileDate?.user_type || item.permission.includes(profileDate?.user_type))
-            .map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "flex items-center gap-2 py-3 px-4 rounded-xl text-primary duration-300 hover:bg-primary/20",
-                    pathname === link.href &&
-                    "bg-primary! text-primary-foreground"
-                  )}
-                >
-                  {link.icon}
-                  {t(link.name)}
-                </Link>
-              </li>
-            ))}
+            .map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "flex items-center gap-2 py-3 px-4 rounded-xl text-secondary duration-300 hover:bg-secondary/20",
+                      isActive &&
+                      "bg-secondary! text-secondary-foreground"
+                    )}
+                  >
+                    <span className={cn("text-secondary/75", isActive && "text-secondary-foreground")}>
+                      {link.icon}
+                    </span>
+
+                    <span className={cn("text-foreground", isActive && "text-secondary-foreground")}>
+                      {t(link.name)}
+                    </span>
+                  </Link>
+                </li>
+              )
+            })}
         </ul>
 
         <button
-          className="mt-auto w-full flex items-center gap-2 py-3 px-4 rounded-xl text-primary duration-300 cursor-pointer hover:bg-primary/20"
+          className="mt-auto w-full flex items-center gap-2 py-3 px-4 rounded-xl text-secondary duration-300 cursor-pointer hover:bg-secondary/20"
           onClick={async () => {
             await logoutAction();
           }}

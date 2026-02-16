@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { InstagramIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useGetData } from "@/hooks/useFetch";
 import NewsletterForm from "./NewsletterForm";
 import { Button } from "@/components/ui/button";
@@ -28,16 +28,39 @@ const newsletterSchema = z.object({
 
 const Footer = () => {
   const t = useTranslations("footer");
+  const locale = useLocale();
 
-  const { data } = useGetData<any>({
+  const { data: settingsDataResponse } = useGetData<any>({
     endpoint: "/settings",
     queryKey: ["Settings"],
   });
 
+  const { data: infoDataResponse } = useGetData<any>({
+    endpoint: "/info",
+    queryKey: ["Info"],
+  });
+
   const settingsData =
-    data && typeof data === "object" && "status" in data && data.status === "success" && "response" in data
-      ? (data as any)?.response?.settings
+    settingsDataResponse && typeof settingsDataResponse === "object" && "status" in settingsDataResponse && settingsDataResponse.status === "success" && "response" in settingsDataResponse
+      ? (settingsDataResponse as any)?.response?.settings
       : null;
+
+  const infoData =
+    infoDataResponse && typeof infoDataResponse === "object" && "status" in infoDataResponse && infoDataResponse.status === "success" && "response" in infoDataResponse
+      ? (infoDataResponse as any)?.response
+      : null;
+
+  // Get footer logo based on locale
+  const footerLogo = locale === "ar" && infoData?.footer_logo_ar
+    ? infoData.footer_logo_ar
+    : infoData?.footer_logo || "/logo.svg";
+
+  // Get social media URLs from infoData, fallback to settingsData
+  const getSocialUrl = (infoKey: string, settingsKey: string) => {
+    const url = infoData?.[infoKey] || settingsData?.[settingsKey];
+    if (!url) return null;
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
 
   const form = useForm<z.infer<typeof newsletterSchema>>({
     resolver: zodResolver(newsletterSchema),
@@ -128,11 +151,16 @@ const Footer = () => {
 
           <div className="flex flex-col items-center justify-center gap-4">
             <Link href="/" className="hover:opacity-90 transition-opacity">
-              <Image src={"/logo.svg"} alt="Events Hubs" width={100} height={100} />
+              <Image
+                src={footerLogo}
+                alt={infoData?.website_name || "Events Hubs"}
+                width={100}
+                height={100}
+              />
             </Link>
 
             <p className="text-white/80 text-sm md:text-base max-w-3xl mx-auto">
-              {t("tagline")}
+              {infoData?.website_desc || t("tagline")}
             </p>
           </div>
         </div>
@@ -181,92 +209,133 @@ const Footer = () => {
 
 
         <div className="flex items-center justify-center gap-4 md:gap-10">
+          {getSocialUrl("social_media_facebook_url", "facebook_link") && (
+            <a
+              href={getSocialUrl("social_media_facebook_url", "facebook_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <Image src={"/icons/facebook.svg"} alt="Facebook" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
 
-          <a
-            href={
-              settingsData?.facebook_link?.startsWith("http")
-                ? settingsData?.facebook_link
-                : `https://${settingsData?.facebook_link}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
-            <Image src={"/icons/facebook.svg"} alt="Facebook" width={24} height={24}
-              unoptimized
-              quality={100}
-              className="w-10 h-10 object-contain"
-            />
-          </a>
+          {getSocialUrl("social_media_instagram_url", "instagram_link") && (
+            <a
+              href={getSocialUrl("social_media_instagram_url", "instagram_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <Image src={"/icons/instagram.svg"} alt="Instagram" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
 
-          <a
-            href={
-              settingsData?.instagram_link?.startsWith("http")
-                ? settingsData?.instagram_link
-                : `https://${settingsData?.instagram_link}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <Image src={"/icons/instagram.svg"} alt="Instagram" width={24} height={24}
-              unoptimized
-              quality={100}
-              className="w-10 h-10 object-contain"
-            />
-          </a>
+          {getSocialUrl("social_media_youtube_url", "youtube_link") && (
+            <a
+              href={getSocialUrl("social_media_youtube_url", "youtube_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              <Image src={"/icons/youtube.svg"} alt="YouTube" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
 
-          <a
-            href={
-              settingsData?.youtube_link?.startsWith("http")
-                ? settingsData?.youtube_link
-                : `https://${settingsData?.youtube_link}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-          >
-            <Image src={"/icons/youtube.svg"} alt="YouTube" width={24} height={24}
-              unoptimized
-              quality={100}
-              className="w-10 h-10 object-contain"
-            />
-          </a>
+          {getSocialUrl("social_media_tiktok_url", "tiktok_link") && (
+            <a
+              href={getSocialUrl("social_media_tiktok_url", "tiktok_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+            >
+              <Image src={"/icons/tiktok.svg"} alt="TikTok" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
 
-          <a
-            href={
-              settingsData?.tiktok_link?.startsWith("http")
-                ? settingsData?.tiktok_link
-                : `https://${settingsData?.tiktok_link}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="TikTok"
-          >
-            <Image src={"/icons/tiktok.svg"} alt="TikTok" width={24} height={24}
-              unoptimized
-              quality={100}
-              className="w-10 h-10 object-contain"
-            />
-          </a>
+          {getSocialUrl("social_media_snapchat_url", "snapchat_link") && (
+            <a
+              href={getSocialUrl("social_media_snapchat_url", "snapchat_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Snapchat"
+            >
+              <Image src={"/icons/snapchat.svg"} alt="Snapchat" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
 
-          <a
-            href={
-              settingsData?.snapchat_link?.startsWith("http")
-                ? settingsData?.snapchat_link
-                : `https://${settingsData?.snapchat_link}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Snapchat"
-          >
-            <Image src={"/icons/snapchat.svg"} alt="Snapchat" width={24} height={24}
-              unoptimized
-              quality={100}
-              className="w-10 h-10 object-contain"
-            />
-          </a>
+          {getSocialUrl("social_media_x_url", "x_link") && (
+            <a
+              href={getSocialUrl("social_media_x_url", "x_link") || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+            >
+              <Image src={"/icons/x.svg"} alt="X" width={24} height={24}
+                unoptimized
+                quality={100}
+                className="w-10 h-10 object-contain"
+              />
+            </a>
+          )}
         </div>
+
+        {/* Contact Information */}
+        {(infoData?.address || infoData?.email || infoData?.mobile || infoData?.map_url) && (
+          <div className="flex flex-col items-center justify-center gap-2 text-white/80 text-sm">
+            {infoData?.address && (
+              <p>{infoData.address}</p>
+            )}
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              {infoData?.email && (
+                <a
+                  href={`mailto:${infoData.email}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {infoData.email}
+                </a>
+              )}
+              {infoData?.mobile && (
+                <a
+                  href={`tel:${infoData.mobile}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {infoData.mobile}
+                </a>
+              )}
+              {infoData?.map_url && (
+                <a
+                  href={infoData.map_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {t("view-map") || "View on Map"}
+                </a>
+              )}
+            </div>
+          </div>
+        )}
 
 
         <div className="flex items-center justify-center gap-4 md:gap-6">

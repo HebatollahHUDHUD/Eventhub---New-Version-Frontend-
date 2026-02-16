@@ -609,6 +609,13 @@
     "employees": {
       "new-employees": "New Employees",
       "confirmed-employees": "Confirmed Employees"
+    },
+    "plans": {
+      "my-plan": "My Plan",
+      "upgrade-plan": "Upgrade Plan",
+      "month": "month",
+      "valid-till": "Valid till",
+      "no-current-plan": "No current plan"
     }
   }
 }
