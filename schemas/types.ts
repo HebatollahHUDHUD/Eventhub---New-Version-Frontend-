@@ -96,7 +96,17 @@ export interface ContactItem {
   href: string;
   isExternal?: boolean;
 }
-export type TalentCategory = "talents" | "recruitment";
+
+export interface InfoResponse {
+  mobile: string;
+  email: string;
+  address: string;
+  map_url: string;
+}
+export type TalentCategory = 
+  | "talents" 
+  | "recruitment";
+
 
 // Talent related interfaces
 export interface Talent extends User {
