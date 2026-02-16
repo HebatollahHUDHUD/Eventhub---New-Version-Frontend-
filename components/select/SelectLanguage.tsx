@@ -17,7 +17,7 @@ const SelectLanguage = ({
   const endpoint = "/system-lookups?type=language";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
-    queryKey: ["SystemLookups", "language"],
+    queryKey: ["language"],
   });
 
   const languagesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];

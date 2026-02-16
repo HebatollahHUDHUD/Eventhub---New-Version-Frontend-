@@ -3,7 +3,7 @@
 import { useGetData } from "@/hooks/useFetch";
 import SelectItem, { ValueType } from "./SelectItem";
 
-const SelectSkills = ({
+const SelectBadge = ({
   onChange,
   value,
   className,
@@ -14,17 +14,17 @@ const SelectSkills = ({
   className?: string;
   isMultiple?: boolean;
 }) => {
-  const endpoint = "/system-lookups?type=skills";
+  const endpoint = "/system-lookups?type=badge";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
-    queryKey: ["Skills", endpoint],
+    queryKey: ["Badges", endpoint],
   });
 
-  const skillsData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
+  const badgesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <SelectItem
-      items={skillsData}
+      items={badgesData}
       value={value}
       setValue={onChange}
       isLoading={isLoading || isFetching}
@@ -34,4 +34,4 @@ const SelectSkills = ({
   );
 };
 
-export default SelectSkills;
+export default SelectBadge;

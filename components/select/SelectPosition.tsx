@@ -15,7 +15,7 @@ const SelectPosition = ({
   const endpoint = "/system-lookups?type=position";
   const { data, isLoading } = useGetData<any>({
     endpoint,
-    queryKey: ["SystemLookups", "position"],
+    queryKey: ["position"],
   });
 
   const positionsData = data?.status === "success" ? data?.result?.system_lookups || [] : [];

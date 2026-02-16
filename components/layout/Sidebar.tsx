@@ -22,7 +22,6 @@ const Sidebar = () => {
   const pathname = usePathname();
   const t = useTranslations("navigation");
   const endpoint = "/profile";
-  const locale = useLocale();
 
   const { data } = useGetData<any>({
     endpoint,
@@ -112,11 +111,9 @@ const Sidebar = () => {
               </p>
             )}
 
-            {(profileDate?.position_ar || profileDate?.position) && (
+            {profileDate?.position && (
               <p className="title-xs font-semibold text-muted-foreground">
-                {locale === "ar"
-                  ? profileDate?.position_ar || profileDate?.position
-                  : profileDate?.position || profileDate?.position_ar}
+                {profileDate?.position?.name}
               </p>
             )}
           </div>

@@ -25,7 +25,7 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
           alt={jobAd.title.en}
           width={400}
           height={267}
-          className="w-full aspect-[3/2] rounded-2xl object-cover"
+          className="w-full aspect-3/2 rounded-2xl object-cover"
         />
       </div>
 

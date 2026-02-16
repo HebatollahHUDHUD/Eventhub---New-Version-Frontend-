@@ -17,7 +17,7 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
         className="relative h-full bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
         role="listitem"
       >
-        <div className="relative w-full aspect-[3/2] overflow-hidden">
+        <div className="relative w-full aspect-3/2 overflow-hidden">
           <Image
             src={blog.image}
             alt={blog.title || "Blog post image"}

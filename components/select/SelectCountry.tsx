@@ -15,7 +15,7 @@ const SelectCountry = ({
   const endpoint = "/system-lookups?type=country";
   const { data, isLoading } = useGetData<any>({
     endpoint,
-    queryKey: ["SystemLookups", "country"],
+    queryKey: ["country"],
   });
 
   const countriesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];

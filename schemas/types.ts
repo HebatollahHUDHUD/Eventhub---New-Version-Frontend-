@@ -251,3 +251,180 @@ export interface PricingPageResponse {
   pricing_page_subtitle: string;
   plans: Plan[];
 }
+
+// Talent Profile related interfaces
+export interface Position {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Education {
+  id: number;
+  major: string;
+  university: string;
+  from_date: string;
+  to_date: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Experience {
+  id: number;
+  company_id?: number | null;
+  position_id?: number | null;
+  other_company?: string | null;
+  other_position?: string | null;
+  company?: {
+    id: number;
+    name: string;
+  } | null;
+  position?: {
+    id: number;
+    name: string;
+    slug: string;
+  } | null;
+  from_date: string;
+  to_date: string | null;
+  is_current: number;
+  description: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Language {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Badge {
+  id: number;
+  name: string;
+  slug: string;
+  image?: string | null;
+  description?: string | null;
+}
+
+export interface Subscription {
+  id: number;
+  plan_id: number;
+  plan_name: string;
+  status: string;
+  start_date: string;
+  end_date: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Project {
+  id: number;
+  title: Record<string, string> | string;
+  description: Record<string, string> | string;
+  date: string;
+  attachments: AttachmentType[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TalentProfile {
+  id: number;
+  name: string;
+  photo: string | null;
+  email: string;
+  user_type: "talent";
+  mobile: string | null;
+  role: string | null;
+  gender: string | null;
+  bio: string | null;
+  position: Position | null;
+  other_position: string | null;
+  experience_years: number | null;
+  available_for_work: boolean;
+  price_per_project: boolean | null;
+  facebook_url: string | null;
+  instagram_url: string | null;
+  youtube_url: string | null;
+  linkedin_url: string | null;
+  skills: Skill[];
+  languages: Language[];
+  badges: Badge[];
+  educations: Education[];
+  experiences: Experience[];
+  projects: Project[];
+  current_subscription: Subscription | null;
+  last_login_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type TalentProfileResponse = {
+  profile: TalentProfile;
+};
+
+export type ProjectDetailsResponse = {
+  project: Project;
+};
+
+// Course related interfaces
+export interface Lesson {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+  video_url: string;
+  is_active: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Course {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  is_active: number;
+  lessons: Lesson[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CoursesResponse {
+  courses: {
+    data: Course[];
+    pagination: Pagination;
+  };
+}
+
+export type CourseDetailsResponse = {
+  course: Course;
+};
+
+// Book related interfaces
+export interface Book {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  is_active: number;
+  created_at: string;
+  updated_at: string;
+  file_url?: string;
+}
+
+export interface BooksResponse {
+  books: {
+    data: Book[];
+    pagination: Pagination;
+  };
+}
+
+export type BookDetailsResponse = {
+  book: Book;
+};

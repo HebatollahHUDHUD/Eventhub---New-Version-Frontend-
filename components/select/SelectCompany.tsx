@@ -3,35 +3,35 @@
 import { useGetData } from "@/hooks/useFetch";
 import SelectItem, { ValueType } from "./SelectItem";
 
-const SelectSkills = ({
+const SelectCompany = ({
   onChange,
   value,
-  className,
   isMultiple,
+  className,
 }: {
   onChange: (value: ValueType) => void;
   value: ValueType;
-  className?: string;
   isMultiple?: boolean;
+  className?: string;
 }) => {
-  const endpoint = "/system-lookups?type=skills";
+  const endpoint = "/users?user_type=company";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
-    queryKey: ["Skills", endpoint],
+    queryKey: ["company"],
   });
 
-  const skillsData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
+  const companiesData = data?.status === "success" ? data?.result?.users || [] : [];
 
   return (
     <SelectItem
-      items={skillsData}
-      value={value}
+      items={companiesData}
+      value={value || []}
       setValue={onChange}
       isLoading={isLoading || isFetching}
-      className={className}
       isMultiple={isMultiple}
+      className={className}
     />
   );
 };
 
-export default SelectSkills;
+export default SelectCompany;

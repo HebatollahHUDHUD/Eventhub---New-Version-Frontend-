@@ -398,10 +398,9 @@ export const companyProfileSchema = z.object({
   country_id: z.number().int().positive({
     message: "Please select a valid country.",
   }),
-  incharge_person_name: z.string().min(2, {
-    message: "Incharge person name must be at least 2 characters.",
-  }),
+  incharge_person_name: z.string().optional(),
   image: z.instanceof(File).optional(),
+  language_ids: z.array(z.number().int().positive()).optional(),
 });
 
 export type CompanyProfileType = z.infer<typeof companyProfileSchema>;
@@ -662,3 +661,141 @@ export const AddEventSchema = z
   );
 
 export type AddEventType = z.infer<typeof AddEventSchema>;
+
+// Education Schema
+export const EducationSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    major: z.string().min(1, {
+      message: "Major is required.",
+    }),
+    university: z.string().min(1, {
+      message: "University is required.",
+    }),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+    to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "To date must be in YYYY-MM-DD format.",
+    }),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date);
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type EducationType = z.infer<typeof EducationSchema>;
+
+// Experience Schema
+export const ExperienceSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    company_id: z.number().int().positive().optional(),
+    position_id: z.number().int().positive().optional(),
+    other_company: z.string().optional(),
+    other_position: z.string().optional(),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+    to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "To date must be in YYYY-MM-DD format.",
+    }),
+    is_current: z.number().int().min(0).max(1),
+    description: z.string().min(1, {
+      message: "Description is required.",
+    }),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      // Either company_id or other_company must be provided
+      return !!(data.company_id || data.other_company);
+    },
+    {
+      message: "Either company or other company must be provided.",
+      path: ["company_id"],
+    }
+  )
+  .refine(
+    (data) => {
+      // Either position_id or other_position must be provided
+      return !!(data.position_id || data.other_position);
+    },
+    {
+      message: "Either position or other position must be provided.",
+      path: ["position_id"],
+    }
+  )
+  .refine(
+    (data) => {
+      // If is_current is 1, to_date validation is skipped
+      if (data.is_current === 1) {
+        return true;
+      }
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date);
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type ExperienceType = z.infer<typeof ExperienceSchema>;
+
+// Skills Form Schema
+export const SkillsFormSchema = z
+  .object({
+    position_id: z.number().int().positive().optional(),
+    language_ids: z.array(z.number().int().positive()).optional(),
+    skill_ids: z.array(z.number().int().positive()).optional(),
+    badge_ids: z.array(z.number().int().positive()).optional(),
+    experience_years: z.number().int().min(0).optional(),
+    bio: z.string().max(250, {
+      message: "Bio must be at most 250 characters.",
+    }).optional(),
+    available_for_work: z.union([z.literal(0), z.literal(1)]).optional(),
+    price_per_project: z.number().min(0).optional(),
+    facebook_url: z.string().url().optional().or(z.literal("")),
+    instagram_url: z.string().url().optional().or(z.literal("")),
+    youtube_url: z.string().url().optional().or(z.literal("")),
+    linkedin_url: z.string().url().optional().or(z.literal("")),
+    resume: z.instanceof(File).optional(),
+  })
+  .strict();
+
+export type SkillsFormType = z.infer<typeof SkillsFormSchema>;
+
+// Portfolio Schema
+export const PortfolioSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    title: z.object({
+      en: z.string().min(1, {
+        message: "Project name is required.",
+      }),
+      ar: z.string().min(1).optional(),
+    }),
+    description: z.object({
+      en: z.string().min(1, {
+        message: "Description is required.",
+      }),
+      ar: z.string().min(1).optional(),
+    }),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "Date must be in YYYY-MM-DD format.",
+    }),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type PortfolioType = z.infer<typeof PortfolioSchema>;

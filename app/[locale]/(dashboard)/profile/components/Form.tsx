@@ -22,6 +22,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import InputImage from "@/components/common/InputImage";
 import { serialize } from "object-to-formdata";
 import SelectCountry from "@/components/select/SelectCountry";
+import { UserType } from "@/constant";
+import SelectLanguage from "@/components/select/SelectLanguage";
 
 const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
   const t = useTranslations("dashboard");
@@ -34,6 +36,7 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
       mobile: profileInfo?.mobile || "",
       country_id: profileInfo?.country_id || undefined,
       incharge_person_name: profileInfo?.incharge_person_name || "",
+      language_ids: profileInfo?.languages?.map((language: any) => language.id) || [],
       image: undefined,
     },
   });
@@ -158,26 +161,47 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="incharge_person_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {t("incharge-person-name")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={
-                          t("incharge-person-name")
-                        }
-                        {...field}
+              {profileInfo?.user_type === UserType.COMPANY && (
+                <FormField
+                  control={form.control}
+                  name="incharge_person_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {t("incharge-person-name")}
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={
+                            t("incharge-person-name")
+                          }
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {profileInfo?.user_type !== UserType.COMPANY && (
+                <FormField
+                  control={form.control}
+                  name="language_ids"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("languages")}</FormLabel>
+                      <SelectLanguage
+                        isMultiple
+                        value={field.value || []}
+                        onChange={field.onChange}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
             </div>
 
             <div className="flex justify-end">
