@@ -27,12 +27,14 @@ interface PurchaseDialogProps {
     price: number;
     id?: string | number;
   } | null;
+  onSubscriptionSuccess?: () => void;
 }
 
 const PurchaseDialog = ({
   open,
   onOpenChange,
   planDetails,
+  onSubscriptionSuccess,
 }: PurchaseDialogProps) => {
   const t = useTranslations("home.pricingPlans.purchaseDialog");
   const router = useRouter();
@@ -125,6 +127,7 @@ const PurchaseDialog = ({
           // Case 3: Success without payment URL (e.g., free plan subscribed directly)
           if (res.status === "success" && !res.result?.payment_url) {
             toast(res.message || t("subscriptionSuccess"), "success");
+            onSubscriptionSuccess?.();
             onOpenChange(false);
             return;
           }

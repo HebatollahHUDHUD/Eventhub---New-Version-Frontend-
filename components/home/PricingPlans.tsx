@@ -89,7 +89,7 @@ const PricingPlans = () => {
   // const activeSubscription = loggedUser?.current_subscription ?? null;
 
   // Fetch current subscription only when user is logged in and payment status check is done
-  const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
+  const { data: profilePlanData, refetch: refetchProfile } = useGetData<ProfilePlanResponse>({
     endpoint: "/profile",
     queryKey: ["profile"],
     enabled: isLoggedIn && !paymentStatusOpen,
@@ -185,6 +185,7 @@ const PricingPlans = () => {
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         planDetails={selectedPlan}
+        onSubscriptionSuccess={refetchProfile}
       />
 
       {/* Payment Status Dialog */}
