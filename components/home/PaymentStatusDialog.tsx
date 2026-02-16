@@ -45,6 +45,9 @@ const PaymentStatusDialog = ({
         className="sm:max-w-md gap-0 p-6"
         showCloseButton={false}
       >
+        <DialogTitle className="sr-only">
+          {t("checkingPayment")}
+        </DialogTitle>
         {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-12 gap-4">
