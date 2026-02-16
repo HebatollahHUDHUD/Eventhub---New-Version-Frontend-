@@ -6,28 +6,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 import { ProfilePlanResponse, TalentProfileResponse } from "@/schemas/types";
 import PlanCard from "@/components/home/PlanCard";
-import { useState } from "react";
-import PurchaseDialog from "@/components/home/PurchaseDialog";
 import { CircleCheckBig } from "lucide-react";
 import { riyalSVG } from "@/public/SVGs";
 import moment from "moment";
 
 const PlansPage = () => {
   const t = useTranslations("dashboard.plans");
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<{
-    name: string;
-    price: number;
-    id?: string | number;
-  } | null>(null);
 
-  const { data, isLoading, refetch } = useGetData<ProfilePlanResponse>({
+  const { data, isLoading } = useGetData<ProfilePlanResponse>({
     endpoint: "/profile/plan",
     queryKey: ["profile-plan"],
   });
 
   // Fetch profile to get subscription end_date
-  const { data: profileData, refetch: refetchProfile } = useGetData<TalentProfileResponse>({
+  const { data: profileData, } = useGetData<TalentProfileResponse>({
     endpoint: "/profile",
     queryKey: ["profile"],
   });
@@ -37,16 +29,6 @@ const PlansPage = () => {
   const currentPlan = data?.status === "success" ? data.result?.current_subscription : null;
   const otherPlans = data?.status === "success" ? data.result?.other_plans || [] : [];
   const subscription = profileData?.status === "success" ? profileData.result?.profile?.current_subscription : null;
-
-  const handlePurchase = (plan: { name: string; price: number; id?: string | number }) => {
-    setSelectedPlan(plan);
-    setDialogOpen(true);
-  };
-
-  const handlePurchaseSuccess = () => {
-    refetch();
-    refetchProfile();
-  };
 
   return (
     <div className="space-y-6">
@@ -123,17 +105,8 @@ const PlansPage = () => {
               {otherPlans.map((plan) => (
                 <PlanCard
                   key={plan.id}
-                  name={plan.name}
                   is_recommended={!!plan.is_featured}
-                  price={parseFloat(plan.price)}
-                  features={plan.features.map((f) => ({ name: f, is_active: true }))}
-                  onPurchase={() =>
-                    handlePurchase({
-                      name: plan.name,
-                      price: parseFloat(plan.price),
-                      id: plan.id,
-                    })
-                  }
+                  plan={plan}
                   disabled={currentPlan?.id === plan.id}
                 />
               ))}
@@ -142,17 +115,7 @@ const PlansPage = () => {
         </Card>
       )}
 
-      {/* Purchase Dialog */}
-      <PurchaseDialog
-        open={dialogOpen}
-        onOpenChange={(open) => {
-          setDialogOpen(open);
-          if (!open) {
-            handlePurchaseSuccess();
-          }
-        }}
-        planDetails={selectedPlan}
-      />
+
     </div>
   );
 };
