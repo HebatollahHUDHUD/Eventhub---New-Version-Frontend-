@@ -14,6 +14,8 @@ import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { getUserSession } from "@/lib/userSession";
+import { toast } from "@/components/ui/toast";
+import { useRouter } from "@/i18n/navigation";
 import PageTitle from "../common/PageTitle";
 
 type PlanType = "company" | "personal";
@@ -53,6 +55,7 @@ interface ProfilePlanResponse {
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
   const searchParams = useSearchParams();
+  const router = useRouter();
   const loggedUser = getUserSession();
   const initialPlanType: PlanType = loggedUser?.user_type === "company" ? "company" : "personal";
   const [planType, setPlanType] = useState<PlanType>(loggedUser ? initialPlanType : "company");
@@ -103,6 +106,11 @@ const PricingPlans = () => {
   const plans = allPlans.filter((plan) => plan.type === planType);
 
   const handlePurchase = (plan: { name: string; price: number; id?: string | number }) => {
+    if (!isLoggedIn) {
+      toast(t("purchaseDialog.loginRequired"), "destructive");
+      router.push("/login");
+      return;
+    }
     setSelectedPlan(plan);
     setDialogOpen(true);
   };

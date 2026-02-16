@@ -153,17 +153,17 @@ const PurchaseDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[600px]!">
+      <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[800px]!">
       <TicketCard
           cardBg="#F2F2F2"
           // className="space-y-6"
           
         > 
-        <div className="max-w-[400px]! mx-auto space-y-4">
+        <div className="max-w-[500px]! mx-auto space-y-4">
 
         
           {/* Header Section */}
-          <DialogHeader className="items-center text-center border-2 border-white rounded-xl py-6 space-y-0 ">
+          <DialogHeader className="items-center text-center border-2 border-white rounded-xl py-8 space-y-0 ">
             <DialogTitle className="text-xl font-bold">
               {t("title")}
             </DialogTitle>
@@ -215,13 +215,16 @@ const PurchaseDialog = ({
           {/* Promocode Input Section */}
 
           {/* Pricing Summary Section */}
-          <div className="space-y-3">
+          <div className="space-y-4">
+
+         
+          <div className="space-y-3 max-w-[500px]! mx-auto ">
             {/* Plan Amount */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
+            <div className="flex items-center justify-between ">
+              <span className="text-sm font-semibold text-muted-foreground">
                 {t("planAmount")}
               </span>
-              <span className="text-base font-semibold flex items-center gap-1">
+              <span className="text-base font-bold flex items-center gap-1">
                 {riyalSVG("#000", "14", "14")}{price.toFixed(2)}
               </span>
             </div>
@@ -256,7 +259,7 @@ const PurchaseDialog = ({
           <Button
             variant="purple"
             size="lg"
-            className="max-w-[300px]! mx-auto"
+            className="max-w-[300px]! mx-auto block"
             onClick={handleSubscribe}
             disabled={isProcessing}
           >
@@ -268,7 +271,7 @@ const PurchaseDialog = ({
               t("continueWithoutCode")
             )}
           </Button>
-       
+          </div>
       </DialogContent>
     </Dialog>
   );
