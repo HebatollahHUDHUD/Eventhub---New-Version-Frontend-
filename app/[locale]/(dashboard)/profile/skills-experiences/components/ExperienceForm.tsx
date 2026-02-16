@@ -36,7 +36,7 @@ const ExperienceForm = ({ profile, refetch }: { profile: TalentProfile, refetch?
       other_company: "",
       other_position: "",
       from_date: "",
-      to_date: "",
+      to_date: undefined,
       is_current: 0 as number,
       description: "",
     },
@@ -165,7 +165,7 @@ const ExperienceForm = ({ profile, refetch }: { profile: TalentProfile, refetch?
                         onCheckedChange={(checked) => {
                           field.onChange(checked ? 1 : 0);
                           if (checked) {
-                            form.setValue("to_date", "");
+                            form.setValue("to_date", undefined);
                           }
                         }}
                       />

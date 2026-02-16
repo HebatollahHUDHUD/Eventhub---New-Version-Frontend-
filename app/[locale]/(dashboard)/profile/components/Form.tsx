@@ -31,6 +31,7 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
   const form = useForm<CompanyProfileType>({
     resolver: zodResolver(companyProfileSchema),
     defaultValues: {
+      id: profileInfo?.id || undefined,
       name: profileInfo?.name || "",
       email: profileInfo?.email || "",
       mobile: profileInfo?.mobile || "",

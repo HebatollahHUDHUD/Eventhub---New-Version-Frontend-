@@ -17,6 +17,11 @@
     "delete-desc": "This action cannot be undone. This will permanently delete the item.",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "confirmed": "Confirmed",
+    "decline": "Decline",
+    "declined": "Declined",
+    "view": "View",
+    "submit-failed": "Failed to submit the form. Please try again.",
     "failed-to-submit": "Failed to submit the form. Please try again.",
     "select-item": "Select item",
     "search-for-items": "Search for items...",
@@ -160,9 +165,14 @@
     "certified-by": "This website certified by",
     "dashboard": "Dashboard",
     "privet-information": "Private Information",
+    "personal-information": "Personal Information",
     "change-password": "Change Password",
+    "skills-experience": "Skills & Experience",
+    "portfolio": "Portfolio",
     "job-ads": "Job Ads",
-    "company-plans": "Company Plans",
+    "my-plan": "My Plan",
+    "e-books": "E-Book",
+    "e-courses": "E-Course",
     "events": "Events",
     "my-messages": "My Messages",
     "employees": "Employees",
@@ -583,6 +593,10 @@
       "back-to-book-list": "Back to E-Book List",
       "whats-in-this-book": "What's in this book",
       "download": "Download"
+    },
+    "employees": {
+      "new-employees": "New Employees",
+      "confirmed-employees": "Confirmed Employees"
     }
   }
 }

@@ -4,8 +4,13 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
+  BookOpenTextIcon,
+  BookTextIcon,
   BookmarkIcon,
+  BrainIcon,
+  CreditCardIcon,
   FileText,
+  FolderIcon,
   LayoutGridIcon,
   LogOutIcon,
   MessageSquareText,
@@ -41,11 +46,30 @@ const Sidebar = () => {
       name: "privet-information",
       href: "/profile",
       icon: <UserIcon size={26} />,
+      permission: UserType.COMPANY,
+    },
+    {
+      name: "personal-information",
+      href: "/profile",
+      icon: <LayoutGridIcon size={26} />,
+      permission: [UserType.RECRUITER, UserType.TALENT],
     },
     {
       name: "change-password",
-      href: "/change-password",
+      href: "/profile/change-password",
       icon: <BookmarkIcon size={26} />,
+    },
+    {
+      name: "skills-experience",
+      href: "/profile/skills-experiences",
+      icon: <BrainIcon size={26} />,
+      permission: [UserType.RECRUITER, UserType.TALENT],
+    },
+    {
+      name: "portfolio",
+      href: "/profile/portfolio",
+      icon: <FolderIcon size={26} />,
+      permission: [UserType.RECRUITER, UserType.TALENT],
     },
     {
       name: "job-ads",
@@ -54,25 +78,35 @@ const Sidebar = () => {
       permission: UserType.COMPANY,
     },
     {
-      name: "company-plans",
-      href: "/profile/company-plans",
-      icon: <BookmarkIcon size={26} />,
+      name: "my-plan",
+      href: "/profile/plans",
+      icon: <CreditCardIcon size={26} />,
+    }, {
+      name: "e-books",
+      href: "/profile/books",
+      icon: <BookOpenTextIcon size={26} />,
+      permission: [UserType.RECRUITER, UserType.TALENT],
+    }, {
+      name: "e-courses",
+      href: "/profile/courses",
+      icon: <BookTextIcon size={26} />,
+      permission: [UserType.RECRUITER, UserType.TALENT],
     },
     {
       name: "events",
       href: "/profile/events",
       icon: <FileText size={26} />,
+    },
+    {
+      name: "employees",
+      href: "/profile/employees",
+      icon: <Users2Icon size={26} />,
       permission: UserType.COMPANY,
     },
     {
       name: "my-messages",
       href: "/profile/messages",
       icon: <MessageSquareText size={26} />,
-    },
-    {
-      name: "employees",
-      href: "/profile/employees",
-      icon: <Users2Icon size={26} />,
     },
   ];
 
@@ -105,9 +139,9 @@ const Sidebar = () => {
               {profileDate?.name}
             </h2>
 
-            {profileDate?.employer_name && (
+            {profileDate?.incharge_person_name && (
               <p className="title-xs font-semibold text-muted-foreground">
-                {profileDate?.employer_name}
+                {profileDate?.incharge_person_name}
               </p>
             )}
 
@@ -121,7 +155,7 @@ const Sidebar = () => {
 
         <ul className="w-full space-y-1">
           {links
-            .filter((item) => !item.permission || item.permission === profileDate?.user_type)
+            .filter((item) => !item.permission || item.permission === profileDate?.user_type || item.permission.includes(profileDate?.user_type))
             .map((link) => (
               <li key={link.name}>
                 <Link

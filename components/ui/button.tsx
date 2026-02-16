@@ -25,7 +25,9 @@ const buttonVariants = cva(
         accentSecondary: "bg-secondary/60 hover:bg-secondary/80 text-white",
         outlinePrimary: "border bg-primary/10 hover:bg-primary/20 text-primary",
         outlineDestructive:
-          "border bg-destructive/10 hover:bg-destructive/20 text-destructive",
+          "border border-destructive hover:bg-destructive/20 text-destructive",
+        outlineSuccess:
+          "border border-green-600 hover:bg-green-600/20 text-green-600",
         outlineSecondary:
           "border border-secondary bg-transparent hover:bg-secondary/20 text-secondary",
         orange: "bg-amber-500 text-white hover:bg-amber-500/90",

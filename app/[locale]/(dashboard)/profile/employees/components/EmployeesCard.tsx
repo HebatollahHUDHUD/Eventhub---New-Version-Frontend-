@@ -1,40 +1,60 @@
 "use client";
 
-import { User } from "@/schemas/types";
+import { Employee } from "@/schemas/types";
 import { Button } from "@/components/ui/button";
 import Image from "@/components/common/image";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import ChangeEmployeeStatus from "./ChangeEmployeeStatus";
+import { useQueryClient } from "@tanstack/react-query";
 
 type EmployeesCardProps = {
-  employee: User;
+  employee: Employee;
 };
 
 const EmployeesCard = ({ employee }: EmployeesCardProps) => {
   const t = useTranslations("common");
+  const queryClient = useQueryClient();
+
+  const handleRefetch = () => {
+    queryClient.invalidateQueries({ queryKey: ["employees"] });
+  }
 
   return (
-    <article className="relative bg-background flex flex-col">
+    <article className="relative bg-background flex flex-col items-center justify-center gap-4">
       <div>
         <Image
-          src="/images/placeholder.png"
-          alt={employee.name}
+          src={employee.user.photo || "/images/placeholder.png"}
+          alt={employee.user.name}
           width={400}
           height={267}
           className="w-32 h-32 rounded-full object-cover"
         />
       </div>
 
-      <h2 className="font-bold text-lg line-clamp-2">{employee.name}</h2>
+      <div className="text-center space-y-1">
 
-      <div className="mt-auto space-y-2 ">
+        <h2 className="font-bold text-lg line-clamp-2">{employee.user.name}</h2>
+
+        {employee.position && (
+          <p className="text-sm text-muted-foreground">{employee.position.name}</p>
+        )}
+      </div>
+
+      <div className="mt-auto space-y-2 w-full">
+        {employee.company_verification_status === "pending" && (
+          <>
+            <ChangeEmployeeStatus id={employee.id} status="confirmed" refetch={handleRefetch} />
+            <ChangeEmployeeStatus id={employee.id} status="declined" refetch={handleRefetch} />
+          </>
+        )}
         <Button
           size={"lg"}
           variant="outlineSecondary"
           className="w-full"
           asChild
         >
-          <Link href={`/profile/employees/${employee.id}`}>
+          <Link href={`/talent/${employee.user.id}`}>
             {t("view")}
           </Link>
         </Button>

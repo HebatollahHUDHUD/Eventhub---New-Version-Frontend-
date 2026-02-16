@@ -17,6 +17,11 @@
     "delete-desc": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف العنصر نهائياً.",
     "cancel": "إلغاء",
     "confirm": "تأكيد",
+    "confirmed": "مؤكد",
+    "decline": "رفض",
+    "declined": "مرفوض",
+    "view": "عرض",
+    "submit-failed": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
     "failed-to-submit": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
     "select-item": "اختر عنصر",
     "search-for-items": "ابحث عن العناصر...",
@@ -171,7 +176,13 @@
     "saved-candidates": "المرشحون المحفوظون",
     "change-password": "تغيير كلمة المرور",
     "privet-information": "المعلومات الخاصة",
+    "personal-information": "المعلومات الشخصية",
+    "skills-experience": "المهارات والخبرة",
+    "portfolio": "المحفظة",
     "job-ads": "إعلانات الوظائف",
+    "my-plan": "خطتي",
+    "e-books": "الكتب الإلكترونية",
+    "e-courses": "الدورات الإلكترونية",
     "company-plans": "خطط الشركة",
     "events": "الفعاليات",
     "my-messages": "رسائلي",
@@ -615,6 +626,10 @@
       "back-to-book-list": "العودة إلى قائمة الكتب الإلكترونية",
       "whats-in-this-book": "ما في هذا الكتاب",
       "download": "تحميل"
+    },
+    "employees": {
+      "new-employees": "الموظفون الجدد",
+      "confirmed-employees": "الموظفون المؤكدون"
     }
   }
 }

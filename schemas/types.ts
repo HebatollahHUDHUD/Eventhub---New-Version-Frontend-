@@ -428,3 +428,28 @@ export interface BooksResponse {
 export type BookDetailsResponse = {
   book: Book;
 };
+
+// Employee related interfaces
+export interface Employee {
+  id: number;
+  user: User;
+  position: Position;
+  other_position: string | null;
+  other_company: string | null;
+  is_current: number;
+  company_verification_status: "pending" | "approved" | "rejected";
+  description: string;
+  from_date: string;
+  to_date: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EmployeesResponse {
+  employees: Employee[];
+}
+
+
+export type EmployeeDetailsResponse = {
+  employee: Employee;
+};

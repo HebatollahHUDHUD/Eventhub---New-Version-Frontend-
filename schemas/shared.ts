@@ -386,6 +386,7 @@ export const talentRegisterSchema = z
   })
 
 export const companyProfileSchema = z.object({
+  id: z.number().int().positive().optional(),
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -705,9 +706,7 @@ export const ExperienceSchema = z
     from_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
       message: "From date must be in YYYY-MM-DD format.",
     }),
-    to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-      message: "To date must be in YYYY-MM-DD format.",
-    }),
+        to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     is_current: z.number().int().min(0).max(1),
     description: z.string().min(1, {
       message: "Description is required.",
@@ -741,7 +740,7 @@ export const ExperienceSchema = z
         return true;
       }
       const fromDate = new Date(data.from_date);
-      const toDate = new Date(data.to_date);
+      const toDate = new Date(data.to_date || "");
       return toDate >= fromDate;
     },
     {
