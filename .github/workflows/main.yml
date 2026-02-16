@@ -1,0 +1,45 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run_pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install ssh keys
+        run: |
+          mkdir -p ~/.ssh 
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: connect and pull
+        run: |
+          ssh -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" << 'EOF'
+            set -e
+            cd /home/hudex/
+
+            # load nvm for non-interactive shells
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            nvm use 24 || nvm use 18
+
+            node -v
+            npm -v
+
+            git checkout main
+            git stash
+            git pull origin main
+
+            npm ci
+            npm run build
+          EOF
+        env:
+          WORK_DIR: ${{ secrets.WORK_DIR }}
+          MAIN_BRANCH: ${{ secrets.MAIN_BRANCH }}
+
+      - name: cleanup
+        if: always()
+        run: rm -rf ~/.ssh
