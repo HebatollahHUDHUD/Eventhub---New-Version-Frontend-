@@ -65,6 +65,7 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
 
             <div className="w-full md:w-auto md:min-w-80 lg:min-w-96 shrink-0">
               <OpportunityJobDetails
+                jobAdId={jobAd.id}
                 details={jobDetails}
                 isActive={jobAd.status === "active" || !jobAd.status}
               />
