@@ -224,6 +224,7 @@ const TalentDetailsContent = ({ id }: TalentDetailsContentProps) => {
                                     </div>
                                 </div>
 
+
                                 <div className="flex items-center justify-around gap-3 pt-2">
                                     <Button size="icon" variant="muted" className="rounded-full" aria-label="Facebook">
                                         <Facebook className="h-4 w-4" aria-hidden="true" />

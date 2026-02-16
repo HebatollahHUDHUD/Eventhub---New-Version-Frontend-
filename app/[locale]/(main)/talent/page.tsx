@@ -1,8 +1,9 @@
 import { Suspense } from 'react'
 import TalentContent from './components/TalentContent'
 import PageHeader from '@/components/common/PageHeader'
-import { getTranslations } from 'next-intl/server';
+import { getData } from '@/lib/request-server';
 import PageTitle from '@/components/common/PageTitle';
+import { TalentsPageResponse } from '@/schemas/types';
 
 type PageProps = {
   searchParams: Promise<Record<string, string | undefined>>;
@@ -10,16 +11,32 @@ type PageProps = {
 
 const page = async ({ searchParams }: PageProps) => {
   const params = await searchParams;
-  const t = await getTranslations("talent");
+  
+  // Call the API to get page data
+  const data = await getData<TalentsPageResponse>({
+    endpoint: "/talents-page",
+    config: {
+      next: {
+        tags: ["talents-page"],
+      },
+    }
+  });
+
+  const pageData = data.status === "success" ? data.result : null;
+  const talentsData = pageData as {
+    talents_page_name: string;
+    talents_page_title: string;
+    talents_page_subtitle: string;
+  } | null;
 
   return (
     <main>
-      <PageHeader title="Talent" />
+      <PageHeader title={talentsData?.talents_page_name || "-"} />
 
       <div className="space-y-10 py-10">
         <PageTitle
-          title={t("title")}
-          description={t("description")}
+          title={talentsData?.talents_page_title || "-"}
+          description={talentsData?.talents_page_subtitle || "-"}
           className="max-w-md"
         />
 
