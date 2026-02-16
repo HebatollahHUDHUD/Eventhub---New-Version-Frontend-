@@ -4,10 +4,64 @@
     "description": "Events Hub - Your premier destination for events"
   },
   "common": {
-  "events": "Events"
+    "events": "Events",
+    "file-upload": {
+      "drag-drop-text": "Drag & Drop your",
+      "images": "Images",
+      "or": "Or",
+      "browse": "browse",
+      "on-computer": "on your computer"
+    },
+    "delete": "Delete",
+    "are-you-sure": "Are you sure?",
+    "delete-desc": "This action cannot be undone. This will permanently delete the item.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "confirmed": "Confirmed",
+    "decline": "Decline",
+    "declined": "Declined",
+    "view": "View",
+    "submit-failed": "Failed to submit the form. Please try again.",
+    "failed-to-submit": "Failed to submit the form. Please try again.",
+    "select-item": "Select item",
+    "search-for-items": "Search for items...",
+    "no-item-found": "No item found."
   },
   "home": {
     "title": "Welcome to Events Hub!",
+    "hero": {
+      "headline": "Find Your Perfect Match for Event Excellence!",
+      "description": "Welcome to Event Hub, your go-to platform for connecting event professionals with top companies in the industry.",
+      "search": {
+        "skills": "Skills/Exp",
+        "location": "Location",
+        "button": "Search"
+      },
+      "social": {
+        "follow": "Follow us on"
+      },
+      "profiles": {
+        "question1": "Do you have any questions?",
+        "question2": "Need help with your event?",
+        "viewProfile": "View Profile"
+      }
+    },
+    "aboutEventsHubs": {
+      "headline": "Welcome to Events Hubs! a community built for sharing knowledge, showcasing talent, and connecting with leading companies in the events industry",
+      "video": {
+        "url": "",
+        "poster": ""
+      },
+      "card1": {
+        "text": "6,000+ Talents In Events experience"
+      },
+      "card2": {
+        "text": "Connect with Industry Leaders"
+      },
+      "card3": {
+        "text": "Blogs for Knowledge Sharing"
+      }
+    },
     "carousel": {
       "1": {
         "title": "Welcome to Events Hub",
@@ -17,16 +71,92 @@
     "buttons": {
       "enter-events": "Enter Events",
       "create-event": "Create Event"
+    },
+    "talents": {
+      "hireButton": "Hire Best Talents",
+      "title": "Our Amazing & Experienced Events Talents",
+      "viewMore": "View More"
+    },
+    "blogs": {
+      "tag": "Blog Post",
+      "title": "Insights From Business Experts",
+      "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired.",
+      "viewMore": "View More"
+    },
+    "opportunities": {
+      "button": "Find Your Passion",
+      "title": "More Opportunities For Everyone",
+      "description": "Explore the latest gigs, projects, and event roles. And take the next step in your events career",
+      "viewMore": "View More"
+    },
+    "trustedOrganisations": {
+      "tag": "Our Trusted Organisations",
+      "title": "Trusted By Over 150 Organizations In More Than 20 Countries",
+      "button": "More About Us"
+    },
+    "pricingPlans": {
+      "title": "Explore Flexible Pricing Plans",
+      "description": "Choose the plan that helps you showcase your talent, grow your network, and get discovered by top event companies",
+      "companiesPlans": "Companies Plans",
+      "talentsPlans": "Talents Plans",
+      "toggleLabel": "Switch between companies and talents plans",
+      "perMonth": "/month",
+      "recommended": "RECOMMENDED",
+      "purchaseNow": "PURCHASE NOW",
+      "registerNow": "REGISTER NOW",
+      "noPlans": "No plans available at the moment.",
+      "purchaseDialog": {
+        "title": "Have a Promocode?",
+        "description": "Apply code to get a discount",
+        "promocode": "Promocode",
+        "promocodePlaceholder": "Promocode",
+        "applyCode": "Apply Code",
+        "planAmount": "Plan Amount",
+        "discount": "Discount",
+        "total": "Total",
+        "continueWithoutCode": "Continue without Code",
+        "proceedToPayment": "Proceed to Payment",
+        "invalidPromoCode": "Invalid promo code",
+        "promoCodeApplied": "Promo code applied successfully",
+        "loginRequired": "Please login to subscribe to a plan",
+        "subscriptionSuccess": "Subscribed successfully",
+        "subscriptionFailed": "Subscription failed. Please try again."
+      },
+      "paymentStatus": {
+        "checkingPayment": "Checking your payment...",
+        "successTitle": "You're All Set!",
+        "successDescription": "Great news! Your payment was successful, and your subscription is now active.\nWelcome aboard. Start exploring your benefits right away and make the most of your experience with us.",
+        "greatButton": "Great!",
+        "failedTitle": "Payment Failed",
+        "failedDescription": "Something went wrong with your payment. Please try again.",
+        "closeButton": "Close"
+      }
     }
   },
   "blogs": {
     "title": "Insights From Business Experts",
     "description": "Insights, tips, and real stories from the events industry. Learn, improve, and stay inspired.",
-    "title-details" : "Browse More Articles",
-    "back_to_blog_list" : "Back to Blog List"
+    "title-details": "Browse More Articles",
+    "back_to_blog_list": "Back to Blog List"
   },
   "footer": {
-    "copyright": "Events Hub"
+    "copyright": "Events Hub",
+    "newsletter-title": "Sign up to <br /> our newsletter",
+    "newsletter-desc": "Stay up to date with the latest news and talents in our website.",
+    "enter-email": "Enter Email Address",
+    "send": "Submit",
+    "subscribed-msg": "Successfully subscribed!",
+    "tagline": "Your go-to platform for connecting event professionals with top companies in the industry.",
+    "about": "About",
+    "recruitment": "Recruitment",
+    "talent": "Talent",
+    "opportunities": "Opportunities",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "billing-cancellation": "Billing and Cancellation",
+    "privacy-policy": "Privacy Policy",
+    "terms-companies": "Terms & Conditions For Companies",
+    "terms-users": "Terms & Conditions For Users"
   },
   "navigation": {
     "brand-name": "Events Hub",
@@ -38,7 +168,27 @@
     "pricing": "Pricing",
     "contact": "Contact",
     "login": "Login",
-    "category": "Category"
+    "category": "Category",
+    "recruitment": "Recruitment",
+    "tagline": "Your go-to platform for connecting event professionals with top companies in the industry.",
+    "billing-cancellation": "Billing and Cancellation",
+    "terms-companies": "Terms & Conditions For Companies",
+    "terms-users": "Terms & Conditions For Users",
+    "certified-by": "This website certified by",
+    "dashboard": "Dashboard",
+    "privet-information": "Private Information",
+    "personal-information": "Personal Information",
+    "change-password": "Change Password",
+    "skills-experience": "Skills & Experience",
+    "portfolio": "Portfolio",
+    "job-ads": "Job Ads",
+    "my-plan": "My Plan",
+    "e-books": "E-Book",
+    "e-courses": "E-Course",
+    "events": "Events",
+    "my-messages": "My Messages",
+    "employees": "Employees",
+    "logout": "Logout"
   },
   "about": {
     "hero_tagline": "Connecting Talent with Opportunity in the Event Industry",
@@ -79,6 +229,25 @@
     "faq_5_answer": "Yes, our Basic Plan for job seekers is free and provides access to job listings and company profiles.",
     "faq_6_question": "Can I upgrade my plan later?",
     "faq_6_answer": "Yes, you can upgrade your plan at any time through your account settings."
+  },
+  "contact": {
+    "title": "Get in Touch!",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your Full Name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your Email",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter Subject",
+    "message": "Message",
+    "messagePlaceholder": "Write your Message",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "sendSuccess": "Message sent successfully!",
+    "error": "Something went wrong",
+    "call": "Call us at",
+    "emailcon": "Drop a mail",
+    "visit": "Drop by",
+    "map": "View on Google Map"
   },
   "talent":{
     "title":"Our Amazing & Experienced Events Talents",
@@ -124,5 +293,350 @@
       "skills": "Skills",
       "details": "Details"
     }
+  },
+  "auth":{
+    "auth-title": "Welcome to Events Hubs",
+    "login":{
+      "title": "Login",
+      "subtitle": "Welcome back! Please login to your account",
+      "email-or-username": "Email or Username",
+      "enter-email-or-username": "Enter email or username",
+      "keep-me-logged-in": "Keep me logged in",
+      "forgot-password": "Forgot password?",
+      "button": "Login",
+      "success-msg": "Login successful!",
+      "dont-have-account": "Don't have an account?",
+      "register-link": "Register",
+      "errors": {
+        "invalid-credentials": "Invalid email or password. Please try again.",
+        "account-locked": "Your account has been locked. Please contact support.",
+        "account-not-verified": "Please verify your email before logging in.",
+        "network-error": "Network error. Please check your connection and try again.",
+        "server-error": "Server error. Please try again later.",
+        "required": "Email and password are required."
+      }
+    },
+    "register":{
+      "title": "Welcome to Events Hubs",
+      "talent-title":"Looking for a Job",
+      "talent-description":"Set your profile and get noticed.",
+      "company-title":"Register as a Company",
+      "company-description":"Perfect employees for your company.",
+      "already-have-account":"Already have an account? <Link>Login</Link>",
+      "button": "Create Account",
+      "success-msg": "Account created successfully! Please check your email to verify your account.",
+      "errors": {
+        "email-exists": "This email is already registered. Please login instead.",
+        "weak-password": "Password is too weak. Please use a stronger password.",
+        "password-mismatch": "Passwords do not match.",
+        "invalid-email": "Please enter a valid email address.",
+        "required-fields": "Please fill in all required fields.",
+        "network-error": "Network error. Please check your connection and try again.",
+        "server-error": "Server error. Please try again later."
+      }
+    },
+    "forgot-password":{
+      "title": "Forgot Password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password",
+      "email-label": "Email Address",
+      "enter-email": "Enter your email address",
+      "button": "Send Reset Link",
+      "back-to-login": "Back to Login",
+      "success-msg": "Password reset link has been sent to your email.",
+      "errors": {
+        "email-not-found": "No account found with this email address.",
+        "invalid-email": "Please enter a valid email address.",
+        "too-many-requests": "Too many requests. Please try again later.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "verify-form":{
+      "title": "Verify Your Email",
+      "subtitle": "We've sent a verification code to your email address",
+      "code-label": "Verification Code",
+      "enter-code": "Enter verification code",
+      "button": "Verify Email",
+      "resend-code": "Resend Code",
+      "resend-success": "Verification code has been resent to your email.",
+      "success-msg": "Email verified successfully!",
+      "errors": {
+        "invalid-code": "Invalid verification code. Please try again.",
+        "expired-code": "Verification code has expired. Please request a new one.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "reset-password":{
+      "title": "Reset Password",
+      "subtitle": "Enter your new password",
+      "new-password-label": "New Password",
+      "confirm-password-label": "Confirm New Password",
+      "button": "Reset Password",
+      "success-msg": "Password has been reset successfully. You can now login with your new password.",
+      "errors": {
+        "weak-password": "Password is too weak. Please use a stronger password.",
+        "password-mismatch": "Passwords do not match.",
+        "invalid-token": "Invalid or expired reset token. Please request a new password reset.",
+        "network-error": "Network error. Please check your connection and try again."
+      }
+    },
+    "fields":{
+      "company-name": "Company Name",
+      "email-address": "Email Address",
+      "enter-email": "Enter email address",
+      "phone-number": "Phone Number",
+      "country": "Country",
+      "select-country": "Select country",
+      "incharge-person-name": "Incharge Person Name",
+      "password": "Password",
+      "enter-password": "Enter password",
+      "password-confirmation": "Confirm Password",
+      "confirm-password": "Confirm your password",
+      "image": "Company Image",
+      "upload-image": "Upload Image"
+    },
+    "common":{
+      "loading": "Loading...",
+      "submitting": "Submitting...",
+      "success": "Success!",
+      "error": "Error",
+      "try-again": "Please try again.",
+      "required": "This field is required.",
+      "optional": "Optional"
+    },
+    "company-name": "Company Name",
+    "email-address": "Email Address",
+    "enter-email": "Enter email address",
+    "phone-number": "Phone Number",
+    "country": "Country",
+    "incharge-person-name": "Incharge Person Name",
+    "password": "Password",
+    "enter-password": "Enter password",
+    "password-confirmation": "Confirm Password",
+    "confirm-password": "Confirm your password",
+    "create-account": "Create Account",
+    "account-created-msg": "Account created successfully! Please check your email to verify your account.",
+    "dont-have-account": "Don't have an account?",
+    "full-name": "Full Name",
+    "current-position": "Current Position",
+    "other-position": "Other Position",
+    "languages": "Languages (Multi)",
+    "verification-code": "Verification Code",
+    "sign-up": "Sign Up",
+    "account-created-successfully": "Account Created Successfully",
+    "account-created-successfully-desc": "Your account has been created successfully. Please verify your email to continue.",
+    "verify-email": "Verify Email",
+    "go-to-login": "Go to Login",
+    "talent": "Talent",
+    "recruiter": "Recruiter",
+    "resume": {
+      "success-msg": "Resume uploaded successfully!",
+      "upload-resume": "Upload Resume",
+      "upload-failed": "Resume upload failed. Please try again."
+    },
+    "upload-resume": "Upload Resume",
+    "submit-failed": "Failed to submit the form. Please try again.",
+    "login-failed": "Login failed. Please try again.",
+    "login-error": "Failed to login. Please try again.",
+    "session-missing": "Login successful but session data is missing."
+  },
+  "dashboard": {
+    "privet-information": "Private Information",
+    "company-name": "Company Name",
+    "email-address": "Email Address",
+    "enter-email": "Enter email address",
+    "phone-number": "Phone Number",
+    "country": "Country",
+    "incharge-person-name": "Incharge Person Name",
+    "save-changes": "Save Changes",
+    "change-password": "Change Password",
+    "current-password": "Current Password",
+    "enter-current-password": "Enter current password",
+    "new-password": "New Password",
+    "enter-new-password": "Enter new password",
+    "confirm-password": "Confirm Password",
+    "enter-confirm-password": "Enter confirm password",
+    "job-ads": {
+      "title": "Job Ads",
+      "job-title": "Job Title",
+      "enter-job-title": "Enter job title",
+      "country": "Country",
+      "job-skills-tags": "Job Skills/Tags",
+      "years-of-experience": "Years of Experience",
+      "select-experience": "Select years of experience",
+      "enter-experience-years": "Enter years of experience",
+      "year": "year",
+      "years": "years",
+      "gender": "Gender",
+      "select-gender": "Select gender",
+      "male": "Male",
+      "female": "Female",
+      "both": "Both",
+      "about-the-job": "About The Job",
+      "enter-about-job": "Enter job description",
+      "max-letters": "Max 250 Letters",
+      "job-image": "Job Image",
+      "drag-drop-image": "Drag & Drop your Job Image",
+      "or-browse": "Or",
+      "browse": "browse",
+      "on-computer": "on your computer",
+      "add-job-ad": "Add Job Ad",
+      "update-job-ad": "Update Job Ad",
+      "job-ad-details": "Job Ad Details",
+      "success-msg": "Job ad created successfully!",
+      "error-msg": "Failed to create job ad. Please try again.",
+      "view": "View",
+      "no-job-ads": "No job ads found.",
+      "status": {
+        "active": "Active",
+        "closed": "Closed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "add-event": "Add Event",
+      "event-title": "Event Title",
+      "enter-event-title": "Enter event title",
+      "event-type": "Event Type",
+      "from-date": "From Date",
+      "enter-from-date": "Enter from date",
+      "to-date": "To Date",
+      "enter-to-date": "Enter to date",
+      "check-in-time": "Check In Time",
+      "enter-check-in-time": "Enter check in time",
+      "check-out-time": "Check Out Time",
+      "enter-check-out-time": "Enter check out time",
+      "employees": "Employees",
+      "attachments": "Attachments",
+      "location": "Location",
+      "month": "Month",
+      "week": "Week",
+      "previous": "Previous",
+      "next": "Next",
+      "error-msg": "Failed to create event. Please try again.",
+      "success-msg": "Event created successfully!"
+    },
+    "skills-experiences": {
+      "experience": "Experience",
+      "education": "Education",
+      "position": "Position",
+      "other-position": "Other Position",
+      "enter-other-position": "Enter other position",
+      "company": "Company",
+      "other-company": "Other Company",
+      "enter-other-company": "Enter other company",
+      "from-date": "From Date",
+      "enter-from-date": "Enter from date",
+      "to-date": "To Date",
+      "enter-to-date": "Enter to date",
+      "currently-working": "Currently Working with this company",
+      "description": "Description",
+      "enter-description": "Enter description",
+      "major": "Major",
+      "enter-major": "Enter major",
+      "university": "University",
+      "enter-university": "Enter university",
+      "add": "Add",
+      "error-msg": "Failed to submit. Please try again.",
+      "view-education": "View Education",
+      "education-details": "Education Details",
+      "view-experience": "View Experience",
+      "experience-details": "Experience Details",
+      "created-at": "Created",
+      "updated-at": "Updated"
+    },
+    "skills-form": {
+      "title": "Skills & Terms",
+      "resume": "Resume",
+      "current-position": "Current Position",
+      "years-of-experience": "Years of Experience",
+      "enter-years-of-experience": "Enter years of experience",
+      "about-me": "About Me",
+      "enter-about-me": "Enter about me",
+      "max-letters": "Max Letters",
+      "availability-to-work": "Availability to work Now",
+      "yes": "YES",
+      "no": "NO",
+      "price-per-project": "Price / Project",
+      "enter-price-per-project": "Enter price per project",
+      "availabilities-badges": "Availabilities Badges",
+      "skills-tags": "Skills/Tags (Multi)",
+      "languages": "Languages",
+      "facebook-link": "Facebook Link",
+      "enter-facebook-link": "Enter Facebook link",
+      "instagram-link": "Instagram Link",
+      "enter-instagram-link": "Enter Instagram link",
+      "youtube-link": "YouTube Link",
+      "enter-youtube-link": "Enter YouTube link",
+      "linkedin-link": "LinkedIn Link",
+      "enter-linkedin-link": "Enter LinkedIn link",
+      "save": "Save",
+      "error-msg": "Failed to submit. Please try again."
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "projects": "Projects",
+      "project-name": "Project Name",
+      "enter-project-name": "Enter project name",
+      "date": "Date",
+      "enter-date": "Enter date",
+      "description": "Description",
+      "enter-description": "Enter description",
+      "images-videos": "Images & Videos",
+      "edit": "Edit",
+      "edit-project": "Edit Project",
+      "update": "Update",
+      "save": "Save",
+      "project-details": "Project Details",
+      "back-to-project-list": "Back to Project List",
+      "project-not-found": "Project not found",
+      "error-msg": "Failed to submit. Please try again."
+    },
+    "courses": {
+      "courses": "E-Course",
+      "back-to-course-list": "Back to E-Course List",
+      "course-details": "Course Details",
+      "whats-in-this-book": "What's in this book",
+      "all-classes": "All Classes"
+    },
+    "books": {
+      "books": "E-Book",
+      "e-book": "E-Book",
+      "back-to-book-list": "Back to E-Book List",
+      "whats-in-this-book": "What's in this book",
+      "download": "Download"
+    },
+    "employees": {
+      "new-employees": "New Employees",
+      "confirmed-employees": "Confirmed Employees"
+    },
+    "plans": {
+      "my-plan": "My Plan",
+      "upgrade-plan": "Upgrade Plan",
+      "month": "month",
+      "valid-till": "Valid till",
+      "no-current-plan": "No current plan"
+    }
+  },
+  "messages": {
+    "messages": "Messages",
+    "search-your-message": "Search your messages...",
+    "multiple-members": "Multiple Members",
+    "message-copied-to-clipboard": "Message copied to clipboard",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "select-a-conversation": "Select a conversation",
+    "loading": "Loading...",
+    "conversation-not-found": "Conversation not found",
+    "no-messages-yet": "No messages yet",
+    "start-the-conversation": "Start the conversation",
+    "loading-more-messages": "Loading more messages...",
+    "please_enter_message_or_attach_files": "Please enter a message or attach files",
+    "error_sending_message": "Error sending message. Please try again.",
+    "type-a-message": "Type a message...",
+    "selected-attachments": "Selected Attachments",
+    "add-more": "Add More",
+    "send": "Send",
+    "cancel": "Cancel"
   }
 }

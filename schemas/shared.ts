@@ -1,5 +1,5 @@
-import { z } from "zod";
-
+import { email, z } from "zod";
+import { User } from "./types";
 export const timestamp = z.string().datetime(); // ISO 8601 timestamp
 
 export const linkSchema = z
@@ -193,9 +193,13 @@ export const HomeSchema = z
   .strict();
 
 export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-  kep_login: z.boolean().optional(),
+  identifier: z.string().min(1, {
+    message: "Email or username is required.",
+  }),
+  password: z.string().min(8, {
+    message: "Password must be at least 8 characters.",
+  }),
+  keep_login: z.boolean().optional(),
 });
 
 export const registerSchema = z
@@ -305,6 +309,123 @@ export const registerSchema = z
     }
   });
 
+export const companyRegisterSchema = z
+  .object({
+    user_type: z.literal("company"),
+    name: z.string().min(2, {
+      message: "Company name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    mobile: z.string().min(10, {
+      message: "Mobile number must be at least 10 characters.",
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    incharge_person_name: z.string().min(2, {
+      message: "Incharge person name must be at least 2 characters.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+    image: z.instanceof(File).optional(),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
+  });
+
+export const talentRegisterSchema = z
+  .object({
+    step:z.enum(["1", "2", "3"]),
+    user_type: z.enum(["talent", "recruiter"]),
+    name: z.string().min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    mobile: z.string().min(10, {
+      message: "Mobile number must be at least 10 characters.",
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    position_id: z.number().int().positive({
+      message: "Please select a valid position.",
+    }),
+    language_ids: z.array(z.number().int().positive()).min(1, {
+      message: "Please select at least one language.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+    verification_code: z.string().min(6, {
+      message: "Verification code must be at least 6 characters.",
+    }).optional(),
+    image: z.instanceof(File).optional(),
+    skills: z.array(z.string()).optional(),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
+  })
+  .refine((data) => data.step === "2" ? data.verification_code : true, {
+    message: "Verification code is required.",
+    path: ["verification_code"],
+  })
+
+export const companyProfileSchema = z.object({
+  id: z.number().int().positive().optional(),
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  mobile: z.string().min(10, {
+    message: "Mobile number must be at least 10 characters.",
+  }),
+  country_id: z.number().int().positive({
+    message: "Please select a valid country.",
+  }),
+  incharge_person_name: z.string().optional(),
+  image: z.instanceof(File).optional(),
+  language_ids: z.array(z.number().int().positive()).optional(),
+});
+
+export type CompanyProfileType = z.infer<typeof companyProfileSchema>;
+
+export const changePasswordSchema = z
+  .object({
+    current_password: z.string().min(1, {
+      message: "Current password is required.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    password_confirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
+  })
+  .strict()
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+    path: ["password_confirmation"],
+  });
+
+export type ChangePasswordType = z.infer<typeof changePasswordSchema>;
+
 const infoSchema = z.object({
   footer_title: z.string().min(1),
   footer_desc: z.string().min(1),
@@ -365,37 +486,36 @@ export const JoinPageSchema = z.object({
   join_page_image: z.string().url(),
 });
 
+const AboutFaqItemSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+});
+
 const AboutPageSchema = z.object({
-  about_page_title: z.string(),
-  about_page_subtitle: z.string(),
-  about_page_video: z.string(),
+  about_page_title: z.string().nullable().optional(),
+  about_page_subtitle: z.string().nullable().optional(),
+  about_page_desc: z.string().nullable().optional(),
+  about_page_video: z.string().nullable().optional(),
 
-  about_page_goals_title: z.string(),
-  about_page_goals_items: z
-    .array(AboutItemSchema)
+  about_page_why_us_items: z
+    .array(WhyUsItemSchema)
     .nullable()
     .optional()
     .default([]),
 
-  about_page_tools_title: z.string(),
-  about_page_tools_items: z
-    .array(AboutItemSchema)
+  about_page_contract_title: z.string().nullable().optional(),
+  about_page_contract_subtitle: z.string().nullable().optional(),
+  about_page_contract_desc: z.string().nullable().optional(),
+  about_page_contract_image: z.string().nullable().optional(),
+  about_page_contract_file: z.string().nullable().optional(),
+
+  about_page_faq_title: z.string().nullable().optional(),
+  about_page_faq_subtitle: z.string().nullable().optional(),
+  about_page_faq_items: z
+    .array(AboutFaqItemSchema)
     .nullable()
     .optional()
     .default([]),
-
-  about_page_what_offer_title: z.string(),
-  about_page_what_offer_desc: z.string(),
-  about_page_what_offer_items: z
-    .array(AboutItemSchema)
-    .nullable()
-    .optional()
-    .default([]),
-
-  about_page_footer_title: z.string(),
-  about_page_footer_desc: z.string(),
-  about_page_footer_btn_text: z.string(),
-  about_page_footer_btn_url: z.string(),
 });
 
 export const faqContactSchema = z.object({
@@ -422,6 +542,13 @@ const calendarSchema = z.object({
   announcements: AnnouncementsSchema,
 });
 
+export const ContactFormSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  subject: z.string(),
+  message: z.string()
+})
+
 export type Calendar = z.infer<typeof calendarSchema>;
 export type AnnouncementSchema = z.infer<typeof AnnouncementSchema>;
 export type AnnouncementsSchema = z.infer<typeof AnnouncementsSchema>;
@@ -438,3 +565,236 @@ export type CollegePage = z.infer<typeof CollegePageSchema>;
 export type AboutPage = z.infer<typeof AboutPageSchema>;
 export type TrackPage = z.infer<typeof trackPageSchema>;
 export type JoinPage = z.infer<typeof JoinPageSchema>;
+export type ContactFormType = z.infer<typeof ContactFormSchema>;
+export type CompanyRegisterSchema = z.infer<typeof companyRegisterSchema>;
+export type TalentRegisterSchema = z.infer<typeof talentRegisterSchema>;
+
+// Dashboard schema - title and about as objects with en and ar
+export const jobAdSchema = z
+  .object({
+    title: z.object({
+      en: z.string().min(1),
+      ar: z.string().min(1).optional(),
+    }),
+    about: z.object({
+      en: z.string().min(1),
+      ar: z.string().min(1).optional(),
+    }),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    gender: z.enum(["male", "female", "both"]).optional(),
+    experience_years: z.string().regex(/^\d+$/, {
+      message: "Experience years must be a number.",
+    }),
+    skill_ids: z.array(z.number().int().positive()).min(1),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type JobAdSchema = z.infer<typeof jobAdSchema>;
+
+// Main website schema - title and about as strings
+export const jobAdMainSchema = z
+  .object({
+    title: z.string().min(1),
+    about: z.string().min(1),
+    country_id: z.number().int().positive({
+      message: "Please select a valid country.",
+    }),
+    gender: z.enum(["male", "female", "both"]).optional(),
+    experience_years: z.string().regex(/^\d+$/, {
+      message: "Experience years must be a number.",
+    }),
+    skill_ids: z.array(z.number().int().positive()).min(1),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type JobAdMainSchema = z.infer<typeof jobAdMainSchema>;
+
+export const AddEventSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    title: z.object({
+      en: z.string().min(1, {
+        message: "Event title is required.",
+      }),
+    }),
+    event_type_id: z.number().int().positive({
+      message: "Please select a valid event type.",
+    }),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{1,2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+    to_date: z.string().regex(/^\d{4}-\d{2}-\d{1,2}$/, {
+      message: "To date must be in YYYY-MM-DD format.",
+    }),
+    lat: z.number().min(1, {
+      message: "Latitude is required.",
+    }),
+    lng: z.number().min(1, {
+      message: "Longitude is required.",
+    }),
+    check_in_time: z.string().regex(/^\d{2}:\d{2}$/, {
+      message: "Check-in time must be in HH:MM format.",
+    }),
+    check_out_time: z.string().regex(/^\d{2}:\d{2}$/, {
+      message: "Check-out time must be in HH:MM format.",
+    }),
+    user_ids: z.array(z.number().int().positive()).min(1, {
+      message: "At least one user must be selected.",
+    }),
+    users:z.array(z.any()).optional(),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date);
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type AddEventType = z.infer<typeof AddEventSchema>;
+
+// Education Schema
+export const EducationSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    major: z.string().min(1, {
+      message: "Major is required.",
+    }),
+    university: z.string().min(1, {
+      message: "University is required.",
+    }),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+    to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "To date must be in YYYY-MM-DD format.",
+    }),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date);
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type EducationType = z.infer<typeof EducationSchema>;
+
+// Experience Schema
+export const ExperienceSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    company_id: z.number().int().positive().optional(),
+    position_id: z.number().int().positive().optional(),
+    other_company: z.string().optional(),
+    other_position: z.string().optional(),
+    from_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "From date must be in YYYY-MM-DD format.",
+    }),
+        to_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    is_current: z.number().int().min(0).max(1),
+    description: z.string().min(1, {
+      message: "Description is required.",
+    }),
+  })
+  .strict()
+  .refine(
+    (data) => {
+      // Either company_id or other_company must be provided
+      return !!(data.company_id || data.other_company);
+    },
+    {
+      message: "Either company or other company must be provided.",
+      path: ["company_id"],
+    }
+  )
+  .refine(
+    (data) => {
+      // Either position_id or other_position must be provided
+      return !!(data.position_id || data.other_position);
+    },
+    {
+      message: "Either position or other position must be provided.",
+      path: ["position_id"],
+    }
+  )
+  .refine(
+    (data) => {
+      // If is_current is 1, to_date validation is skipped
+      if (data.is_current === 1) {
+        return true;
+      }
+      const fromDate = new Date(data.from_date);
+      const toDate = new Date(data.to_date || "");
+      return toDate >= fromDate;
+    },
+    {
+      message: "To date must be after or equal to from date.",
+      path: ["to_date"],
+    }
+  );
+
+export type ExperienceType = z.infer<typeof ExperienceSchema>;
+
+// Skills Form Schema
+export const SkillsFormSchema = z
+  .object({
+    position_id: z.number().int().positive().optional(),
+    language_ids: z.array(z.number().int().positive()).optional(),
+    skill_ids: z.array(z.number().int().positive()).optional(),
+    badge_ids: z.array(z.number().int().positive()).optional(),
+    experience_years: z.number().int().min(0).optional(),
+    bio: z.string().max(250, {
+      message: "Bio must be at most 250 characters.",
+    }).optional(),
+    available_for_work: z.union([z.literal(0), z.literal(1)]).optional(),
+    price_per_project: z.number().min(0).optional(),
+    facebook_url: z.string().url().optional().or(z.literal("")),
+    instagram_url: z.string().url().optional().or(z.literal("")),
+    youtube_url: z.string().url().optional().or(z.literal("")),
+    linkedin_url: z.string().url().optional().or(z.literal("")),
+    resume: z.instanceof(File).optional(),
+  })
+  .strict();
+
+export type SkillsFormType = z.infer<typeof SkillsFormSchema>;
+
+// Portfolio Schema
+export const PortfolioSchema = z
+  .object({
+    id: z.number().int().positive().optional(),
+    title: z.object({
+      en: z.string().min(1, {
+        message: "Project name is required.",
+      }),
+      ar: z.string().min(1).optional(),
+    }),
+    description: z.object({
+      en: z.string().min(1, {
+        message: "Description is required.",
+      }),
+      ar: z.string().min(1).optional(),
+    }),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: "Date must be in YYYY-MM-DD format.",
+    }),
+    attachments: z.array(z.instanceof(File)).optional(),
+  })
+  .strict();
+
+export type PortfolioType = z.infer<typeof PortfolioSchema>;

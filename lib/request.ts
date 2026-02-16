@@ -16,7 +16,7 @@ const getLangAndToken = () => {
 const { lang, token } = getLangAndToken();
 
 const apiInstance = new FetchInstance({
-  baseURL: API_URL + "/api",
+  baseURL: API_URL ,
   headers: {
     "Accept-Language": lang,
     Accept: "application/json",

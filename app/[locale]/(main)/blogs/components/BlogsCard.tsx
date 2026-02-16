@@ -14,10 +14,10 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
   return (
     <Link key={blog.id} href={`/blogs/${blog.slug}`} className="h-full" role="listitem">
       <article
-        className="relative bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
+        className="relative h-full bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300"
         role="listitem"
       >
-        <div className="relative w-full aspect-[3/2] overflow-hidden">
+        <div className="relative w-full aspect-3/2 overflow-hidden">
           <Image
             src={blog.image}
             alt={blog.title || "Blog post image"}
@@ -31,11 +31,12 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
           </span>
 
         </div>
-        <div className="space-y-2 px-4 pt-6 pb-4">
+
+        <div className="flex flex-col gap-2 px-4 pt-6 pb-4">
           <h2 className="title-4 line-clamp-2">{blog.title}</h2>
 
           <div
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 mt-auto"
             aria-label={`Published on ${formattedDate}`}
           >
             <CalendarIcon

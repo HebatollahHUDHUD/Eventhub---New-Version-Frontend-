@@ -5,7 +5,7 @@ import NavLink from "./NavLink";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -59,7 +59,7 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={"w-full bg-primary z-40"}>
+    <nav className={"sticky top-0 w-full bg-primary z-40"}>
       <div className="container">
         <div className="h-20 flex items-center justify-between">
           <Link href="/" className="flex justify-center items-center">
@@ -102,17 +102,6 @@ const Navbar = () => {
             </div>
 
             <ul className="p-4 flex flex-col xl:items-center xl:justify-center gap-2 xl:flex-row xl:p-0">
-              {/* <li>
-                <Button
-                  size={"lg"}
-                  className="rounded-full"
-                  variant={"ghostSecondary"}
-                >
-                  <Grid2X2Icon />
-                  <span>{t("category")}</span>
-                </Button>
-              </li> */}
-
               {navigation.map((item) => (
                 <li key={item.name}>
                   <NavLink href={item.href}>{t(item.name)}</NavLink>
@@ -120,7 +109,9 @@ const Navbar = () => {
               ))}
 
               <li>
-                <LocalChanger />
+                <Suspense fallback={<span className="text-sm">عربي</span>}>
+                  <LocalChanger />
+                </Suspense>
               </li>
 
               {!isLoggedIn && (

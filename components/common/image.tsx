@@ -21,14 +21,19 @@ const Image = ({
   ...props
 }: CustomImageProps) => {
   const [isView, setIsView] = useState(false);
-  const [imgSrc, setImgSrc] = useState(src ?? fallback);
+  // Check if src starts with "/", if not use fallback
+  const [imgSrc, setImgSrc] = useState(() => {
+    if (!src) return fallback;
+    return src.startsWith("/") ? src : fallback;
+  });
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // Reset state when src changes
   useEffect(() => {
-    if (src) {
-      setImgSrc(src);
+    const validSrc = !src ? fallback : (src.startsWith("/") ? src : fallback);
+    if (validSrc) {
+      setImgSrc(validSrc);
       setHasError(false);
       setIsLoading(true);
     } else {
@@ -40,7 +45,8 @@ const Image = ({
 
   // Handle image load error using a hidden test image
   useEffect(() => {
-    if (!src || hasError) return;
+    const validSrc = !src ? fallback : (src.startsWith("/") ? src : fallback);
+    if (!validSrc || hasError || validSrc === fallback) return;
 
     const testImg = new window.Image();
     testImg.onload = () => {
@@ -52,7 +58,7 @@ const Image = ({
       setImgSrc(fallback);
       setIsLoading(false);
     };
-    testImg.src = src;
+    testImg.src = validSrc;
 
     return () => {
       testImg.onload = null;

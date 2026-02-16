@@ -11,9 +11,9 @@ export default function QuestionsAndAnswers({ data }: QuestionsAndAnswersProps) 
   const t = useTranslations("about");
 
   const sectionTitle =
-    data?.about_page_what_offer_title || t("questions_and_answers");
+    data?.about_page_faq_title || t("questions_and_answers");
   const sectionDescription =
-    data?.about_page_what_offer_desc || t("questions_and_answers_description");
+    data?.about_page_faq_subtitle || t("questions_and_answers_description");
 
   const staticFaqs = [
     { question: t("faq_1_question"), answer: t("faq_1_answer") },
@@ -25,11 +25,11 @@ export default function QuestionsAndAnswers({ data }: QuestionsAndAnswersProps) 
   ];
 
   const faqs =
-    data?.about_page_what_offer_items &&
-    data.about_page_what_offer_items.length > 0
-      ? data.about_page_what_offer_items.map((item) => ({
-          question: item.title,
-          answer: item.desc,
+    data?.about_page_faq_items &&
+    data.about_page_faq_items.length > 0
+      ? data.about_page_faq_items.map((item) => ({
+          question: item.question,
+          answer: item.answer,
         }))
       : staticFaqs;
 

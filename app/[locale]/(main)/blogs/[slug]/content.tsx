@@ -13,7 +13,8 @@ type BlogContentProps = {
 
 const BlogContent = async ({ slug }: BlogContentProps) => {
   const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${slug}` });
-  const blog = data?.result?.blog_post;
+
+  const blog = data?.status === "success" ? data.result.blog_post : null;
 
   const formattedDate = moment(blog?.created_at).format("DD MMM, YYYY");
   const t = await getTranslations("blogs");
@@ -23,7 +24,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
       <section className="container px-6 xl:px-20">
         <div className="relative">
           <Image
-            src={blog?.image}
+            src={blog?.image || ""}
             alt={blog?.title}
             hasPreview
             width={800}
@@ -44,7 +45,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               {t("back_to_blog_list")}
             </Link>
 
-            <h2 className="title-2 max-w-full md:max-w-[450px]">{blog?.title}</h2>
+            <h2 className="title-2 max-w-full md:max-w-[550px]">{blog?.title}</h2>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="bg-accentPink text-white title-5 px-3 py-0.5 rounded-lg capitalize">
@@ -65,7 +66,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
 
       <section className="container-sm space-y-6">
         <div className="space-y-4 max-w-2xl mx-auto text-center">
-          <h2 className="title-1">{t("title-details")}</h2>
+          <h2 className="title-2">{t("title-details")}</h2>
           <p className="description">{t("description")}</p>
         </div>
 

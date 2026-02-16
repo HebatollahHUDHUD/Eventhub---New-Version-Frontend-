@@ -1,10 +1,8 @@
 import { useTranslations } from "next-intl";
 import { cyrclesToDownSVG } from "@/public/SVGs";
 import VideoPlayer from "@/components/common/VideoPlayer";
-import StatCard from "../common/StatCard";
 import type { AboutPage } from "@/schemas/shared";
-
-const PLACEHOLDER_VIDEO_URL = "https://www.example.com/placeholder-video.mp4";
+import StatCard from "@/components/common/StatCard";
 
 interface AboutIntroProps {
   data?: AboutPage | null;
@@ -15,8 +13,8 @@ export default function AboutIntro({ data }: AboutIntroProps) {
 
   const title = data?.about_page_title || t("hero_tagline");
   const subtitle = data?.about_page_subtitle || t("who_is_events_hubs");
-  const description = t("who_is_events_hubs_description");
-  const videoUrl = data?.about_page_video || PLACEHOLDER_VIDEO_URL;
+  const description = data?.about_page_desc || t("who_is_events_hubs_description");
+  const videoUrl = data?.about_page_video;
 
   const stats = [
     { value: "+200", label: t("companies"), highlightColor: "bg-teal-300/50" },
@@ -36,7 +34,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-10 gap-8 lg:gap-12 px-4 md:px-8 lg:px-12">
           {/* Left column - Tagline */}
           <div className="flex lg:col-span-4">
-            <h1 className="title-1 text-primary leading-snug font-normal! lg:text-6xl!">
+            <h1 className="title-1 text-primary leading-snug font-normal! ">
               {title}
             </h1>
           </div>
@@ -53,12 +51,14 @@ export default function AboutIntro({ data }: AboutIntroProps) {
         </div>
 
         {/* Video section */}
-        <div className="relative z-10 px-4 md:px-8 lg:px-12">
-          <VideoPlayer
-            url={videoUrl}
-            className="w-full aspect-video max-h-[623px] rounded-2xl"
-          />
-        </div>
+        {videoUrl && (
+          <div className="relative z-10 px-4 md:px-8 lg:px-12">
+            <VideoPlayer
+              url={videoUrl}
+              className="w-full aspect-video max-h-[623px] rounded-2xl"
+            />
+          </div>
+        )}
 
         {/* Stats section */}
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 px-4 md:px-8 lg:px-12">

@@ -1,0 +1,50 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run_pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install ssh keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null
+          ssh-keyscan -T 10 -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          
+
+      - name: connect and pull
+        run: |
+          ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" << 'EOF'
+            set -e
+            cd /home/eventshubs/website/
+
+            # load nvm for non-interactive shells
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            nvm use 24 || nvm use 18
+
+            node -v
+            npm -v
+
+            git checkout main
+            git stash
+            git pull origin main
+
+            npm ci
+            npm i
+            npm run build
+            pm2 restart 7
+          EOF
+
+      - name: cleanup
+        if: always()
+        run: rm -rf ~/.ssh

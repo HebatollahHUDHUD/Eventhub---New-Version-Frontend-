@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
@@ -8,6 +9,8 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
       <Navbar />
 
       {children}
+
+      <Footer />
     </main>
   );
 };

@@ -15,6 +15,7 @@ type FetchData = {
   endpoint: string;
   config?: FetchRequestConfig;
   queryKey?: any[];
+  enabled?: boolean;
 };
 
 // GET
@@ -22,11 +23,13 @@ export const useGetData = <T, K = unknown>({
   endpoint,
   config,
   queryKey = [],
+  enabled,
 }: FetchData) => {
   const { isLoading, isSuccess, status, data, refetch, isFetching } = useQuery({
     queryKey: [...queryKey, endpoint],
     queryFn: () => getData<T, K>({ endpoint, config }),
     placeholderData: keepPreviousData,
+    enabled,
   });
   return { isLoading, isSuccess, status, data, refetch, isFetching };
 };
@@ -76,10 +79,10 @@ export const useDeleteData = <T, K = unknown>({
   endpoint,
   config,
 }: FetchData) => {
-  const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
+  const { data, mutateAsync, mutate, status, isSuccess, isPending } = useMutation({
     mutationKey: [endpoint, config],
     mutationFn: (data: RequestData) =>
       deleteData<T, K>({ endpoint, config: { body: data, ...config } }),
   });
-  return { data, mutateAsync, mutate, status, isSuccess };
+  return { data, mutateAsync, mutate, status, isSuccess, isPending };
 };

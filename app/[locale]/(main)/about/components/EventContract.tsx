@@ -13,13 +13,12 @@ interface EventContractProps {
 export default function EventContract({ data, downloadIcon }: EventContractProps) {
   const t = useTranslations("about");
 
-  const badgeText = t("ready_to_use_event_contract");
-  const title = data?.about_page_footer_title || t("event_contract_title");
+  const badgeText = data?.about_page_contract_title || t("ready_to_use_event_contract");
+  const title = data?.about_page_contract_subtitle || t("event_contract_title");
   const description =
-    data?.about_page_footer_desc || t("event_contract_description");
-  const buttonText =
-    data?.about_page_footer_btn_text || t("download_now");
-  const downloadUrl = data?.about_page_footer_btn_url || "#";
+    data?.about_page_contract_desc || t("event_contract_description");
+  const buttonText = t("download_now");
+  const downloadUrl = data?.about_page_contract_file || "#";
 
   return (
     <section className="bg-[#010462] p-4 md:p-8 lg:p-12">

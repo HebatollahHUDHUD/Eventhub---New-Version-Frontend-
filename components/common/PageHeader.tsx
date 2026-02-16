@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils"
 
 
-const PageHeader = ({ title }: { title: string }) => {
+const PageHeader = ({ title, className }: { title: string, className?: string }) => {
   return (
-    <section className='bg-primary py-16'>
+    <section className={cn('bg-primary py-16', className)}>
       <div className="container">
-        <h1 className="title-1 text-primary-foreground text-center">{title}</h1>
+        <h1 className="title-2 text-primary-foreground text-center">{title}</h1>
       </div>
     </section>
   )

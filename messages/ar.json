@@ -4,10 +4,64 @@
     "description": "مركز الفعاليات - وجهتك المفضلة للفعاليات"
   },
   "common": {
-    "events": "الفعاليات"
+    "events": "الفعاليات",
+    "file-upload": {
+      "drag-drop-text": "اسحب وأفلت",
+      "images": "الصور",
+      "or": "أو",
+      "browse": "تصفح",
+      "on-computer": "على جهازك"
+    },
+    "delete": "حذف",
+    "are-you-sure": "هل أنت متأكد؟",
+    "delete-desc": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف العنصر نهائياً.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "confirmed": "مؤكد",
+    "decline": "رفض",
+    "declined": "مرفوض",
+    "view": "عرض",
+    "submit-failed": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
+    "failed-to-submit": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
+    "select-item": "اختر عنصر",
+    "search-for-items": "ابحث عن العناصر...",
+    "no-item-found": "لم يتم العثور على عنصر."
   },
   "home": {
     "title": "مرحباً بك في مركز الفعاليات!",
+    "hero": {
+      "headline": "ابحث عن شريكك المثالي للتميز في الفعاليات!",
+      "description": "مرحباً بك في مركز الفعاليات، منصتك المفضلة لربط محترفي الفعاليات مع أفضل الشركات في الصناعة.",
+      "search": {
+        "skills": "المهارات/الخبرة",
+        "location": "الموقع",
+        "button": "بحث"
+      },
+      "social": {
+        "follow": "تابعنا على"
+      },
+      "profiles": {
+        "question1": "هل لديك أي أسئلة؟",
+        "question2": "تحتاج مساعدة في فعاليتك؟",
+        "viewProfile": "عرض الملف الشخصي"
+      }
+    },
+    "aboutEventsHubs": {
+      "headline": "مرحباً بك في مركز الفعاليات! مجتمع مبني لمشاركة المعرفة، وعرض المواهب، والاتصال مع الشركات الرائدة في صناعة الفعاليات",
+      "video": {
+        "url": "",
+        "poster": ""
+      },
+      "card1": {
+        "text": "أكثر من 6000 موهبة في تجربة الفعاليات"
+      },
+      "card2": {
+        "text": "تواصل مع قادة الصناعة"
+      },
+      "card3": {
+        "text": "مدونات لمشاركة المعرفة"
+      }
+    },
     "carousel": {
       "1": {
         "title": "مرحباً بك في مركز الفعاليات",
@@ -17,6 +71,66 @@
     "buttons": {
       "enter-events": "الدخول إلى الفعاليات",
       "create-event": "إنشاء فعالية"
+    },
+    "talents": {
+      "hireButton": "استأجر أفضل المواهب",
+      "title": "مواهبنا المذهلة وذات الخبرة في الفعاليات",
+      "viewMore": "عرض المزيد"
+    },
+    "blogs": {
+      "tag": "مقال",
+      "title": "رؤى من خبراء الأعمال",
+      "description": "رؤى ونصائح وقصص حقيقية من صناعة الفعاليات. تعلم، وطور نفسك، وابق ملهمًا.",
+      "viewMore": "عرض المزيد"
+    },
+    "opportunities": {
+      "button": "ابحث عن شغفك",
+      "title": "المزيد من الفرص للجميع",
+      "description": "استكشف أحدث العروض والمشاريع وأدوار الفعاليات. واتخذ الخطوة التالية في مسيرتك المهنية في مجال الفعاليات",
+      "viewMore": "عرض المزيد"
+    },
+    "trustedOrganisations": {
+      "tag": "منظماتنا الموثوقة",
+      "title": "موثوق به من قبل أكثر من 150 منظمة في أكثر من 20 دولة",
+      "button": "المزيد عنا"
+    },
+    "pricingPlans": {
+      "title": "استكشف خطط الأسعار المرنة",
+      "description": "اختر الخطة التي تساعدك على عرض موهبتك وتوسيع شبكتك والتميز أمام أفضل شركات الفعاليات",
+      "companiesPlans": "خطط الشركات",
+      "talentsPlans": "خطط المواهب",
+      "toggleLabel": "التبديل بين خطط الشركات والمواهب",
+      "perMonth": "/شهرياً",
+      "recommended": "موصى به",
+      "purchaseNow": "اشتر الآن",
+      "registerNow": "سجّل الآن",
+      "noPlans": "لا توجد خطط متاحة حالياً.",
+      "purchaseDialog": {
+        "title": "هل لديك رمز ترويجي؟",
+        "description": "أدخل الرمز للحصول على خصم",
+        "promocode": "الرمز الترويجي",
+        "promocodePlaceholder": "الرمز الترويجي",
+        "applyCode": "تطبيق الرمز",
+        "planAmount": "مبلغ الخطة",
+        "discount": "الخصم",
+        "total": "الإجمالي",
+        "continueWithoutCode": "المتابعة بدون رمز",
+        "proceedToPayment": "المتابعة للدفع",
+        "invalidPromoCode": "رمز ترويجي غير صالح",
+        "promoCodeApplied": "تم تطبيق الرمز الترويجي بنجاح",
+        "loginRequired": "يرجى تسجيل الدخول للاشتراك في الخطة",
+        "subscriptionSuccess": "تم الاشتراك بنجاح",
+        "subscriptionFailed": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
+      },
+      "paymentStatus": {
+        "checkingPayment": "جارٍ التحقق من الدفع...",
+        "successTitle": "تم بنجاح!",
+        "successDescription": "أخبار رائعة! تمت عملية الدفع بنجاح، واشتراكك الآن نشط.\nمرحبًا بك على متن الرحلة. ابدأ باستكشاف مزاياك الآن واستفد إلى أقصى حد من تجربتك معنا.",
+        "greatButton": "رائع!",
+        "failedTitle": "فشل الدفع",
+        "failedDescription": "حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.",
+        "closeButton": "إغلاق"
+      }
     }
   },
   "blogs": {
@@ -26,7 +140,23 @@
     "back_to_blog_list" : "العودة إلى قائمة المقالات"
   },
   "footer": {
-    "copyright": "مركز الفعاليات"
+    "copyright": "مركز الفعاليات",
+    "newsletter-title": "اشترك في <br /> نشرتنا الإخبارية",
+    "newsletter-desc": "ابق على اطلاع بآخر الأخبار والمواهب في موقعنا.",
+    "enter-email": "أدخل عنوان البريد الإلكتروني",
+    "send": "إرسال",
+    "subscribed-msg": "تم الاشتراك بنجاح!",
+    "tagline": "منصتك المفضلة لربط محترفي الفعاليات مع أفضل الشركات في الصناعة.",
+    "about": "من نحن",
+    "recruitment": "التوظيف",
+    "talent": "المواهب",
+    "opportunities": "الفرص",
+    "pricing": "الأسعار",
+    "contact": "اتصل بنا",
+    "billing-cancellation": "الفواتير والإلغاء",
+    "privacy-policy": "سياسة الخصوصية",
+    "terms-companies": "الشروط والأحكام للشركات",
+    "terms-users": "الشروط والأحكام للمستخدمين"
   },
   "navigation": {
     "brand-name": "مركز الفعاليات",
@@ -39,8 +169,13 @@
     "contact": "اتصل بنا",
     "login": "تسجيل الدخول",
     "category": "الفئات",
+    "recruitment": "التوظيف",
+    "tagline": "منصتك المفضلة لربط محترفي الفعاليات مع أفضل الشركات في الصناعة.",
+    "billing-cancellation": "الفواتير والإلغاء",
+    "terms-companies": "الشروط والأحكام للشركات",
+    "terms-users": "الشروط والأحكام للمستخدمين",
+    "certified-by": "هذا الموقع معتمد من",
     "speakers": "المتحدثون",
-    "events": "الفعاليات",
     "about-us": "من نحن",
     "my-subscription": "اشتراكي",
     "contact-us": "اتصل بنا",
@@ -52,6 +187,18 @@
     "saved-events": "الفعاليات المحفوظة",
     "saved-candidates": "المرشحون المحفوظون",
     "change-password": "تغيير كلمة المرور",
+    "privet-information": "المعلومات الخاصة",
+    "personal-information": "المعلومات الشخصية",
+    "skills-experience": "المهارات والخبرة",
+    "portfolio": "المحفظة",
+    "job-ads": "إعلانات الوظائف",
+    "my-plan": "خطتي",
+    "e-books": "الكتب الإلكترونية",
+    "e-courses": "الدورات الإلكترونية",
+    "company-plans": "خطط الشركة",
+    "events": "الفعاليات",
+    "my-messages": "رسائلي",
+    "employees": "الموظفون",
     "delete-account-desc": "هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
     "delete-account": "حذف الحساب",
     "unlock-profile": "إلغاء قفل الملف الشخصي",
@@ -116,6 +263,25 @@
     "faq_6_question": "هل يمكنني ترقية خطتي لاحقًا؟",
     "faq_6_answer": "نعم، يمكنك ترقية خطتك في أي وقت من خلال إعدادات حسابك."
   },
+  "contact": {
+    "title": "تواصل معنا!",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "أدخل اسمك الكامل",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "subject": "الموضوع",
+    "subjectPlaceholder": "أدخل الموضوع",
+    "message": "الرسالة",
+    "messagePlaceholder": "اكتب رسالتك هنا",
+    "submit": "إرسال",
+    "sending": "جارٍ الإرسال...",
+    "sendSuccess": "تم إرسال الرسالة بنجاح!",
+    "error": "حدث خطأ ما",
+    "call": "اتصل بنا",
+    "emailcon": "أرسل لنا بريداً",
+    "visit": "زرنا",
+    "map": "عرض على خرائط جوجل"
+  },
   "talent": {
     "title": "مواهبنا المذهلة وذات الخبرة في الفعاليات",
     "description": "استكشف أحدث العروض والمشاريع وأدوار الفعاليات، واتخذ الخطوة التالية في مسيرتك المهنية في مجال الفعاليات",
@@ -160,5 +326,350 @@
       "skills": "المهارات",
       "details": "التفاصيل"
     }
+  },
+  "auth": {
+    "auth-title": "مرحباً بك في مركز الفعاليات",
+    "login": {
+      "title": "تسجيل الدخول",
+      "subtitle": "مرحباً بعودتك! يرجى تسجيل الدخول إلى حسابك",
+      "email-or-username": "البريد الإلكتروني أو اسم المستخدم",
+      "enter-email-or-username": "أدخل البريد الإلكتروني أو اسم المستخدم",
+      "keep-me-logged-in": "ابقني مسجلاً",
+      "forgot-password": "نسيت كلمة المرور؟",
+      "button": "تسجيل الدخول",
+      "success-msg": "تم تسجيل الدخول بنجاح!",
+      "dont-have-account": "ليس لديك حساب؟",
+      "register-link": "تسجيل",
+      "errors": {
+        "invalid-credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
+        "account-locked": "تم قفل حسابك. يرجى الاتصال بالدعم.",
+        "account-not-verified": "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول.",
+        "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+        "server-error": "خطأ في الخادم. يرجى المحاولة مرة أخرى لاحقاً.",
+        "required": "البريد الإلكتروني وكلمة المرور مطلوبان."
+      }
+    },
+    "register": {
+      "title": "مرحباً بك في مركز الفعاليات",
+      "talent-title": "تبحث عن وظيفة",
+      "talent-description": "قم بإعداد ملفك الشخصي واحصل على الانتباه.",
+      "company-title": "سجل كشركة",
+      "company-description": "موظفون مثاليون لشركتك.",
+      "already-have-account": "هل لديك حساب بالفعل؟ <Link>تسجيل الدخول</Link>",
+      "button": "إنشاء حساب",
+      "success-msg": "تم إنشاء الحساب بنجاح! يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك.",
+      "errors": {
+        "email-exists": "هذا البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول بدلاً من ذلك.",
+        "weak-password": "كلمة المرور ضعيفة جداً. يرجى استخدام كلمة مرور أقوى.",
+        "password-mismatch": "كلمات المرور غير متطابقة.",
+        "invalid-email": "يرجى إدخال عنوان بريد إلكتروني صحيح.",
+        "required-fields": "يرجى ملء جميع الحقول المطلوبة.",
+        "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+        "server-error": "خطأ في الخادم. يرجى المحاولة مرة أخرى لاحقاً."
+      }
+    },
+    "forgot-password": {
+      "title": "نسيت كلمة المرور",
+      "subtitle": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور",
+      "email-label": "عنوان البريد الإلكتروني",
+      "enter-email": "أدخل عنوان بريدك الإلكتروني",
+      "button": "إرسال رابط إعادة التعيين",
+      "back-to-login": "العودة إلى تسجيل الدخول",
+      "success-msg": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.",
+      "errors": {
+        "email-not-found": "لم يتم العثور على حساب بهذا العنوان الإلكتروني.",
+        "invalid-email": "يرجى إدخال عنوان بريد إلكتروني صحيح.",
+        "too-many-requests": "طلبات كثيرة جداً. يرجى المحاولة مرة أخرى لاحقاً.",
+        "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى."
+      }
+    },
+    "verify-form": {
+      "title": "تحقق من بريدك الإلكتروني",
+      "subtitle": "لقد أرسلنا رمز التحقق إلى عنوان بريدك الإلكتروني",
+      "code-label": "رمز التحقق",
+      "enter-code": "أدخل رمز التحقق",
+      "button": "تحقق من البريد الإلكتروني",
+      "resend-code": "إعادة إرسال الرمز",
+      "resend-success": "تم إعادة إرسال رمز التحقق إلى بريدك الإلكتروني.",
+      "success-msg": "تم التحقق من البريد الإلكتروني بنجاح!",
+      "errors": {
+        "invalid-code": "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.",
+        "expired-code": "انتهت صلاحية رمز التحقق. يرجى طلب رمز جديد.",
+        "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى."
+      }
+    },
+    "reset-password": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل كلمة المرور الجديدة",
+      "new-password-label": "كلمة المرور الجديدة",
+      "confirm-password-label": "تأكيد كلمة المرور الجديدة",
+      "button": "إعادة تعيين كلمة المرور",
+      "success-msg": "تم إعادة تعيين كلمة المرور بنجاح. يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة.",
+      "errors": {
+        "weak-password": "كلمة المرور ضعيفة جداً. يرجى استخدام كلمة مرور أقوى.",
+        "password-mismatch": "كلمات المرور غير متطابقة.",
+        "invalid-token": "رمز إعادة التعيين غير صحيح أو منتهي الصلاحية. يرجى طلب إعادة تعيين كلمة مرور جديدة.",
+        "network-error": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى."
+      }
+    },
+    "fields": {
+      "company-name": "اسم الشركة",
+      "email-address": "عنوان البريد الإلكتروني",
+      "enter-email": "أدخل عنوان البريد الإلكتروني",
+      "phone-number": "رقم الهاتف",
+      "country": "الدولة",
+      "select-country": "اختر الدولة",
+      "incharge-person-name": "اسم الشخص المسؤول",
+      "password": "كلمة المرور",
+      "enter-password": "أدخل كلمة المرور",
+      "password-confirmation": "تأكيد كلمة المرور",
+      "confirm-password": "أكد كلمة المرور",
+      "image": "صورة الشركة",
+      "upload-image": "رفع صورة"
+    },
+    "common": {
+      "loading": "جاري التحميل...",
+      "submitting": "جاري الإرسال...",
+      "success": "نجح!",
+      "error": "خطأ",
+      "try-again": "يرجى المحاولة مرة أخرى.",
+      "required": "هذا الحقل مطلوب.",
+      "optional": "اختياري"
+    },
+    "company-name": "اسم الشركة",
+    "email-address": "عنوان البريد الإلكتروني",
+    "enter-email": "أدخل عنوان البريد الإلكتروني",
+    "phone-number": "رقم الهاتف",
+    "country": "الدولة",
+    "incharge-person-name": "اسم الشخص المسؤول",
+    "password": "كلمة المرور",
+    "enter-password": "أدخل كلمة المرور",
+    "password-confirmation": "تأكيد كلمة المرور",
+    "confirm-password": "أكد كلمة المرور",
+    "create-account": "إنشاء حساب",
+    "account-created-msg": "تم إنشاء الحساب بنجاح! يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك.",
+    "dont-have-account": "ليس لديك حساب؟",
+    "full-name": "الاسم الكامل",
+    "current-position": "المنصب الحالي",
+    "other-position": "منصب آخر",
+    "languages": "اللغات (متعدد)",
+    "verification-code": "رمز التحقق",
+    "sign-up": "التسجيل",
+    "account-created-successfully": "تم إنشاء الحساب بنجاح",
+    "account-created-successfully-desc": "تم إنشاء حسابك بنجاح. يرجى التحقق من بريدك الإلكتروني للمتابعة.",
+    "verify-email": "التحقق من البريد الإلكتروني",
+    "go-to-login": "الذهاب إلى تسجيل الدخول",
+    "talent": "الموهبة",
+    "recruiter": "المسؤول عن التوظيف",
+    "resume": {
+      "success-msg": "تم رفع السيرة الذاتية بنجاح!",
+      "upload-resume": "رفع السيرة الذاتية",
+      "upload-failed": "فشل رفع السيرة الذاتية. يرجى المحاولة مرة أخرى."
+    },
+    "upload-resume": "رفع السيرة الذاتية",
+    "submit-failed": "فشل إرسال النموذج. يرجى المحاولة مرة أخرى.",
+    "login-failed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "login-error": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "session-missing": "تم تسجيل الدخول بنجاح ولكن بيانات الجلسة مفقودة."
+  },
+  "dashboard": {
+    "privet-information": "المعلومات الخاصة",
+    "company-name": "اسم الشركة",
+    "email-address": "عنوان البريد الإلكتروني",
+    "enter-email": "أدخل عنوان البريد الإلكتروني",
+    "phone-number": "رقم الهاتف",
+    "country": "الدولة",
+    "incharge-person-name": "اسم الشخص المسؤول",
+    "save-changes": "حفظ التغييرات",
+    "change-password": "تغيير كلمة المرور",
+    "current-password": "كلمة المرور الحالية",
+    "enter-current-password": "أدخل كلمة المرور الحالية",
+    "new-password": "كلمة المرور الجديدة",
+    "enter-new-password": "أدخل كلمة المرور الجديدة",
+    "confirm-password": "تأكيد كلمة المرور",
+    "enter-confirm-password": "أدخل تأكيد كلمة المرور",
+    "job-ads": {
+      "title": "إعلانات الوظائف",
+      "job-title": "المسمى الوظيفي",
+      "enter-job-title": "أدخل المسمى الوظيفي",
+      "country": "الدولة",
+      "job-skills-tags": "مهارات/علامات الوظيفة",
+      "years-of-experience": "سنوات الخبرة",
+      "select-experience": "اختر سنوات الخبرة",
+      "enter-experience-years": "أدخل سنوات الخبرة",
+      "year": "سنة",
+      "years": "سنوات",
+      "gender": "الجنس",
+      "select-gender": "اختر الجنس",
+      "male": "ذكر",
+      "female": "أنثى",
+      "both": "كلاهما",
+      "about-the-job": "نبذة عن الوظيفة",
+      "enter-about-job": "أدخل وصف الوظيفة",
+      "max-letters": "الحد الأقصى 250 حرف",
+      "job-image": "صورة الوظيفة",
+      "drag-drop-image": "اسحب وأفلت صورة الوظيفة",
+      "or-browse": "أو",
+      "browse": "تصفح",
+      "on-computer": "على جهازك",
+      "add-job-ad": "إضافة إعلان وظيفة",
+      "update-job-ad": "تحديث إعلان الوظيفة",
+      "job-ad-details": "تفاصيل إعلان الوظيفة",
+      "success-msg": "تم إنشاء إعلان الوظيفة بنجاح!",
+      "error-msg": "فشل إنشاء إعلان الوظيفة. يرجى المحاولة مرة أخرى.",
+      "view": "عرض",
+      "no-job-ads": "لا توجد إعلانات وظائف.",
+      "status": {
+        "active": "نشط",
+        "closed": "مغلق",
+        "cancelled": "ملغي"
+      }
+    },
+    "events": {
+      "title": "الفعاليات",
+      "add-event": "إضافة فعالية",
+      "event-title": "عنوان الفعالية",
+      "enter-event-title": "أدخل عنوان الفعالية",
+      "event-type": "نوع الفعالية",
+      "from-date": "من تاريخ",
+      "enter-from-date": "أدخل تاريخ البداية",
+      "to-date": "إلى تاريخ",
+      "enter-to-date": "أدخل تاريخ النهاية",
+      "check-in-time": "وقت الحضور",
+      "enter-check-in-time": "أدخل وقت الحضور",
+      "check-out-time": "وقت المغادرة",
+      "enter-check-out-time": "أدخل وقت المغادرة",
+      "employees": "الموظفون",
+      "attachments": "المرفقات",
+      "location": "الموقع",
+      "month": "شهر",
+      "week": "أسبوع",
+      "previous": "السابق",
+      "next": "التالي",
+      "error-msg": "فشل إنشاء الفعالية. يرجى المحاولة مرة أخرى.",
+      "success-msg": "تم إنشاء الفعالية بنجاح!"
+    },
+    "skills-experiences": {
+      "experience": "الخبرة",
+      "education": "التعليم",
+      "position": "المنصب",
+      "other-position": "منصب آخر",
+      "enter-other-position": "أدخل منصب آخر",
+      "company": "الشركة",
+      "other-company": "شركة أخرى",
+      "enter-other-company": "أدخل شركة أخرى",
+      "from-date": "من تاريخ",
+      "enter-from-date": "أدخل تاريخ البداية",
+      "to-date": "إلى تاريخ",
+      "enter-to-date": "أدخل تاريخ النهاية",
+      "currently-working": "أعمل حاليًا في هذه الشركة",
+      "description": "الوصف",
+      "enter-description": "أدخل الوصف",
+      "major": "التخصص",
+      "enter-major": "أدخل التخصص",
+      "university": "الجامعة",
+      "enter-university": "أدخل الجامعة",
+      "add": "إضافة",
+      "error-msg": "فشل الإرسال. يرجى المحاولة مرة أخرى.",
+      "view-education": "عرض التعليم",
+      "education-details": "تفاصيل التعليم",
+      "view-experience": "عرض الخبرة",
+      "experience-details": "تفاصيل الخبرة",
+      "created-at": "تم الإنشاء",
+      "updated-at": "تم التحديث"
+    },
+    "skills-form": {
+      "title": "المهارات والشروط",
+      "resume": "السيرة الذاتية",
+      "current-position": "المنصب الحالي",
+      "years-of-experience": "سنوات الخبرة",
+      "enter-years-of-experience": "أدخل سنوات الخبرة",
+      "about-me": "نبذة عني",
+      "enter-about-me": "أدخل نبذة عنك",
+      "max-letters": "الحد الأقصى للحروف",
+      "availability-to-work": "التوفر للعمل الآن",
+      "yes": "نعم",
+      "no": "لا",
+      "price-per-project": "السعر / المشروع",
+      "enter-price-per-project": "أدخل السعر لكل مشروع",
+      "availabilities-badges": "شارات التوفر",
+      "skills-tags": "المهارات/العلامات (متعدد)",
+      "languages": "اللغات",
+      "facebook-link": "رابط فيسبوك",
+      "enter-facebook-link": "أدخل رابط فيسبوك",
+      "instagram-link": "رابط إنستغرام",
+      "enter-instagram-link": "أدخل رابط إنستغرام",
+      "youtube-link": "رابط يوتيوب",
+      "enter-youtube-link": "أدخل رابط يوتيوب",
+      "linkedin-link": "رابط لينكد إن",
+      "enter-linkedin-link": "أدخل رابط لينكد إن",
+      "save": "حفظ",
+      "error-msg": "فشل الإرسال. يرجى المحاولة مرة أخرى."
+    },
+    "portfolio": {
+      "title": "المحفظة",
+      "projects": "المشاريع",
+      "project-name": "اسم المشروع",
+      "enter-project-name": "أدخل اسم المشروع",
+      "date": "التاريخ",
+      "enter-date": "أدخل التاريخ",
+      "description": "الوصف",
+      "enter-description": "أدخل الوصف",
+      "images-videos": "الصور والفيديوهات",
+      "edit": "تعديل",
+      "edit-project": "تعديل المشروع",
+      "update": "تحديث",
+      "save": "حفظ",
+      "project-details": "تفاصيل المشروع",
+      "back-to-project-list": "العودة إلى قائمة المشاريع",
+      "project-not-found": "المشروع غير موجود",
+      "error-msg": "فشل الإرسال. يرجى المحاولة مرة أخرى."
+    },
+    "courses": {
+      "courses": "الدورات الإلكترونية",
+      "back-to-course-list": "العودة إلى قائمة الدورات الإلكترونية",
+      "course-details": "تفاصيل الدورة",
+      "whats-in-this-book": "ما في هذا الكتاب",
+      "all-classes": "جميع الفصول"
+    },
+    "books": {
+      "books": "الكتب الإلكترونية",
+      "e-book": "كتاب إلكتروني",
+      "back-to-book-list": "العودة إلى قائمة الكتب الإلكترونية",
+      "whats-in-this-book": "ما في هذا الكتاب",
+      "download": "تحميل"
+    },
+    "employees": {
+      "new-employees": "الموظفون الجدد",
+      "confirmed-employees": "الموظفون المؤكدون"
+    },
+    "plans": {
+      "my-plan": "خطتي",
+      "upgrade-plan": "ترقية الخطة",
+      "month": "شهر",
+      "valid-till": "صالح حتى",
+      "no-current-plan": "لا توجد خطة حالية"
+    }
+  },
+  "messages": {
+    "messages": "الرسائل",
+    "search-your-message": "ابحث في رسائلك...",
+    "multiple-members": "أعضاء متعددون",
+    "message-copied-to-clipboard": "تم نسخ الرسالة إلى الحافظة",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "select-a-conversation": "اختر محادثة",
+    "loading": "جاري التحميل...",
+    "conversation-not-found": "المحادثة غير موجودة",
+    "no-messages-yet": "لا توجد رسائل بعد",
+    "start-the-conversation": "ابدأ المحادثة",
+    "loading-more-messages": "جاري تحميل المزيد من الرسائل...",
+    "please_enter_message_or_attach_files": "يرجى إدخال رسالة أو إرفاق ملفات",
+    "error_sending_message": "خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+    "type-a-message": "اكتب رسالة...",
+    "selected-attachments": "المرفقات المحددة",
+    "add-more": "إضافة المزيد",
+    "send": "إرسال",
+    "cancel": "إلغاء"
   }
 }

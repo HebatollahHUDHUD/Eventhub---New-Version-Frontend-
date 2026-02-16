@@ -34,6 +34,12 @@
   --color-primary: var(--primary);
   --color-accentPink: var(--accentPink);
   --color-accentBlue: var(--accentBlue);
+  --color-clr-orange: var(--orange);
+  --color-accentPurple: var(--accentPurple);
+  --color-accentSky: var(--accentSky);
+  --color-lightGray: var(--lightGray);
+  --color-subtleText: var(--subtleText);
+  --color-lightBackground: var(--lightBackground);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -63,12 +69,21 @@
   --accent: oklch(0.9700 0 0);
   --accentPink: oklch(67.515% 0.2295 345.972);
   --accentBlue: oklch(62.057% 0.1884 258.697);
+  --accentPurple: #797DE5;
+  --accentSky: #38BDF8;
+  --lightGray: #E2E2E2;
+  --subtleText: #727272;
+  --lightBackground: #F8FAFC;
+  --accentPurple: hsl(238, 68%, 69%);
   --accent-foreground: oklch(0.2050 0 0);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.9220 0 0);
   --input: oklch(0.9220 0 0);
   --ring: oklch(0.7080 0 0);
+  --orange: oklch(0.8062 0.1493 73.3220);
+
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -113,7 +128,7 @@
 
 @layer utilities {
   .container {
-    @apply mx-auto;
+    @apply mx-auto px-4! sm:px-6! lg:px-8!;
   }
 
   .container-sm {
@@ -121,10 +136,10 @@
   }
 
   .title-1 {
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold;
   }
   .title-2 {
-    @apply text-xl md:text-2xl lg:text-3xl font-bold;
+    @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold;
   }
   .title-3 {
     @apply text-lg md:text-xl lg:text-2xl font-semibold;
@@ -135,7 +150,83 @@
   .title-5 {
     @apply text-sm md:text-base lg:text-lg;
   }
+  .title-sm {
+    @apply text-base md:text-lg font-semibold;
+  }
+  .title-xs {
+    @apply text-sm md:text-base font-medium;
+  }
   .description {
     @apply text-sm md:text-base lg:text-lg text-muted-foreground;
   }
+  .section-style {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.fc .fc-toolbar.fc-header-toolbar{
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:last-child{
+  margin-inline-start: auto;
+}
+
+/* Hide empty header toolbar chunks */
+.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:empty {
+  display: none;
+}
+
+/* Ticket Card Design */
+.ticket-card {
+  --ticket-bg: #ffffff;
+  --notch-radius: 10px;
+  --notch-step: 30px;
+
+  position: relative;
+  background: var(--ticket-bg);
+  border-radius: 24px;
+
+  -webkit-mask:
+    radial-gradient(
+      circle var(--notch-radius) at 0%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y,
+    radial-gradient(
+      circle var(--notch-radius) at 100%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y;
+  -webkit-mask-composite: destination-in;
+
+  mask:
+    radial-gradient(
+      circle var(--notch-radius) at 0%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y,
+    radial-gradient(
+      circle var(--notch-radius) at 100%,
+      transparent 99%,
+      black 100%
+    ) 0 0 / 100% var(--notch-step) repeat-y;
+  mask-composite: intersect;
 }

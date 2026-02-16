@@ -8,7 +8,7 @@ const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
   const t = useTranslations("talent.card");
   
   return (
-    <div className=" bg-linear-to-br from-purple-200 to-white rounded-3xl p-6 shadow-lg flex flex-col items-center text-center relative">
+    <div className="bg-gradient-to-br from-purple-200 to-white rounded-3xl p-6 shadow-lg flex flex-col items-center text-center relative">
       
       {/* Circle Image */}
       <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white -mt-18">

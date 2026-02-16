@@ -1,9 +1,10 @@
-import AboutIntro from '@/components/about/AboutIntro'
-import EventContract from '@/components/about/EventContract'
-import QuestionsAndAnswers from '@/components/about/QuestionsAndAnswers'
-import WhyEventsHubs from '@/components/about/WhyEventsHubs'
+
 import { getData } from '@/lib/request-server'
 import type { AboutPage } from '@/schemas/shared'
+import AboutIntro from './components/AboutIntro';
+import WhyEventsHubs from './components/WhyEventsHubs';
+import EventContract from './components/EventContract';
+import QuestionsAndAnswers from './components/QuestionsAndAnswers';
 
 const page = async () => {
   const response = await getData<AboutPage>({
