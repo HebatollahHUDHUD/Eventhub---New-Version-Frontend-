@@ -1,10 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CircleCheck, ArrowUpRight } from "lucide-react";
+import { CircleCheck, ArrowUpRight, CircleCheckBig } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { riyalSVG } from "@/public/SVGs";
 
 interface PlanFeature {
   name: string;
@@ -17,6 +18,7 @@ interface PlanCardProps {
   price: number;
   features: PlanFeature[];
   onPurchase: () => void;
+  disabled?: boolean;
 }
 
 const PlanCard = ({
@@ -25,15 +27,15 @@ const PlanCard = ({
   price,
   features,
   onPurchase,
+  disabled,
 }: PlanCardProps) => {
   const t = useTranslations("home.pricingPlans");
 
   const isFree = price === 0;
 
-  const lowerName = name.toLowerCase();
-  const planIcon = lowerName.includes("platinum")
+  const planIcon = (name.toLowerCase().includes("platinum") || name.includes("بلاتين"))
     ? "/icons/plan-icons/platinum.png"
-    : lowerName.includes("gold")
+    : (name.toLowerCase().includes("gold") || name.includes("ذهب"))
       ? "/icons/plan-icons/gold.png"
       : "/icons/plan-icons/muted.png";
 
@@ -57,8 +59,8 @@ const PlanCard = ({
         style={{
           background:
             "linear-gradient(180deg, #797DE5 0%, #333441 100%)",
-          // borderRadius: "0 0 50% 50% / 0 0 30px 30px",
-          borderRadius: "0 0 70% 70% / 0 0 30px 30px",
+          borderRadius: "0 0 50% 50% / 0 0 30px 30px",
+          // borderRadius: "0 0 70% 70% / 0 0 30px 30px",
         }}
       >
         {/* Icon Circle */}
@@ -67,7 +69,7 @@ const PlanCard = ({
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
-          {name}
+          {name} 
         </h3>
       </div>
 
@@ -76,11 +78,12 @@ const PlanCard = ({
 
         {/* Price */}
         <div className="flex items-baseline justify-center gap-1">
-          <span className="text-4xl md:text-5xl font-bold text-foreground">
+          <span className="title-2 font-bold text-foreground flex items-center gap-1">
+            {riyalSVG("#000","40px","40px")}
             {isFree ? "00.00" : price.toFixed(2)}
           </span>
           <span className="text-sm text-muted-foreground font-medium">
-            {t("perMonth")}
+            {t("perMonth")} 
           </span>
         </div>
 
@@ -91,17 +94,17 @@ const PlanCard = ({
               key={index}
               className={cn(
                 "flex items-center gap-2 text-sm",
-                feature.is_active
-                  ? "text-foreground"
-                  : "text-muted-foreground/40"
+                // feature
+                //   ? "text-foreground"
+                //   : "text-muted-foreground/40"
               )}
             >
-              <CircleCheck
+              <CircleCheckBig
                 className={cn(
                   "size-4 shrink-0",
-                  feature.is_active
-                    ? "text-primary"
-                    : "text-muted-foreground/40"
+                  // feature.is_active
+                  //   ? "text-primary"
+                  //   : "text-muted-foreground/40"
                 )}
               />
               <span>{feature.name}</span>
@@ -111,14 +114,18 @@ const PlanCard = ({
 
         {/* Purchase / Register Button */}
         <Button
-          variant="default"
+          variant="purple"
           size="lg"
           className="w-full uppercase tracking-wider font-bold"
           onClick={onPurchase}
+          disabled={disabled}
+          
         >
           {isFree ? t("registerNow") : t("purchaseNow")}
-          <ArrowUpRight className="size-4" />
-        </Button>
+          <div className="relative ">
+              <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+              <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+            </div>      </Button>
       </div>
     </article>
   );

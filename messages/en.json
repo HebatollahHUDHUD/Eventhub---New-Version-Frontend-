@@ -117,7 +117,19 @@
         "continueWithoutCode": "Continue without Code",
         "proceedToPayment": "Proceed to Payment",
         "invalidPromoCode": "Invalid promo code",
-        "promoCodeApplied": "Promo code applied successfully"
+        "promoCodeApplied": "Promo code applied successfully",
+        "loginRequired": "Please login to subscribe to a plan",
+        "subscriptionSuccess": "Subscribed successfully",
+        "subscriptionFailed": "Subscription failed. Please try again."
+      },
+      "paymentStatus": {
+        "checkingPayment": "Checking your payment...",
+        "successTitle": "You're All Set!",
+        "successDescription": "Great news! Your payment was successful, and your subscription is now active.\nWelcome aboard. Start exploring your benefits right away and make the most of your experience with us.",
+        "greatButton": "Great!",
+        "failedTitle": "Payment Failed",
+        "failedDescription": "Something went wrong with your payment. Please try again.",
+        "closeButton": "Close"
       }
     }
   },

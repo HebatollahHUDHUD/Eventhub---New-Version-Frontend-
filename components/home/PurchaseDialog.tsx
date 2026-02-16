@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMutation } from "@tanstack/react-query";
 import {
   Dialog,
   DialogContent,
@@ -12,9 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TicketCard } from "@/components/ui/ticket-card";
-import { usePostData } from "@/hooks/useFetch";
+import { postData } from "@/lib/request";
 import { toast } from "@/components/ui/toast";
+import { useRouter } from "@/i18n/navigation";
 import { CircleX, Loader2 } from "lucide-react";
+import { riyalSVG } from "@/public/SVGs";
 
 interface PurchaseDialogProps {
   open: boolean;
@@ -32,54 +35,62 @@ const PurchaseDialog = ({
   planDetails,
 }: PurchaseDialogProps) => {
   const t = useTranslations("home.pricingPlans.purchaseDialog");
+  const router = useRouter();
 
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<{
     code: string;
+    price: number;
     discount: number;
+    total: number;
   } | null>(null);
 
-  // Placeholder API: Validate Promo Code
-  // POST /validate-promo  { code: string, plan_id: string }
-  // Response: { status: "success", result: { discount: number, code: string } }
-  const { mutate: validatePromo, isPending: isValidating } = usePostData<{
-    discount: number;
-    code: string;
-  }>({
-    endpoint: "/validate-promo",
+  // Check coupon via the subscribe endpoint with check_coupon flag
+  const { mutate: checkCoupon, isPending: isValidating } = useMutation({
+    mutationFn: (coupon: string) =>
+      postData<{ price: number; discount: number; total: number }>({
+        endpoint: `/profile/plan/${planDetails?.id}/subscribe`,
+        config: {
+          body: { coupon, check_coupon: 1 },
+        },
+      }),
   });
 
-  // Placeholder API: Process Payment
-  // POST /process-payment  { plan_id: string, promo_code?: string }
-  // Response: { status: "success", result: { payment_url: string } }
-  const { mutate: processPayment, isPending: isProcessing } = usePostData<{
-    payment_url: string;
-  }>({
-    endpoint: "/process-payment",
+  // Subscribe to plan API (dynamic endpoint per planId)
+  // POST /profile/plan/{planId}/subscribe
+  // Success: { error_flag: 0, message: "You can pay now", result: { payment_url: "..." } }
+  // Unauthenticated: returns FailResponse with code 401
+  const { mutate: subscribePlan, isPending: isProcessing } = useMutation({
+    mutationFn: (payload: { planId: string | number; coupon?: string }) =>
+      postData<{ payment_url: string }>({
+        endpoint: `/profile/plan/${payload.planId}/subscribe`,
+        config: {
+          body: payload.coupon ? { coupon: payload.coupon } : null,
+        },
+      }),
   });
 
   const handleApplyPromo = () => {
     if (!promoCode.trim() || !planDetails) return;
 
-    validatePromo(
-      { code: promoCode.trim(), plan_id: String(planDetails.id ?? "") },
-      {
-        onSuccess: (res) => {
-          if (res?.status === "success" && res.result) {
-            setAppliedPromo({
-              code: promoCode.trim(),
-              discount: res.result.discount,
-            });
-            toast(t("promoCodeApplied"), "success");
-          } else {
-            toast(t("invalidPromoCode"), "destructive");
-          }
-        },
-        onError: () => {
+    checkCoupon(promoCode.trim(), {
+      onSuccess: (res) => {
+        if (res?.status === "success" && res.result) {
+          setAppliedPromo({
+            code: promoCode.trim(),
+            price: res.result.price,
+            discount: res.result.discount,
+            total: res.result.total,
+          });
+          toast(t("promoCodeApplied"), "success");
+        } else {
           toast(t("invalidPromoCode"), "destructive");
-        },
-      }
-    );
+        }
+      },
+      onError: () => {
+        toast(t("invalidPromoCode"), "destructive");
+      },
+    });
   };
 
   const handleRemovePromo = () => {
@@ -87,26 +98,42 @@ const PurchaseDialog = ({
     setPromoCode("");
   };
 
-  const handlePayment = () => {
-    if (!planDetails) return;
+  const handleSubscribe = () => {
+    if (!planDetails?.id) return;
 
-    const payload: Record<string, unknown> = {
-      plan_id: String(planDetails.id ?? ""),
-    };
-    if (appliedPromo) {
-      payload.promo_code = appliedPromo.code;
-    }
+    subscribePlan(
+      {
+        planId: planDetails.id,
+        coupon: appliedPromo?.code,
+      },
+      {
+        onSuccess: (res) => {
+          // Case 1: Unauthenticated (401 returned as FailResponse)
+          if (res.status === "fail" && res.code === 401) {
+            toast(t("loginRequired"), "destructive");
+            onOpenChange(false);
+            router.push("/login");
+            return;
+          }
 
-    processPayment(payload, {
-      onSuccess: (res) => {
-        if (res?.status === "success" && res.result?.payment_url) {
-          window.location.href = res.result.payment_url;
-        }
-      },
-      onError: () => {
-        toast(t("invalidPromoCode"), "destructive");
-      },
-    });
+          // Case 2: Success with payment URL — redirect cross-browser safe
+          if (res.status === "success" && res.result?.payment_url) {
+            window.location.assign(res.result.payment_url);
+            return;
+          }
+
+          // Case 3: Success without payment URL (e.g., free plan subscribed directly)
+          if (res.status === "success" && !res.result?.payment_url) {
+            toast(res.message || t("subscriptionSuccess"), "success");
+            onOpenChange(false);
+            return;
+          }
+
+          // Case 4: Other failure
+          toast(t("subscriptionFailed"), "destructive");
+        },
+      }
+    );
   };
 
   const handleOpenChange = (value: boolean) => {
@@ -120,9 +147,9 @@ const PurchaseDialog = ({
 
   if (!planDetails) return null;
 
-  const price = planDetails.price;
+  const price = appliedPromo?.price ?? planDetails.price;
   const discount = appliedPromo?.discount ?? 0;
-  const total = price - discount;
+  const total = appliedPromo?.total ?? planDetails.price;
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -194,8 +221,8 @@ const PurchaseDialog = ({
               <span className="text-sm text-muted-foreground">
                 {t("planAmount")}
               </span>
-              <span className="text-base font-semibold">
-                ₦{price.toFixed(2)}
+              <span className="text-base font-semibold flex items-center gap-1">
+                {riyalSVG("#000", "14", "14")}{price.toFixed(2)}
               </span>
             </div>
 
@@ -206,8 +233,8 @@ const PurchaseDialog = ({
                   <span className="text-sm text-muted-foreground">
                     {t("discount")}
                   </span>
-                  <span className="text-base font-semibold">
-                    ₦{discount.toFixed(2)}
+                  <span className="text-base font-semibold flex items-center gap-1">
+                    {riyalSVG("#000", "14", "14")}{discount.toFixed(2)}
                   </span>
                 </div>
 
@@ -217,8 +244,8 @@ const PurchaseDialog = ({
                   <span className="text-sm font-medium text-foreground">
                     {t("total")}
                   </span>
-                  <span className="text-lg font-bold text-amber-500">
-                    ₦{total.toFixed(2)}
+                  <span className="text-lg font-bold text-amber-500 flex items-center gap-1">
+                    {riyalSVG("#f59e0b", "16", "16")}{total.toFixed(2)}
                   </span>
                 </div>
               </>
@@ -227,10 +254,10 @@ const PurchaseDialog = ({
 
           {/* Footer Button */}
           <Button
-            // variant="default"
+            variant="purple"
             size="lg"
-            className="max-w-[300px]! mx-auto bg-[#797DE5]!"
-            onClick={handlePayment}
+            className="max-w-[300px]! mx-auto"
+            onClick={handleSubscribe}
             disabled={isProcessing}
           >
             {isProcessing ? (

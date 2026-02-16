@@ -2,21 +2,60 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import cookieClient from "js-cookie";
+import { SESSION_NAME } from "@/constant";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import PlanCard from "@/components/home/PlanCard";
 import PurchaseDialog from "@/components/home/PurchaseDialog";
+import PaymentStatusDialog from "@/components/home/PaymentStatusDialog";
 import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { PricingPageResponse } from "@/schemas/types";
+import { getUserSession } from "@/lib/userSession";
 import PageTitle from "../common/PageTitle";
 
 type PlanType = "company" | "personal";
 
+interface Plan {
+  id: number;
+  type: string;
+  image: string | null;
+  name: string;
+  slug: string;
+  features: string[];
+  currency: string;
+  price: string;
+  billing_interval: string;
+  is_featured: number;
+}
+
+interface PricingPageResponse {
+  pricing_page_title: string;
+  pricing_page_subtitle: string;
+  plans: Plan[];
+}
+
+interface ProfilePlanResponse {
+  profile: {
+    current_subscription: {
+      id: number;
+      plan: Plan;
+      start_date: string;
+      end_date: string;
+      created_at: string;
+      updated_at: string;
+    } | null;
+  };
+}
+
 const PricingPlans = () => {
   const t = useTranslations("home.pricingPlans");
-  const [planType, setPlanType] = useState<PlanType>("company");
+  const searchParams = useSearchParams();
+  const loggedUser = getUserSession();
+  const initialPlanType: PlanType = loggedUser?.user_type === "company" ? "company" : "personal";
+  const [planType, setPlanType] = useState<PlanType>(loggedUser ? initialPlanType : "company");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
@@ -24,15 +63,44 @@ const PricingPlans = () => {
     id?: string | number;
   } | null>(null);
 
+  // Payment status check: only if logged in and payment_id param is present
+  const paymentId = searchParams.get("payment_id");
+  const isLoggedIn = !!cookieClient.get(SESSION_NAME);
+  const [paymentStatusOpen, setPaymentStatusOpen] = useState(
+    !!paymentId && isLoggedIn
+  );
+  const handlePaymentStatusClose = (open: boolean) => {
+    setPaymentStatusOpen(open);
+    if (!open && paymentId) {
+      // Remove payment_id from URL without a full reload
+      const url = new URL(window.location.href);
+      url.searchParams.delete("payment_id");
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
   const { data, isLoading } = useGetData<PricingPageResponse>({
     endpoint: "/pricing-page",
     queryKey: ["pricing-plans"],
   });
+  // const activeSubscription = loggedUser?.current_subscription ?? null;
 
-  // Filter plans by selected plan type
-  const plans = data?.status === "success"
-    ? (data.result?.plans ?? []).filter((plan) => plan.type === planType)
-    : [];
+  // Fetch current subscription only when user is logged in and payment status check is done
+  const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
+    endpoint: "/profile",
+    queryKey: ["profile"],
+    enabled: isLoggedIn && !paymentStatusOpen,
+  });
+
+  const activeSubscription =
+    isLoggedIn &&
+    profilePlanData?.status === "success" &&
+    profilePlanData.result?.profile?.current_subscription
+      ? profilePlanData.result.profile.current_subscription
+      : null;
+
+  const allPlans = data?.status === "success" ? data.result?.plans ?? [] : [];
+  const plans = allPlans.filter((plan) => plan.type === planType);
 
   const handlePurchase = (plan: { name: string; price: number; id?: string | number }) => {
     setSelectedPlan(plan);
@@ -80,12 +148,9 @@ const PricingPlans = () => {
                 <PlanCard
                   key={plan.id}
                   name={plan.name}
-                  is_recommended={plan.is_featured === 1}
+                  is_recommended={!!plan.is_featured}
                   price={parseFloat(plan.price)}
-                  features={plan.features.map((feature) => ({
-                    name: feature,
-                    is_active: true,
-                  }))}
+                  features={plan.features.map((f) => ({ name: f, is_active: true }))}
                   onPurchase={() =>
                     handlePurchase({
                       name: plan.name,
@@ -93,6 +158,7 @@ const PricingPlans = () => {
                       id: plan.id,
                     })
                   }
+                  disabled={activeSubscription?.plan?.id === plan.id}
                 />
               ))}
             </div>
@@ -112,7 +178,14 @@ const PricingPlans = () => {
         onOpenChange={setDialogOpen}
         planDetails={selectedPlan}
       />
-    </section >
+
+      {/* Payment Status Dialog */}
+      <PaymentStatusDialog
+        open={paymentStatusOpen}
+        onOpenChange={handlePaymentStatusClose}
+        paymentId={paymentId}
+      />
+    </section>
   );
 };
 

@@ -31,6 +31,7 @@ const buttonVariants = cva(
         outlineSecondary:
           "border border-secondary bg-transparent hover:bg-secondary/20 text-secondary",
         orange: "bg-amber-500 text-white hover:bg-amber-500/90",
+        purple: "bg-[#797DE5] text-white hover:bg-[#797DE5]/90",
 
       },
       size: {
