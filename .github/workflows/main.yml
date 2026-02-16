@@ -40,7 +40,7 @@ jobs:
             git pull origin main
 
             npm ci
-            npm run i
+            npm i
             npm run build
             pm2 restart 7
           EOF
