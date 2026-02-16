@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Play } from "lucide-react";
+import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
+
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
   url: string;
@@ -15,24 +16,6 @@ export default function VideoPlayer({
   className,
   poster,
 }: VideoPlayerProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
-
-  const handleEnded = () => {
-    setIsPlaying(false);
-  };
-
   return (
     <figure
       className={cn(
@@ -40,29 +23,13 @@ export default function VideoPlayer({
         className
       )}
     >
-      <video
-        ref={videoRef}
+      <ReactPlayer
         src={url}
-        poster={poster}
-        controls={isPlaying}
-        onPause={handlePause}
-        onEnded={handleEnded}
-        className="w-full h-full object-cover"
-        preload="metadata"
+        controls
+        light={poster || true}
+        width="100%"
+        height="100%"
       />
-
-      {/* Play button overlay */}
-      {!isPlaying && (
-        <button
-          onClick={handlePlay}
-          aria-label="Play video"
-          className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/40"
-        >
-          <span className="flex items-center justify-center w-14 h-14 md:w-18 md:h-18 rounded-full bg-primary">
-            <Play className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground fill-primary-foreground ms-0.5" />
-          </span>
-        </button>
-      )}
     </figure>
   );
 }
