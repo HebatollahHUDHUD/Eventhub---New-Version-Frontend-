@@ -3,6 +3,7 @@
 import { usePostData } from "@/hooks/useFetch";
 import { toast } from "@/components/ui/toast";
 import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type JobDetail = {
   label: string;
@@ -59,17 +60,19 @@ const OpportunityJobDetails = ({
         </div>
       </div>
       <div className="rounded-lg shadow-[0px_0px_6px_#00000029] p-3.5 mx-4 mb-4">
-        <button
+        <Button
+          variant="accentPurple"
+          size="lg"
           onClick={handleApply}
           disabled={isPending}
-          className="block w-full text-center bg-accentPurple text-white font-medium py-2.5 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="w-full rounded-lg"
         >
           {isPending ? (
-            <Loader2 className="w-5 h-5 animate-spin mx-auto" />
+            <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
             "Apply to Job"
           )}
-        </button>
+        </Button>
       </div>
     </div>
   );
