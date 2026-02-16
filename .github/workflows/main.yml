@@ -24,7 +24,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" << 'EOF'
             set -e
-            cd /home/eventshubs/
+            cd /home/eventshubs/website/
 
             # load nvm for non-interactive shells
             export NVM_DIR="$HOME/.nvm"
