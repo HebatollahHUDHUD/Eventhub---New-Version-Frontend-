@@ -11,6 +11,8 @@ type OpportunitiesCardProps = {
 };
 
 const OpportunitiesCard = ({ jobAd }: OpportunitiesCardProps) => {
+  if (!jobAd) return null;
+
   return (
     <Link
       href={`/opportunities/${jobAd.id}`}

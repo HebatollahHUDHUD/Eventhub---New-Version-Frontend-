@@ -53,7 +53,8 @@ const OpportunitiesList = async ({
     },
   });
 
-  const jobAds = data.status === "success" ? data.result.job_ads : null;
+  const jobAds =
+    data.status === "success" ? data.result?.job_ads : null;
   const jobAdsList = jobAds?.data || [];
   const pagination = jobAds?.pagination || null;
 

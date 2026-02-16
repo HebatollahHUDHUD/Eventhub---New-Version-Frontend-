@@ -187,6 +187,11 @@ export type JobAdDetailsResponse = {
   job_ad: JobAd;
 };
 
+export type JobAdMainDetailsResponse = {
+  job_ad: JobAdMain;
+  similar_job_ads: JobAdMain[];
+};
+
 // Event related interfaces
 export interface EventType {
   id: number;
