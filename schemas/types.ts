@@ -468,3 +468,42 @@ export interface EmployeesResponse {
 export type EmployeeDetailsResponse = {
   employee: Employee;
 };
+
+// Conversation related interfaces
+export interface ConversationSubjectJobAd {
+  id: number;
+  user: JobAdUser;
+  title: string;
+  about: string;
+  experience_years: number;
+  gender: string | null;
+  status: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ConversationSubject {
+  id: number;
+  job_ad: ConversationSubjectJobAd | null;
+  user: User | null;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface Conversation {
+  id: number;
+  subject: ConversationSubject | null;
+  created_by: JobAdUser;
+  users: User[];
+  unread_count: number;
+  created_at: string;
+  subject_type?: string;
+  subject_id?: number;
+  module?: {
+    name: string;
+  } | null;
+}
+
+export interface ConversationsResponse {
+  conversations: Conversation[];
+}

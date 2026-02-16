@@ -650,5 +650,26 @@
       "valid-till": "صالح حتى",
       "no-current-plan": "لا توجد خطة حالية"
     }
+  },
+  "messages": {
+    "messages": "الرسائل",
+    "search-your-message": "ابحث في رسائلك...",
+    "multiple-members": "أعضاء متعددون",
+    "message-copied-to-clipboard": "تم نسخ الرسالة إلى الحافظة",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "select-a-conversation": "اختر محادثة",
+    "loading": "جاري التحميل...",
+    "conversation-not-found": "المحادثة غير موجودة",
+    "no-messages-yet": "لا توجد رسائل بعد",
+    "start-the-conversation": "ابدأ المحادثة",
+    "loading-more-messages": "جاري تحميل المزيد من الرسائل...",
+    "please_enter_message_or_attach_files": "يرجى إدخال رسالة أو إرفاق ملفات",
+    "error_sending_message": "خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+    "type-a-message": "اكتب رسالة...",
+    "selected-attachments": "المرفقات المحددة",
+    "add-more": "إضافة المزيد",
+    "send": "إرسال",
+    "cancel": "إلغاء"
   }
 }

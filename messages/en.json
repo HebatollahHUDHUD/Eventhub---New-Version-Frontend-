@@ -617,5 +617,26 @@
       "valid-till": "Valid till",
       "no-current-plan": "No current plan"
     }
+  },
+  "messages": {
+    "messages": "Messages",
+    "search-your-message": "Search your messages...",
+    "multiple-members": "Multiple Members",
+    "message-copied-to-clipboard": "Message copied to clipboard",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "select-a-conversation": "Select a conversation",
+    "loading": "Loading...",
+    "conversation-not-found": "Conversation not found",
+    "no-messages-yet": "No messages yet",
+    "start-the-conversation": "Start the conversation",
+    "loading-more-messages": "Loading more messages...",
+    "please_enter_message_or_attach_files": "Please enter a message or attach files",
+    "error_sending_message": "Error sending message. Please try again.",
+    "type-a-message": "Type a message...",
+    "selected-attachments": "Selected Attachments",
+    "add-more": "Add More",
+    "send": "Send",
+    "cancel": "Cancel"
   }
 }
