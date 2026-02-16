@@ -495,7 +495,7 @@ const AboutPageSchema = z.object({
   about_page_title: z.string().nullable().optional(),
   about_page_subtitle: z.string().nullable().optional(),
   about_page_desc: z.string().nullable().optional(),
-  about_page_video: z.string().nullable().optional(),
+  about_page_video_url: z.string().nullable().optional(),
 
   about_page_why_us_items: z
     .array(WhyUsItemSchema)
