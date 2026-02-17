@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,25 +17,24 @@ import { TicketCard } from "@/components/ui/ticket-card";
 import { postData } from "@/lib/request";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "@/i18n/navigation";
-import { CircleX, Loader2 } from "lucide-react";
+import { ArrowUpRight, CircleX, Loader2 } from "lucide-react";
 import { riyalSVG } from "@/public/SVGs";
+import { Plan } from "@/schemas/types";
 
 interface PurchaseDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  planDetails: {
-    name: string;
-    price: number;
-    id?: string | number;
-  } | null;
+  planDetails: Plan;
+  disabled?: boolean;
+  isFree?: boolean;
 }
 
 const PurchaseDialog = ({
-  open,
-  onOpenChange,
   planDetails,
+  disabled,
+  isFree
 }: PurchaseDialogProps) => {
+  const [open, setOpen] = useState(false);
   const t = useTranslations("home.pricingPlans.purchaseDialog");
+  const tParent = useTranslations("home.pricingPlans");
   const router = useRouter();
 
   const [promoCode, setPromoCode] = useState("");
@@ -111,7 +111,7 @@ const PurchaseDialog = ({
           // Case 1: Unauthenticated (401 returned as FailResponse)
           if (res.status === "fail" && res.code === 401) {
             toast(t("loginRequired"), "destructive");
-            onOpenChange(false);
+            setOpen(false);
             router.push("/login");
             return;
           }
@@ -125,7 +125,7 @@ const PurchaseDialog = ({
           // Case 3: Success without payment URL (e.g., free plan subscribed directly)
           if (res.status === "success" && !res.result?.payment_url) {
             toast(res.message || t("subscriptionSuccess"), "success");
-            onOpenChange(false);
+            setOpen(false);
             return;
           }
 
@@ -142,7 +142,7 @@ const PurchaseDialog = ({
       setPromoCode("");
       setAppliedPromo(null);
     }
-    onOpenChange(value);
+    setOpen(value);
   };
 
   if (!planDetails) return null;
@@ -153,122 +153,136 @@ const PurchaseDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[600px]!">
-      <TicketCard
-          cardBg="#F2F2F2"
-          // className="space-y-6"
-          
-        > 
-        <div className="max-w-[400px]! mx-auto space-y-4">
+      <DialogTrigger asChild>
+        <Button
+          variant="purple"
+          size="lg"
+          className="w-full uppercase tracking-wider font-bold"
+          disabled={disabled}
+        >
+          {isFree ? tParent("registerNow") : tParent("purchaseNow")}
+          <div className="relative ">
+            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+          </div>      </Button>
+      </DialogTrigger>
 
-        
-          {/* Header Section */}
-          <DialogHeader className="items-center text-center border-2 border-white rounded-xl py-6 space-y-0 ">
-            <DialogTitle className="text-xl font-bold">
-              {t("title")}
-            </DialogTitle>
-            <DialogDescription className="text-muted-foreground">
-              {t("description")}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
-              {t("promocode")}
-            </label>
-            <div className="flex gap-2">
-              <div className="relative flex-1">
-                <Input
-                  value={appliedPromo ? appliedPromo.code : promoCode}
-                  onChange={(e) => setPromoCode(e.target.value)}
-                  placeholder={t("promocodePlaceholder")}
-                  disabled={!!appliedPromo || isValidating}
-                  className="border-amber-400!  pe-10 h-[40px]"
-                />
-                {appliedPromo && (
-                  <button
-                    type="button"
-                    onClick={handleRemovePromo}
-                    className="absolute top-1/2 end-3 -translate-y-1/2 text-red-500 hover:text-red-600 transition-colors"
-                    aria-label="Remove promo code"
-                  >
-                    <CircleX className="size-5" />
-                  </button>
-                )}
+      <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[600px]!">
+        <TicketCard
+          cardBg="#F2F2F2"
+        // className="space-y-6"
+
+        >
+          <div className="max-w-[400px]! mx-auto space-y-4">
+
+
+            {/* Header Section */}
+            <DialogHeader className="items-center text-center border-2 border-white rounded-xl py-6 space-y-0 ">
+              <DialogTitle className="text-xl font-bold">
+                {t("title")}
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                {t("description")}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">
+                {t("promocode")}
+              </label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Input
+                    value={appliedPromo ? appliedPromo.code : promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    placeholder={t("promocodePlaceholder")}
+                    disabled={!!appliedPromo || isValidating}
+                    className="border-amber-400!  pe-10 h-[40px]"
+                  />
+                  {appliedPromo && (
+                    <button
+                      type="button"
+                      onClick={handleRemovePromo}
+                      className="absolute top-1/2 end-3 -translate-y-1/2 text-red-500 hover:text-red-600 transition-colors"
+                      aria-label="Remove promo code"
+                    >
+                      <CircleX className="size-5" />
+                    </button>
+                  )}
+                </div>
+                <Button
+                  variant="orange"
+                  onClick={handleApplyPromo}
+                  disabled={!promoCode.trim() || !!appliedPromo || isValidating}
+                  className="shrink-0 h-[40px]"
+                >
+                  {isValidating ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    t("applyCode")
+                  )}
+                </Button>
               </div>
-              <Button
-                variant="orange"
-                onClick={handleApplyPromo}
-                disabled={!promoCode.trim() || !!appliedPromo || isValidating}
-                className="shrink-0 h-[40px]"
-              >
-                {isValidating ? (
-                  <Loader2 className="size-4 animate-spin" />
-                ) : (
-                  t("applyCode")
-                )}
-              </Button>
             </div>
-          </div>
           </div>
         </TicketCard>
 
-          {/* Promocode Input Section */}
+        {/* Promocode Input Section */}
 
-          {/* Pricing Summary Section */}
-          <div className="space-y-3">
-            {/* Plan Amount */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
-                {t("planAmount")}
-              </span>
-              <span className="text-base font-semibold flex items-center gap-1">
-                {riyalSVG("#000", "14", "14")}{price.toFixed(2)}
-              </span>
-            </div>
-
-            {/* Discount - only shown when promo applied */}
-            {appliedPromo && (
-              <>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
-                    {t("discount")}
-                  </span>
-                  <span className="text-base font-semibold flex items-center gap-1">
-                    {riyalSVG("#000", "14", "14")}{discount.toFixed(2)}
-                  </span>
-                </div>
-
-                
-                {/* Total */}
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-foreground">
-                    {t("total")}
-                  </span>
-                  <span className="text-lg font-bold text-amber-500 flex items-center gap-1">
-                    {riyalSVG("#f59e0b", "16", "16")}{total.toFixed(2)}
-                  </span>
-                </div>
-              </>
-            )}
+        {/* Pricing Summary Section */}
+        <div className="space-y-3">
+          {/* Plan Amount */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">
+              {t("planAmount")}
+            </span>
+            <span className="text-base font-semibold flex items-center gap-1">
+              {riyalSVG("#000", "14", "14")}{parseFloat(planDetails.price).toFixed(2)}
+            </span>
           </div>
 
-          {/* Footer Button */}
-          <Button
-            variant="purple"
-            size="lg"
-            className="max-w-[300px]! mx-auto"
-            onClick={handleSubscribe}
-            disabled={isProcessing}
-          >
-            {isProcessing ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : appliedPromo ? (
-              t("proceedToPayment")
-            ) : (
-              t("continueWithoutCode")
-            )}
-          </Button>
-       
+          {/* Discount - only shown when promo applied */}
+          {appliedPromo && (
+            <>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">
+                  {t("discount")}
+                </span>
+                <span className="text-base font-semibold flex items-center gap-1">
+                  {riyalSVG("#000", "14", "14")}{discount.toFixed(2)}
+                </span>
+              </div>
+
+
+              {/* Total */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-foreground">
+                  {t("total")}
+                </span>
+                <span className="text-lg font-bold text-amber-500 flex items-center gap-1">
+                  {riyalSVG("#f59e0b", "16", "16")}{parseFloat(total.toString()).toFixed(2)}
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Footer Button */}
+        <Button
+          variant="purple"
+          size="lg"
+          className="max-w-[300px]! mx-auto"
+          onClick={handleSubscribe}
+          disabled={isProcessing}
+        >
+          {isProcessing ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : appliedPromo ? (
+            t("proceedToPayment")
+          ) : (
+            t("continueWithoutCode")
+          )}
+        </Button>
+
       </DialogContent>
     </Dialog>
   );

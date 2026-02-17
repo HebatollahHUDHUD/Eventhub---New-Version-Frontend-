@@ -4,11 +4,18 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 import OpportunitiesList from "./OpportunitiesList";
 import { circlesToDownLeftSVG, circlesToLeftSVG } from "@/public/SVGs";
+import type { HomeOpportunity } from "@/schemas/home";
 
-const OpportunitiesSection = () => {
+interface OpportunitiesSectionProps {
+  title: string;
+  subtitle: string;
+  description: string;
+  opportunities: HomeOpportunity[];
+}
+
+const OpportunitiesSection = ({ title, subtitle, description, opportunities }: OpportunitiesSectionProps) => {
   const t = useTranslations("home.opportunities");
 
   return (
@@ -54,17 +61,15 @@ const OpportunitiesSection = () => {
           {/* Heading and Description */}
           <div className="max-w-6xl mx-auto space-y-4 text-center">
             <h2 className="title-2 tracking-tight">
-              {t("title")}
+              {title}
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {t("description")}
+              {description}
             </p>
           </div>
 
           {/* Opportunity Cards */}
-          <Suspense fallback={<div className="text-center py-12">Loading opportunities...</div>}>
-            <OpportunitiesList />
-          </Suspense>
+          <OpportunitiesList opportunities={opportunities} />
 
           {/* View More Button */}
           <div className="flex justify-center">

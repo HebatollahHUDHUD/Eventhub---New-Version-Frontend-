@@ -12,8 +12,8 @@ export function TicketCard({
   className = "",
   style,
   cardBg = "#ffffff",
-  notchRadius = 10,
-  notchStep = 30,
+  notchRadius = 8,
+  notchStep = 25,
   children,
   ...props
 }: TicketCardProps) {
