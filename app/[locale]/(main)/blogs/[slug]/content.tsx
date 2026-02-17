@@ -31,7 +31,8 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
             height={450}
             className="
               w-full 
-              md:max-w-[600px] 
+              md:max-w-[500px] 
+              lg:max-w-[600px] 
               aspect-[16/9] 
               rounded-t-4xl 
               object-cover 
