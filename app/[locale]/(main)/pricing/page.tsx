@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import cookieClient from "js-cookie";
@@ -47,7 +47,7 @@ interface ProfilePlanResponse {
   };
 }
 
-const PricingPlans = () => {
+const PricingPlansContent = () => {
   const t = useTranslations("home.pricingPlans");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -144,6 +144,22 @@ const PricingPlans = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const PricingPlans = () => {
+  return (
+    <Suspense fallback={
+      <section className="relative py-6 md:py-8 lg:py-12 overflow-hidden">
+        <div className="container relative z-10">
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="size-8 animate-spin text-primary" />
+          </div>
+        </div>
+      </section>
+    }>
+      <PricingPlansContent />
+    </Suspense>
   );
 };
 
