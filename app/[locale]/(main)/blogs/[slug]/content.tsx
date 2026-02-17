@@ -57,7 +57,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               </div>
             </div>
 
-            <div className="description">
+            <div className="description text-justify">
               <p>{blog?.content}</p>
             </div>
           </div>

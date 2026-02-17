@@ -52,7 +52,7 @@ export default function ContactForm() {
         <div className="w-full max-w-lg mx-auto bg-white shadow-xl rounded-3xl p-10">
             <h2 className="title-3 mb-10 relative inline-block">
                 {t("title")}
-                <span className="absolute -bottom-4 left-0 w-40 h-8 bg-accentPurple/30 rounded-full"></span>
+                <span className="absolute -bottom-4 start-0 w-40 h-8 bg-accentPurple/30 rounded-full"></span>
             </h2>
 
             <Form {...form}>
