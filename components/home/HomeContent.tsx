@@ -29,8 +29,8 @@ const HomeContent = async () => {
       <HeroSection
         title={homeData.home_hero_title}
         subtitle={homeData.home_hero_subtitle}
-        image={"/images/hero-section-image.png"}
-        image2={homeData.home_hero_image_2}
+        image={"/images/hero_bg.svg"}
+        image2={"/images/hero_line.svg"}
       />
       <AboutEventsHubs
         title={homeData.home_about_us_title}

@@ -15,8 +15,8 @@ import Image from "../common/image";
 interface HeroSectionProps {
   title: string;
   subtitle: string;
-  image: string | null;
-  image2: string | null;
+  image: string;
+  image2: string;
 }
 
 const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
@@ -155,22 +155,30 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
 
-      {image && (
-        <div className="hidden absolute bottom-0 end-0 lg:block w-3/5">
           <Image
             src={image}
             alt="Hero Section Image"
-            width={500}
-            height={500}
-            className="w-full h-auto object-cover"
+            width={1000}
+            height={1000}
+            className="w-[125%] h-auto object-cover"
             unoptimized
             quality={100}
           />
         </div>
-      )}
+      </div>
+
+      <div className="hidden absolute bottom-0 end-0 lg:block w-3/5 rtl:-scale-x-100">
+        <Image
+          src={image2}
+          alt="Hero Section Image"
+          width={500}
+          height={500}
+          className="w-full h-auto object-cover"
+          unoptimized
+          quality={100}
+        />
+      </div>
     </section>
   );
 };
