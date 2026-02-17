@@ -36,7 +36,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               rounded-t-4xl 
               object-cover 
               mb-6 
-              md:float-right md:ml-6 md:mb-1
+              md:float-end md:ms-6 md:mb-1
             "
           />
 
