@@ -8,32 +8,11 @@ import { SESSION_NAME } from "@/constant";
 import PlanCard from "@/components/home/PlanCard";
 import { PricingSwitch } from "@/components/home/PricingSwitch";
 import { useGetData } from "@/hooks/useFetch";
-import { Loader2 } from "lucide-react";
 import { getUserSession } from "@/lib/userSession";
-import { toast } from "@/components/ui/toast";
-import { useRouter } from "@/i18n/navigation";
 import PageTitle from "../common/PageTitle";
+import type { Plan } from "@/schemas/types";
 
 type PlanType = "company" | "personal";
-
-interface Plan {
-  id: number;
-  type: string;
-  image: string | null;
-  name: string;
-  slug: string;
-  features: string[];
-  currency: string;
-  price: string;
-  billing_interval: string;
-  is_featured: number;
-}
-
-interface PricingPageResponse {
-  pricing_page_title: string;
-  pricing_page_subtitle: string;
-  plans: Plan[];
-}
 
 interface ProfilePlanResponse {
   profile: {
@@ -48,15 +27,19 @@ interface ProfilePlanResponse {
   };
 }
 
-const PricingPlans = () => {
+interface PricingPlansProps {
+  title: string;
+  subtitle: string;
+  description: string;
+  plans: Plan[];
+}
+
+const PricingPlans = ({ title, subtitle, description, plans: allPlans }: PricingPlansProps) => {
   const t = useTranslations("home.pricingPlans");
   const searchParams = useSearchParams();
-  const router = useRouter();
   const loggedUser = getUserSession();
   const initialPlanType: PlanType = loggedUser?.user_type === "company" ? "company" : "personal";
   const [planType, setPlanType] = useState<PlanType>(loggedUser ? initialPlanType : "company");
-
-
 
   // Payment status check: only if logged in and payment_id param is present
   const paymentId = searchParams.get("payment_id");
@@ -65,15 +48,8 @@ const PricingPlans = () => {
     !!paymentId && isLoggedIn
   );
 
-
-  const { data, isLoading } = useGetData<PricingPageResponse>({
-    endpoint: "/pricing-page",
-    queryKey: ["pricing-plans"],
-  });
-  // const activeSubscription = loggedUser?.current_subscription ?? null;
-
   // Fetch current subscription only when user is logged in and payment status check is done
-  const { data: profilePlanData, refetch: refetchProfile } = useGetData<ProfilePlanResponse>({
+  const { data: profilePlanData } = useGetData<ProfilePlanResponse>({
     endpoint: "/profile",
     queryKey: ["profile"],
     enabled: isLoggedIn && !paymentStatusOpen,
@@ -86,7 +62,6 @@ const PricingPlans = () => {
       ? profilePlanData.result.profile.current_subscription
       : null;
 
-  const allPlans = data?.status === "success" ? data.result?.plans ?? [] : [];
   const plans = allPlans.filter((plan) => plan.type === planType);
 
   return (
@@ -95,8 +70,8 @@ const PricingPlans = () => {
         <div className="space-y-10 md:space-y-14">
           {/* Title and Description */}
           <PageTitle
-            title={(data?.status === "success" ? data.result?.pricing_page_title : undefined) ?? t("title")}
-            description={(data?.status === "success" ? data.result?.pricing_page_subtitle : undefined) ?? t("description")}
+            title={title}
+            description={subtitle}
           />
 
           {/* Plan Type Toggle */}
@@ -120,11 +95,7 @@ const PricingPlans = () => {
           </div>
 
           {/* Plans Grid */}
-          {isLoading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="size-8 animate-spin text-primary" />
-            </div>
-          ) : plans.length > 0 ? (
+          {plans.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
               {plans.map((plan) => (
                 <PlanCard

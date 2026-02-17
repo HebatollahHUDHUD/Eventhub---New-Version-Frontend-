@@ -6,9 +6,10 @@ import OpportunitiesSection from "@/components/home/OpportunitiesSection";
 import TrustedOrganisationsSection from "@/components/home/TrustedOrganisationsSection";
 import PricingPlans from "@/components/home/PricingPlans";
 import { getData } from "@/lib/request-server";
+import type { HomeResponse } from "@/schemas/home";
 
 const HomeContent = async () => {
-  const data = await getData<any>({
+  const data = await getData<HomeResponse>({
     endpoint: "/home",
     config: {
       next: {
@@ -17,17 +18,54 @@ const HomeContent = async () => {
     }
   });
 
-  console.log(data);
+  const homeData = data.status === "success" ? data.result : null;
+
+  if (!homeData) {
+    return null;
+  }
 
   return (
     <div>
-      <HeroSection />
-      <AboutEventsHubs />
-      <TalentsSection />
-      <TrustedOrganisationsSection />
-      <PricingPlans />
-      <OpportunitiesSection />
-      <BlogsSection />
+      <HeroSection
+        title={homeData.home_hero_title}
+        subtitle={homeData.home_hero_subtitle}
+        image={homeData.home_hero_image}
+        image2={homeData.home_hero_image_2}
+      />
+      <AboutEventsHubs
+        title={homeData.home_about_us_title}
+        description={homeData.home_about_us_desc}
+        video={homeData.home_about_us_video}
+        videoUrl={homeData.home_about_us_video_url}
+        items={homeData.home_about_us_items}
+      />
+      <TalentsSection
+        title={homeData.home_talents_title}
+        subtitle={homeData.home_talents_subtitle}
+      />
+      <TrustedOrganisationsSection
+        title={homeData.home_trusted_organizations_title}
+        subtitle={homeData.home_trusted_organizations_subtitle}
+        items={homeData.home_trusted_organizations_items}
+      />
+      <PricingPlans
+        title={homeData.home_pricing_title}
+        subtitle={homeData.home_pricing_subtitle}
+        description={homeData.home_pricing_desc}
+        plans={homeData.plans}
+      />
+      <OpportunitiesSection
+        title={homeData.home_opportunities_title}
+        subtitle={homeData.home_opportunities_subtitle}
+        description={homeData.home_opportunities_desc}
+        opportunities={homeData.opportunities}
+      />
+      <BlogsSection
+        title={homeData.home_blog_title}
+        subtitle={homeData.home_blog_subtitle}
+        description={homeData.home_blog_desc}
+        blogPosts={homeData.blog_posts}
+      />
     </div>
   )
 }

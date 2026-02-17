@@ -34,6 +34,7 @@ const PurchaseDialog = ({
 }: PurchaseDialogProps) => {
   const [open, setOpen] = useState(false);
   const t = useTranslations("home.pricingPlans.purchaseDialog");
+  const tParent = useTranslations("home.pricingPlans");
   const router = useRouter();
 
   const [promoCode, setPromoCode] = useState("");
@@ -159,7 +160,7 @@ const PurchaseDialog = ({
           className="w-full uppercase tracking-wider font-bold"
           disabled={disabled}
         >
-          {isFree ? t("registerNow") : t("purchaseNow")}
+          {isFree ? tParent("registerNow") : tParent("purchaseNow")}
           <div className="relative ">
             <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
             <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />

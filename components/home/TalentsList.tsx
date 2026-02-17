@@ -1,6 +1,6 @@
 import { getData } from "@/lib/request-server";
 import TalentCard from "@/app/[locale]/(main)/talent/components/TalentCard";
-import type { Talent, TalentCardData, TalentsResponse } from "@/schemas/types";
+import type { Talent, TalentsResponse } from "@/schemas/types";
 
 const TalentsList = async () => {
   const data = await getData<TalentsResponse>({
@@ -8,7 +8,7 @@ const TalentsList = async () => {
     config: {
       queryParams: {
         page: "1",
-        // user_type: "talent",
+        user_type: "talent",
       },
       next: {
         tags: ["talent"],
@@ -16,7 +16,6 @@ const TalentsList = async () => {
     },
   });
 
-  // Response structure: data.result.users.data
   const talentItems = data.status === "success" ? data?.result?.users?.data : [];
 
   const talentsToShow: Talent[] = talentItems

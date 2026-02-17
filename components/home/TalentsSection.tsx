@@ -6,7 +6,12 @@ import Link from "next/link";
 import { Suspense } from "react";
 import TalentsList from "./TalentsList";
 
-const TalentsSection = () => {
+interface TalentsSectionProps {
+  title: string;
+  subtitle: string;
+}
+
+const TalentsSection = ({ title, subtitle }: TalentsSectionProps) => {
   const t = useTranslations("home.talents");
 
   return (
@@ -35,9 +40,14 @@ const TalentsSection = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="title-2 font-bold! max-w-xl mx-auto text-center">
-            {t("title")}
-          </h2>
+          <div className="space-y-2 max-w-xl mx-auto text-center">
+            <h2 className="title-2 font-bold!">
+              {title}
+            </h2>
+            <p className="text-muted-foreground">
+              {subtitle}
+            </p>
+          </div>
 
           {/* Talent Cards */}
           <Suspense fallback={<div className="text-center py-12">Loading talents...</div>}>
