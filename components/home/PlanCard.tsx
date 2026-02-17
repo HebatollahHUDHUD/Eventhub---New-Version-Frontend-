@@ -1,18 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CircleCheck, ArrowUpRight, CircleCheckBig } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {  CircleCheckBig } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { riyalSVG } from "@/public/SVGs";
 import { Plan } from "@/schemas/types";
 import PurchaseDialog from "./PurchaseDialog";
-import PaymentStatusDialog from "./PaymentStatusDialog";
-import { SESSION_NAME } from "@/constant";
+// import PaymentStatusDialog from "./PaymentStatusDialog";
 import { useSearchParams } from "next/navigation";
 import { getUserSession } from "@/lib/userSession";
 import { useState } from "react";
+import PaymentStatusDialog from "./PaymentStatusDialog";
 
 interface PlanFeature {
   name: string;
@@ -23,12 +22,14 @@ interface PlanCardProps {
   plan: Plan;
   is_recommended: boolean;
   disabled?: boolean;
+  checkPaymentStatus?: boolean;
 }
 
 const PlanCard = ({
   plan,
   is_recommended,
   disabled,
+  checkPaymentStatus = false,
 }: PlanCardProps) => {
 
   const searchParams = useSearchParams();
@@ -151,11 +152,11 @@ const PlanCard = ({
 
 
       {/* Payment Status Dialog */}
-      <PaymentStatusDialog
+     { checkPaymentStatus && <PaymentStatusDialog
         open={paymentStatusOpen}
         onOpenChange={handlePaymentStatusClose}
         paymentId={paymentId}
-      />
+      />}
     </article>
   );
 };

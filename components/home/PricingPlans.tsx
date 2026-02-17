@@ -11,6 +11,7 @@ import { useGetData } from "@/hooks/useFetch";
 import { getUserSession } from "@/lib/userSession";
 import PageTitle from "../common/PageTitle";
 import type { Plan } from "@/schemas/types";
+import PaymentStatusDialog from "./PaymentStatusDialog";
 
 type PlanType = "company" | "personal";
 
@@ -115,6 +116,11 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
           )}
         </div>
       </div>
+      <PaymentStatusDialog
+      onOpenChange={setPaymentStatusOpen}
+      open={paymentStatusOpen}
+      paymentId={paymentId}
+      />
     </section>
   );
 };
