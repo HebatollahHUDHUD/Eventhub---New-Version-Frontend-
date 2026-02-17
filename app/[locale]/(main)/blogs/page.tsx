@@ -1,8 +1,8 @@
 import BlogsContent from './components/BlogsContent';
 import PageHeader from '@/components/common/PageHeader';
-import PageTitle from '@/components/common/PageTitle';
 import BlogsFilters from './components/BlogsFilters';
 import { getTranslations } from 'next-intl/server';
+import BlogsTitle from './components/BlogsTitle';
 
 type PageProps = {
   searchParams: Promise<Record<string, string | undefined>>;
@@ -18,11 +18,7 @@ const page = async ({ searchParams }: PageProps) => {
 
       <div className="space-y-10 py-10">
 
-        <PageTitle
-          title={t("title")}
-          description={t("description")}
-          className="max-w-md"
-        />
+         <BlogsTitle />
 
         <BlogsFilters />
 

@@ -31,12 +31,13 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
             height={450}
             className="
               w-full 
-              md:max-w-[600px] 
+              md:max-w-[500px] 
+              lg:max-w-[600px] 
               aspect-[16/9] 
               rounded-t-4xl 
               object-cover 
               mb-6 
-              md:float-right md:ml-6 md:mb-1
+              md:float-end md:ms-6 md:mb-1
             "
           />
 
@@ -57,7 +58,7 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
               </div>
             </div>
 
-            <div className="description">
+            <div className="description text-justify">
               <p>{blog?.content}</p>
             </div>
           </div>

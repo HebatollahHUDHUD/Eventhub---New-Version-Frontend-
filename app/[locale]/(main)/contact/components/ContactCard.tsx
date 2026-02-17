@@ -28,6 +28,7 @@ export default function ContactCard({
       ) : (
         <Link
           href={href}
+          dir="ltr"
           className="text-accentPurple title-4 underline hover:text-secondary/80 duration-200"
         >
           {value}
