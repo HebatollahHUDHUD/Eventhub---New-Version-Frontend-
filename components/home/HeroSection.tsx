@@ -12,7 +12,14 @@ import { ChevronDown, ArrowRight, MapPin, Tag, Instagram, Twitter, Linkedin, Fac
 import { cn } from "@/lib/utils";
 import Image from "../common/image";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  title: string;
+  subtitle: string;
+  image: string | null;
+  image2: string | null;
+}
+
+const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
   const t = useTranslations("home.hero");
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [locationOpen, setLocationOpen] = useState(false);
@@ -69,12 +76,12 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="title-1 text-primary-foreground tracking-tight">
-              {t("headline")}
+              {title}
             </h1>
 
             {/* Description */}
             <p className="max-w-xl title-4 font-normal! leading-relaxed text-primary-foreground/85">
-              {t("description")}
+              {subtitle}
             </p>
 
             {/* Search Bar */}
@@ -151,17 +158,19 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="hidden absolute bottom-0 end-0 lg:block w-3/5">
-        <Image
-          src="/images/hero-section-image.png"
-          alt="Hero Section Image"
-          width={500}
-          height={500}
-          className="w-full h-auto object-cover"
-          unoptimized
-          quality={100}
-        />
-      </div>
+      {image && (
+        <div className="hidden absolute bottom-0 end-0 lg:block w-3/5">
+          <Image
+            src={image}
+            alt="Hero Section Image"
+            width={500}
+            height={500}
+            className="w-full h-auto object-cover"
+            unoptimized
+            quality={100}
+          />
+        </div>
+      )}
     </section>
   );
 };

@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { riyalSVG } from "@/public/SVGs";
+import { Plan } from "@/schemas/types";
+import PurchaseDialog from "./PurchaseDialog";
+import PaymentStatusDialog from "./PaymentStatusDialog";
+import { SESSION_NAME } from "@/constant";
+import { useSearchParams } from "next/navigation";
+import { getUserSession } from "@/lib/userSession";
+import { useState } from "react";
 
 interface PlanFeature {
   name: string;
@@ -13,29 +20,49 @@ interface PlanFeature {
 }
 
 interface PlanCardProps {
-  name: string;
+  plan: Plan;
   is_recommended: boolean;
-  price: number;
-  features: PlanFeature[];
-  onPurchase: () => void;
   disabled?: boolean;
 }
 
 const PlanCard = ({
-  name,
+  plan,
   is_recommended,
-  price,
-  features,
-  onPurchase,
   disabled,
 }: PlanCardProps) => {
+
+  const searchParams = useSearchParams();
+  const loggedUser = getUserSession();
+
+
+  // Payment status check: only if logged in and payment_id param is present
+  const paymentId = searchParams.get("payment_id");
+  const isLoggedIn = !!loggedUser;
+  const [paymentStatusOpen, setPaymentStatusOpen] = useState(
+    !!paymentId && isLoggedIn
+  );
+  const handlePaymentStatusClose = (open: boolean) => {
+    setPaymentStatusOpen(open);
+    if (!open && paymentId) {
+      // Remove payment_id from URL without a full reload
+      const url = new URL(window.location.href);
+      url.searchParams.delete("payment_id");
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+
+
+
   const t = useTranslations("home.pricingPlans");
 
-  const isFree = Number(price) === 0;
+  const isFree = Number(plan.price) === 0;
 
-  const planIcon = (name.toLowerCase().includes("platinum") || name.includes("بلاتين"))
+
+
+  const planIcon = (plan.name.toLowerCase().includes("platinum") || plan.name.includes("بلاتين"))
     ? "/icons/plan-icons/platinum.png"
-    : (name.toLowerCase().includes("gold") || name.includes("ذهب"))
+    : (plan.name.toLowerCase().includes("gold") || plan.name.includes("ذهب"))
       ? "/icons/plan-icons/gold.png"
       : "/icons/plan-icons/muted.png";
 
@@ -69,7 +96,7 @@ const PlanCard = ({
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
-          {name}
+          {plan.name}
         </h3>
       </div>
 
@@ -80,7 +107,7 @@ const PlanCard = ({
         <div className="flex items-baseline justify-center gap-1">
           <span className="title-2 font-bold text-foreground flex items-center gap-1">
             {riyalSVG("#000", "40px", "40px")}
-            {isFree ? "00.00" : price.toFixed(2)}
+            {isFree ? "00.00" : parseFloat(plan.price).toFixed(2)}
           </span>
           <span className="text-sm text-muted-foreground font-medium">
             {t("perMonth")}
@@ -89,7 +116,7 @@ const PlanCard = ({
 
         {/* Features */}
         <ul className="space-y-3 flex-1">
-          {features.map((feature, index) => (
+          {plan.features.map((feature, index) => (
             <li
               key={index}
               className={cn(
@@ -107,26 +134,28 @@ const PlanCard = ({
                   //   : "text-muted-foreground/40"
                 )}
               />
-              <span>{feature.name}</span>
+              <span>{feature}</span>
             </li>
           ))}
         </ul>
 
         {/* Purchase / Register Button */}
-        <Button
-          variant="purple"
-          size="lg"
-          className="w-full uppercase tracking-wider font-bold"
-          onClick={onPurchase}
+        <PurchaseDialog
           disabled={disabled}
-
-        >
-          {isFree ? t("registerNow") : t("purchaseNow")}
-          <div className="relative ">
-            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
-            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
-          </div>      </Button>
+          isFree={isFree}
+          planDetails={plan}
+        />
       </div>
+
+      {/* Purchase Dialog */}
+
+
+      {/* Payment Status Dialog */}
+      <PaymentStatusDialog
+        open={paymentStatusOpen}
+        onOpenChange={handlePaymentStatusClose}
+        paymentId={paymentId}
+      />
     </article>
   );
 };

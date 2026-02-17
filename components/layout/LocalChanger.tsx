@@ -6,8 +6,9 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import cookies from "js-cookie";
 import { COOKIE_NAME } from "@/constant";
+import { cn } from "@/lib/utils";
 
-const LocalChanger = () => {
+const LocalChanger = ({ className }: { className?: string }) => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -27,7 +28,9 @@ const LocalChanger = () => {
     <button
       onClick={() => handleChange(locale === "ar" ? "en" : "ar")}
       disabled={isPending}
-      className="flex items-center gap-2 text-sm"
+      className={cn("ms-2 cursor-pointer flex items-center gap-2 font-semibold hover:text-secondary/80", className)}
+      aria-label="Change language"
+      title="Change language"
     >
 
       <span>{locale === "en" ? "عربي" : "English"}</span>

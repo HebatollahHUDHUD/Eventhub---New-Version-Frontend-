@@ -23,12 +23,13 @@ const NavLink = ({
 
   return (
     <Link
+      {...props}
       href={href}
       className={cn(
-        "p-2 text-primary-foreground duration-300 hover:text-secondary/80",
-        isActive && "!text-secondary"
+        "p-2 text-primary-foreground duration-300 font-semibold hover:text-secondary/80",
+        props.className,
+        isActive && "text-secondary",
       )}
-      {...props}
     >
       {children}
     </Link>

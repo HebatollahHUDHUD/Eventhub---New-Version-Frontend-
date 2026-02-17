@@ -39,7 +39,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} ${cairo.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${cairo.variable}`}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+    >
       <body className="font-cairo">
         <QueryProvider>
           <SearchParamsProvider>
