@@ -1,4 +1,3 @@
-"use client";
 
 import Image from "@/components/common/image";
 import { Button } from "@/components/ui/button";
@@ -6,38 +5,41 @@ import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     ArrowUpRight,
-    BadgeCheck,
     Briefcase,
-    CalendarDays,
     Download,
     Flag,
     Mail,
     MapPin,
-    MessageCircle,
     Phone,
     Star,
     User,
-    XCircle,
     Facebook,
     Linkedin,
     Youtube,
-    Twitter,
     X,
 } from "lucide-react";
-import Link from "next/link";
 import DownloadButton from "@/components/common/DownloadButton";
 import TalentCard from "../components/TalentCard";
 import RateCandidateDialog from "../components/RateCandidateDialog";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { getData } from "@/lib/request-server";
 
 type TalentDetailsContentProps = {
     id: string;
 };
 
-const TalentDetailsContent = ({ id }: TalentDetailsContentProps) => {
-    const [isRateDialogOpen, setIsRateDialogOpen] = useState(false);
-    const t = useTranslations("talent.details");
+const TalentDetailsContent = async ({ id }: TalentDetailsContentProps) => {
+
+    const t = await getTranslations("talent.details");
+    const data = await getData<any>({
+        endpoint: `/users/${id}`,
+    });
+
+    const res = data.status === "success" ? data.result : null;
+    console.log(data);
+
+
 
     const talent = {
         id,
@@ -251,13 +253,10 @@ const TalentDetailsContent = ({ id }: TalentDetailsContentProps) => {
                                         </Button>
                                     </div>
                                     <div className="p-2 shadow-2xl rounded-sm">
-                                        <Button
-                                            variant="secondary"
-                                            className="w-full rounded-md bg-[#F9AF3F] text-white hover:bg-[F9AF33]"
-                                            onClick={() => setIsRateDialogOpen(true)}
-                                        >
-                                            {t("rate_candidate")}
-                                        </Button>
+                                        <RateCandidateDialog
+
+                                        />
+
                                     </div>
 
                                 </div>
@@ -383,10 +382,7 @@ const TalentDetailsContent = ({ id }: TalentDetailsContentProps) => {
                 </div>
             </section>
 
-            <RateCandidateDialog 
-                isOpen={isRateDialogOpen} 
-                onClose={() => setIsRateDialogOpen(false)} 
-            />
+
 
         </main>
     );

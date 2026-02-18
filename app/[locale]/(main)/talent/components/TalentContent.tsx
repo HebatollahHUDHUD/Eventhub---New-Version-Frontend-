@@ -3,22 +3,25 @@ import TalentFilters from './TalentFilters';
 import TalentCard from './TalentCard';
 import TalentSearchFilters from './TalentSearchFilters';
 import { Suspense } from 'react';
-import { TalentsPageResponse } from '@/schemas/types';
+import { Talent, TalentsResponse } from '@/schemas/types';
 
 type TalentContentProps = {
   searchParams?: Record<string, string | undefined>;
 };
 
 const TalentContent = ({ searchParams }: TalentContentProps) => {
+
   return (
     <div className="space-y-8">
       <TalentFilters />
-      
+
       <div className="container-sm">
         <TalentSearchFilters />
       </div>
       <div className="container-sm mt-20">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={<div>Loading...</div>}
+        >
           <TalentList searchParams={searchParams} />
         </Suspense>
       </div>
@@ -29,32 +32,19 @@ const TalentContent = ({ searchParams }: TalentContentProps) => {
 export default TalentContent;
 
 const TalentList = async ({ searchParams }: TalentContentProps) => {
- 
-  const data = await getData<TalentsPageResponse>({
-    endpoint: "/talents-page",
+
+  const data = await getData<TalentsResponse>({
+    endpoint: "/users",
     config: {
-      next: {
-        tags: ["talents-page"],
+      queryParams: {
+        page: "1",
+        user_type: "talent",
+        ...searchParams,
       },
-    }
+    },
   });
 
-  const pageData = data.status === "success" ? data.result : null;
-  
-  const talentItems = null; 
-
-  // Static card data
-  const staticCard = {
-    id: '1',
-    name: 'Static Talent',
-    role: 'Example Position',
-    projects: 25,
-    years: 5,
-    skills: 10,
-    image: '/images/image1.png'
-  };
-
-  const allCards = talentItems ? [staticCard, ...talentItems] : [staticCard];
+  const talentItems = data.status === "success" ? data?.result?.users?.data : [];
 
   return (
     <div className="space-y-6">
@@ -63,16 +53,16 @@ const TalentList = async ({ searchParams }: TalentContentProps) => {
         role="list"
         aria-label="Talent items list"
       >
-        {allCards?.map((item: any) => (
-          <TalentCard 
+        {talentItems?.map((item: Talent) => (
+          <TalentCard
             key={item.id}
             id={item.id}
             name={item.name}
             role={item.role}
-            projects={item.projects}
-            years={item.years}
-            skills={item.skills}
-            image={item.image}
+            projects={"-"}
+            years={"-"}
+            skills={"-"}
+            image={item.photo}
           />
         ))}
       </div>

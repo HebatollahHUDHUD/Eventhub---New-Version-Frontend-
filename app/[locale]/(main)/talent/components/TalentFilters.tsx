@@ -3,25 +3,27 @@
 import { Button } from "@/components/ui/button";
 import { parseAsString, useQueryStates } from "nuqs";
 import { useTranslations } from "next-intl";
-import type { TalentCategory } from "../../../../../schemas/types";
+import { useRouter } from "next/navigation";
 
-const categories: TalentCategory[] = [
-  "recruitment",
-  "talents",
+const user_types: string[] = [
+  "talent",
+  "recruiter",
 ];
 
 const TalentFilters = () => {
+  const router = useRouter();
   const t = useTranslations("talent.filters");
   const [queryParams, setQueryParams] = useQueryStates({
     page: parseAsString.withDefault("1"),
-    category: parseAsString.withDefault("recruitment"),
+    user_type: parseAsString.withDefault("talent"),
   });
 
-  const handleCategoryChange = (category: TalentCategory) => {
-    setQueryParams({
+  const handleCategoryChange = async (user_type: string) => {
+    await setQueryParams({
       page: "1",
-      category
+      user_type,
     });
+    router.refresh();
   };
 
   return (
@@ -29,17 +31,17 @@ const TalentFilters = () => {
       className="flex items-center justify-center gap-4 flex-wrap"
       aria-label="Talent category filters"
     >
-      {categories.map((category) => (
+      {user_types.map((user_type) => (
         <Button
-          key={category}
+          key={user_type}
           size="lg"
-          variant={queryParams.category === category ? "secondary" : "muted"}
-          onClick={() => handleCategoryChange(category)}
+          variant={queryParams.user_type === user_type ? "secondary" : "muted"}
+          onClick={() => handleCategoryChange(user_type)}
           className="rounded-full capitalize"
-          aria-pressed={queryParams.category === category}
-          aria-label={`Filter by ${category} category`}
+          aria-pressed={queryParams.user_type === user_type}
+          aria-label={`Filter by ${user_type} category`}
         >
-          {category === "talents" ? t("talents") : t("recruitment")}
+          {user_type === "talent" ? t("talents") : t("recruitment")}
         </Button>
       ))}
     </nav>

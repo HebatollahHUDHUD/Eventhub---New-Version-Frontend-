@@ -31,10 +31,10 @@ const TalentsList = async () => {
           id={talent.id}
           name={talent.name}
           role={talent.role}
-          projects={30}
-          years={30}
-          skills={30}
-          image={"/images/placeholder.png"}
+          projects={"-"}
+          years={"-"}
+          skills={"-"}
+          image={talent.photo}
         />
       ))}
     </div>

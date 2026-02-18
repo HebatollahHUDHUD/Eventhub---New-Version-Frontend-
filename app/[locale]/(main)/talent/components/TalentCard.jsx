@@ -1,5 +1,6 @@
  "use client";
 
+import Image from "@/components/common/image";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -12,7 +13,7 @@ const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
       
       {/* Circle Image */}
       <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white -mt-18">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <Image src={image} alt={name} className="w-full h-full object-cover" width={96} height={96} />
       </div>
 
       {/* Name and Role */}
