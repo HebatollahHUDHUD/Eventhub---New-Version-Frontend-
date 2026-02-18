@@ -46,7 +46,10 @@ const ResumeForm = ({ onSuccess }: { onSuccess: (data: any) => void }) => {
 
       if (res.status === "success") {
         toast(t("resume.success-msg"), "success");
-        onSuccess(res.result);
+        onSuccess({
+          resume: values.resume,
+          ...res.result,
+        });
       } else {
         toast(res.message || t("resume.upload-failed"), "destructive");
       }

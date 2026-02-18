@@ -28,14 +28,15 @@ const TalentRegisterForm = ({ extractData }: { extractData: any }) => {
       name: extractData?.name || "",
       email: extractData?.email || "",
       mobile: extractData?.mobile || "",
-      country_id: undefined,
-      position_id: extractData?.position || undefined,
-      skills: extractData?.skills || [],
+      country_id: extractData?.country_id,
+      position_id: extractData?.position_id,
+      skills: extractData?.skill_ids || [],
       language_ids: [],
       password: "",
       password_confirmation: "",
       verification_code: undefined,
       image: undefined,
+      ...extractData,
     },
   });
 
