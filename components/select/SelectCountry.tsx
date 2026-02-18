@@ -7,10 +7,12 @@ const SelectCountry = ({
   onChange,
   value,
   className,
+  icon,
 }: {
   onChange: (value: ValueType) => void;
   value: ValueType;
   className?: string;
+  icon?: React.ReactNode;
 }) => {
   const endpoint = "/system-lookups?type=country";
   const { data, isLoading } = useGetData<any>({
@@ -27,6 +29,7 @@ const SelectCountry = ({
       setValue={onChange}
       isLoading={isLoading}
       className={className}
+      icon={icon}
     />
   );
 };

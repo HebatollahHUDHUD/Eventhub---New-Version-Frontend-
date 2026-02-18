@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import React from "react";
 
 export type ValueType = any;
 
@@ -33,6 +34,7 @@ type SelectItemProps = {
   disabled?: boolean;
   size?: "sm" | "lg" | "default";
   onSearchChange?: (value: string) => void;
+  icon?: React.ReactNode; // Icon to display in the PopoverTrigger button
 };
 
 const SelectItem = ({
@@ -48,6 +50,7 @@ const SelectItem = ({
   disabled,
   size = "default",
   onSearchChange,
+  icon,
 }: SelectItemProps) => {
   const [open, setOpen] = useState(false);
   const language = useLocale()
@@ -113,6 +116,9 @@ const SelectItem = ({
           )}
           disabled={disabled !== undefined ? disabled : !items.length}
         >
+          {/* Icon in trigger button */}
+          {icon && <span className="shrink-0 me-2">{icon}</span>}
+
           {/* MULTI SELECT */}
           {isMultiple && value?.length
             ? value?.map((id: any) => {
@@ -134,7 +140,7 @@ const SelectItem = ({
                       }}
                       className="text-muted-foreground hover:text-destructive"
                     >
-                      <XIcon className="!size-4" />
+                      <XIcon className="size-4!" />
                     </span>
                   </div>
                 );
