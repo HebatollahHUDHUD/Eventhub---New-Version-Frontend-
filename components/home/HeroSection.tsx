@@ -161,7 +161,7 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
             alt="Hero Section Image"
             width={1000}
             height={1000}
-            className="w-[125%] h-auto object-cover"
+            className="w-[125%] h-auto object-cover hidden lg:block"
             unoptimized
             quality={100}
           />

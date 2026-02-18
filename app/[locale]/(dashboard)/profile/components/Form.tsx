@@ -100,10 +100,10 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("company-name")}</FormLabel>
+                    <FormLabel>{profileInfo?.user_type === UserType.COMPANY ? t("company-name") : t("full-name")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder={t("company-name")}
+                        placeholder={profileInfo?.user_type === UserType.COMPANY ? t("company-name") : t("full-name")}
                         {...field}
                       />
                     </FormControl>
