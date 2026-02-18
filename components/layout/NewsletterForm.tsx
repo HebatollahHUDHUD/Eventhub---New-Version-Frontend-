@@ -26,7 +26,7 @@ const NewsletterForm = () => {
   });
 
   const { mutateAsync } = usePostData<z.infer<typeof newsletterSchema>>({
-    endpoint: "/subscribe-newsletter",
+    endpoint: "/subscribe-to-newsletter",
   });
 
   async function onSubmit(values: z.infer<typeof newsletterSchema>) {

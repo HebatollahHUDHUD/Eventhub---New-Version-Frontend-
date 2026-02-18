@@ -67,7 +67,7 @@ const Footer = () => {
   });
 
   const { mutateAsync } = usePostData<z.infer<typeof newsletterSchema>>({
-    endpoint: "/subscribe-newsletter",
+    endpoint: "/subscribe-to-newsletter",
   });
 
   async function onSubmit(values: z.infer<typeof newsletterSchema>) {
@@ -112,6 +112,7 @@ const Footer = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-full"
                     key={form.formState.submitCount}
+                    suppressHydrationWarning
                   >
                     <div className="flex flex-col items-end gap-4">
                       <FormField

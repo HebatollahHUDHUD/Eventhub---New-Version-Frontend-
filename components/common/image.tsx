@@ -12,6 +12,12 @@ type CustomImageProps = Omit<ImageProps, "src" | "alt"> & {
   className?: string;
 };
 
+// Helper function to check if src is valid (local path or external URL)
+const isValidSrc = (src?: string): boolean => {
+  if (!src) return false;
+  return src.startsWith("/") || src.startsWith("http://") || src.startsWith("https://");
+};
+
 const Image = ({
   src,
   hasPreview,
@@ -21,17 +27,18 @@ const Image = ({
   ...props
 }: CustomImageProps) => {
   const [isView, setIsView] = useState(false);
-  // Check if src starts with "/", if not use fallback
+
+  // Check if src is valid (local path or external URL), if not use fallback
   const [imgSrc, setImgSrc] = useState(() => {
     if (!src) return fallback;
-    return src.startsWith("/") ? src : fallback;
+    return isValidSrc(src) ? src : fallback;
   });
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // Reset state when src changes
   useEffect(() => {
-    const validSrc = !src ? fallback : (src.startsWith("/") ? src : fallback);
+    const validSrc = !src ? fallback : (isValidSrc(src) ? src : fallback);
     if (validSrc) {
       setImgSrc(validSrc);
       setHasError(false);
@@ -45,7 +52,7 @@ const Image = ({
 
   // Handle image load error using a hidden test image
   useEffect(() => {
-    const validSrc = !src ? fallback : (src.startsWith("/") ? src : fallback);
+    const validSrc = !src ? fallback : (isValidSrc(src) ? src : fallback);
     if (!validSrc || hasError || validSrc === fallback) return;
 
     const testImg = new window.Image();

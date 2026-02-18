@@ -2,13 +2,23 @@ import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  images: {
+  images: { 
     remotePatterns: [
+      { 
+        protocol: "https", 
+        hostname: "**", 
+        port: "" 
+      },
+      { 
+        protocol: "http", 
+        hostname: "**", 
+        port: "" 
+      },
       {
         protocol: "https",
         hostname: "apis-eventshubs.hudhud.it.com",
-      },
-    ],
+      }
+    ] 
   },
 };
 
