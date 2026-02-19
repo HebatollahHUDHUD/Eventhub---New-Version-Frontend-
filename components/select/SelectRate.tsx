@@ -1,14 +1,17 @@
 "use client";
 
+import React from "react";
 import SelectItem, { ValueType } from "./SelectItem";
 
-const genderOptions = [
-  { id: "male", name: "Male" },
-  { id: "female", name: "Female" },
-  { id: "both", name: "Both" },
+const rateOptions = [
+  { id: 1, name: "1" },
+  { id: 2, name: "2" },
+  { id: 3, name: "3" },
+  { id: 4, name: "4" },
+  { id: 5, name: "5" },
 ];
 
-const SelectGender = ({
+const SelectRate = ({
   onChange,
   value,
   className,
@@ -21,7 +24,7 @@ const SelectGender = ({
 }) => {
   return (
     <SelectItem
-      items={genderOptions}
+      items={rateOptions}
       value={value}
       setValue={onChange}
       isLoading={false}
@@ -31,4 +34,4 @@ const SelectGender = ({
   );
 };
 
-export default SelectGender;
+export default SelectRate;

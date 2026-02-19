@@ -26,7 +26,10 @@
     "failed-to-submit": "Failed to submit the form. Please try again.",
     "select-item": "Select item",
     "search-for-items": "Search for items...",
-    "no-item-found": "No item found."
+    "no-item-found": "No item found.",
+    "close": "Close",
+    "pleaseLogin": "Please Login",
+    "pleaseLoginDescription": "You need to be logged in to access this feature. Please login to continue."
   },
   "home": {
     "title": "Welcome to Events Hub!",

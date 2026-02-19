@@ -1,14 +1,20 @@
  "use client";
 
+import PleaseLoginDialog from "@/components/common/PleaseLoginDialog";
 import Image from "@/components/common/image";
 import { Button } from "@/components/ui/button";
+import { getUserSession } from "@/lib/userSession";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
   const t = useTranslations("talent.card");
-  
+  const user = getUserSession()
+
+  const isLoggedIn = !!user
+
   return (
+    <div className="pt-12">
     <div className="bg-gradient-to-br from-purple-200 to-white rounded-3xl p-6 shadow-lg flex flex-col items-center text-center relative">
       
       {/* Circle Image */}
@@ -46,16 +52,32 @@ const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
       </div>
 
       {/* Button */}
+      {isLoggedIn ? (
+        <Button
+          asChild
+          variant={"secondary"}
+          className="rounded-full capitalize w-3/4 mt-3"
+        >
+          <Link href={`/talent/${id}`} aria-label={`${t("details")} - ${name}`}>
+            {t("details")}
+          </Link>
+        </Button>
+      ) : (
+        <PleaseLoginDialog>
+
       <Button
-        asChild
         variant={"secondary"}
         className="rounded-full capitalize w-3/4 mt-3"
       >
-        <Link href={`/talent/${id}`} aria-label={`${t("details")} - ${name}`}>
-          {t("details")}
-        </Link>
+                 {t("details")}
+
       </Button>
+        </PleaseLoginDialog>
+
+      )}
     </div>
+    </div>
+
   );
 };
 
