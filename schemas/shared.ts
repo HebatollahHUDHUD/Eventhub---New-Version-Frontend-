@@ -311,6 +311,7 @@ export const registerSchema = z
 
 export const companyRegisterSchema = z
   .object({
+    step: z.enum(["1", "2"]),
     user_type: z.literal("company"),
     name: z.string().min(2, {
       message: "Company name must be at least 2 characters.",
@@ -334,6 +335,9 @@ export const companyRegisterSchema = z
       message: "Password confirmation must be at least 8 characters.",
     }),
     image: z.instanceof(File).optional(),
+    verification_code: z.string().min(6, {
+      message: "Verification code must be at least 6 characters.",
+    }).optional(),
   })
   .strict()
   .refine((data) => data.password === data.password_confirmation, {

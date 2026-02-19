@@ -481,11 +481,13 @@
   "dashboard": {
     "privet-information": "المعلومات الخاصة",
     "company-name": "اسم الشركة",
+    "full-name": "الاسم الكامل",
     "email-address": "عنوان البريد الإلكتروني",
     "enter-email": "أدخل عنوان البريد الإلكتروني",
     "phone-number": "رقم الهاتف",
     "country": "الدولة",
     "incharge-person-name": "اسم الشخص المسؤول",
+    "languages": "اللغات (متعدد)",
     "save-changes": "حفظ التغييرات",
     "change-password": "تغيير كلمة المرور",
     "current-password": "كلمة المرور الحالية",
@@ -654,7 +656,8 @@
       "upgrade-plan": "ترقية الخطة",
       "month": "شهر",
       "valid-till": "صالح حتى",
-      "no-current-plan": "لا توجد خطة حالية"
+      "no-current-plan": "لا توجد خطة حالية",
+      "start-date": "تاريخ البدء"
     }
   },
   "messages": {

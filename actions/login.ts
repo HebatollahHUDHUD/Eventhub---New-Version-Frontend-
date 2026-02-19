@@ -45,8 +45,4 @@ export const loginAction = async (
   if (cookieSession.get(EMAIL_ADDRESS)) {
     cookieSession.delete(EMAIL_ADDRESS);
   }
-
-  // Redirect to the callback URL if provided, otherwise to the default redirect
-  const redirectUrl = callbackUrl || DEFAULT_LOGIN_REDIRECT;
-  redirect(redirectUrl);
 };

@@ -42,6 +42,7 @@ const PlanCard = ({
   const [paymentStatusOpen, setPaymentStatusOpen] = useState(
     !!paymentId && isLoggedIn
   );
+
   const handlePaymentStatusClose = (open: boolean) => {
     setPaymentStatusOpen(open);
     if (!open && paymentId) {
@@ -52,20 +53,9 @@ const PlanCard = ({
     }
   };
 
-
-
-
   const t = useTranslations("home.pricingPlans");
 
   const isFree = Number(plan.price) === 0;
-
-
-
-  const planIcon = (plan.name.toLowerCase().includes("platinum") || plan.name.includes("بلاتين"))
-    ? "/icons/plan-icons/platinum.png"
-    : (plan.name.toLowerCase().includes("gold") || plan.name.includes("ذهب"))
-      ? "/icons/plan-icons/gold.png"
-      : "/icons/plan-icons/muted.png";
 
   return (
     <article
@@ -93,7 +83,7 @@ const PlanCard = ({
       >
         {/* Icon Circle */}
         <div className="">
-          <Image src={planIcon} alt="Plan Icon" width={48} height={48} />
+          <Image src={getPlanIcon(plan.name)} alt="Plan Icon" width={48} height={48} />
         </div>
         {/* Plan Name */}
         <h3 className="text-lg font-bold text-white text-center">
@@ -162,3 +152,14 @@ const PlanCard = ({
 };
 
 export default PlanCard;
+
+
+export const getPlanIcon = (planName: string) => {
+  if (planName.toLowerCase().includes("platinum") || planName.includes("بلاتين")) {
+    return "/icons/plan-icons/platinum.png";
+  } else if (planName.toLowerCase().includes("gold") || planName.includes("ذهب")) {
+    return "/icons/plan-icons/gold.png";
+  } else {
+    return "/icons/plan-icons/muted.png";
+  }
+}

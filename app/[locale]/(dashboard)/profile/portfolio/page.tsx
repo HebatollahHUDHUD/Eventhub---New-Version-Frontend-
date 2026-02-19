@@ -3,25 +3,24 @@
 import { useGetData } from "@/hooks/useFetch";
 import PortfolioForm from "@/app/[locale]/(dashboard)/profile/portfolio/components/PortfolioForm";
 import PortfolioCard from "@/app/[locale]/(dashboard)/profile/portfolio/components/PortfolioCard";
-import { TalentProfileResponse } from "@/schemas/types";
 import LoadingPage from "@/components/common/LoadingPage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
 const Page = () => {
   const t = useTranslations("dashboard.portfolio");
-  const endpoint = "/profile";
+  const endpoint = "/profile/projects";
 
-  const { data, isLoading, refetch } = useGetData<TalentProfileResponse>({
+  const { data, isLoading, refetch } = useGetData<any>({
     endpoint,
-    queryKey: ["Profile", endpoint],
+    queryKey: ["profile-projects"],
   });
 
-  const profile = data?.status === "success" ? data?.result?.profile : null;
+  const projects = data?.status === "success" ? data?.result?.projects : null;
 
   if (isLoading) return <LoadingPage />;
 
-  if (!profile) return null;
+  if (!projects) return null;
 
   return (
     <div className="space-y-6">
@@ -29,14 +28,14 @@ const Page = () => {
         refetch={refetch}
       />
 
-      {profile.projects && profile.projects.length > 0 && (
+      {projects && projects.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle>{t("projects")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {profile.projects.map((project) => (
+              {projects.map((project: any) => (
                 <PortfolioCard
                   key={project.id}
                   project={project}

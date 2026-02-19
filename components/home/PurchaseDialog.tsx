@@ -142,12 +142,13 @@ const PurchaseDialog = ({
   };
 
   const handleOpenChange = (value: boolean) => {
+    setOpen(value);
+
     if (!value) {
       // Reset state when dialog closes
       setPromoCode("");
       setAppliedPromo(null);
     }
-    setOpen(value);
   };
 
   if (!planDetails) return null;
@@ -163,7 +164,17 @@ const PurchaseDialog = ({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <CardBtn disabled={disabled} isFree={isFree} />
+        <Button
+          variant="purple"
+          size="lg"
+          className="w-full uppercase tracking-wider font-bold"
+          disabled={disabled}
+        >
+          {isFree ? tParent("registerNow") : tParent("purchaseNow")}
+          <div className="relative ">
+            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+          </div>      </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[600px]!">

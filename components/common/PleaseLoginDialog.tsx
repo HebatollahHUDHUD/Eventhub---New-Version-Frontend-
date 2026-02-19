@@ -28,11 +28,9 @@ const PleaseLoginDialog = ({
   const [open, setOpen] = useState(false);
   const t = useTranslations("common");
 
-
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="cursor-pointer">
         {children}
       </DialogTrigger>
       <DialogContent>

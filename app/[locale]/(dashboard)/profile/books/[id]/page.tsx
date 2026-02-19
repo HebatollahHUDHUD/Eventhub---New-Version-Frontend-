@@ -48,14 +48,24 @@ const BookDetailsPage = () => {
         <CardContent>
           <div className="flex flex-col md:flex-row gap-6">
             {/* Book Cover */}
-            <div className="shrink-0">
+            <div className="shrink-0 space-y-4">
               <Image
                 src={book?.image}
                 alt={book?.title || ""}
                 width={400}
                 height={600}
-                className="w-full md:w-[360px] aspect-3/4 object-cover rounded-lg shadow-lg"
+                className="w-full md:w-[360px] max-h-[400px] aspect-3/4 object-cover rounded-lg shadow-lg"
               />
+
+              {
+                book?.attachment && (
+                  <Button asChild variant="orange" className="w-full" size={"xl"}>
+                    <a href={book?.attachment?.file_path} target="_blank" rel="noopener noreferrer">
+                      {t("download")}
+                    </a>
+                  </Button>
+                )
+              }
             </div>
 
             {/* Book Info */}
@@ -78,19 +88,6 @@ const BookDetailsPage = () => {
 
               {!descriptionLines.length && book?.description && (
                 <p className="text-muted-foreground">{book?.description}</p>
-              )}
-
-              {/* Download Button */}
-              {book?.file_url && (
-                <div className="mt-auto pt-4">
-                  <DownloadButton
-                    url={book?.file_url}
-                    label={t("download")}
-                    variant="orange"
-                    size="lg"
-                    className="rounded-lg min-w-[200px]"
-                  />
-                </div>
               )}
             </div>
           </div>

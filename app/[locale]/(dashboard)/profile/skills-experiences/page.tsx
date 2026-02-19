@@ -14,7 +14,7 @@ const page = () => {
 
   const { data, isLoading, refetch } = useGetData<TalentProfileResponse>({
     endpoint,
-    queryKey: ["Profile", endpoint],
+    queryKey: ["profile"],
   });
 
   const profile = data?.status === "success" ? data?.result?.profile : null;

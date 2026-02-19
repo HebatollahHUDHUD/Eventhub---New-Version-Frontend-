@@ -268,7 +268,14 @@ export interface PricingPageResponse {
 }
 
 export interface ProfilePlanResponse {
-  current_subscription: Plan | null;
+  current_subscription: {
+    id: number;
+    plan: Plan;
+    start_date: string;
+    end_date: string;
+    created_at: string;
+    updated_at: string;
+  } | null;
   other_plans: Plan[];
 }
 
@@ -278,6 +285,23 @@ export interface CurrentSubscriptionWithDate extends Plan {
 
 // Talent Profile related interfaces
 export interface Position {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Resume {
+  id: number;
+  title: string;
+  file_name: string;
+  file_path: string;
+  file_size: number;
+  extra: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Country {
   id: number;
   name: string;
   slug: string;
@@ -302,6 +326,15 @@ export interface Experience {
   company?: {
     id: number;
     name: string;
+    photo: string | null;
+    incharge_person_name: string | null;
+    email: string;
+    user_type: string;
+    mobile: string | null;
+    is_featured: number;
+    last_login_at: string | null;
+    created_at: string;
+    updated_at: string;
   } | null;
   position?: {
     id: number;
@@ -311,6 +344,7 @@ export interface Experience {
   from_date: string;
   to_date: string | null;
   is_current: number;
+  company_verification_status: "pending" | "approved" | "rejected";
   description: string;
   created_at: string;
   updated_at: string;
@@ -319,7 +353,7 @@ export interface Experience {
 export interface Skill {
   id: number;
   name: string;
-  slug: string;
+  slug: string | null;
 }
 
 export interface Language {
@@ -364,18 +398,19 @@ export interface TalentProfile {
   email: string;
   user_type: "talent";
   mobile: string | null;
-  role: string | null;
+  country: Country | null;
   gender: string | null;
   bio: string | null;
   position: Position | null;
   other_position: string | null;
   experience_years: number | null;
   available_for_work: boolean;
-  price_per_project: boolean | null;
+  price_per_project: number | null;
   facebook_url: string | null;
   instagram_url: string | null;
   youtube_url: string | null;
   linkedin_url: string | null;
+  resume: Resume | null;
   skills: Skill[];
   languages: Language[];
   badges: Badge[];
@@ -383,6 +418,7 @@ export interface TalentProfile {
   experiences: Experience[];
   projects: Project[];
   current_subscription: Subscription | null;
+  is_featured: number;
   last_login_at: string | null;
   created_at: string;
   updated_at: string;
@@ -431,15 +467,28 @@ export type CourseDetailsResponse = {
 };
 
 // Book related interfaces
+export interface BookAttachment {
+  id: number;
+  title: string;
+  file_name: string;
+  file_path: string;
+  file_size: number;
+  extra: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Book {
   id: number;
   title: string;
   description: string;
   image: string;
+  attachment: BookAttachment | null;
   is_active: number;
+  writer: User;
+  editor: User | null;
   created_at: string;
   updated_at: string;
-  file_url?: string;
 }
 
 export interface BooksResponse {

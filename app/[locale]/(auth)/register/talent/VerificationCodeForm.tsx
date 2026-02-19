@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
-import { talentRegisterSchema } from "@/lib/schemas";
 import { useTranslations } from "next-intl";
 import { FormField, FormItem, FormControl, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -17,9 +15,9 @@ const
     isLoading,
     onSubmit,
   }: {
-    form: UseFormReturn<z.infer<typeof talentRegisterSchema>>;
+    form: UseFormReturn<any>;
     isLoading: boolean;
-    onSubmit: (values: z.infer<typeof talentRegisterSchema>) => Promise<void>;
+    onSubmit: (values: any) => Promise<void>;
   }) => {
     const t = useTranslations("auth");
     const tCommon = useTranslations("common");

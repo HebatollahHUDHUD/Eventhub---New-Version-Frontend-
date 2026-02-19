@@ -45,18 +45,18 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
   const form = useForm<SkillsFormType>({
     resolver: zodResolver(SkillsFormSchema),
     defaultValues: {
-      position_id: undefined,
-      language_ids: [],
-      skill_ids: [],
-      badge_ids: [],
-      experience_years: undefined,
-      bio: "",
-      available_for_work: 0,
-      price_per_project: undefined,
+      position_id: profile?.position?.id || undefined,
+      language_ids: profile?.languages?.map((language: any) => language.id) || [],
+      skill_ids: profile?.skills?.map((skill: any) => skill.id) || [],
+      badge_ids: profile?.badges?.map((badge: any) => badge.id) || [],
+      experience_years: profile?.experience_years || undefined,
+      bio: profile?.bio || "",
+      available_for_work: profile?.available_for_work ? 1 : 0,
+      price_per_project: profile?.price_per_project || undefined,
       facebook_url: "",
-      instagram_url: "",
-      youtube_url: "",
-      linkedin_url: "",
+      instagram_url: profile?.instagram_url || "",
+      youtube_url: profile?.youtube_url || "",
+      linkedin_url: profile?.linkedin_url || "",
       resume: undefined,
     },
   });
@@ -112,6 +112,7 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                       isResume={true}
                       files={field.value ? [field.value] : []}
                       onChange={(files) => field.onChange(files?.[0] || undefined)}
+                      defaultValue={profile?.resume ? [profile?.resume] : []}
                       options={{
                         multiple: false,
                         maxFiles: 1,
@@ -313,7 +314,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                     <FormControl>
                       <Input
                         {...field}
-                        type="url"
                         placeholder={t("enter-facebook-link")}
                       />
                     </FormControl>
@@ -331,7 +331,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                     <FormControl>
                       <Input
                         {...field}
-                        type="url"
                         placeholder={t("enter-instagram-link")}
                       />
                     </FormControl>
@@ -349,7 +348,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                     <FormControl>
                       <Input
                         {...field}
-                        type="url"
                         placeholder={t("enter-youtube-link")}
                       />
                     </FormControl>
@@ -367,7 +365,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                     <FormControl>
                       <Input
                         {...field}
-                        type="url"
                         placeholder={t("enter-linkedin-link")}
                       />
                     </FormControl>

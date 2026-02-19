@@ -448,11 +448,13 @@
   "dashboard": {
     "privet-information": "Private Information",
     "company-name": "Company Name",
+    "full-name": "Full Name",
     "email-address": "Email Address",
     "enter-email": "Enter email address",
     "phone-number": "Phone Number",
     "country": "Country",
     "incharge-person-name": "Incharge Person Name",
+    "languages": "Languages (Multi)",
     "save-changes": "Save Changes",
     "change-password": "Change Password",
     "current-password": "Current Password",
@@ -621,7 +623,8 @@
       "upgrade-plan": "Upgrade Plan",
       "month": "month",
       "valid-till": "Valid till",
-      "no-current-plan": "No current plan"
+      "no-current-plan": "No current plan",
+      "start-date": "Start Date"
     }
   },
   "messages": {

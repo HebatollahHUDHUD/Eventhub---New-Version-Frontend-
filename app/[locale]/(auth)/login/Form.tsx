@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { loginAction } from "@/actions/login";
 import Link from "next/link";
+import { UserType } from "@/constant";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -53,11 +54,10 @@ const LoginForm = () => {
         if (token && userSession) {
           await loginAction(
             token,
-            JSON.stringify(userSession),
-            values.keep_login || false
+            JSON.stringify(userSession)
           );
 
-          if (userSession?.user_type === "company") {
+          if (userSession?.user_type === UserType.COMPANY) {
             router.replace("/dashboard");
           } else {
             router.replace("/profile");

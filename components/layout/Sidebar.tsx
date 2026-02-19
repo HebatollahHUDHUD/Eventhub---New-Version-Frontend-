@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   const { data } = useGetData<any>({
     endpoint,
-    queryKey: ["Profile", endpoint],
+    queryKey: ["profile"],
   });
 
   const profileDate = data?.status === "success" ? data?.result?.profile : null;
