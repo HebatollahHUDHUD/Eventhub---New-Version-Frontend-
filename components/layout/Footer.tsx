@@ -2,10 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { InstagramIcon } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useGetData } from "@/hooks/useFetch";
-import NewsletterForm from "./NewsletterForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -30,25 +28,12 @@ const Footer = () => {
   const t = useTranslations("footer");
   const locale = useLocale();
 
-  const { data: settingsDataResponse } = useGetData<any>({
-    endpoint: "/settings",
-    queryKey: ["Settings"],
-  });
-
-  const { data: infoDataResponse } = useGetData<any>({
+  const { data } = useGetData<any>({
     endpoint: "/info",
     queryKey: ["Info"],
   });
 
-  const settingsData =
-    settingsDataResponse && typeof settingsDataResponse === "object" && "status" in settingsDataResponse && settingsDataResponse.status === "success" && "response" in settingsDataResponse
-      ? (settingsDataResponse as any)?.response?.settings
-      : null;
-
-  const infoData =
-    infoDataResponse && typeof infoDataResponse === "object" && "status" in infoDataResponse && infoDataResponse.status === "success" && "response" in infoDataResponse
-      ? (infoDataResponse as any)?.response
-      : null;
+  const infoData = data?.status === "success" ? data.result : null;
 
   // Get footer logo based on locale
   const footerLogo = locale === "ar" && infoData?.footer_logo_ar
@@ -56,8 +41,8 @@ const Footer = () => {
     : infoData?.footer_logo || "/logo.svg";
 
   // Get social media URLs from infoData, fallback to settingsData
-  const getSocialUrl = (infoKey: string, settingsKey: string) => {
-    const url = infoData?.[infoKey] || settingsData?.[settingsKey];
+  const getSocialUrl = (infoKey: string) => {
+    const url = infoData?.[infoKey];
     if (!url) return null;
     return url.startsWith("http") ? url : `https://${url}`;
   };
@@ -87,7 +72,19 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-primary py-12 space-y-12">
+    <footer className="bg-primary py-12 space-y-12 relative">
+      <div className="absolute bottom-6 end-6">
+        <p className="text-muted-foreground">This website certified by</p>
+        <Image
+          src="/images/ksa_center.png"
+          alt={"المركز السعودي للأعمال"}
+          unoptimized
+          width={500}
+          height={200}
+          quality={100}
+          className="w-auto h-10 md:h-12 object-contain"
+        />
+      </div>
       <div className="border-b border-border/60 pb-12">
         <div className="container space-y-10">
 
@@ -207,12 +204,10 @@ const Footer = () => {
           </Link>
         </nav>
 
-
-
         <div className="flex items-center justify-center gap-4 md:gap-10">
-          {getSocialUrl("social_media_facebook_url", "facebook_link") && (
+          {getSocialUrl("social_media_facebook_url") && (
             <a
-              href={getSocialUrl("social_media_facebook_url", "facebook_link") || "#"}
+              href={getSocialUrl("social_media_facebook_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -225,9 +220,9 @@ const Footer = () => {
             </a>
           )}
 
-          {getSocialUrl("social_media_instagram_url", "instagram_link") && (
+          {getSocialUrl("social_media_instagram_url") && (
             <a
-              href={getSocialUrl("social_media_instagram_url", "instagram_link") || "#"}
+              href={getSocialUrl("social_media_instagram_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -240,9 +235,9 @@ const Footer = () => {
             </a>
           )}
 
-          {getSocialUrl("social_media_youtube_url", "youtube_link") && (
+          {getSocialUrl("social_media_youtube_url") && (
             <a
-              href={getSocialUrl("social_media_youtube_url", "youtube_link") || "#"}
+              href={getSocialUrl("social_media_youtube_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
@@ -255,9 +250,9 @@ const Footer = () => {
             </a>
           )}
 
-          {getSocialUrl("social_media_tiktok_url", "tiktok_link") && (
+          {getSocialUrl("social_media_tiktok_url") && (
             <a
-              href={getSocialUrl("social_media_tiktok_url", "tiktok_link") || "#"}
+              href={getSocialUrl("social_media_tiktok_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
@@ -270,9 +265,9 @@ const Footer = () => {
             </a>
           )}
 
-          {getSocialUrl("social_media_snapchat_url", "snapchat_link") && (
+          {getSocialUrl("social_media_snapchat_url") && (
             <a
-              href={getSocialUrl("social_media_snapchat_url", "snapchat_link") || "#"}
+              href={getSocialUrl("social_media_snapchat_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Snapchat"
@@ -285,9 +280,9 @@ const Footer = () => {
             </a>
           )}
 
-          {getSocialUrl("social_media_x_url", "x_link") && (
+          {getSocialUrl("social_media_x_url") && (
             <a
-              href={getSocialUrl("social_media_x_url", "x_link") || "#"}
+              href={getSocialUrl("social_media_x_url") || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X (Twitter)"
@@ -300,44 +295,6 @@ const Footer = () => {
             </a>
           )}
         </div>
-
-        {/* Contact Information */}
-        {(infoData?.address || infoData?.email || infoData?.mobile || infoData?.map_url) && (
-          <div className="flex flex-col items-center justify-center gap-2 text-white/80 text-sm">
-            {infoData?.address && (
-              <p>{infoData.address}</p>
-            )}
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              {infoData?.email && (
-                <a
-                  href={`mailto:${infoData.email}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {infoData.email}
-                </a>
-              )}
-              {infoData?.mobile && (
-                <a
-                  href={`tel:${infoData.mobile}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {infoData.mobile}
-                </a>
-              )}
-              {infoData?.map_url && (
-                <a
-                  href={infoData.map_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  {t("view-map") || "View on Map"}
-                </a>
-              )}
-            </div>
-          </div>
-        )}
-
 
         <div className="flex items-center justify-center gap-4 md:gap-6">
           <Link
@@ -369,6 +326,11 @@ const Footer = () => {
           </Link>
         </div>
       </div>
+
+      <p className="text-muted-foreground text-center">
+        <span>© {new Date().getFullYear()}</span>{" "}
+        <span>{t("copyright_footer")}</span>
+      </p>
     </footer>
   );
 };
