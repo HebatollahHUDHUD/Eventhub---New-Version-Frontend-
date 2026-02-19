@@ -4,14 +4,17 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "@/components/common/image";
+import type { HomeFeaturedCompany } from "@/schemas/home";
+import { Badge } from "../ui/badge";
 
 interface TrustedOrganisationsSectionProps {
   title: string;
   subtitle: string;
-  items: unknown[] | null;
+  featured_companies: HomeFeaturedCompany[];
 }
 
-const TrustedOrganisationsSection = ({ title, subtitle, items }: TrustedOrganisationsSectionProps) => {
+const TrustedOrganisationsSection = ({ title, subtitle, featured_companies }: TrustedOrganisationsSectionProps) => {
   const t = useTranslations("home.trustedOrganisations");
 
   return (
@@ -19,11 +22,12 @@ const TrustedOrganisationsSection = ({ title, subtitle, items }: TrustedOrganisa
       <div className="container relative z-10">
         <div className="space-y-6 md:space-y-10">
           <div className="space-y-4">
-            <Button asChild size={"sm"} variant={"secondary"} className="rounded-full">
-              <Link href="/about">
-                {t("tag")}
-              </Link>
-            </Button>
+            <Badge
+              variant={"secondary"}
+              className="rounded-full capitalize px-6 py-2"
+            >
+              {t("tag")}
+            </Badge>
 
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <div className="space-y-2 max-w-xl">
@@ -50,16 +54,24 @@ const TrustedOrganisationsSection = ({ title, subtitle, items }: TrustedOrganisa
           </div>
 
           {/* Company Logos Grid */}
-          {items && items.length > 0 && (
+          {featured_companies && featured_companies.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
-              {items.map((item: any, index: number) => (
+              {featured_companies.map((company) => (
                 <div
-                  key={item?.id || index}
+                  key={company.id}
                   className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center gap-3 min-h-[120px] hover:opacity-80"
                 >
-                  {item?.name && (
-                    <p className="font-semibold text-sm md:text-base text-foreground">
-                      {item.name}
+                  {company.photo ? (
+                    <Image
+                      src={company.photo}
+                      alt={company.name}
+                      className="w-full h-full object-contain max-h-16"
+                      width={120}
+                      height={64}
+                    />
+                  ) : (
+                    <p className="font-semibold text-sm md:text-base text-foreground text-center">
+                      {company.name}
                     </p>
                   )}
                 </div>

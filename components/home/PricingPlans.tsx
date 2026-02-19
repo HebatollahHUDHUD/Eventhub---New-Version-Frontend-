@@ -63,7 +63,15 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
       ? profilePlanData.result.profile.current_subscription
       : null;
 
-  const plans = allPlans.filter((plan) => plan.type === planType);
+  const plans = allPlans.filter((plan) => {
+    // Filter by plan type
+    if (plan.type !== planType) return false;
+
+    // Hide free plans if user is logged in
+    if (isLoggedIn && Number(plan.price) === 0) return false;
+
+    return true;
+  });
 
   return (
     <section className="relative py-6 md:py-8 lg:py-12 overflow-hidden">
@@ -97,14 +105,18 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
 
           {/* Plans Grid */}
           {plans.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center">
               {plans.map((plan) => (
-                <PlanCard
+                <div
                   key={plan.id}
-                  plan={plan}
-                  is_recommended={!!plan.is_featured}
-                  disabled={activeSubscription?.plan?.id === plan.id}
-                />
+                  className="h-auto w-full px-2 md:w-[50%] lg:w-[33.33%] xl:w-[25%]">
+                  <PlanCard
+                    plan={plan}
+                    is_recommended={!!plan.is_featured}
+                    disabled={activeSubscription?.plan?.id === plan.id}
+                  />
+                </div>
+
               ))}
             </div>
           ) : (
@@ -117,9 +129,9 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
         </div>
       </div>
       <PaymentStatusDialog
-      onOpenChange={setPaymentStatusOpen}
-      open={paymentStatusOpen}
-      paymentId={paymentId}
+        onOpenChange={setPaymentStatusOpen}
+        open={paymentStatusOpen}
+        paymentId={paymentId}
       />
     </section>
   );

@@ -86,7 +86,15 @@ const PricingPlansContent = () => {
       : null;
 
   const allPlans = data?.status === "success" ? data.result?.plans ?? [] : [];
-  const plans = allPlans.filter((plan) => plan.type === planType);
+  const plans = allPlans.filter((plan) => {
+    // Filter by plan type
+    if (plan.type !== planType) return false;
+
+    // Hide free plans if user is logged in
+    if (isLoggedIn && Number(plan.price) === 0) return false;
+
+    return true;
+  });
 
   return (
     <section className="relative py-6 md:py-8 lg:py-12 overflow-hidden">
@@ -124,14 +132,18 @@ const PricingPlansContent = () => {
               <Loader2 className="size-8 animate-spin text-primary" />
             </div>
           ) : plans.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center">
               {plans.map((plan) => (
-                <PlanCard
+                <div
                   key={plan.id}
-                  plan={plan}
-                  is_recommended={!!plan.is_featured}
-                  disabled={activeSubscription?.plan?.id === plan.id}
-                />
+                  className="h-auto w-full px-2 md:w-[50%] lg:w-[33.33%] xl:w-[25%]">
+                  <PlanCard
+                    key={plan.id}
+                    plan={plan}
+                    is_recommended={!!plan.is_featured}
+                    disabled={activeSubscription?.plan?.id === plan.id}
+                  />
+                </div>
               ))}
             </div>
           ) : (

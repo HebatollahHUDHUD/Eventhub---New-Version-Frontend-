@@ -75,7 +75,7 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
             </p>
 
             {/* Search Bar */}
-            <div className="bg-background rounded-xl p-2.5 sm:rounded-full sm:p-1.5 flex flex-col sm:flex-row gap-1.5 shadow-2xl border border-border">
+            <div className="bg-background rounded-xl p-2.5 sm:rounded-full sm:p-1.5 flex flex-col sm:flex-row sm:items-center gap-1.5 shadow-2xl border border-border">
               <SelectSkills
                 className="flex-1 border-none!"
                 value={selectedSkills}
@@ -94,7 +94,7 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
               <Button
                 variant="pink"
                 size="lg"
-                className="rounded-full px-8 sm:px-10 gap-2 shrink-0 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="rounded-full px-8 sm:px-10 gap-2 shrink-0 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 sm:h-12"
               >
                 {t("search.button")}
                 <ArrowRight className="size-4" />

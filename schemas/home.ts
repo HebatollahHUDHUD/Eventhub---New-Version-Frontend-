@@ -1,4 +1,4 @@
-import { Plan, BlogPostCategory } from "./types";
+import { Plan, BlogPostCategory, Talent } from "./types";
 
 // Home page specific types
 export interface HomeAboutUsItem {
@@ -24,6 +24,17 @@ export interface HomeBlogPost {
   content: string;
   category: BlogPostCategory;
   created_at: string;
+}
+
+export interface HomeFeaturedCompany {
+  id: number;
+  name: string;
+  photo: string | null;
+  incharge_person_name: string;
+  email: string;
+  user_type: string;
+  mobile: string | null;
+  role: string | null;
 }
 
 export interface HomeResponse {
@@ -53,4 +64,6 @@ export interface HomeResponse {
   plans: Plan[];
   opportunities: HomeOpportunity[];
   blog_posts: HomeBlogPost[];
+  featured_talents: Talent[];
+  featured_companies: HomeFeaturedCompany[];
 }

@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import BlogsList from "./BlogsList";
 import type { HomeBlogPost } from "@/schemas/home";
+import { Badge } from "../ui/badge";
 
 interface BlogsSectionProps {
   title: string;
@@ -22,16 +23,12 @@ const BlogsSection = ({ title, subtitle, description, blogPosts }: BlogsSectionP
           {/* Blog Post Tag */}
 
           <div className="flex justify-center">
-            <Button
-              asChild
-              size={"sm"}
+            <Badge
               variant={"secondary"}
-              className="rounded-full"
+              className="rounded-full capitalize px-6 py-2"
             >
-              <Link href="/blogs">
-                {t("tag")}
-              </Link>
-            </Button>
+              {t("tag")}
+            </Badge>
           </div>
 
           {/* Heading and Description */}

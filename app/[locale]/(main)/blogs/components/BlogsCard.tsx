@@ -23,7 +23,6 @@ const BlogsCard = ({ blog }: BlogsCardProps) => {
             alt={blog.title || "Blog post image"}
             width={400}
             height={267}
-            hasPreview
             className="w-full h-full object-cover rounded-t-2xl"
           />
           <span className="absolute bottom-3 left-3 bg-accentPink text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md capitalize z-10">

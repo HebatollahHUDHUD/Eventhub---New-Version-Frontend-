@@ -7,6 +7,7 @@ import Link from "next/link";
 import OpportunitiesList from "./OpportunitiesList";
 import { circlesToDownLeftSVG, circlesToLeftSVG } from "@/public/SVGs";
 import type { HomeOpportunity } from "@/schemas/home";
+import { Badge } from "../ui/badge";
 
 interface OpportunitiesSectionProps {
   title: string;
@@ -46,16 +47,12 @@ const OpportunitiesSection = ({ title, subtitle, description, opportunities }: O
         <div className="space-y-12 md:space-y-16 lg:space-y-20">
           {/* Top Button */}
           <div className="flex justify-center">
-            <Button
-              asChild
-              size={"sm"}
+            <Badge
               variant={"secondary"}
-              className="rounded-full"
+              className="rounded-full capitalize px-6 py-2"
             >
-              <Link href="/opportunities">
-                {t("button")}
-              </Link>
-            </Button>
+              {t("button")}
+            </Badge>
           </div>
 
           {/* Heading and Description */}

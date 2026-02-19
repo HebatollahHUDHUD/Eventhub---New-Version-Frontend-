@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import {  CircleCheckBig } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { riyalSVG } from "@/public/SVGs";
@@ -70,7 +70,7 @@ const PlanCard = ({
   return (
     <article
       className={cn(
-        "relative flex flex-col rounded-3xl bg-background shadow-lg overflow-hidden border border-border/50 transition-transform duration-300 hover:-translate-y-1",
+        "h-full relative flex flex-col rounded-3xl bg-background shadow-lg overflow-hidden border border-border/50 transition-transform duration-300 hover:-translate-y-1",
 
       )}
     >
@@ -152,7 +152,7 @@ const PlanCard = ({
 
 
       {/* Payment Status Dialog */}
-     { checkPaymentStatus && <PaymentStatusDialog
+      {checkPaymentStatus && <PaymentStatusDialog
         open={paymentStatusOpen}
         onOpenChange={handlePaymentStatusClose}
         paymentId={paymentId}

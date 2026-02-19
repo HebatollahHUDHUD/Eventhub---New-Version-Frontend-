@@ -42,11 +42,12 @@ const HomeContent = async () => {
       <TalentsSection
         title={homeData.home_talents_title}
         subtitle={homeData.home_talents_subtitle}
+        featured_talents={homeData.featured_talents || []}
       />
       <TrustedOrganisationsSection
         title={homeData.home_trusted_organizations_title}
         subtitle={homeData.home_trusted_organizations_subtitle}
-        items={homeData.home_trusted_organizations_items}
+        featured_companies={homeData.featured_companies || []}
       />
       <PricingPlans
         title={homeData.home_pricing_title}

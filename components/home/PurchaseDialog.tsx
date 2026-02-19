@@ -20,6 +20,8 @@ import { useRouter } from "@/i18n/navigation";
 import { ArrowUpRight, CircleX, Loader2 } from "lucide-react";
 import { riyalSVG } from "@/public/SVGs";
 import { Plan } from "@/schemas/types";
+import { getUserSession } from "@/lib/userSession";
+import Link from "next/link";
 
 interface PurchaseDialogProps {
   planDetails: Plan;
@@ -32,6 +34,9 @@ const PurchaseDialog = ({
   disabled,
   isFree
 }: PurchaseDialogProps) => {
+  const loggedUser = getUserSession();
+  const isLoggedIn = !!loggedUser;
+
   const [open, setOpen] = useState(false);
   const t = useTranslations("home.pricingPlans.purchaseDialog");
   const tParent = useTranslations("home.pricingPlans");
@@ -151,20 +156,14 @@ const PurchaseDialog = ({
   const discount = appliedPromo?.discount ?? 0;
   const total = appliedPromo?.total ?? planDetails.price;
 
+  if (!isLoggedIn) return <Link href={isFree ? "/register" : "/login"}>
+    <CardBtn disabled={disabled} isFree={isFree} />
+  </Link>
+
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button
-          variant="purple"
-          size="lg"
-          className="w-full uppercase tracking-wider font-bold"
-          disabled={disabled}
-        >
-          {isFree ? tParent("registerNow") : tParent("purchaseNow")}
-          <div className="relative ">
-            <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
-            <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
-          </div>      </Button>
+        <CardBtn disabled={disabled} isFree={isFree} />
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md gap-4 p-4 pt-10 border-none shadow-none overflow-visible md:min-w-[600px]!">
@@ -289,3 +288,20 @@ const PurchaseDialog = ({
 };
 
 export default PurchaseDialog;
+
+const CardBtn = ({ disabled = false, isFree = false }: { disabled?: boolean, isFree?: boolean }) => {
+  const tParent = useTranslations("home.pricingPlans");
+  return (
+    <Button
+      variant="purple"
+      size="lg"
+      className="w-full uppercase tracking-wider font-bold"
+      disabled={disabled}
+    >
+      {isFree ? tParent("registerNow") : tParent("purchaseNow")}
+      <div className="relative ">
+        <ArrowUpRight className="size-5 absolute top-[-13px] start-[7px] " />
+        <ArrowUpRight className="size-5 opacity-[0.4] absolute bot-[11px] start-[-5px] " />
+      </div>      </Button>
+  );
+};

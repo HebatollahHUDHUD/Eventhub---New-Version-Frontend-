@@ -3,16 +3,19 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
-import TalentsList from "./TalentsList";
+import TalentCard from "@/app/[locale]/(main)/talent/components/TalentCard";
+import type { Talent } from "@/schemas/types";
 
 interface TalentsSectionProps {
   title: string;
   subtitle: string;
+  featured_talents: Talent[];
 }
 
-const TalentsSection = ({ title, subtitle }: TalentsSectionProps) => {
+const TalentsSection = ({ title, subtitle, featured_talents }: TalentsSectionProps) => {
   const t = useTranslations("home.talents");
+
+  const talentsToShow = featured_talents?.slice(0, 4) || [];
 
   return (
     <section className="relative py-6 md:py-8 lg:py-12">
@@ -50,9 +53,26 @@ const TalentsSection = ({ title, subtitle }: TalentsSectionProps) => {
           </div>
 
           {/* Talent Cards */}
-          <Suspense fallback={<div className="text-center py-12">Loading talents...</div>}>
-            <TalentsList />
-          </Suspense>
+          {talentsToShow.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pt-8">
+              {talentsToShow.map((talent) => (
+                <TalentCard
+                  key={talent.id}
+                  id={talent.id}
+                  name={talent.name}
+                  role={talent.role || "-"}
+                  projects={"-"}
+                  years={"-"}
+                  skills={"-"}
+                  image={talent.photo}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">{t("noTalents") || "No talents available"}</p>
+            </div>
+          )}
 
           {/* View More Button */}
           <div className="flex justify-center">
