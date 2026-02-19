@@ -15,7 +15,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
   const subtitle = data?.about_page_subtitle || t("who_is_events_hubs");
   const description = data?.about_page_desc || t("who_is_events_hubs_description");
   const videoUrl = data?.about_page_video_url
-  
+
 
   const stats = [
     { value: "+200", label: t("companies"), highlightColor: "bg-teal-300/50" },
@@ -35,7 +35,7 @@ export default function AboutIntro({ data }: AboutIntroProps) {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-10 gap-8 lg:gap-12 px-4 md:px-8 lg:px-12">
           {/* Left column - Tagline */}
           <div className="flex lg:col-span-4">
-            <h1 className="title-1 text-primary leading-snug font-normal! ">
+            <h1 className="text-2xl lg:text-4xl xl:text-5xl text-primary leading-snug font-semibold! ">
               {title}
             </h1>
           </div>

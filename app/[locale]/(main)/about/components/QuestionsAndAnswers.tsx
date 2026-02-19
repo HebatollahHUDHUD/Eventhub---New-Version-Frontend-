@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import QACard from "@/components/common/QACard";
 import type { AboutPage } from "@/schemas/shared";
+import PageTitle from "@/components/common/PageTitle";
 
 interface QuestionsAndAnswersProps {
   data?: AboutPage | null;
@@ -26,17 +27,17 @@ export default function QuestionsAndAnswers({ data }: QuestionsAndAnswersProps) 
 
   const faqs =
     data?.about_page_faq_items &&
-    data.about_page_faq_items.length > 0
+      data.about_page_faq_items.length > 0
       ? data.about_page_faq_items.map((item) => ({
-          question: item.question,
-          answer: item.answer,
-        }))
+        question: item.question,
+        answer: item.answer,
+      }))
       : staticFaqs;
 
   return (
     <section className="px-4 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 container">
       {/* Header */}
-      <TitleAndDescription
+      <PageTitle
         title={sectionTitle}
         description={sectionDescription}
       />

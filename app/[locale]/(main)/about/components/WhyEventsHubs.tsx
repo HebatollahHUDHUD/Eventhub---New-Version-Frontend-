@@ -3,9 +3,10 @@ import { circlesToDownLeftSVG, circlesToLeftSVG } from "@/public/SVGs";
 import TitleAndDescription from "@/components/common/TitleAndDescription";
 import FeatureCard from "@/components/common/FeatureCard";
 import type { AboutPage } from "@/schemas/shared";
+import PageTitle from "@/components/common/PageTitle";
 
 interface WhyEventsHubsProps {
-  data?: AboutPage | null;
+  data: AboutPage | null;
 }
 
 export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
@@ -14,54 +15,7 @@ export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
   const sectionTitle = t("why_events_hubs");
   const sectionDescription = t("why_events_hubs_description");
 
-  const staticFeatures = [
-    {
-      number: "01",
-      title: t("keen"),
-      description: t("keen_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-    {
-      number: "02",
-      title: t("smart"),
-      description: t("smart_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-    {
-      number: "03",
-      title: t("dedicated"),
-      description: t("dedicated_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-    {
-      number: "04",
-      title: t("eager"),
-      description: t("eager_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-    {
-      number: "05",
-      title: t("passionate"),
-      description: t("passionate_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-    {
-      number: "06",
-      title: t("concerned"),
-      description: t("concerned_description"),
-      highlightColor: "bg-amber-200/60",
-    },
-  ];
-
-  const features =
-    data?.about_page_why_us_items && data.about_page_why_us_items.length > 0
-      ? data.about_page_why_us_items.map((item, index) => ({
-        number: String(index + 1).padStart(2, "0"),
-        title: item.title,
-        description: item.desc,
-        highlightColor: "bg-amber-200/60",
-      }))
-      : staticFeatures;
+  const features = data?.about_page_why_us_items || [];
 
   return (
     <section className="relative overflow-hidden bg-[#F4F6F8]">
@@ -89,20 +43,20 @@ export default function WhyEventsHubs({ data }: WhyEventsHubsProps) {
 
       <div className="relative z-10 py-12 md:py-16 lg:py-20 space-y-12 md:space-y-16 px-4 md:px-8 lg:px-12">
         {/* Section header */}
-        <TitleAndDescription
+        <PageTitle
           title={sectionTitle}
           description={sectionDescription}
         />
 
         {/* Feature cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <FeatureCard
-              key={feature.number}
-              number={feature.number}
+              key={index}
+              number={String(index + 1).padStart(2, "0")}
               title={feature.title}
-              description={feature.description}
-              highlightColor={feature.highlightColor}
+              description={feature.desc}
+              highlightColor="bg-amber-200/60"
             />
           ))}
         </div>
