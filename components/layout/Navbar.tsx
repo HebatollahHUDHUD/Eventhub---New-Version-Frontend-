@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useEffect, useState, Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, UserIcon, XIcon } from "lucide-react";
 import { SESSION_NAME } from "@/constant";
 import { usePathname } from "next/navigation";
 import LocalChanger from "./LocalChanger";
@@ -150,7 +150,7 @@ const Navbar = () => {
                 </Suspense>
               </li>
 
-              {!isLoggedIn && (
+              {!isLoggedIn ? (
                 <li className="xl:hidden mt-2">
                   <Link
                     href="/login"
@@ -159,14 +159,28 @@ const Navbar = () => {
                     {t("login")}
                   </Link>
                 </li>
-              )}
+              ) : <li className="xl:hidden mt-2">
+                <Button
+                  asChild
+                  variant="orange"
+                  size="lg"
+                >
+                  <Link
+                    href="/profile"
+
+                  >
+                    {t("profile")}
+                  </Link>
+                </Button>
+
+              </li>}
             </ul>
 
 
           </div>
 
           <div className="relative z-10 flex items-center gap-4">
-            {!isLoggedIn && (
+            {!isLoggedIn ? (
               <div className="hidden xl:flex items-center gap-4">
                 <Button
                   asChild
@@ -192,6 +206,19 @@ const Navbar = () => {
                   </Link>
                 </Button>
               </div>
+            ) : (
+              <Button
+                asChild
+                variant="orange"
+                size="lg"
+              >
+                <Link
+                  href="/profile"
+                >
+                  <UserIcon size={20} />
+                  {t("profile")}
+                </Link>
+              </Button>
             )}
 
 

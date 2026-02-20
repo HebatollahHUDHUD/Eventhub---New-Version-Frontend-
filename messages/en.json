@@ -274,12 +274,21 @@
       "badges": "Badges",
       "pricing_per_day": "Pricing/Day",
       "similar_profiles": "Similar Profiles",
-      "view": "View"
+      "view": "View",
+      "available": "Available",
+      "not_available": "Not Available",
+      "user_not_found": "User not found",
+      "per_project": "/Project"
     },
     "rate_dialog": {
       "title": "Rate Candidate",
       "description": "Your feedback matters, rate this candidate",
-      "submit": "Submit"
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "please_select_rating": "Please select a rating",
+      "rating_success": "Rating submitted successfully",
+      "rating_failed": "Failed to submit rating. Please try again.",
+      "rate_candidate": "Rate Candidate"
     },
     "filters": {
       "talents": "Talents",

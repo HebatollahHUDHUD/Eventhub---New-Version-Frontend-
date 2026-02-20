@@ -307,12 +307,21 @@
       "badges": "الشارات",
       "pricing_per_day": "السعر/اليوم",
       "similar_profiles": "ملفات تعريف مشابهة",
-      "view": "عرض"
+      "view": "عرض",
+      "available": "متاح",
+      "not_available": "غير متاح",
+      "user_not_found": "المستخدم غير موجود",
+      "per_project": "/المشروع"
     },
     "rate_dialog": {
       "title": "تقييم المرشح",
       "description": "ملاحظاتك مهمة، قم بتقييم هذا المرشح",
-      "submit": "إرسال"
+      "submit": "إرسال",
+      "submitting": "جاري الإرسال...",
+      "please_select_rating": "يرجى اختيار تقييم",
+      "rating_success": "تم إرسال التقييم بنجاح",
+      "rating_failed": "فشل إرسال التقييم. يرجى المحاولة مرة أخرى.",
+      "rate_candidate": "تقييم المرشح"
     },
     "filters": {
       "talents": "المواهب",

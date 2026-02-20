@@ -22,7 +22,7 @@ const TalentDetailsContent = async ({ id }: TalentDetailsContentProps) => {
             <main className="py-10">
                 <section className="container px-6 xl:px-20">
                     <div className="text-center py-20">
-                        <p className="text-muted-foreground">User not found</p>
+                        <p className="text-muted-foreground">{t("user_not_found")}</p>
                     </div>
                 </section>
             </main>

@@ -40,7 +40,7 @@ const layout = async ({ children, params }: { children: React.ReactNode, params:
       <main className="py-10">
         <section className="container px-6 xl:px-20">
           <div className="text-center py-20">
-            <p className="text-muted-foreground">User not found</p>
+            <p className="text-muted-foreground">{t("user_not_found")}</p>
           </div>
         </section>
       </main>
@@ -51,7 +51,7 @@ const layout = async ({ children, params }: { children: React.ReactNode, params:
 
   // Map user data to component structure
   const positionName = userData.position?.name || userData.other_position || "-";
-  const availability = userData.available_for_work === 1 ? "Available" : "Not Available";
+  const availability = userData.available_for_work === 1 ? t("available") : t("not_available");
   const availabilityColor = userData.available_for_work === 1 ? "bg-green-600" : "bg-[#B71C1C]";
   const pricePerProject = userData.price_per_project || "0.00";
   const gender = userData.gender || "-";
@@ -233,7 +233,7 @@ const layout = async ({ children, params }: { children: React.ReactNode, params:
                 </div>
                 <div className="px-6 pb-6 flex items-end justify-center gap-2">
                   <div className="text-3xl font-extrabold text-chart-5">{pricePerProject}</div>
-                  <div className="text-sm font-medium text-chart-5 mb-1">/Project</div>
+                  <div className="text-sm font-medium text-chart-5 mb-1">{t("per_project")}</div>
                 </div>
               </Card>
             )}
