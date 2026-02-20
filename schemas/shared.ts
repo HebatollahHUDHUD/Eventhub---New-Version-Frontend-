@@ -378,16 +378,14 @@ export const talentRegisterSchema = z
     }).optional(),
     image: z.instanceof(File).optional(),
     skills: z.array(z.string()).optional(),
-  })
-  .strict()
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Passwords do not match.",
-    path: ["password_confirmation"],
-  })
-  .refine((data) => data.step === "2" ? data.verification_code : true, {
-    message: "Verification code is required.",
-    path: ["verification_code"],
-  })
+     resume: z.instanceof(File).optional(),
+     experiences: z.any(),
+     position: z.any(),
+     country: z.any(),
+     languages: z.any(),
+     educations: z.any(),
+   })
+   .strict()
 
 export const companyProfileSchema = z.object({
   id: z.number().int().positive().optional(),
@@ -646,10 +644,10 @@ export const AddEventSchema = z
     check_out_time: z.string().regex(/^\d{2}:\d{2}$/, {
       message: "Check-out time must be in HH:MM format.",
     }),
-    user_ids: z.array(z.number().int().positive()).min(1, {
+    user_ids: z.array(z.number().int().positive()).optional(),
+    users:z.array(z.any()).min(1, {
       message: "At least one user must be selected.",
     }),
-    users:z.array(z.any()).optional(),
     attachments: z.array(z.instanceof(File)).optional(),
   })
   .strict()
@@ -763,9 +761,7 @@ export const SkillsFormSchema = z
     skill_ids: z.array(z.number().int().positive()).optional(),
     badge_ids: z.array(z.number().int().positive()).optional(),
     experience_years: z.number().int().min(0).optional(),
-    bio: z.string().max(250, {
-      message: "Bio must be at most 250 characters.",
-    }).optional(),
+    bio: z.string().optional(),
     available_for_work: z.union([z.literal(0), z.literal(1)]).optional(),
     price_per_project: z.number().min(0).optional(),
     facebook_url: z.string().url().optional().or(z.literal("")),

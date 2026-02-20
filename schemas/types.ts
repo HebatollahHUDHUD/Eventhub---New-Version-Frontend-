@@ -159,6 +159,7 @@ export interface JobAdUser extends User {
 
 export interface JobAd {
   id: number;
+  image: string;
   user: JobAdUser;
   country: JobAdCountry;
   title: { en: string };
@@ -426,6 +427,48 @@ export interface TalentProfile {
 
 export type TalentProfileResponse = {
   profile: TalentProfile;
+};
+
+// User detail response from /users/{id} endpoint
+export interface UserDetail {
+  id: number;
+  name: string;
+  photo: string | null;
+  email: string;
+  user_type: string;
+  mobile: string | null;
+  country: Country | null;
+  gender: string | null;
+  bio: string | null;
+  position: Position | null;
+  other_position: string | null;
+  experience_years: number | null;
+  available_for_work: number; // 0 or 1
+  price_per_project: string | null;
+  facebook_url: string | null;
+  instagram_url: string | null;
+  youtube_url: string | null;
+  linkedin_url: string | null;
+  projects_count: number;
+  skills_count: number;
+  resume: Resume | null;
+  skills: Skill[];
+  languages: Language[];
+  badges: Badge[];
+  educations: Education[];
+  experiences: Experience[];
+  current_subscription: {
+    id: number;
+    plan: Plan;
+    start_date: string;
+    end_date: string | null;
+    created_at: string;
+    updated_at: string;
+  } | null;
+}
+
+export type UserDetailResponse = {
+  user: UserDetail;
 };
 
 export type ProjectDetailsResponse = {

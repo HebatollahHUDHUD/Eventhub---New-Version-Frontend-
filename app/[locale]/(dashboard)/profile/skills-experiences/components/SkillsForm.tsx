@@ -179,9 +179,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                         maxLength={250}
                       />
                     </FormControl>
-                    <div className="text-sm text-muted-foreground">
-                      {field.value?.length || 0}/250 {t("max-letters")}
-                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

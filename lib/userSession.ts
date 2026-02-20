@@ -25,7 +25,7 @@ export function isStudentType() {
 export function getUserType() {
   const user = getUserSession();
 
-  return user.user_type as UserType;
+  return user?.user_type as UserType;
 }
 
 export function addUserSession(userSession: string) {

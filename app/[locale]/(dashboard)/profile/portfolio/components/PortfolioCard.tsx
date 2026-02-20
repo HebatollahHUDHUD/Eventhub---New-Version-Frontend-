@@ -7,12 +7,15 @@ import { useTranslations } from "next-intl";
 import moment from "moment";
 import { useLocale } from "next-intl";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 type PortfolioCardProps = {
   project: Project;
+  isTalent?: boolean;
 };
 
-const PortfolioCard = ({ project }: PortfolioCardProps) => {
+const PortfolioCard = ({ project, isTalent }: PortfolioCardProps) => {
+  const { id } = useParams();
   const t = useTranslations("dashboard.portfolio");
   const locale = useLocale();
 
@@ -47,16 +50,27 @@ const PortfolioCard = ({ project }: PortfolioCardProps) => {
         <p className="text-sm text-muted-foreground">{formattedDate}</p>
 
         <div className="mt-auto pt-2">
-          <Button
+          {!isTalent ? (
+            <Button
+              size={"lg"}
+              variant="outlineSecondary"
+              className="w-full"
+              asChild
+            >
+              <Link href={`/profile/portfolio/${project.id}`}>
+                {t("edit")}
+              </Link>
+            </Button>
+          ) : <Button
             size={"lg"}
             variant="outlineSecondary"
             className="w-full"
             asChild
           >
-            <Link href={`/profile/portfolio/${project.id}`}>
-              {t("edit")}
+            <Link href={`/talent/${id}/portfolio/${project.id}`}>
+              {t("view")}
             </Link>
-          </Button>
+          </Button>}
         </div>
       </div>
     </article>

@@ -210,9 +210,6 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         maxLength={250}
                       />
                     </FormControl>
-                    <div className="text-sm text-muted-foreground">
-                      {field.value?.toString().length || 0}/250 {t("max-letters")}
-                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

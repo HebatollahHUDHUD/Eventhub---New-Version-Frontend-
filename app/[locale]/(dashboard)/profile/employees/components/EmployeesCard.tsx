@@ -10,13 +10,15 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type EmployeesCardProps = {
   employee: Employee;
+  refetch?: () => void;
 };
 
-const EmployeesCard = ({ employee }: EmployeesCardProps) => {
+const EmployeesCard = ({ employee, refetch }: EmployeesCardProps) => {
   const t = useTranslations("common");
   const queryClient = useQueryClient();
 
   const handleRefetch = () => {
+    refetch?.();
     queryClient.invalidateQueries({ queryKey: ["employees"] });
   }
 

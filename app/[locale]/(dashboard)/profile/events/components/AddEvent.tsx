@@ -26,6 +26,7 @@ import SelectEventType from "@/components/select/SelectEventType";
 import SelectLocation from "@/components/common/SelectLocation";
 import Image from "@/components/common/image";
 import { Event } from "@/schemas/types";
+import SelectEmployee from "@/components/select/SelectEmployee";
 
 const AddEvent = ({
   refetch,
@@ -61,14 +62,7 @@ const AddEvent = ({
     },
   });
 
-  const {
-    fields: users,
-    append: appendUser,
-    remove: removeUser,
-  } = useFieldArray({
-    control: form.control,
-    name: "users",
-  });
+  const users = form.watch("users");
 
   const { mutateAsync } = usePostData<AddEventType>({
     endpoint: "/profile/events",
@@ -77,6 +71,7 @@ const AddEvent = ({
   async function onSubmit(values: AddEventType) {
     try {
       const userIds = users?.map((user: any) => user.id) || [];
+
       const data = {
         ...values,
         user_ids: userIds,
@@ -116,6 +111,7 @@ const AddEvent = ({
   }
 
   const isLoading = form.formState.isSubmitting;
+
   return (
     <Card>
       <CardHeader>
@@ -225,14 +221,13 @@ const AddEvent = ({
                 )}
               />
 
-
               <FormField
                 control={form.control}
                 name="user_ids"
                 render={() => (
                   <FormItem>
                     <FormLabel>{t("employees")}</FormLabel>
-                    <SelectUser
+                    <SelectEmployee
                       isMultiple
                       value={form.watch("users")?.map((user: any) => user.id) || []}
                       getItem={(value) => {
@@ -248,7 +243,7 @@ const AddEvent = ({
                 {users?.map((user: any, index: number) => (
                   <div key={user.id} className="flex items-center gap-4">
                     <Button variant="outlineDestructive" size="icon-sm" className="rounded-full border-destructive bg-transparent" onClick={() => {
-                      removeUser(index);
+                      form.setValue("users", users.filter((user: any) => user.id !== user.id));
                     }}>
                       <XIcon />
                     </Button>

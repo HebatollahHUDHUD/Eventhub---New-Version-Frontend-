@@ -1,3 +1,4 @@
+"use client";
 
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import TalentCard from "@/app/[locale]/(main)/talent/components/TalentCard";
 import type { Talent } from "@/schemas/types";
+import AdBanner from "../common/AdBanner";
 
 interface TalentsSectionProps {
   title: string;
@@ -26,7 +28,7 @@ const TalentsSection = ({ title, subtitle, featured_talents }: TalentsSectionPro
         </span>
       </div>
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 space-y-10 md:space-y-12 lg:space-y-16">
         <div className="space-y-8 md:space-y-12">
           {/* Top Button */}
           <div className="flex justify-center">
@@ -87,6 +89,8 @@ const TalentsSection = ({ title, subtitle, featured_talents }: TalentsSectionPro
             </Button>
           </div>
         </div>
+
+        <AdBanner dir="Horizontal" position="home_talents_section" />
       </div>
     </section>
   );

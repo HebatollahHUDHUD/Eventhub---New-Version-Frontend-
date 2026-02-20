@@ -23,6 +23,9 @@ const JobAdsList = ({ jobAds }: { jobAds: JobAd[] }) => {
     );
   }
 
+  console.log(jobAds);
+
+
   return (
     <Card>
       <CardHeader>

@@ -12,6 +12,7 @@ import { getUserSession } from "@/lib/userSession";
 import PageTitle from "../common/PageTitle";
 import type { Plan } from "@/schemas/types";
 import PaymentStatusDialog from "./PaymentStatusDialog";
+import AdBanner from "../common/AdBanner";
 
 type PlanType = "company" | "personal";
 
@@ -75,7 +76,7 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
 
   return (
     <section className="relative py-6 md:py-8 lg:py-12 overflow-hidden">
-      <div className="container relative z-10">
+      <div className="container space-y-10 md:space-y-14 relative z-10">
         <div className="space-y-10 md:space-y-14">
           {/* Title and Description */}
           <PageTitle
@@ -127,7 +128,14 @@ const PricingPlans = ({ title, subtitle, description, plans: allPlans }: Pricing
             </div>
           )}
         </div>
+
+        <AdBanner
+          dir="Horizontal"
+          position="home_plans_section"
+        />
       </div>
+
+
       <PaymentStatusDialog
         onOpenChange={setPaymentStatusOpen}
         open={paymentStatusOpen}

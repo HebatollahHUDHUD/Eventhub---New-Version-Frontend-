@@ -104,7 +104,7 @@ export default function Status({
         <TooltipTrigger className={tooltip ? "cursor-help" : "cursor-default"}>
           <p
             className={cn(
-              "p-1 text-sm font-semibold text-center",
+              "text-sm font-semibold text-center",
               classes[status],
               className
             )}

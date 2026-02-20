@@ -21,7 +21,7 @@ const EventsPage = () => {
     endpoint: "/profile/events",
     queryKey: ["events", queryParams.from_date, queryParams.to_date],
     config: {
-      queryParams
+      // queryParams
     },
   });
 

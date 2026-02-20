@@ -77,7 +77,6 @@ const TalentRegisterForm = ({ extractData }: { extractData: any }) => {
 
   const isLoading = form.formState.isSubmitting;
 
-
   return (
 
     <Form {...form}>
@@ -85,10 +84,10 @@ const TalentRegisterForm = ({ extractData }: { extractData: any }) => {
         {form.watch("step") === "1" && (
           <RegisterInfoForm form={form} isLoading={isLoading} />
         )}
+
         {form.watch("step") === "2" && (
           <VerificationCodeForm form={form} isLoading={isLoading} onSubmit={onSubmit} />
         )}
-
       </form>
     </Form>
   );

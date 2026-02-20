@@ -6,30 +6,30 @@ import SelectItem, { ValueType } from "./SelectItem";
 const SelectEventType = ({
   onChange,
   value,
-  className,
   isMultiple,
+  className,
 }: {
   onChange: (value: ValueType) => void;
   value: ValueType;
-  className?: string;
   isMultiple?: boolean;
+  className?: string;
 }) => {
-  const endpoint = "/event_types";
+  const endpoint = "/system-lookups?type=event_type";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
-    queryKey: ["EventTypes", endpoint],
+    queryKey: ["event_type"],
   });
 
-  const eventTypesData = data?.status === "success" ? data?.result : [];
+  const eventTypeData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <SelectItem
-      items={eventTypesData}
-      value={value}
+      items={eventTypeData}
+      value={value || []}
       setValue={onChange}
       isLoading={isLoading || isFetching}
-      className={className}
       isMultiple={isMultiple}
+      className={className}
     />
   );
 };

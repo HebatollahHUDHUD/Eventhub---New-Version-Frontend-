@@ -1,14 +1,12 @@
 import { getData } from "@/lib/request-server";
-import { API_URL } from "@/constant";
 import type { JobAdMainDetailsResponse } from "../../../../../schemas/types";
 import OpportunityHeader from "./components/OpportunityHeader";
 import OpportunityBadges from "./components/OpportunityBadges";
 import OpportunityAbout from "./components/OpportunityAbout";
 import OpportunityJobDetails from "./components/OpportunityJobDetails";
-import OpportunityAdBanner from "./components/OpportunityAdBanner";
 import OpportunitySimilarJobs from "./components/OpportunitySimilarJobs";
+import AdBanner from "@/components/common/AdBanner";
 
-const storageUrl = API_URL.replace(/\/api$/, "");
 
 type OpportunityContentProps = {
   slug: string;
@@ -30,9 +28,7 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
 
   if (!jobAd) return null;
 
-  const photoUrl = jobAd.user?.photo
-    ? `${storageUrl}${jobAd.user.photo}`
-    : undefined;
+  const photoUrl = jobAd?.user?.photo || "";
 
   const jobDetails = [
     { label: "Gender", value: jobAd.gender || "N/A" },
@@ -74,7 +70,12 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
 
           {/* Right - Ad Banner (separate column) */}
           <div className="lg:w-91.75 shrink-0">
-            <OpportunityAdBanner />
+            <div className="h-fit sticky top-20 p-4">
+              <AdBanner
+                dir="Vertical"
+                position="opportunities_details"
+              />
+            </div>
           </div>
         </div>
       </section>

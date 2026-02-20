@@ -8,7 +8,7 @@ import { Employee, EmployeesResponse } from '@/schemas/types';
 
 const NewEmployees = () => {
   const t = useTranslations("dashboard.employees");
-  const { data } = useGetData<EmployeesResponse>({
+  const { data, refetch } = useGetData<EmployeesResponse>({
     endpoint: "/profile/employees",
     queryKey: ["pending-employees", "employees"],
     config: {
@@ -32,7 +32,7 @@ const NewEmployees = () => {
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {employees.map((employee) => (
-            <EmployeesCard key={employee.id} employee={employee} />
+            <EmployeesCard key={employee.id} employee={employee} refetch={refetch} />
           ))}
         </div>
       </CardContent>

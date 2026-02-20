@@ -16,7 +16,7 @@ const SelectSkills = ({
   isMultiple?: boolean;
   icon?: React.ReactNode;
 }) => {
-  const endpoint = "/system-lookups?type=skills";
+  const endpoint = "/system-lookups?type=skill";
   const { data, isLoading, isFetching } = useGetData<any>({
     endpoint,
     queryKey: ["Skills", endpoint],

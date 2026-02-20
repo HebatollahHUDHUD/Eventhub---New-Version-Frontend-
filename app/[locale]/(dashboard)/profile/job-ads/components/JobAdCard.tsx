@@ -21,7 +21,7 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
     <article className="relative bg-background flex flex-col">
       <div>
         <Image
-          src="/images/placeholder.png"
+          src={jobAd.image}
           alt={jobAd.title.en}
           width={400}
           height={267}
@@ -29,13 +29,13 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
         />
       </div>
 
-      <div className="flex flex-col gap-2 py-4 flex-1">
+      <div className="flex flex-col py-4 flex-1">
         <h2 className="font-bold text-lg line-clamp-2">{jobAd.title.en}</h2>
 
         <p className="text-sm text-muted-foreground">{formattedDate}</p>
 
         <div className="">
-          <Status status={jobAd.status as StatusType} />
+          <Status status={(jobAd.status || "active") as StatusType} />
         </div>
 
         {/* View Button */}
