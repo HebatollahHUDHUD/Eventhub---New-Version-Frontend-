@@ -121,8 +121,8 @@ const Navbar = () => {
               <button
                 className="absolute top-2 start-2 flex justify-center items-center bg-muted rounded-full w-8 h-8 [&_svg]:size-4"
                 onClick={toggleNav}
-                aria-label="Close Navigation"
-                title="Close Navigation"
+                aria-label={t("close-navigation")}
+                title={t("close-navigation")}
               >
                 <XIcon />
               </button>
@@ -228,8 +228,8 @@ const Navbar = () => {
                 shouldHaveWhiteBg ? "text-foreground" : "text-primary-foreground"
               )}
               onClick={toggleNav}
-              aria-label="Open Navigation"
-              title="Open Navigation"
+              aria-label={t("open-navigation")}
+              title={t("open-navigation")}
             >
               <MenuIcon size={30} />
             </button>

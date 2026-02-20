@@ -62,7 +62,7 @@ const SelectItem = ({
     if (typeof item.name === "string") {
       return item.name;
     } else {
-      return item.name?.[language];
+      return item.name?.[language] || item.name?.en || item.name?.ar || "";
     }
 
   };

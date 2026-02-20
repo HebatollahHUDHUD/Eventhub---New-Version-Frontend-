@@ -24,7 +24,12 @@ import { UserDetailResponse } from "@/schemas/types";
 import { Badge } from "@/components/ui/badge";
 
 
-const layout = async ({ children, params }: { children: React.ReactNode, params: { id: string } }) => {
+type LayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string; id: string }>;
+};
+
+const layout = async ({ children, params }: LayoutProps) => {
   const { id } = await params;
   const t = await getTranslations("talent.details");
 
