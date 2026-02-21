@@ -39,7 +39,7 @@ const MessageDetailsPage = () => {
   // Fetch conversation details
   const { data: conversationData } = useGetData<ConversationDetailsResponse>({
     endpoint: `/messages/conversations/${conversationId}`,
-    queryKey: ["Conversation", conversationId],
+    queryKey: ["Conversation", conversationId, "Messages"],
   });
 
   const conversation = conversationData?.status === "success" ? conversationData.result?.conversation : null;

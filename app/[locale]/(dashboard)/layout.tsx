@@ -5,6 +5,7 @@ import { USER_SESSION, UserType } from "@/constant";
 import { createHeaders } from "@/lib/createHeaders";
 import { getData } from "@/lib/request-server";
 import { getUserType } from "@/lib/userSession";
+import PusherProvider from "@/providers/PusherProvider";
 import {
   dehydrate,
   HydrationBoundary,
@@ -47,6 +48,8 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
           />
         </div>
       </div>
+
+      <PusherProvider />
     </main>
   );
 };

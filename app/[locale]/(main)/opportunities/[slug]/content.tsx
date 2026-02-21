@@ -39,6 +39,8 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
     { label: "Country", value: jobAd.country?.name || "N/A" },
   ];
 
+
+
   return (
     <div className="space-y-10 py-10">
       <section className="container px-6 xl:px-20">
@@ -64,6 +66,7 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
                 jobAdId={jobAd.id}
                 details={jobDetails}
                 isActive={jobAd.status === "active" || !jobAd.status}
+                is_applied={jobAd.is_applied}
               />
             </div>
           </div>

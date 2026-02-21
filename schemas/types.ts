@@ -224,6 +224,7 @@ export interface JobAdMain {
   experience_years: number;
   gender: string | null;
   status: string | null;
+  is_applied: boolean;
   skills: JobAdSkill[];
   attachments: AttachmentType[];
   created_at: string;

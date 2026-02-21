@@ -14,12 +14,14 @@ type OpportunityJobDetailsProps = {
   jobAdId: number;
   details: JobDetail[];
   isActive?: boolean;
+  is_applied?: boolean;
 };
 
 const OpportunityJobDetails = ({
   jobAdId,
   details,
   isActive = true,
+  is_applied = false,
 }: OpportunityJobDetailsProps) => {
   const { mutate: applyToJob, isPending } = usePostData({
     endpoint: `/job-ads/${jobAdId}/apply`,
@@ -68,13 +70,13 @@ const OpportunityJobDetails = ({
           variant="accentPurple"
           size="lg"
           onClick={handleApply}
-          disabled={isPending}
+          disabled={isPending || is_applied}
           className="w-full rounded-lg"
         >
           {isPending ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            "Apply to Job"
+            is_applied ? "Applied" : "Apply to Job"
           )}
         </Button>
       </div>

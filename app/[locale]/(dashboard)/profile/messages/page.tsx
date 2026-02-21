@@ -23,7 +23,7 @@ const Conversations = () => {
   const t = useTranslations("messages");
   const { data, isLoading } = useGetData<ConversationsResponse>({
     endpoint: "/messages/conversations",
-    queryKey: ["Conversations"],
+    queryKey: ["Conversations", "Messages"],
     config: {
       queryParams: {
         search_key: search,
