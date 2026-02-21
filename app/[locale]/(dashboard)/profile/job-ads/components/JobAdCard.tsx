@@ -21,7 +21,7 @@ const JobAdCard = ({ jobAd }: JobAdCardProps) => {
     <article className="relative bg-background flex flex-col">
       <div>
         <Image
-          src={jobAd.image}
+          src={jobAd?.image || "/images/placeholder.png"}
           alt={jobAd.title.en}
           width={400}
           height={267}
