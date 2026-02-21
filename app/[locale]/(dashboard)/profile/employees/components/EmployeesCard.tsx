@@ -7,13 +7,16 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import ChangeEmployeeStatus from "./ChangeEmployeeStatus";
 import { useQueryClient } from "@tanstack/react-query";
+import SendMessageDialog from "./SendMessageDialog";
 
 type EmployeesCardProps = {
   employee: Employee;
   refetch?: () => void;
+  hasMessage?: boolean;
+  jobAdApplicantId?: number;
 };
 
-const EmployeesCard = ({ employee, refetch }: EmployeesCardProps) => {
+const EmployeesCard = ({ employee, refetch, hasMessage = false, jobAdApplicantId }: EmployeesCardProps) => {
   const t = useTranslations("common");
   const queryClient = useQueryClient();
 
@@ -60,6 +63,21 @@ const EmployeesCard = ({ employee, refetch }: EmployeesCardProps) => {
             {t("view")}
           </Link>
         </Button>
+
+        {hasMessage && (
+          <SendMessageDialog
+            jobAdApplicantId={jobAdApplicantId}
+            trigger={
+              <Button
+                size={"lg"}
+                variant="outlineOrange"
+                className="w-full"
+              >
+                {t("message")}
+              </Button>
+            }
+          />
+        )}
       </div>
     </article>
   );

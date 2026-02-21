@@ -506,6 +506,8 @@
       "error-msg": "Failed to create job ad. Please try again.",
       "view": "View",
       "no-job-ads": "No job ads found.",
+      "applicants": "Applicants",
+      "no-applicants": "No applicants yet",
       "status": {
         "active": "Active",
         "closed": "Closed",
@@ -628,7 +630,16 @@
     },
     "employees": {
       "new-employees": "New Employees",
-      "confirmed-employees": "Confirmed Employees"
+      "confirmed-employees": "Confirmed Employees",
+      "send_message": "Send Message",
+      "send_message_description": "Send a message to start a conversation",
+      "message_required": "Please enter a message",
+      "applicant_id_required": "Applicant ID is required",
+      "message_sent": "Message sent successfully",
+      "message_failed": "Failed to send message. Please try again.",
+      "enter_message": "Enter your message...",
+      "sending": "Sending...",
+      "send": "Send"
     },
     "plans": {
       "my-plan": "My Plan",

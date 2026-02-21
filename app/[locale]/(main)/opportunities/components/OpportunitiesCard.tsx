@@ -5,15 +5,19 @@ import PleaseLoginDialog from "@/components/common/PleaseLoginDialog";
 import { ArrowUpRight } from "lucide-react";
 import { getUserSession } from "@/lib/userSession";
 import type { JobAdMain } from "../../../../../schemas/types";
+import { USER_SESSION } from "@/constant";
+import { cookies } from "next/headers";
 
 
 type OpportunitiesCardProps = {
   jobAd: JobAdMain;
 };
 
-const OpportunitiesCard = ({ jobAd }: OpportunitiesCardProps) => {
-  const user = getUserSession()
-  const isLoggedIn = !!user
+const OpportunitiesCard = async ({ jobAd }: OpportunitiesCardProps) => {
+  const cookieStore = await cookies();
+  const user = cookieStore.get(USER_SESSION)?.value
+  const userData = user ? JSON.parse(user) : null;
+  const isLoggedIn = !!userData
 
   if (!isLoggedIn) {
     return (

@@ -155,11 +155,49 @@ export interface JobAdSkill {
 
 export interface JobAdUser extends User {
   incharge_person_name: string | null;
+  is_featured: number;
+  last_login_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface JobAdAttachment {
+  id: number;
+  title: string;
+  file_name: string;
+  file_path: string;
+  file_size: number;
+  extra: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface JobAdApplicant {
+  id: number;
+  name: string;
+  photo: string | null;
+  email: string;
+  user_type: string;
+  mobile: string | null;
+  gender: string | null;
+  bio: string | null;
+  other_position: string | null;
+  experience_years: number | null;
+  available_for_work: number;
+  price_per_project: string | null;
+  facebook_url: string | null;
+  instagram_url: string | null;
+  youtube_url: string | null;
+  linkedin_url: string | null;
+  is_featured: number;
+  last_login_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface JobAd {
   id: number;
-  image: string;
+  image: string | null;
   user: JobAdUser;
   country: JobAdCountry;
   title: { en: string };
@@ -168,7 +206,8 @@ export interface JobAd {
   gender: string | null;
   status: string | null;
   skills: JobAdSkill[];
-  attachments: AttachmentType[];
+  attachments: JobAdAttachment[];
+  applicants: JobAdApplicant[];
   created_at: string;
   updated_at: string;
 }

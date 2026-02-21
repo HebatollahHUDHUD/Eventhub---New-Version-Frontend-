@@ -539,6 +539,8 @@
       "error-msg": "فشل إنشاء إعلان الوظيفة. يرجى المحاولة مرة أخرى.",
       "view": "عرض",
       "no-job-ads": "لا توجد إعلانات وظائف.",
+      "applicants": "المتقدمون",
+      "no-applicants": "لا يوجد متقدمون بعد",
       "status": {
         "active": "نشط",
         "closed": "مغلق",
@@ -661,7 +663,16 @@
     },
     "employees": {
       "new-employees": "الموظفون الجدد",
-      "confirmed-employees": "الموظفون المؤكدون"
+      "confirmed-employees": "الموظفون المؤكدون",
+      "send_message": "إرسال رسالة",
+      "send_message_description": "أرسل رسالة لبدء محادثة",
+      "message_required": "يرجى إدخال رسالة",
+      "applicant_id_required": "معرف المتقدم مطلوب",
+      "message_sent": "تم إرسال الرسالة بنجاح",
+      "message_failed": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+      "enter_message": "أدخل رسالتك...",
+      "sending": "جاري الإرسال...",
+      "send": "إرسال"
     },
     "plans": {
       "my-plan": "خطتي",

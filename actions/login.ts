@@ -15,7 +15,7 @@ import {
 export const loginAction = async (
   session: string,
   user_session: string,
-  remeber: boolean = false,
+  remeber: boolean = true,
   callbackUrl?: string | null
 ) => {
   // get the exp value from the session
