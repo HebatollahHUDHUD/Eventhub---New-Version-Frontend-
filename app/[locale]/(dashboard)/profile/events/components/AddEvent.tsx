@@ -265,7 +265,9 @@ const AddEvent = ({
                   <div key={user.id} className="flex items-center gap-4">
                     <Button variant="outlineDestructive" size="icon-sm" className="rounded-full border-destructive bg-transparent" onClick={() => {
                       form.setValue("users", users.filter((user: any) => user.id !== user.id));
-                    }}>
+                    }}
+                      disabled={isDisabled}
+                    >
                       <XIcon />
                     </Button>
 
