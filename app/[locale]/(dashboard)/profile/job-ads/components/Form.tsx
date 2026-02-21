@@ -213,7 +213,6 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         placeholder={t("enter-about-job")}
                         {...field}
                         className="min-h-[120px]"
-                        maxLength={250}
                         disabled={isDisabled}
                       />
                     </FormControl>

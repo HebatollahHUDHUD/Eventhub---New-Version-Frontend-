@@ -176,7 +176,6 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                         {...field}
                         placeholder={t("enter-about-me")}
                         className="min-h-[120px]"
-                        maxLength={250}
                       />
                     </FormControl>
                     <FormMessage />
