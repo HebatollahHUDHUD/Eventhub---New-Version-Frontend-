@@ -27,6 +27,8 @@ import SelectLocation from "@/components/common/SelectLocation";
 import Image from "@/components/common/image";
 import { Event } from "@/schemas/types";
 import SelectEmployee from "@/components/select/SelectEmployee";
+import ChangeEventStatus from "./ChangeEventStatus";
+import Status, { StatusType } from "@/components/common/Status";
 
 const AddEvent = ({
   refetch,
@@ -111,12 +113,19 @@ const AddEvent = ({
   }
 
   const isLoading = form.formState.isSubmitting;
+  const isDisabled = isUpdate && event?.status !== "active";
 
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           {isUpdate ? t("event-details") || "Event Details" : t("add-event")}
+
+          {isUpdate && (
+            <Status
+              status={event?.status as StatusType || "active"}
+            />
+          )}
         </CardTitle>
       </CardHeader>
 
@@ -134,6 +143,7 @@ const AddEvent = ({
                       <Input
                         {...field}
                         placeholder={t("enter-event-title")}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -147,7 +157,12 @@ const AddEvent = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t("event-type")}</FormLabel>
-                    <SelectEventType onChange={field.onChange} value={field.value} />
+                    <div className={isDisabled ? "pointer-events-none opacity-50" : ""}>
+                      <SelectEventType
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -164,6 +179,7 @@ const AddEvent = ({
                         {...field}
                         type="date"
                         placeholder={t("enter-from-date")}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -181,6 +197,7 @@ const AddEvent = ({
                       {...field}
                       type="date"
                       placeholder={t("enter-to-date")}
+                      disabled={isDisabled}
                     />
                     <FormMessage />
                   </FormItem>
@@ -198,6 +215,7 @@ const AddEvent = ({
                         {...field}
                         type="time"
                         placeholder={t("enter-check-in-time")}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -215,6 +233,7 @@ const AddEvent = ({
                       {...field}
                       type="time"
                       placeholder={t("enter-check-out-time")}
+                      disabled={isDisabled}
                     />
                     <FormMessage />
                   </FormItem>
@@ -227,13 +246,15 @@ const AddEvent = ({
                 render={() => (
                   <FormItem>
                     <FormLabel>{t("employees")}</FormLabel>
-                    <SelectEmployee
-                      isMultiple
-                      value={form.watch("users")?.map((user: any) => user.id) || []}
-                      getItem={(value) => {
-                        form.setValue("users", value);
-                      }}
-                    />
+                    <div className={isDisabled ? "pointer-events-none opacity-50" : ""}>
+                      <SelectEmployee
+                        isMultiple
+                        value={form.watch("users")?.map((user: any) => user.id) || []}
+                        getItem={(value) => {
+                          form.setValue("users", value);
+                        }}
+                      />
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -275,6 +296,7 @@ const AddEvent = ({
                         files={field.value || []}
                         defaultValue={event?.attachments || []}
                         onChange={field.onChange}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -289,13 +311,15 @@ const AddEvent = ({
                   <FormItem>
                     <FormLabel>{t("location")}</FormLabel>
                     <FormControl>
-                      <SelectLocation
-                        value={{ lat: form.watch("lat"), lng: form.watch("lng") }}
-                        onChange={({ lat, lng }) => {
-                          form.setValue("lat", lat);
-                          form.setValue("lng", lng);
-                        }}
-                      />
+                      <div className={isDisabled ? "pointer-events-none opacity-50" : ""}>
+                        <SelectLocation
+                          value={{ lat: form.watch("lat"), lng: form.watch("lng") }}
+                          onChange={({ lat, lng }) => {
+                            form.setValue("lat", lat);
+                            form.setValue("lng", lng);
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -306,11 +330,28 @@ const AddEvent = ({
             </div>
 
 
-            <div className="flex justify-end">
+
+            <div className="flex gap-2 justify-end">
+              {isUpdate && event?.status === "active" && (
+                <>
+                  <ChangeEventStatus
+                    id={event?.id as number}
+                    status={"completed"}
+                    refetch={refetch}
+                  />
+
+                  <ChangeEventStatus
+                    id={event?.id as number}
+                    status={"cancelled"}
+                    refetch={refetch}
+                  />
+                </>)
+              }
+
               <Button
                 type="submit"
                 size={"lg"}
-                disabled={isLoading}
+                disabled={isLoading || isDisabled}
                 variant={"accentSecondary"}
               >
                 {isLoading && (
@@ -321,6 +362,9 @@ const AddEvent = ({
 
               </Button>
             </div>
+
+
+
           </form>
         </Form>
       </CardContent>
