@@ -25,16 +25,17 @@ const TalentsList = async () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pt-8">
-      {talentsToShow.map((talent) => (
+      {talentsToShow.map((item) => (
         <TalentCard
-          key={talent.id}
-          id={talent.id}
-          name={talent.name}
-          role={talent.role}
-          projects={"-"}
-          years={"-"}
-          skills={"-"}
-          image={talent.photo}
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          role={item.position?.name || item.other_position || "-"}
+          projects={item.projects_count}
+          years={item.experience_years}
+          skills={item.skills_count}
+          image={item.photo}
+          average_rating={item.average_rating}
         />
       ))}
     </div>

@@ -58,11 +58,12 @@ const TalentList = async ({ searchParams }: TalentContentProps) => {
             key={item.id}
             id={item.id}
             name={item.name}
-            role={item.role}
-            projects={"-"}
-            years={"-"}
-            skills={"-"}
+            role={item.position?.name || item.other_position || "-"}
+            projects={item.projects_count}
+            years={item.experience_years}
+            skills={item.skills_count}
             image={item.photo}
+            average_rating={item.average_rating}
           />
         ))}
       </div>

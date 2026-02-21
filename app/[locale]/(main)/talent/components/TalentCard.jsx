@@ -7,11 +7,26 @@ import { getUserSession } from "@/lib/userSession";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
+const TalentCard = ({ id, name, role, projects, years, skills, image, average_rating = 0 }) => {
   const t = useTranslations("talent.card");
   const user = getUserSession()
 
   const isLoggedIn = !!user
+
+  // Render stars based on average_rating (0-5 scale)
+  const renderStars = () => {
+    const stars = [];
+    const fullStars = Math.round(average_rating); // Round to nearest integer
+
+    for (let i = 0; i < 5; i++) {
+      if (i < fullStars) {
+        stars.push(<span key={i} className="text-yellow-400">★</span>);
+      } else {
+        stars.push(<span key={i} className="text-gray-300">★</span>);
+      }
+    }
+    return stars;
+  };
 
   return (
     <div className="pt-12">
@@ -27,27 +42,23 @@ const TalentCard = ({ id, name, role, projects, years, skills, image }) => {
       <p className="text-gray-500">{role}</p>
 
       {/* Rating */}
-      <div className="flex items-center mt-2 text-yellow-400">
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span className="text-gray-300">★</span>
+      <div className="flex items-center mt-2">
+        {renderStars()}
       </div>
 
       {/* Stats */}
       <div className="flex justify-between w-full mt-4 text-gray-600 font-medium">
         <div>
           <p className="text-sm">{t("projects")}</p>
-          <p className="text-lg">{projects}</p>
+          <p className="text-lg">{projects || "0"}</p>
         </div>
         <div>
           <p className="text-sm">{t("years")}</p>
-          <p className="text-lg">{years}</p>
+          <p className="text-lg">{years || "0"}</p>
         </div>
         <div>
           <p className="text-sm">{t("skills")}</p>
-          <p className="text-lg">{skills}</p>
+          <p className="text-lg">{skills || "0"}</p>
         </div>
       </div>
 

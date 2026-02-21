@@ -13,6 +13,8 @@ const page = async ({ params }: { params: { id: string, portfolioId: string } })
 
   const project = data.status === "success" ? data.result?.project : null;
 
+  console.log(project?.attachments);
+
   return (
     <div className='space-y-6'>
       <div className="space-y-2">
@@ -35,6 +37,7 @@ const page = async ({ params }: { params: { id: string, portfolioId: string } })
           id: attachment.id,
           src: attachment.file_path,
           alt: attachment.file_name,
+          isVideo: attachment.file_path.endsWith(".mp4") || attachment.file_path.endsWith(".mov") || attachment.file_path.endsWith(".avi") || attachment.file_path.endsWith(".mkv") || attachment.file_path.endsWith(".webm"),
         }))}
       />
 

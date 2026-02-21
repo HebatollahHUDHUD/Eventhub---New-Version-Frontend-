@@ -11,7 +11,7 @@ type PageProps = {
 
 const page = async ({ searchParams }: PageProps) => {
   const params = await searchParams;
-  
+
   // Call the API to get page data
   const data = await getData<TalentsPageResponse>({
     endpoint: "/talents-page",

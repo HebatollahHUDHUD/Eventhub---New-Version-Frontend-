@@ -118,9 +118,29 @@ export type TalentCategory =
 
 
 // Talent related interfaces
-export interface Talent extends User {
-  // Talent-specific fields are already in User interface
-  // This extends User to make it clear this is a talent type
+export interface Talent {
+  id: number;
+  name: string;
+  photo: string | null;
+  average_rating: number;
+  email: string;
+  user_type: string;
+  mobile: string | null;
+  country: Country | null;
+  gender: string | null;
+  bio: string | null;
+  position: Position | null;
+  other_position: string | null;
+  experience_years: number | null;
+  available_for_work: number; // 0 or 1
+  price_per_project: string | null;
+  facebook_url: string | null;
+  instagram_url: string | null;
+  youtube_url: string | null;
+  linkedin_url: string | null;
+  projects_count: number;
+  skills_count: number;
+  resume: Resume | null;
 }
 
 export interface TalentCardData {
