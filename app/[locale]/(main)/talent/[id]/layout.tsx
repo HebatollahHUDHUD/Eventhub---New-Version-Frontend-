@@ -22,6 +22,7 @@ import { getData } from "@/lib/request-server";
 import AdBanner from "@/components/common/AdBanner";
 import { UserDetailResponse } from "@/schemas/types";
 import { Badge } from "@/components/ui/badge";
+import Image from "@/components/common/image";
 
 
 type LayoutProps = {
@@ -229,6 +230,18 @@ const layout = async ({ children, params }: LayoutProps) => {
                 </div>
               </div>
             </Card>
+
+            {userData?.badges?.length > 0 && (
+              <Card className="rounded-2xl grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {userData?.badges?.map((badge) => (
+                  <div className="flex flex-col items-center justify-center">
+                    <Image src={badge.image || ""} alt={badge.name} width={100} height={100} className="w-9 h-9 object-contain" />
+
+                    <label htmlFor={badge.id.toString()} className="cursor-pointer text-center text-sm">{badge.name}</label>
+                  </div>
+                ))}
+              </Card>
+            )}
 
             {/* Pricing */}
             {pricePerProject !== "0.00" && (

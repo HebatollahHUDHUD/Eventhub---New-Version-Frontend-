@@ -255,7 +255,7 @@ const SkillsForm = ({ profile, refetch }: { profile: TalentProfile; refetch?: ()
                           }
                         }}
                       />
-                      <div className="flex flex-col items-center justify-center">
+                      <div className="flex flex-col items-center justify-center text-center">
                         <Image src={badge.image} alt={badge.name} width={100} height={100} className="w-9 h-9 object-contain" />
 
                         <label htmlFor={badge.id.toString()} className="cursor-pointer text-sm">{badge.name}</label>
