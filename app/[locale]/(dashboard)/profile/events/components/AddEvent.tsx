@@ -327,8 +327,6 @@ const AddEvent = ({
                   </FormItem>
                 )}
               />
-
-
             </div>
 
 
