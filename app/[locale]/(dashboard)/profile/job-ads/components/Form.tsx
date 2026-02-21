@@ -54,6 +54,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
         title: { en: jobAd.title?.en },
         about: { en: jobAd.about.en },
         country_id: jobAd.country.id,
+        category_id: jobAd?.category?.id,
         gender: jobAd.gender as "male" | "female" | "both" | undefined,
         experience_years: jobAd.experience_years.toString(),
         skill_ids: jobAd.skills.map((skill) => skill.id),
@@ -257,7 +258,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
 
 
             <div className="flex gap-2 justify-end">
-              {isUpdate && (
+              {isUpdate && jobAd?.status === "active" && (
                 <>
                   <ChangeJobAdsStatus
                     id={jobAd?.id as number}

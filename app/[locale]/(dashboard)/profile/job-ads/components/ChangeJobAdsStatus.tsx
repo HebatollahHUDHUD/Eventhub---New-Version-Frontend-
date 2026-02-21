@@ -28,7 +28,7 @@ const ChangeJobAdsStatus = ({ id, status, refetch }: { id: number, status: "clos
   }
 
   return (
-    <Button variant={status === "closed" ? "success" : "destructive"} size="lg" onClick={onSubmit} disabled={isPending}
+    <Button type="button" variant={status === "closed" ? "success" : "destructive"} size="lg" onClick={onSubmit} disabled={isPending}
     >
       {isPending ? <LoaderIcon className="animate-spin" /> : t(status)}
     </Button>

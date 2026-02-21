@@ -214,6 +214,7 @@ export interface JobAdApplicant {
   last_login_at: string | null;
   created_at: string;
   updated_at: string;
+  category: any;
 }
 
 export interface JobAd {
@@ -231,6 +232,7 @@ export interface JobAd {
   applicants: JobAdApplicant[];
   created_at: string;
   updated_at: string;
+  category: any;
 }
 
 // Main website JobAd - title and about as strings

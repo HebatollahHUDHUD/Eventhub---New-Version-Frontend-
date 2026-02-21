@@ -28,7 +28,7 @@ const OpportunityContent = async ({ slug }: OpportunityContentProps) => {
 
   if (!jobAd) return null;
 
-  const photoUrl = jobAd?.user?.photo || "";
+  const photoUrl = jobAd?.image || "";
 
   const jobDetails = [
     { label: "Gender", value: jobAd.gender || "N/A" },
