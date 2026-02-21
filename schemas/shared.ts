@@ -574,6 +574,7 @@ export type TalentRegisterSchema = z.infer<typeof talentRegisterSchema>;
 // Dashboard schema - title and about as objects with en and ar
 export const jobAdSchema = z
   .object({
+    id: z.number().int().positive().optional(),
     title: z.object({
       en: z.string().min(1),
       ar: z.string().min(1).optional(),

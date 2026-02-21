@@ -536,7 +536,11 @@
       "previous": "Previous",
       "next": "Next",
       "error-msg": "Failed to create event. Please try again.",
-      "success-msg": "Event created successfully!"
+      "success-msg": "Event created successfully!",
+      "event-details": "Event Details",
+      "open-location": "Open Location",
+      "done": "Done",
+      "view": "View"
     },
     "skills-experiences": {
       "experience": "Experience",

@@ -37,7 +37,7 @@ const EventsPage = () => {
         <AddEvent refetch={refetch} />
       )}
 
-      <EventsList eventsData={eventsData} />
+      <EventsList eventsData={eventsData} refetch={refetch} />
     </div>
   );
 };

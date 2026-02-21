@@ -6,22 +6,34 @@ import Image from "@/components/common/image";
 import { useTranslations } from "next-intl";
 import moment from "moment";
 import Status, { StatusType } from "@/components/common/Status";
+import EventDetailsDialog from "./EventDetailsDialog";
+import { getUserType } from "@/lib/userSession";
+import { UserType } from "@/constant";
 import Link from "next/link";
+import ClockInBtn from "./ClockInBtn";
 
 type EventCardProps = {
   event: Event;
+  refetch: () => void;
 };
 
-const EventCard = ({ event }: EventCardProps) => {
+const EventCard = ({ event, refetch }: EventCardProps) => {
+  const userType = getUserType();
+
   const t = useTranslations("dashboard.events");
 
   const formattedDate = moment(event.created_at).format("MMM DD, YYYY");
+
+  // Get event image from attachments or use placeholder
+  const eventImage = event.attachments && event.attachments.length > 0
+    ? event.attachments[0].file_path
+    : "/images/placeholder.png";
 
   return (
     <article className="relative bg-background flex flex-col">
       <div>
         <Image
-          src="/images/placeholder.png"
+          src={eventImage}
           alt={event.title}
           width={400}
           height={267}
@@ -40,16 +52,40 @@ const EventCard = ({ event }: EventCardProps) => {
 
         {/* View Button */}
         <div className="mt-auto pt-2">
-          <Button
-            size={"lg"}
-            variant="outlineSecondary"
-            className="w-full"
-            asChild
-          >
-            <Link href={`/profile/events/${event.id}`}>
-              {t("view")}
-            </Link>
-          </Button>
+          {userType === UserType.COMPANY ? (
+            <Button
+              size={"lg"}
+              variant="outlineSecondary"
+              className="w-full"
+              asChild
+            >
+              <Link href={`/profile/events/${event.id}`}>
+                {t("view")}
+              </Link>
+            </Button>
+          ) : (
+            <>
+
+              <EventDetailsDialog
+                event={event}
+                trigger={
+                  <Button
+                    size={"lg"}
+                    variant="outlineSecondary"
+                    className="w-full"
+                  >
+                    {t("view")}
+                  </Button>
+                }
+              />
+
+              <ClockInBtn
+                event={event}
+                refetch={refetch}
+              />
+            </>
+
+          )}
         </div>
       </div>
     </article>

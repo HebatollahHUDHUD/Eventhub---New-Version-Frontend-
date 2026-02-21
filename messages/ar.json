@@ -569,7 +569,11 @@
       "previous": "السابق",
       "next": "التالي",
       "error-msg": "فشل إنشاء الفعالية. يرجى المحاولة مرة أخرى.",
-      "success-msg": "تم إنشاء الفعالية بنجاح!"
+      "success-msg": "تم إنشاء الفعالية بنجاح!",
+      "event-details": "تفاصيل الفعالية",
+      "open-location": "فتح الموقع",
+      "done": "تم",
+      "view": "عرض"
     },
     "skills-experiences": {
       "experience": "الخبرة",
