@@ -167,6 +167,12 @@
     "terms-users": "Terms & Conditions For Users",
     "copyright_footer":"All rights reserved. Powered by HUDHUDIT"
   },
+  "legal": {
+    "billing-cancellation": "Billing and Cancellation",
+    "privacy-policy": "Privacy Policy",
+    "terms-companies": "Terms & Conditions For Companies",
+    "terms-users": "Terms & Conditions For Users"
+  },
   "navigation": {
     "brand-name": "Events Hub",
     "home": "Home",

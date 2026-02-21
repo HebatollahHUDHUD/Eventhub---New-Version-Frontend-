@@ -167,6 +167,12 @@
     "terms-users": "الشروط والأحكام للمستخدمين",
     "copyright_footer": "جميع الحقوق محفوظة. مدعوم من HUDHUDIT"
   },
+  "legal": {
+    "billing-cancellation": "الفواتير والإلغاء",
+    "privacy-policy": "سياسة الخصوصية",
+    "terms-companies": "الشروط والأحكام للشركات",
+    "terms-users": "الشروط والأحكام للمستخدمين"
+  },
   "navigation": {
     "brand-name": "مركز الفعاليات",
     "home": "الرئيسية",

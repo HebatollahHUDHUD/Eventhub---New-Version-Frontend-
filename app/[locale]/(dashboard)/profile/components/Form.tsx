@@ -24,6 +24,7 @@ import { serialize } from "object-to-formdata";
 import SelectCountry from "@/components/select/SelectCountry";
 import { UserType } from "@/constant";
 import SelectLanguage from "@/components/select/SelectLanguage";
+import SelectGender from "@/components/select/SelectGender";
 
 const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
   const t = useTranslations("dashboard");
@@ -39,6 +40,7 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
       incharge_person_name: profileInfo?.incharge_person_name || "",
       language_ids: profileInfo?.languages?.map((language: any) => language.id) || [],
       image: undefined,
+      gender: profileInfo?.gender || undefined,
     },
   });
 
@@ -186,21 +188,40 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
               )}
 
               {profileInfo?.user_type !== UserType.COMPANY && (
-                <FormField
-                  control={form.control}
-                  name="language_ids"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("languages")}</FormLabel>
-                      <SelectLanguage
-                        isMultiple
-                        value={field.value || []}
-                        onChange={field.onChange}
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <>
+                  <FormField
+                    control={form.control}
+                    name="gender"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("gender")}</FormLabel>
+                        <SelectGender
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="language_ids"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("languages")}</FormLabel>
+                        <SelectLanguage
+                          isMultiple
+                          value={field.value || []}
+                          onChange={field.onChange}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                </>
+
               )}
 
             </div>

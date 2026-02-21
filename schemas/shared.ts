@@ -404,6 +404,7 @@ export const companyProfileSchema = z.object({
   incharge_person_name: z.string().optional(),
   image: z.instanceof(File).optional(),
   language_ids: z.array(z.number().int().positive()).optional(),
+  gender: z.string().optional(),
 });
 
 export type CompanyProfileType = z.infer<typeof companyProfileSchema>;
