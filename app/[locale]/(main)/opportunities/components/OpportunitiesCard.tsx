@@ -46,7 +46,7 @@ const CardContent = ({ jobAd }: OpportunitiesCardProps) => {
     <div className="relative pt-16 h-full">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-32 rounded-full overflow-hidden border-5 border-lightBackground shadow-sm">
         <Image
-          src={jobAd.user?.photo || ""}
+          src={jobAd.image || ""}
           alt={jobAd.user?.name}
           width={128}
           height={128}

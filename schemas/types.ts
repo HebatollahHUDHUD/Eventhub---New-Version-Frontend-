@@ -216,6 +216,7 @@ export interface JobAd {
 // Main website JobAd - title and about as strings
 export interface JobAdMain {
   id: number;
+  image: string | null;
   user: JobAdUser;
   country: JobAdCountry;
   title: string;
