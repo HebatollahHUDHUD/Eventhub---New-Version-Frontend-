@@ -2,46 +2,60 @@
 
 import { Button } from "@/components/ui/button";
 import { parseAsString, useQueryStates } from "nuqs";
-import type { BlogCategory } from "../../../../../schemas/types";
-
-const categories: BlogCategory[] = [
-  "all",
-  "business",
-  "conference",
-  "marketing",
-  "sales",
-  "organizing",
-];
+import { useGetData } from "@/hooks/useFetch";
+import { useTranslations } from "next-intl";
+import { useUpdateSearchParams } from "@/hooks/useSearchParams";
 
 const BlogsFilters = () => {
-  const [queryParams, setQueryParams] = useQueryStates({
+  const t = useTranslations("common");
+  const { data } = useGetData<any>({
+    endpoint: "/system-lookups?type=blog_post_category",
+    queryKey: ["job_ad_categories"],
+  })
+  const {
+    queryParams,
+    updateParamsAndRefresh,
+  } = useUpdateSearchParams({
     page: parseAsString.withDefault("1"),
-    category: parseAsString.withDefault("all"),
+    category_id: parseAsString.withDefault("all"),
   });
 
-  const handleCategoryChange = (category: BlogCategory) => {
-    setQueryParams({
+  const handleCategoryChange = (category: any) => {
+    updateParamsAndRefresh({
       page: "1",
-      category
+      category_id: category,
     });
   };
+
+  const categories = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <nav
       className="flex items-center justify-center gap-4 flex-wrap"
-      aria-label="Blog category filters"
+      aria-label="Opportunity category filters"
     >
-      {categories.map((category) => (
+      <Button
+        size="sm"
+        variant={queryParams.category_id === "all" ? "secondary" : "muted"}
+        onClick={() => handleCategoryChange("all")}
+        className="rounded-full capitalize"
+        aria-pressed={queryParams.category_id === "all"}
+        aria-label={`Filter by ${t("all")} category`}
+      >
+        {t("all")}
+      </Button>
+
+      {categories.map((category: any) => (
         <Button
-          key={category}
+          key={category?.id}
           size="sm"
-          variant={queryParams.category === category ? "secondary" : "muted"}
-          onClick={() => handleCategoryChange(category)}
+          variant={queryParams.category_id === category?.id ? "secondary" : "muted"}
+          onClick={() => handleCategoryChange(category?.id)}
           className="rounded-full capitalize"
-          aria-pressed={queryParams.category === category}
-          aria-label={`Filter by ${category} category`}
+          aria-pressed={queryParams.category_id === category?.id}
+          aria-label={`Filter by ${category?.name} category`}
         >
-          {category}
+          {category?.name}
         </Button>
       ))}
     </nav>
@@ -49,3 +63,4 @@ const BlogsFilters = () => {
 };
 
 export default BlogsFilters;
+

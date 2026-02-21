@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Tag, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
+import { ArrowRight, MapPin, Tag, Instagram, Twitter, Facebook } from "lucide-react";
 import SelectCountry from "../select/SelectCountry";
 import SelectSkills from "../select/SelectSkillsTags";
 import Image from "next/image";
+import { useGetData } from "@/hooks/useFetch";
 
 interface HeroSectionProps {
   title: string;
@@ -20,6 +21,24 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
   const [selectedSkills, setSelectedSkills] = useState<string>("");
   const [selectedLocation, setSelectedLocation] = useState<string>("");
 
+  const { data } = useGetData<any>({
+    endpoint: "/info",
+    queryKey: ["Info"],
+  });
+
+  const infoData = data?.status === "success" ? data.result : null;
+
+  // Get social media URLs from infoData
+  const getSocialUrl = (infoKey: string) => {
+    const url = infoData?.[infoKey];
+    if (!url) return null;
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
+
+  const facebookUrl = getSocialUrl("social_media_facebook_url");
+  const instagramUrl = getSocialUrl("social_media_instagram_url");
+  const twitterUrl = getSocialUrl("social_media_x_url");
+
   return (
     <section className="min-h-[calc(100vh-80px)] flex items-center bg-primary">
       <div className="relative container">
@@ -29,18 +48,39 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
             <div className="absolute -start-6 top-4 hidden xl:flex flex-col items-center gap-5">
               <span className="h-28 w-[3px] bg-white" />
 
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="Instagram">
-                <Instagram className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="Twitter">
-                <Twitter className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="LinkedIn">
-                <Linkedin className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors duration-300" aria-label="Facebook">
-                <Facebook className="size-5" />
-              </a>
+              {instagramUrl && (
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="size-5" />
+                </a>
+              )}
+              {twitterUrl && (
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="size-5" />
+                </a>
+              )}
+              {facebookUrl && (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="size-5" />
+                </a>
+              )}
 
               <span className="text-white text-xs font-medium mb-6 [writing-mode:vertical-rl] [text-orientation:mixed] tracking-wider">
                 {t("social.follow")}
@@ -50,18 +90,39 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
             {/* Social Media Icons - Mobile */}
             <div className="flex xl:hidden items-center gap-4 mb-8">
               <span className="text-white text-sm font-medium">{t("social.follow")}</span>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors" aria-label="Instagram">
-                <Instagram className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors" aria-label="Twitter">
-                <Twitter className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors" aria-label="LinkedIn">
-                <Linkedin className="size-5" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-accentPink transition-colors" aria-label="Facebook">
-                <Facebook className="size-5" />
-              </a>
+              {instagramUrl && (
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="size-5" />
+                </a>
+              )}
+              {twitterUrl && (
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="size-5" />
+                </a>
+              )}
+              {facebookUrl && (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-accentPink transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="size-5" />
+                </a>
+              )}
             </div>
 
             {/* Headline */}
