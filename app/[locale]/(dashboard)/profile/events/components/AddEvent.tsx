@@ -336,11 +336,11 @@ const AddEvent = ({
             <div className="flex gap-2 justify-end">
               {isUpdate && event?.status === "active" && (
                 <>
-                  <ChangeEventStatus
+                  {/* <ChangeEventStatus
                     id={event?.id as number}
                     status={"completed"}
                     refetch={refetch}
-                  />
+                  /> */}
 
                   <ChangeEventStatus
                     id={event?.id as number}
