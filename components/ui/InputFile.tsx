@@ -20,6 +20,7 @@ const InputFile = ({
   id = `fileInput-${Math.random()}`,
   options = {},
   defaultValue = [],
+  disabled = false,
 }: {
   isResume?: boolean;
   files: File[] | string[];
@@ -32,6 +33,7 @@ const InputFile = ({
     maxSize?: number;
     accept?: { [key: string]: string[] };
   };
+  disabled?: boolean;
 }) => {
   const t = useTranslations("common.file-upload");
 
@@ -52,9 +54,10 @@ const InputFile = ({
       onValueChange={onChange}
       dropzoneOptions={dropZoneConfig}
       className="relative bg-background rounded-lg p-2"
+      disabled={disabled}
     >
       <FileInput id={id} className="border-dashed shadow-none">
-        <div className="flex items-center justify-center flex-col gap-4 p-8 w-full ">
+        <div className="flex items-center justify-center flex-col gap-4 p-8 w-full">
           <Image
             src={isResume ? "/images/upload-resume.png" : "/images/upload.png"}
             alt="upload"

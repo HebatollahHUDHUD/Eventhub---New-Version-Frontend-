@@ -21,6 +21,8 @@
     "confirmed": "Confirmed",
     "decline": "Decline",
     "declined": "Declined",
+    "closed": "Closed",
+    "cancelled": "Cancelled",
     "view": "View",
     "submit-failed": "Failed to submit the form. Please try again.",
     "failed-to-submit": "Failed to submit the form. Please try again.",

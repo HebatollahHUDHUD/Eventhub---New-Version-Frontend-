@@ -9,12 +9,14 @@ const SelectSkills = ({
   className,
   isMultiple,
   icon,
+  disabled,
 }: {
   onChange: (value: ValueType) => void;
   value: ValueType;
   className?: string;
   isMultiple?: boolean;
   icon?: React.ReactNode;
+  disabled?: boolean;
 }) => {
   const endpoint = "/system-lookups?type=skill";
   const { data, isLoading, isFetching } = useGetData<any>({
@@ -33,6 +35,7 @@ const SelectSkills = ({
       className={className}
       isMultiple={isMultiple}
       icon={icon}
+      disabled={disabled}
     />
   );
 };

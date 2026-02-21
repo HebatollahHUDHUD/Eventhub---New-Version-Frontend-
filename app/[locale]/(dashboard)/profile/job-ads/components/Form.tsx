@@ -33,6 +33,7 @@ import { serialize } from "object-to-formdata";
 import InputFile from "@/components/ui/InputFile";
 import { JobAd } from "@/schemas/types";
 import Status, { StatusType } from "@/components/common/Status";
+import ChangeJobAdsStatus from "./ChangeJobAdsStatus";
 
 const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: JobAd | null, isUpdate?: boolean }) => {
   const t = useTranslations("dashboard.job-ads");
@@ -86,6 +87,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
   }
 
   const isLoading = form.formState.isSubmitting;
+  const isDisabled = isUpdate && jobAd?.status !== "active";
 
   return (
     <Card>
@@ -115,6 +117,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                       <Input
                         {...field}
                         placeholder={t("enter-job-title")}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -128,7 +131,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t("country")}</FormLabel>
-                    <SelectCountry onChange={field.onChange} value={field.value} />
+                    <SelectCountry onChange={field.onChange} value={field.value} disabled={isDisabled} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -145,6 +148,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         isMultiple
                         value={field.value}
                         onChange={field.onChange}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -164,6 +168,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                       min={0}
                       max={50}
                       placeholder={t("enter-experience-years")}
+                      disabled={isDisabled}
                     />
                     <FormMessage />
                   </FormItem>
@@ -179,9 +184,10 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                     <Select
                       onValueChange={field.onChange}
                       value={field.value}
+                      disabled={isDisabled}
                     >
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger disabled={isDisabled}>
                           <SelectValue placeholder={t("select-gender")} />
                         </SelectTrigger>
                       </FormControl>
@@ -208,6 +214,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         {...field}
                         className="min-h-[120px]"
                         maxLength={250}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -226,6 +233,7 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         files={field.value || []}
                         defaultValue={jobAd?.attachments || []}
                         onChange={field.onChange}
+                        disabled={isDisabled}
                       />
                     </FormControl>
                     <FormMessage />
@@ -235,11 +243,26 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
             </div>
 
 
-            <div className="flex justify-end">
+            <div className="flex gap-2 justify-end">
+              {isUpdate && (
+                <>
+                  <ChangeJobAdsStatus
+                    id={jobAd?.id as number}
+                    status={"closed"}
+                    refetch={refetch}
+                  />
+
+                  <ChangeJobAdsStatus
+                    id={jobAd?.id as number}
+                    status={"cancelled"}
+                    refetch={refetch}
+                  />
+                </>)
+              }
               <Button
                 type="submit"
                 size={"lg"}
-                disabled={isLoading}
+                disabled={isLoading || isDisabled}
                 variant={"accentSecondary"}
               >
                 {isLoading && (
