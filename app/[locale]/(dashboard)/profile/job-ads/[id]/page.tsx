@@ -40,15 +40,13 @@ const JobAdsDetails = () => {
           {jobAd?.applicants && jobAd.applicants.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {jobAd.applicants.map((applicant) => {
-
-
                 return (
                   <EmployeesCard
                     key={applicant.id}
                     employee={{ user: applicant } as any}
                     refetch={refetch}
                     hasMessage={true}
-                    jobAdApplicantId={applicant.id}
+                    jobAdApplicantId={applicant.job_ad_applicant_id}
                   />
                 );
               })}

@@ -29,7 +29,8 @@
     "no-item-found": "لم يتم العثور على عنصر.",
     "close": "إغلاق",
     "pleaseLogin": "يرجى تسجيل الدخول",
-    "pleaseLoginDescription": "تحتاج إلى تسجيل الدخول للوصول إلى هذه الميزة. يرجى تسجيل الدخول للمتابعة."
+    "pleaseLoginDescription": "تحتاج إلى تسجيل الدخول للوصول إلى هذه الميزة. يرجى تسجيل الدخول للمتابعة.",
+    "message": "رسالة"
   },
   "home": {
     "title": "مرحباً بك في مركز الفعاليات!",
@@ -550,6 +551,7 @@
     "events": {
       "title": "الفعاليات",
       "add-event": "إضافة فعالية",
+      "update-event": "تحديث الفعالية",
       "event-title": "عنوان الفعالية",
       "enter-event-title": "أدخل عنوان الفعالية",
       "event-type": "نوع الفعالية",
@@ -573,7 +575,18 @@
       "event-details": "تفاصيل الفعالية",
       "open-location": "فتح الموقع",
       "done": "تم",
-      "view": "عرض"
+      "view": "عرض",
+      "clockIn": "تسجيل الحضور",
+      "clockOut": "تسجيل المغادرة",
+      "employees-attendance": "حضور الموظفين",
+      "select-date": "اختر التاريخ",
+      "employee": "الموظف",
+      "date": "التاريخ",
+      "clock-in": "تسجيل الحضور",
+      "clock-out": "تسجيل المغادرة",
+      "action": "الإجراء",
+      "no-attendance-records": "لا توجد سجلات حضور لهذا التاريخ",
+      "edit-hours": "تعديل الساعات"
     },
     "skills-experiences": {
       "experience": "الخبرة",

@@ -51,7 +51,7 @@ const EventCard = ({ event, refetch }: EventCardProps) => {
         </div>
 
         {/* View Button */}
-        <div className="mt-auto pt-2">
+        <div className="mt-auto pt-2 space-y-2">
           {userType === UserType.COMPANY ? (
             <Button
               size={"lg"}

@@ -35,7 +35,7 @@ const ProfileForm = ({ profileInfo }: { profileInfo: any }) => {
       name: profileInfo?.name || "",
       email: profileInfo?.email || "",
       mobile: profileInfo?.mobile || "",
-      country_id: profileInfo?.country_id || undefined,
+      country_id: profileInfo?.country?.id || undefined,
       incharge_person_name: profileInfo?.incharge_person_name || "",
       language_ids: profileInfo?.languages?.map((language: any) => language.id) || [],
       image: undefined,

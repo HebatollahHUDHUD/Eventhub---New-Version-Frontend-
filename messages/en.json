@@ -29,7 +29,8 @@
     "no-item-found": "No item found.",
     "close": "Close",
     "pleaseLogin": "Please Login",
-    "pleaseLoginDescription": "You need to be logged in to access this feature. Please login to continue."
+    "pleaseLoginDescription": "You need to be logged in to access this feature. Please login to continue.",
+    "message": "Message"
   },
   "home": {
     "title": "Welcome to Events Hub!",
@@ -517,6 +518,7 @@
     "events": {
       "title": "Events",
       "add-event": "Add Event",
+      "update-event": "Update Event",
       "event-title": "Event Title",
       "enter-event-title": "Enter event title",
       "event-type": "Event Type",
@@ -540,7 +542,18 @@
       "event-details": "Event Details",
       "open-location": "Open Location",
       "done": "Done",
-      "view": "View"
+      "view": "View",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "employees-attendance": "Employees Attendance",
+      "select-date": "Select Date",
+      "employee": "Employee",
+      "date": "Date",
+      "clock-in": "Clock In",
+      "clock-out": "Clock Out",
+      "action": "Action",
+      "no-attendance-records": "No attendance records found for this date",
+      "edit-hours": "Edit Hours"
     },
     "skills-experiences": {
       "experience": "Experience",

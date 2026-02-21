@@ -174,6 +174,7 @@ export interface JobAdAttachment {
 
 export interface JobAdApplicant {
   id: number;
+  job_ad_applicant_id: number;
   name: string;
   photo: string | null;
   email: string;
@@ -262,6 +263,8 @@ export interface Event {
   id: number;
   event_type: EventType;
   title: string;
+  has_checked_in: boolean;
+  has_checked_out: boolean;
   from_date: string;
   to_date: string;
   check_in_time: string;

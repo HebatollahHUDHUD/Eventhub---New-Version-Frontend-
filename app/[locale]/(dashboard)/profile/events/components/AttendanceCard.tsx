@@ -9,6 +9,7 @@ import moment from "moment";
 import Image from "@/components/common/image";
 import { useState } from "react";
 import EditHoursDialog from "./EditHoursDialog";
+import { Input } from "@/components/ui/input";
 
 type AttendanceCardProps = {
   event: Event;
@@ -49,39 +50,39 @@ const AttendanceCard = ({ event, refetch }: AttendanceCardProps) => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold">
-            {t("employees-attendance") || "EMPLOYEES ATTENDANCE"}
+          <CardTitle className="text-2xl font-bold">
+            {t("employees-attendance")}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium">
-              {t("select-date") || "Select Date"}
+              {t("select-date")}
             </label>
-            <input
+            <Input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="max-w-80"
             />
           </div>
 
           <div className="overflow-x-auto">
-            <Table>
+            <Table className="border">
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t("employee") || "EMPLOYEE"}</TableHead>
-                  <TableHead>{t("date") || "DATE"}</TableHead>
-                  <TableHead>{t("clock-in") || "CLOCK-IN"}</TableHead>
-                  <TableHead>{t("clock-out") || "CLOCK-OUT"}</TableHead>
-                  <TableHead>{t("action") || "ACTION"}</TableHead>
+                  <TableHead>{t("employee")}</TableHead>
+                  <TableHead>{t("date")}</TableHead>
+                  <TableHead>{t("clock-in")}</TableHead>
+                  <TableHead>{t("clock-out")}</TableHead>
+                  <TableHead>{t("action")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredAttendees.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
-                      {t("no-attendance-records") || "No attendance records found for this date"}
+                      {t("no-attendance-records")}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -104,9 +105,8 @@ const AttendanceCard = ({ event, refetch }: AttendanceCardProps) => {
                       <TableCell>{attendee.check_out ? formatTime(attendee.check_out) : "-"}</TableCell>
                       <TableCell>
                         <Button
-                          variant="outline"
+                          variant="accentSecondary"
                           size="sm"
-                          className="bg-accentBlue text-white hover:bg-accentBlue/90"
                           onClick={() => {
                             setEditingAttendee({
                               id: attendee.id,
@@ -117,7 +117,7 @@ const AttendanceCard = ({ event, refetch }: AttendanceCardProps) => {
                             });
                           }}
                         >
-                          {t("edit-hours") || "Edit Hours"}
+                          {t("edit-hours")}
                         </Button>
                       </TableCell>
                     </TableRow>

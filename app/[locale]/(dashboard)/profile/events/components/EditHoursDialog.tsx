@@ -33,10 +33,11 @@ import { useTranslations } from "next-intl";
 import Image from "@/components/common/image";
 import moment from "moment";
 import { useEffect } from "react";
+import { Input } from "@/components/ui/input";
 
 const editHoursSchema = z.object({
-  check_in_hour: z.string().min(1, "Clock-in hour is required"),
-  check_out_hour: z.string().min(1, "Clock-out hour is required"),
+  check_in: z.string().min(1, "Clock-in hour is required"),
+  check_out: z.string().min(1, "Clock-out hour is required"),
 });
 
 type EditHoursFormValues = z.infer<typeof editHoursSchema>;
@@ -64,39 +65,13 @@ const EditHoursDialog = ({
 }: EditHoursDialogProps) => {
   const t = useTranslations("dashboard.events");
 
-  // Generate hour options (00-23)
-  const hours = Array.from({ length: 24 }, (_, i) => {
-    const hour = i.toString().padStart(2, "0");
-    return {
-      value: hour,
-      label: `${hour}:00`,
-    };
-  });
-
   const form = useForm<EditHoursFormValues>({
     resolver: zodResolver(editHoursSchema),
     defaultValues: {
-      check_in_hour: "00",
-      check_out_hour: "00",
+      check_in: attendee.check_in || "",
+      check_out: attendee.check_out || "",
     },
   });
-
-  // Reset form when attendee changes
-  useEffect(() => {
-    if (open && attendee) {
-      const existingCheckIn = attendee.check_in
-        ? moment(attendee.check_in).format("HH")
-        : "00";
-      const existingCheckOut = attendee.check_out
-        ? moment(attendee.check_out).format("HH")
-        : "00";
-
-      form.reset({
-        check_in_hour: existingCheckIn,
-        check_out_hour: existingCheckOut,
-      });
-    }
-  }, [open, attendee, form]);
 
   const { mutateAsync, isPending } = usePostData({
     endpoint: `/profile/events/${eventId}/attendees/${attendee.id}`,
@@ -104,38 +79,26 @@ const EditHoursDialog = ({
 
   const onSubmit = async (values: EditHoursFormValues) => {
     try {
-      // Parse the date from attendee.check_in or use today's date
-      const dateStr = attendee.check_in
-        ? moment(attendee.check_in).format("YYYY-MM-DD")
-        : moment().format("YYYY-MM-DD");
-
-      // Format: YYYY-MM-DD HH:MM
-      const check_in = `${dateStr} ${values.check_in_hour}:00`;
-      const check_out = `${dateStr} ${values.check_out_hour}:00`;
-
-      const res = (await mutateAsync({
-        check_in,
-        check_out,
-      } as any)) as any;
+      const res = await mutateAsync(values as any)
 
       if (res.status === "success") {
-        toast(res.message || t("hours-updated") || "Hours updated successfully", "success");
+        toast(res.message || t("hours-updated"), "success");
         refetch();
         onOpenChange(false);
       } else {
-        toast(res.message || t("error-msg") || "An error occurred", "destructive");
+        toast(res.message || t("error-msg"), "destructive");
       }
     } catch (error) {
       console.error(error);
-      toast(t("error-msg") || "An error occurred", "destructive");
+      toast(t("error-msg"), "destructive");
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="md:max-w-3xl">
         <DialogHeader>
-          <DialogTitle>{t("edit-hours") || "Edit Hours"}</DialogTitle>
+          <DialogTitle>{t("edit-hours")}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -159,27 +122,15 @@ const EditHoursDialog = ({
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
-                  name="check_in_hour"
+                  name="check_in"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("clock-in-hour") || "Clock-in Hour"}</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder={t("hour") || "Hour"} />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {hours.map((hour) => (
-                            <SelectItem key={hour.value} value={hour.value}>
-                              {hour.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>{t("clock-in")}</FormLabel>
+                      <Input
+                        {...field}
+                        type="datetime-local"
+                        placeholder={t("clock-in")}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -187,27 +138,15 @@ const EditHoursDialog = ({
 
                 <FormField
                   control={form.control}
-                  name="check_out_hour"
+                  name="check_out"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("clock-out-hour") || "Clock-out Hour"}</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder={t("hour") || "Hour"} />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {hours.map((hour) => (
-                            <SelectItem key={hour.value} value={hour.value}>
-                              {hour.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>{t("clock-out")}</FormLabel>
+                      <Input
+                        {...field}
+                        type="datetime-local"
+                        placeholder={t("clock-out")}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -216,20 +155,12 @@ const EditHoursDialog = ({
 
               <DialogFooter>
                 <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isPending}
-                >
-                  {t("back") || "Back"}
-                </Button>
-                <Button
                   type="submit"
                   variant="accentSecondary"
                   disabled={isPending}
                 >
-                  {isPending && <LoaderIcon className="animate-spin mr-2" />}
-                  {t("update") || "Update"}
+                  {isPending && <LoaderIcon className="animate-spin" />}
+                  {t("update")}
                 </Button>
               </DialogFooter>
             </form>
