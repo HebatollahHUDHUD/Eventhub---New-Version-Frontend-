@@ -4,6 +4,7 @@
     "description": "Events Hub - Your premier destination for events"
   },
   "common": {
+    "all": "All",
     "events": "Events",
     "file-upload": {
       "drag-drop-text": "Drag & Drop your",
@@ -668,6 +669,17 @@
       "valid-till": "Valid till",
       "no-current-plan": "No current plan",
       "start-date": "Start Date"
+    },
+    "dashboard-stats": {
+      "title": "Dashboard",
+      "welcome": "Welcome to your dashboard. Manage your account and activities from here.",
+      "profile-views": "Profile Views",
+      "rates-count": "Rates Count",
+      "job-ad-views": "Job Ad Views",
+      "job-ads": "Job Ads",
+      "applicants": "Applicants",
+      "views": "Views",
+      "job-ads-chart-title": "Job Ads Performance"
     }
   },
   "messages": {

@@ -4,32 +4,35 @@ import { useGetData } from "@/hooks/useFetch";
 import SelectItem, { ValueType } from "./SelectItem";
 
 const SelectCategory = ({
-  className,
   onChange,
   value,
-  isMultiple,
+  className,
+  icon,
+  disabled,
 }: {
-  className?: string;
   onChange: (value: ValueType) => void;
   value: ValueType;
-  isMultiple?: boolean;
+  className?: string;
+  icon?: React.ReactNode;
+  disabled?: boolean;
 }) => {
-  const endpoint = `/categories`;
-  const { data, isLoading, isFetching } = useGetData<any>({
+  const endpoint = "/system-lookups?type=job_ad_category";
+  const { data, isLoading } = useGetData<any>({
     endpoint,
-    queryKey: ["Categories", endpoint],
+    queryKey: ["job_ad_category"],
   });
 
-  const categoriesData = data?.status === "success" ? data?.result : [];
+  const categoriesData = data?.status === "success" ? data?.result?.system_lookups || [] : [];
 
   return (
     <SelectItem
       items={categoriesData}
       value={value}
       setValue={onChange}
-      isLoading={isLoading || isFetching}
+      isLoading={isLoading}
       className={className}
-      isMultiple={isMultiple}
+      icon={icon}
+      disabled={disabled}
     />
   );
 };

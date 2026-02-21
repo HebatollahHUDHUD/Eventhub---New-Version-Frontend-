@@ -34,6 +34,7 @@ import InputFile from "@/components/ui/InputFile";
 import { JobAd } from "@/schemas/types";
 import Status, { StatusType } from "@/components/common/Status";
 import ChangeJobAdsStatus from "./ChangeJobAdsStatus";
+import SelectCategory from "@/components/select/SelectCategory";
 
 const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: JobAd | null, isUpdate?: boolean }) => {
   const t = useTranslations("dashboard.job-ads");
@@ -120,6 +121,19 @@ const JobAdForm = ({ refetch, jobAd, isUpdate }: { refetch: () => void, jobAd?: 
                         disabled={isDisabled}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+
+              <FormField
+                control={form.control}
+                name="category_id"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("category")}</FormLabel>
+                    <SelectCategory onChange={field.onChange} value={field.value} disabled={isDisabled} />
                     <FormMessage />
                   </FormItem>
                 )}

@@ -4,6 +4,7 @@
     "description": "مركز الفعاليات - وجهتك المفضلة للفعاليات"
   },
   "common": {
+    "all": "الكل",
     "events": "الفعاليات",
     "file-upload": {
       "drag-drop-text": "اسحب وأفلت",
@@ -701,6 +702,17 @@
       "valid-till": "صالح حتى",
       "no-current-plan": "لا توجد خطة حالية",
       "start-date": "تاريخ البدء"
+    },
+    "dashboard-stats": {
+      "title": "لوحة التحكم",
+      "welcome": "مرحباً بك في لوحة التحكم. قم بإدارة حسابك وأنشطتك من هنا.",
+      "profile-views": "مشاهدات الملف الشخصي",
+      "rates-count": "عدد التقييمات",
+      "job-ad-views": "مشاهدات إعلانات الوظائف",
+      "job-ads": "إعلانات الوظائف",
+      "applicants": "المتقدمون",
+      "views": "المشاهدات",
+      "job-ads-chart-title": "أداء إعلانات الوظائف"
     }
   },
   "messages": {

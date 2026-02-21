@@ -586,6 +586,9 @@ export const jobAdSchema = z
     country_id: z.number().int().positive({
       message: "Please select a valid country.",
     }),
+    category_id: z.number().int().positive({
+      message: "Please select a valid category.",
+    }),
     gender: z.enum(["male", "female", "both"]).optional(),
     experience_years: z.string().regex(/^\d+$/, {
       message: "Experience years must be a number.",
