@@ -68,7 +68,7 @@ const ClockInBtn = ({ event, refetch }: ClockInBtnProps) => {
       size="lg"
       className="w-full"
     >
-      {event.status === "active" && !event.has_checked_out ? t("clockIn") : t("clockOut")}
+      {event.status === "active" && !event.has_checked_in ? t("clockIn") : t("clockOut")}
     </Button>
   )
 }
