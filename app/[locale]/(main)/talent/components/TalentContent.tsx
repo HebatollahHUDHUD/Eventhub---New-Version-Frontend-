@@ -38,7 +38,7 @@ const TalentList = async ({ searchParams }: TalentContentProps) => {
     config: {
       queryParams: {
         page: "1",
-        user_type: "talent",
+        user_type: searchParams?.user_type || "talent",
         ...searchParams,
       },
     },

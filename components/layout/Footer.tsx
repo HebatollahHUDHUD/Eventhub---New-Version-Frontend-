@@ -173,10 +173,10 @@ const Footer = () => {
             {t("about")}
           </Link>
           <Link
-            href="/recruitment"
+            href="/talent?user_type=recruiter"
             className="text-white/90 hover:text-white hover:underline transition-colors text-sm md:text-base"
           >
-            {t("recruitment") || "Recruitment"}
+            {t("recruitment")}
           </Link>
           <Link
             href="/talent"
@@ -298,31 +298,31 @@ const Footer = () => {
 
         <div className="flex items-center justify-center gap-4 md:gap-6">
           <Link
-            href="/billing-cancellation"
+            href="/legal?tab=billing-cancellation"
             className="text-white/80 hover:text-white hover:underline transition-colors"
           >
-            {t("billing-cancellation") || "Billing and Cancellation"}
+            {t("billing-cancellation")}
           </Link>
           <span className="text-white/40">|</span>
           <Link
-            href="/privacy-policy"
+            href="/legal?tab=privacy-policy"
             className="text-white/80 hover:text-white hover:underline transition-colors"
           >
             {t("privacy-policy")}
           </Link>
           <span className="text-white/40">|</span>
           <Link
-            href="/terms-companies"
+            href="/legal?tab=terms-companies"
             className="text-white/80 hover:text-white hover:underline transition-colors"
           >
-            {t("terms-companies") || "Terms & Conditions For Companies"}
+            {t("terms-companies")}
           </Link>
           <span className="text-white/40">|</span>
           <Link
-            href="/terms-users"
+            href="/legal?tab=terms-users"
             className="text-white/80 hover:text-white hover:underline transition-colors"
           >
-            {t("terms-users") || "Terms & Conditions For Users"}
+            {t("terms-users")}
           </Link>
         </div>
       </div>
