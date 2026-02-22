@@ -5,16 +5,19 @@ import Link from "next/link";
 import { CalendarIcon } from "lucide-react";
 import moment from "moment";
 import { getTranslations } from "next-intl/server";
-import BlogsContent from "../components/BlogsContent";
 
 type BlogContentProps = {
   slug: string;
 };
 
 const BlogContent = async ({ slug }: BlogContentProps) => {
-  const data = await getData<BlogPostDetailsResponse>({ endpoint: `/blog-posts/${slug}` });
+  const data = await getData<BlogPostDetailsResponse>({
+    endpoint: `/blog-posts/${slug}`,
+  });
 
   const blog = data?.status === "success" ? data.result.blog_post : null;
+  const similarBlogs =
+    data?.status === "success" ? data?.result?.similar_blog_posts : [];
 
   const formattedDate = moment(blog?.created_at).format("DD MMM, YYYY");
   const t = await getTranslations("blogs");
@@ -42,11 +45,16 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
           />
 
           <div className="space-y-4 leading-7">
-            <Link href="/blogs" className="text-accentBlue underline title-5 block">
+            <Link
+              href="/blogs"
+              className="text-accentBlue underline title-5 block"
+            >
               {t("back_to_blog_list")}
             </Link>
 
-            <h2 className="title-2 max-w-full md:max-w-[550px]">{blog?.title}</h2>
+            <h2 className="title-2 max-w-full md:max-w-[550px]">
+              {blog?.title}
+            </h2>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="bg-accentPink text-white title-5 px-3 py-0.5 rounded-lg capitalize">
@@ -65,17 +73,62 @@ const BlogContent = async ({ slug }: BlogContentProps) => {
         </div>
       </section>
 
-      <section className="container-sm space-y-6">
-        <div className="space-y-4 max-w-2xl mx-auto text-center">
-          <h2 className="title-2">{t("title-details")}</h2>
-          <p className="description">{t("description")}</p>
-        </div>
+      {similarBlogs?.length > 0 && (
+        <section className="container-sm space-y-6">
+          <div className="space-y-4 max-w-2xl mx-auto text-center">
+            <h2 className="title-2">{t("title-details")}</h2>
+            <p className="description">{t("description")}</p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+            {similarBlogs?.map((item: any) => {
+              const itemDate = moment(item?.created_at).format("DD MMM, YYYY");
 
-        <BlogsContent />
-      </section>
+              return (
+                <Link
+                  key={item.id}
+                  href={`/blogs/${item.slug}`}
+                  className="h-full"
+                  role="listitem"
+                >
+                  <article className="relative h-full bg-background shadow-sm border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300">
+                    <div className="relative w-full aspect-3/2 overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title || "Blog post image"}
+                        width={400}
+                        height={267}
+                        className="w-full h-full object-cover rounded-t-2xl"
+                      />
+
+                      <span className="absolute bottom-3 left-3 bg-accentPink text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md capitalize z-10">
+                        {item.category?.name}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-2 px-4 pt-6 pb-4 h-full">
+                      <h2 className="title-4 line-clamp-2">{item?.title}</h2>
+                      <div className="flex items-center gap-1">
+                        <CalendarIcon
+                          className="w-4 h-4 text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                        <time
+                          dateTime={item?.created_at}
+                          className="text-sm text-muted-foreground"
+                        >
+                          {itemDate}
+                        </time>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 };
 
-
-export default BlogContent; 
+export default BlogContent;
