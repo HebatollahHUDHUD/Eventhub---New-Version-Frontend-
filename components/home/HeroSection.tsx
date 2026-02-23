@@ -1,13 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Tag, Instagram, Twitter, Facebook } from "lucide-react";
-import SelectCountry from "../select/SelectCountry";
-import SelectSkills from "../select/SelectSkillsTags";
 import Image from "next/image";
-import { useGetData } from "@/hooks/useFetch";
+import HeroSocialMedia from "./HeroSocialMedia";
+import HeroSearchBar from "./HeroSearchBar";
 
 interface HeroSectionProps {
   title: string;
@@ -17,113 +10,13 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
-  const t = useTranslations("home.hero");
-  const [selectedSkills, setSelectedSkills] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("");
-
-  const { data } = useGetData<any>({
-    endpoint: "/info",
-    queryKey: ["Info"],
-  });
-
-  const infoData = data?.status === "success" ? data.result : null;
-
-  // Get social media URLs from infoData
-  const getSocialUrl = (infoKey: string) => {
-    const url = infoData?.[infoKey];
-    if (!url) return null;
-    return url.startsWith("http") ? url : `https://${url}`;
-  };
-
-  const facebookUrl = getSocialUrl("social_media_facebook_url");
-  const instagramUrl = getSocialUrl("social_media_instagram_url");
-  const twitterUrl = getSocialUrl("social_media_x_url");
 
   return (
     <section className="min-h-[calc(100vh-80px)] flex items-center bg-primary">
       <div className="relative container">
         <div className="grid xl:grid-cols-2 gap-8 xl:gap-16 items-center">
           <div className="space-y-8">
-            {/* Social Media Icons - Desktop */}
-            <div className="absolute -start-6 top-4 hidden xl:flex flex-col items-center gap-5">
-              <span className="h-28 w-[3px] bg-white" />
-
-              {instagramUrl && (
-                <a
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="size-5" />
-                </a>
-              )}
-              {twitterUrl && (
-                <a
-                  href={twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="size-5" />
-                </a>
-              )}
-              {facebookUrl && (
-                <a
-                  href={facebookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors duration-300"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="size-5" />
-                </a>
-              )}
-
-              <span className="text-white text-xs font-medium mb-6 [writing-mode:vertical-rl] [text-orientation:mixed] tracking-wider">
-                {t("social.follow")}
-              </span>
-            </div>
-
-            {/* Social Media Icons - Mobile */}
-            <div className="flex xl:hidden items-center gap-4 mb-8">
-              <span className="text-white text-sm font-medium">{t("social.follow")}</span>
-              {instagramUrl && (
-                <a
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="size-5" />
-                </a>
-              )}
-              {twitterUrl && (
-                <a
-                  href={twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="size-5" />
-                </a>
-              )}
-              {facebookUrl && (
-                <a
-                  href={facebookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accentPink transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="size-5" />
-                </a>
-              )}
-            </div>
+            <HeroSocialMedia />
 
             {/* Headline */}
             <h1 className="title-1 text-primary-foreground tracking-tight">
@@ -136,31 +29,7 @@ const HeroSection = ({ title, subtitle, image, image2 }: HeroSectionProps) => {
             </p>
 
             {/* Search Bar */}
-            <div className="bg-background rounded-xl p-2.5 sm:rounded-full sm:p-1.5 flex flex-col sm:flex-row sm:items-center gap-1.5 shadow-2xl border border-border">
-              <SelectSkills
-                className="flex-1 border-none!"
-                value={selectedSkills}
-                onChange={setSelectedSkills}
-                icon={<Tag className="size-4 text-accentPink shrink-0 group-hover:scale-110 transition-transform" />}
-              />
-              {/* Location Dropdown */}
-              <SelectCountry
-                className="flex-1 border-none!"
-                value={selectedLocation}
-                onChange={setSelectedLocation}
-                icon={<MapPin className="size-4 text-accentPink shrink-0 group-hover:scale-110 transition-transform" />}
-              />
-
-              {/* Search Button */}
-              <Button
-                variant="pink"
-                size="lg"
-                className="rounded-full px-8 sm:px-10 gap-2 shrink-0 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 sm:h-12"
-              >
-                {t("search.button")}
-                <ArrowRight className="size-4" />
-              </Button>
-            </div>
+            <HeroSearchBar />
           </div>
 
           <div>

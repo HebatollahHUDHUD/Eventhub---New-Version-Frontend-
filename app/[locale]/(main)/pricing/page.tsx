@@ -107,7 +107,7 @@ const PricingPlansContent = () => {
           />
 
           {/* Plan Type Toggle */}
-          <div className="flex items-center justify-center gap-4">
+          <div dir="ltr" className="flex items-center justify-center gap-4">
             <span className="text-sm md:text-base font-semibold transition-colors duration-200 text-foreground">
               {t("companiesPlans")}
             </span>
