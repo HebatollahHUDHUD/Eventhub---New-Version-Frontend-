@@ -87,6 +87,7 @@ export interface BlogPostsResponse {
 
 export type BlogPostDetailsResponse = {
   blog_post: BlogPost;
+  similar_blog_posts: BlogPost[];
 };
 
 export interface TalentsPageResponse {
