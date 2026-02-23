@@ -430,17 +430,26 @@ export const changePasswordSchema = z
 export type ChangePasswordType = z.infer<typeof changePasswordSchema>;
 
 const infoSchema = z.object({
-  footer_title: z.string().min(1),
-  footer_desc: z.string().min(1),
-
-  social_media_facebook_url: z.string(),
-  social_media_instagram_url: z.string(),
-  social_media_x_url: z.string(),
+  address: z.string(),
+  email: z.string().email(),
+  footer_content: z.string().nullable().optional(),
+  footer_logo: z.string().nullable().optional(),
+  footer_logo_ar: z.string().nullable().optional(),
+  map_url: z.union([z.string().url(), z.null()]).optional(),
+  mobile: z.string(),
+  social_media_facebook_url: z.union([z.string().url(), z.null()]).optional(),
+  social_media_instagram_url: z.union([z.string().url(), z.null()]).optional(),
+  social_media_snapchat_url: z.union([z.string().url(), z.null()]).optional(),
+  social_media_tiktok_url: z.union([z.string().url(), z.null()]).optional(),
+  social_media_x_url: z.union([z.string().url(), z.null()]).optional(),
+  social_media_youtube_url: z.union([z.string().url(), z.null()]).optional(),
   website_desc: z.string(),
-  website_favicon: z.string(),
-  website_logo: z.string(),
+  website_favicon: z.string().nullable().optional(),
+  website_keywords: z.string().nullable().optional(),
+  website_logo: z.string().nullable().optional(),
+  website_logo_ar: z.string().nullable().optional(),
   website_name: z.string(),
-  visitor_country: z.string(),
+  website_og_image: z.union([z.string().url(), z.null()]).optional(),
 });
 
 export const AnnouncementSchema = z

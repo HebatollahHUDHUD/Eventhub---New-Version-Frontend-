@@ -9,6 +9,9 @@ import { cairo, inter } from "@/providers/fonts";
 import { SearchParamsProvider } from "@/providers/search-params";
 import { QueryProvider } from "@/providers/query";
 import { Toaster } from "@/components/ui/sonner";
+import { getData } from "@/lib/request-server";
+import { BASE_URL } from "@/constant";
+import { InfoSchema } from "@/schemas/shared";
 
 type Props = {
   children: React.ReactNode;
@@ -18,13 +21,66 @@ type Props = {
 export const generateStaticParams = async () =>
   routing.locales.map((locale) => ({ locale }));
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("main");
 
+
+  const data = await getData<InfoSchema>({
+    endpoint: "/info",
+    config: {
+      next: {
+        tags: ["info"],
+      },
+    },
+  });
+
+  const infoData = data.status === "success" ? data.result : null;
+
+
+
+  // Get favicon URL
+  const faviconUrl = infoData?.website_favicon || "/favicon.ico";
+
+  // Get OG image URL
+  const ogImageUrl = infoData?.website_og_image || undefined;
+
   const metadata: Metadata = {
-    title: t("title"),
-    description: t("description"),
+    title: infoData?.website_name || t("title"),
+    description: infoData?.website_desc || t("description"),
+    keywords: infoData?.website_keywords
+      ? infoData.website_keywords.split(",").map(k => k.trim())
+      : undefined,
+    icons: {
+      icon: faviconUrl,
+      shortcut: faviconUrl,
+      apple: faviconUrl,
+    },
+    openGraph: {
+      title: infoData?.website_name || t("title"),
+      description: infoData?.website_desc || t("description"),
+      type: "website",
+      ...(ogImageUrl && {
+        images: [
+          {
+            url: ogImageUrl,
+            width: 1200,
+            height: 630,
+            alt: infoData?.website_name || "Events Hubs",
+          },
+        ],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: infoData?.website_name || t("title"),
+      description: infoData?.website_desc || t("description"),
+      ...(ogImageUrl && {
+        images: [ogImageUrl],
+      }),
+    },
+    metadataBase: new URL(BASE_URL),
   };
+
   return metadata;
 }
 
