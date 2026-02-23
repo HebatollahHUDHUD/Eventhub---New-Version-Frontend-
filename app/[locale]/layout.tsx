@@ -21,7 +21,12 @@ type Props = {
 export const generateStaticParams = async () =>
   routing.locales.map((locale) => ({ locale }));
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  // Set the locale for translations
+  setRequestLocale(locale);
+
   const t = await getTranslations("main");
 
 
@@ -65,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
             url: ogImageUrl,
             width: 1200,
             height: 630,
-            alt: infoData?.website_name || "Events Hubs",
+            alt: infoData?.website_name || t("title"),
           },
         ],
       }),
