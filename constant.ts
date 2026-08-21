@@ -29,7 +29,7 @@ const PUBLIC_ROUTES = [
 const DEFAULT_LOGIN_REDIRECT = "/dashboard";
 const DEFAULT_LOGOUT_REDIRECT = "/login";
 const BASE_URL = "https://eventshubs.com";
-const API_URL = "https://apis-eventshubs.hudhud.it.com/api";
+const API_URL = "https://apis-eventshubs.hudhud-it.com/api";
 
 const PUSHER_APP_ID = "2060491";
 const PUSHER_APP_KEY = "3bb1f97034c7d028906d";

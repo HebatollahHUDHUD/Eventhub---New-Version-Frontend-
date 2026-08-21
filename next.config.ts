@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "apis-eventshubs.hudhud.it.com",
+        hostname: "apis-eventshubs.hudhud-it.com",
       }
     ] 
   },
